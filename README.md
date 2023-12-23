@@ -1,4 +1,4 @@
-### COACHGPT/FRIDAY/GraphMindGPT: your own personalised AI agent
+### COACHGPT: your local personalised AI agent
 
 Goal: a local, open source ai agent that uses your data and can infer next best question to provide a personalised experience.
 
