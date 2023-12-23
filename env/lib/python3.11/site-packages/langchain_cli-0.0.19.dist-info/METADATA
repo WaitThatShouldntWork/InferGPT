@@ -1,0 +1,28 @@
+Metadata-Version: 2.1
+Name: langchain-cli
+Version: 0.0.19
+Summary: CLI for interacting with LangChain
+Author: Erick Friis
+Author-email: erick@langchain.dev
+Requires-Python: >=3.8.1,<4.0
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Provides-Extra: serve
+Requires-Dist: gitpython (>=3.1.40,<4.0.0)
+Requires-Dist: langserve[all] (>=0.0.16)
+Requires-Dist: tomlkit (>=0.12.2,<0.13.0)
+Requires-Dist: typer[all] (>=0.9.0,<0.10.0)
+Requires-Dist: uvicorn (>=0.23.2,<0.24.0)
+Description-Content-Type: text/markdown
+
+# langchain-cli
+
+This package implements the official CLI for LangChain. Right now, it is most useful
+for getting started with LangChain Templates!
+
+[CLI Docs](https://github.com/langchain-ai/langchain/blob/master/libs/cli/DOCS.md)
+
+[LangServe Templates Quickstart](https://github.com/langchain-ai/langchain/blob/master/templates/README.md)
+
