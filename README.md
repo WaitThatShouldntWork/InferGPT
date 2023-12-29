@@ -1,4 +1,4 @@
-### COACHGPT: your local personalised AI agent
+### InferGPT: your local personalised AI agent
 
 Goal: a local, open source ai agent that uses your data and can infer next best question to provide a personalised experience.
 
@@ -16,9 +16,9 @@ It can then also store conversations, context and new information as times goes 
 Graphs are great at this sort of task. They inference really fast and they carry deep context with their edges.
 Most excitingly they also:
 1. act as super-vector stores with Neo4j's cypher language, providing better perforfmance vs cosine similiary methods.
-2. Make great recommendation models - COACHGPT could even start to predict what you want to do next!
+2. Make great recommendation models - graphs could even start to predict what you want to do next!
 
-###TODO
+### TODO
 (Will migrate this to Issues/projects later)
 
 - Change neo4jvector variable in tools/vector.py to update to new graph
@@ -29,21 +29,40 @@ Most excitingly they also:
 - Change source of Neo4j graph in secrets.toml
 - Add an item
 
-### Running the application
+### Getting Started
 
+In the top-right corner of the page, click Fork.
+Create Fork UI
+
+On the next page, select your GitHub account to create the fork under.
+Wait for the forking process to complete. You now have a copy of the repository in your GitHub account.
+Clone the Repository To clone the repository, you need to have Git installed on your system. 
+
+Once you have Git installed, follow these steps:
+
+Open your terminal.
+Navigate to the directory where you want to clone the repository.
+Run the git clone command for the fork you just created
+
+## Clone the Repository
+
+Then open your project in your ide
 To run the application, you must install the libraries listed in `requirements.txt`.
 
-[source,sh]
 pip install -r requirements.txt
 
+## Install Neo4j Desktop or Aura DB
+Instructions can be found[here](https://neo4j.com/docs/?utm_medium=PaidSearch&utm_source=google&utm_campaign=GDB&utm_content=EMEA-X-Conversion-GDB-Text&utm_term=neo4j&gclid=Cj0KCQiA1rSsBhDHARIsANB4EJY8wQONKSyNCofQBGAcOGWwNpNh4Z0yj7oGxok8vs2CipPJMjGPcpkaAuw1EALw_wcB)
 
-Then run the `streamlit run` command to start the app on link:http://localhost:8501/[http://localhost:8501/^].
 
-[source,sh]
+## Run it
+
+run your virtual enbiroment and then run the `streamlit run` command to start the app on link:http://localhost:8501/[http://localhost:8501/^].
+
 streamlit run bot.py
 
 ###USAGE 
 Coming
 
 LISENCE 
-See LISENCE.md
+See [LISENCE.md](LISENCE.md)
