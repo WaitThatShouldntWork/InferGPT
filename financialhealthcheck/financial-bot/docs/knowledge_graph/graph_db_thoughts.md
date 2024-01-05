@@ -43,7 +43,7 @@ The proposed ontology has the following nodes:
         * Push - the value is always the latest (any updates are pushed from outside the conversation system)
         * Prompt - a question to ask a user
         * Calculate - calculate a value using the values it depends
-* **User** - is a user of the chatbot system (e.g. a NatWest customer or potential customer).
+* **User** - is a user of the chatbot system (e.g. a UKRetail bank customer or potential customer).
     * **Properties:**
     * userId
     * name
