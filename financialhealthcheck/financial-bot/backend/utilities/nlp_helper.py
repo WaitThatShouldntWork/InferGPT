@@ -34,7 +34,7 @@ class NlpHelper:
     @staticmethod
     def sender_to_role(sender:str):
         user = Defaults.user
-        assistant = Defaults.scottBot
+        assistant = Defaults.sBot
         userRole = 'user'
         assistantRole = 'assistant'
         systemRole = 'system'

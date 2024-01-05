@@ -5,7 +5,7 @@
 
 1.  Create language service at [azure portal](https://portal.azure.com/#create/Microsoft.CognitiveServicesTextAnalytics) while selecting custom feature ‘Custom text classification & Custom named entity recognition’. Fill all necessary fields as you see fit.
     
-2.  Navigate to [the language studio](https://language.cognitive.azure.com/) and select the “Understand questions and conversational language” tab. Import project from [github scottbot repo](https://github.com/ScottLogic/scott-bot) (/samples/azure/cb2023v1Project(Chatbot).json)
+2.  Navigate to [the language studio](https://language.cognitive.azure.com/) and select the “Understand questions and conversational language” tab. Import project from [github sbot repo] (/samples/azure/2023v1Project(Chatbot).json)
     
 3.  Once imported, you will be redirected to the “Schema Definition” page of the project.
 
