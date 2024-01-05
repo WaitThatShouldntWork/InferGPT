@@ -1,22 +1,19 @@
-# InferGPT: your local personalised AI agent
+# InferGPT: your local best friend & AI agent
 
-Goal: a local, open source ai agent that uses your data and can infer next best question to provide a personalised experience.
+InferGPT's primary focus is to be an AI that knows you better than your best friend.
 
-### Context
-Language models are great a predicting the next token - as theyre design to. 
-The issue though, compared to humans, is when one human makes a request to another, we very rarely just spew out a response.
-Instead, we usually ask a question back.
-A good example is GPTEngineer: https://github.com/gpt-engineer-org/gpt-engineer
+Our mission is to provide an AI that personalises to who you are and what you care about. We want to build a system that can:
 
-When you first give it a request, it asks "clarifying questions" to ensure its aligned with what you want - but those are generated. 
-I want to use a graph to understand the users current profile and ask questions based on missing context needed to solve their issue.
-It can then also store conversations, context and new information as times goes on - always remaining contextually updated.
+🔗 Ingest data about you from various sources (with your permission of course)
+💡 Have deep and personal conversations without having to answer lots of questions - it will already infer your needs, make personalised recommendations and remember all your conversations.
+🏗️ Carry out tasks: this is an agent after all - it will go away and action stuff for you! 
+🔮 Predict what you need before you need it!
 
-### Why a graph?
-Graphs are great at this sort of task. They inference really fast and they carry deep context with their edges.
-Most excitingly they also:
-1. act as super-vector stores with Neo4j's cypher language, providing better perforfmance vs cosine similiary methods.
-2. Make great recommendation models - graphs could even start to predict what you want to do next!
+### Roadmap & Docs
+Want more context about how it works, our roadmap and documentation? Check out the [wiki:] (https://github.com/WaitThatShouldntWork/InferGPT/wiki)
+
+### Contribute
+Guide in progress!
 
 # Getting Started
 
@@ -52,6 +49,6 @@ streamlit run bot.py
 ### USAGE 
 Coming
 
-### LISENCE 
-See [LISENCE.md](LISENCE.md)
+### LICENCE 
+See [LICENCE.md](LICENCE.md)
 
