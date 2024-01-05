@@ -1,4 +1,4 @@
-# InferGPT: your local best friend & AI agent
+# InferGPT: your local personalised & AI agent
 
 InferGPT's primary focus is to be an AI that knows you better than your best friend.
 
