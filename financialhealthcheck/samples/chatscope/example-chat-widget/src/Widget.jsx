@@ -1,7 +1,7 @@
 import "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import { MainContainer, ChatContainer, ConversationHeader, MessageList, Message, MessageInput } from "@chatscope/chat-ui-kit-react";
 
-export const Widget = ({remoteName = "Aroc", messages = [], onSend}) => {
+export const Widget = ({remoteName = "Bot0", messages = [], onSend}) => {
     
     return (
         <MainContainer>
