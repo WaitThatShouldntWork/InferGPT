@@ -10,7 +10,7 @@ Our mission is to provide an AI that personalises to who you are and what you ca
 🔮 Predict what you need before you need it!  
 
 ### Roadmap & Docs
-Want more context about how it works, our roadmap and documentation? Check out the [wiki:] (https://github.com/WaitThatShouldntWork/InferGPT/wiki)
+Want more context about how it works, our roadmap and documentation? Check out the [wiki] (https://github.com/WaitThatShouldntWork/InferGPT/wiki)
 
 ### Contribute
 Guide in progress!
@@ -38,15 +38,15 @@ To run the application, you must install the libraries listed in `requirements.t
 pip install -r requirements.txt
 
 ## Install Neo4j Desktop or Aura DB
-Instructions can be found[here](https://neo4j.com/docs/?utm_medium=PaidSearch&utm_source=google&utm_campaign=GDB&utm_content=EMEA-X-Conversion-GDB-Text&utm_term=neo4j&gclid=Cj0KCQiA1rSsBhDHARIsANB4EJY8wQONKSyNCofQBGAcOGWwNpNh4Z0yj7oGxok8vs2CipPJMjGPcpkaAuw1EALw_wcB)
+Instructions can be found [here](https://neo4j.com/docs/?utm_medium=PaidSearch&utm_source=google&utm_campaign=GDB&utm_content=EMEA-X-Conversion-GDB-Text&utm_term=neo4j&gclid=Cj0KCQiA1rSsBhDHARIsANB4EJY8wQONKSyNCofQBGAcOGWwNpNh4Z0yj7oGxok8vs2CipPJMjGPcpkaAuw1EALw_wcB)
 
 
 ## Run it
-Run your virtual enbiroment and then run the `streamlit run` command to start the app on link:http://localhost:8501/[http://localhost:8501/^].
+Run your virtual enbiroment and then run the `streamlit run` command to start the app on link: http://localhost:8501/[http://localhost:8501/].
 
 streamlit run bot.py
 
-### USAGE 
+### Usage
 Coming
 
 ### LICENCE 
