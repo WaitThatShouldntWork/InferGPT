@@ -4,10 +4,10 @@ InferGPT's primary focus is to be an AI that knows you better than your best fri
 
 Our mission is to provide an AI that personalises to who you are and what you care about. We want to build a system that can:
 
-🔗 Ingest data about you from various sources (with your permission of course)
-💡 Have deep and personal conversations without having to answer lots of questions - it will already infer your needs, make personalised recommendations and remember all your conversations.
-🏗️ Carry out tasks: this is an agent after all - it will go away and action stuff for you! 
-🔮 Predict what you need before you need it!
+🔗 Ingest data about you from various sources (with your permission of course)  
+💡 Have deep and personal conversations without having to answer lots of questions - it will already infer your needs, make personalised recommendations and remember all your conversations.  
+🏗️ Carry out tasks: this is an agent after all - it will go away and action stuff for you!  
+🔮 Predict what you need before you need it!  
 
 ### Roadmap & Docs
 Want more context about how it works, our roadmap and documentation? Check out the [wiki:] (https://github.com/WaitThatShouldntWork/InferGPT/wiki)
