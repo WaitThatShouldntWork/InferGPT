@@ -4,7 +4,7 @@ from agent import generate_response
 
 # tag::setup[]
 # Page Config
-st.set_page_config("Coach", page_icon=":brain:")
+st.set_page_config("InferGPT", page_icon=":brain:")
 
 openai_api_key = st.secrets['OPENAI_API_KEY']
 openai_model = st.secrets['OPENAI_MODEL']
