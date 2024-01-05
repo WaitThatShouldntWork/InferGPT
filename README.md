@@ -10,7 +10,7 @@ Our mission is to provide an AI that personalises to who you are and what you ca
 🔮 Predict what you need before you need it!  
 
 ### Roadmap & Docs
-Want more context about how it works, our roadmap and documentation? Check out the [wiki] (https://github.com/WaitThatShouldntWork/InferGPT/wiki)
+Want more context about how it works, our roadmap and documentation? Check out the [wiki](https://github.com/WaitThatShouldntWork/InferGPT/wiki)
 
 ### Contribute
 Guide in progress!
