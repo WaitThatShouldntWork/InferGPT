@@ -14,6 +14,7 @@ Want more context about how it works, our roadmap and documentation? Check out t
 
 ### Contribute
 Guide in progress!
+Check out the project Kanban [here](https://github.com/users/WaitThatShouldntWork/projects/1) (Skeleton and also in progress of setting up)
 
 # Getting Started
 
