@@ -6,13 +6,14 @@ Our mission is to provide an AI that personalises to who you are and what you ca
 
 🔗 Ingest data about you from various sources (with your permission of course)  
 💡 Have deep and personal conversations without having to answer lots of questions - it will already infer your needs, make personalised recommendations and remember all your conversations.  
+🎯 Help you set and keep track of goals. 
 🏗️ Carry out tasks: this is an agent after all - it will go away and action stuff for you!  
 🔮 Predict what you need before you need it!  
 
 We aim to be able to answer complex questions that require a deep understanding of someone to effectively answer, such as:
 1) How can i be better with my finances?
 2) I'm trying to lose weight but its not working, why? 
-3) Can you recommend a good movie to watch? 
+3) I'm learning to code, can you create a tailored learning plan?  
 
 ### Roadmap & Docs
 Want more context about how it works, our roadmap and documentation? Check out the [wiki](https://github.com/WaitThatShouldntWork/InferGPT/wiki)
