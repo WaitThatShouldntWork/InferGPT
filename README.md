@@ -9,6 +9,11 @@ Our mission is to provide an AI that personalises to who you are and what you ca
 🏗️ Carry out tasks: this is an agent after all - it will go away and action stuff for you!  
 🔮 Predict what you need before you need it!  
 
+We aim to be able to answer complex questions that require a deep understanding of someone to effectively answer, such as:
+1) How can i be better with my finances?
+2) I'm trying to lose weight but its not working, why? 
+3) Can you recommend a good movie to watch? 
+
 ### Roadmap & Docs
 Want more context about how it works, our roadmap and documentation? Check out the [wiki](https://github.com/WaitThatShouldntWork/InferGPT/wiki)
 
