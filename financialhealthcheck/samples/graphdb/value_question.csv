@@ -1,9 +1,0 @@
-valueId,questionId,relationshipType
-1,2,"FOR"
-1,2,"LEADS_TO"
-2,5,"FOR"
-2,5,"LEADS_TO"
-3,3,"FOR"
-3,3,"LEADS_TO"
-4,7,"FOR"
-4,7,"LEADS_TO"
