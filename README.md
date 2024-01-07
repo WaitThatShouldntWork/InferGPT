@@ -4,7 +4,7 @@ InferGPT's mission is to be an AI that knows you better than your best friend. A
 
 🔗 Ingest data about you from various sources (with your permission of course)  
 💡 Have deep and personal conversations without having to answer lots of questions - it will already infer your needs, make personalised recommendations and remember all your conversations.  
-🎯 Help you set and keep track of goals. 
+🎯 Help you set and keep track of goals.  
 🏗️ Carry out tasks: this is an agent after all - it will go away and action stuff for you!  
 🔮 Predict what you need before you need it!  
 
