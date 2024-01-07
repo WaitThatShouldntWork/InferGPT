@@ -44,7 +44,7 @@ pip install -r requirements.txt
 
 ## Install Neo4j Desktop or Aura DB
 Instructions can be found [here](https://neo4j.com/docs/?utm_medium=PaidSearch&utm_source=google&utm_campaign=GDB&utm_content=EMEA-X-Conversion-GDB-Text&utm_term=neo4j&gclid=Cj0KCQiA1rSsBhDHARIsANB4EJY8wQONKSyNCofQBGAcOGWwNpNh4Z0yj7oGxok8vs2CipPJMjGPcpkaAuw1EALw_wcB)
-
+Install the pre-made recommendations database. version 4.4 is rhe latest stable. 
 
 ## Run it
 Run your virtual enbiroment and then run the `streamlit run` command to start the app on link: http://localhost:8501/[http://localhost:8501/].
