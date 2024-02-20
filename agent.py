@@ -4,6 +4,7 @@ from langchain.tools import Tool
 #from tools.vector import kg_qa
 from tools.cypher import cypher_qa
 #from graph import graph
+from langchain.chains.conversation.memory import ConversationBufferWindowMemory
 
 tools = [
     # Tool.from_function(
@@ -17,7 +18,7 @@ tools = [
         func = cypher_qa, # (3)
     ),
 ]
-from langchain.chains.conversation.memory import ConversationBufferWindowMemory
+
 memory = ConversationBufferWindowMemory(
     memory_key='chat_history',
     k=5,
