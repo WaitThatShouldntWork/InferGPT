@@ -16,6 +16,15 @@ We aim to be able to answer complex questions that require a deep understanding 
 ### Roadmap & Docs
 Want more context about how it works, our roadmap and documentation? Check out the [wiki](https://github.com/WaitThatShouldntWork/InferGPT/wiki)
 
+For further reading on InferGPT's components, see any of the following
+- [Full system testing](test/README.md)
+- [Data persistence](data/README.md)
+- [Backend](backend/README.md)
+- [Frontend](frontend/README.md)
+- [Assets](assets/README.md)
+- [Testing](test/README.md)
+- [Financial Bot](financialhealthcheckScottLogic/README.md)
+
 ### Contribute
 Guide in progress!
 Check out the project Kanban [here](https://github.com/users/WaitThatShouldntWork/projects/1) (Skeleton and also in progress of setting up)
@@ -23,33 +32,30 @@ Check out the project Kanban [here](https://github.com/users/WaitThatShouldntWor
 # Getting Started
 
 In the top-right corner of the page, click Fork.
-Create Fork UI
 
 On the next page, select your GitHub account to create the fork under.
 Wait for the forking process to complete. You now have a copy of the repository in your GitHub account.
-Clone the Repository To clone the repository, you need to have Git installed on your system. 
-
-Once you have Git installed, follow these steps:
-
-Open your terminal.
-Navigate to the directory where you want to clone the repository.
-Run the git clone command for the fork you just created
 
 ## Clone the Repository
 
-Then open your project in your ide
-To run the application, you must install the libraries listed in `requirements.txt`.
+To clone the repository, you need to have Git installed on your system. Use the [official Git installer](https://git-scm.com/download/win) or [follow the terminal commands guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 
-pip install -r requirements.txt
+Once you have Git installed, follow these steps:
+
+- Open your terminal.
+- Navigate to the directory where you want to clone the repository.
+- Run the git clone command for the fork you just created.
 
 ## Install Neo4j Desktop or Aura DB
 Instructions can be found [here](https://neo4j.com/docs/?utm_medium=PaidSearch&utm_source=google&utm_campaign=GDB&utm_content=EMEA-X-Conversion-GDB-Text&utm_term=neo4j&gclid=Cj0KCQiA1rSsBhDHARIsANB4EJY8wQONKSyNCofQBGAcOGWwNpNh4Z0yj7oGxok8vs2CipPJMjGPcpkaAuw1EALw_wcB).  
-Install the pre-made recommendations database. Version 4.4 is the latest stable. 
+Install the pre-made recommendations database. Version 4.4 is the latest stable.
 
-## Run it
-Run your virtual environment and then run the `streamlit run` command to start the app on link: http://localhost:8501/[http://localhost:8501/].
-
-streamlit run bot.py
+## Build and Run it
+- Open your terminal.
+- Navigate to the directory where you want to clone the repository.
+  - It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your terminal.
+- To install all project dependencies (listed in `requirements.txt`) run `pip install -r requirements.txt`.
+- Once all dependencies have been pulled run `streamlit run bot.py` to start the app. See the app running at [http://localhost:8501/](http://localhost:8501/).
 
 ### Usage
 Coming
