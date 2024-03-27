@@ -1,6 +1,6 @@
 # Backend
 
-Python service for the InferGPT backend
+Python service for the InferGPT backend.
 
 ### Subdirectories
 - `/supervisors` storing all supervisor modules (agents that call other agents for a greater goal)
