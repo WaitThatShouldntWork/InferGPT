@@ -1,3 +1,7 @@
+'
+' PlantUML diagram for the Goal Bot architecture.
+' Please re-generate the image (.png) after updating the code
+'
 @startuml GoalBotArchitecture
 
 interface user as "User"
@@ -49,8 +53,9 @@ database "Graph Database" {
 user -->  ui
 ui --> api
 api --> director
-director ..> supervisor
+director --> supervisor
 director ..> llm
+Agents ..> llm
 supervisor --> goals
 supervisor --> nextBestQuestion
 supervisor --> summariser

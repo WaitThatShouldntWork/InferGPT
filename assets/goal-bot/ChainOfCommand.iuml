@@ -1,0 +1,12 @@
+'
+' PlantUML diagram for Chain of Command.
+' Please re-generate the image (.png) after updating the code
+'
+@startuml ChainOfCommand
+
+(Director) <-> (Supervisors)
+(Supervisors) <-> (Agent)
+(Agent) <-> (Tools)
+(Agent) --> (LLM)
+
+@enduml
