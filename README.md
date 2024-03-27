@@ -26,8 +26,7 @@ For further reading on InferGPT's components, see any of the following
 - [Financial Bot](financialhealthcheckScottLogic/README.md)
 
 ### Contribute
-Guide in progress!
-Check out the project Kanban [here](https://github.com/users/WaitThatShouldntWork/projects/1) (Skeleton and also in progress of setting up)
+See [the contribution guide](CONTRIBUTING.md) for further guidance. Note this guide is in progress!
 
 # Getting Started
 
@@ -62,4 +61,3 @@ Coming
 
 ### LICENCE 
 See [LICENCE.md](LICENCE.md)
-
