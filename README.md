@@ -53,9 +53,10 @@ Install the pre-made recommendations database. Version 4.4 is the latest stable.
 - Open your terminal.
 - Navigate to the directory where you want to clone the repository.
   - It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your terminal.
+- changed directory to the backend `cd backend`.
 - To install all project dependencies (listed in `requirements.txt`) run `pip install -r requirements.txt`.
-- Once all dependencies have been pulled run `streamlit run bot.py` to start the app. See the app running at [http://localhost:8501/](http://localhost:8501/).
-
+- Once all dependencies have been pulled run `uvicorn api:app` to start the app. Check the backend app is running at [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
+ 
 ### Usage
 Coming
 
