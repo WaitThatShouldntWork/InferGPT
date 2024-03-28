@@ -8,8 +8,7 @@ load_dotenv()
 try:
   endpoint = os.environ["INFER_GPT_MISTRAL_LARGE_ENDPOINT"]
   api_key = os.environ["INFER_GPT_MISTRAL_LARGE_KEY"]
-  key = os.getenv("OPENAI_API_KEY")
-  model = "azureai" # might me mistral-large
+  model = os.environ["INFER_GPT_MODEL"]# might me mistral-large
 
   client = MistralClient(api_key=api_key, endpoint=endpoint)
 except FileNotFoundError:
@@ -28,5 +27,4 @@ def call_model(prompt):
       ],
       max_tokens=125
    )
-   print(response.choices[0].message.content)
    return response.choices[0].message.content
