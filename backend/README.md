@@ -8,5 +8,7 @@ Python service for the InferGPT backend.
 - `/utils` with all shared utility modules
 - `/tools` for all shared function modules
 
-### To do
-- [ ] Implement initial Goal bot
+### Set up
+- To install all project dependencies (listed in `requirements.txt`) run `pip install -r requirements.txt`.
+- Once all dependencies have been pulled run `uvicorn api:app --port 8250` to start the app. 
+- Check the backend app is running at [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
