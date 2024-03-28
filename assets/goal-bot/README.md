@@ -18,6 +18,7 @@ We recommended the [vscode-plantuml](https://github.com/qjebbs/vscode-plantuml) 
 
 High Level Architecture of the initial version of "goal-bot"
 
+> [!NOTE]
 > This is work-in-progress and will actively change.
 
 ![Architecture](./GoalBotArchitecture.png)
