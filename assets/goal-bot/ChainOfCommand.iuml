@@ -7,6 +7,6 @@
 (Director) <-> (Supervisors)
 (Supervisors) <-> (Agents)
 (Agents) <-> (Tools)
-(Agent) --> (LLM)
+(Agents) --> (LLM)
 
 @enduml
