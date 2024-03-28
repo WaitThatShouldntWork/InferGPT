@@ -8,7 +8,7 @@ export interface InputProps {
 }
 
 export const Input = ({ sendMessage }: InputProps) => {
-  const [userInut, setUserInput] = useState<string>('');
+  const [userInput, setUserInput] = useState<string>('');
 
   const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     setUserInput(event.target.value);
@@ -17,13 +17,13 @@ export const Input = ({ sendMessage }: InputProps) => {
   const onSend = useCallback(
     (event: FormEvent<HTMLElement>) => {
       event.preventDefault();
-      sendMessage(userInut);
+      sendMessage(userInput);
       setUserInput('');
     },
-    [sendMessage, userInut]
+    [sendMessage, userInput]
   );
 
-  const sendDisabled = useMemo(() => userInut.length === 0, [userInut]);
+  const sendDisabled = useMemo(() => userInput.length === 0, [userInput]);
 
   return (
     <form onSubmit={onSend} className={styles.inputContainer}>
@@ -33,7 +33,7 @@ export const Input = ({ sendMessage }: InputProps) => {
         onSubmit={onSend}
         placeholder="Send a Message..."
         type="text"
-        value={userInut}
+        value={userInput}
       />
       <button className={classNames(styles.sendButton, { [styles.disabled]: sendDisabled })} onClick={onSend} disabled={sendDisabled}>
         <img src={RightArrow} />

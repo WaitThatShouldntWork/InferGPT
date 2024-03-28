@@ -10,7 +10,7 @@ npm install
 npm start
 ```
 
-The app should now be running on [localhost:3000](http://localhost:8650/).
+The app should now be running on [localhost:8650](http://localhost:8650/).
 
 # Connect to Backend
 
