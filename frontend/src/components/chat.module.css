@@ -1,0 +1,14 @@
+.container {
+  align-items: center;
+  border-radius: 5px;
+  border: 1px solid var(--border-primary);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 75%;
+  margin: 2rem 0 1rem 0;
+  overflow-y: auto;
+  padding: 1rem;
+  width: 50%;
+}
