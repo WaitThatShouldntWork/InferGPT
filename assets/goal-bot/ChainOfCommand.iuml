@@ -5,8 +5,8 @@
 @startuml ChainOfCommand
 
 (Director) <-> (Supervisors)
-(Supervisors) <-> (Agent)
-(Agent) <-> (Tools)
+(Supervisors) <-> (Agents)
+(Agents) <-> (Tools)
 (Agent) --> (LLM)
 
 @enduml
