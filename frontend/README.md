@@ -3,7 +3,7 @@ UI service for a chat bot.
 
 # Run Locally
 
-Checkout the code, and run the following commands from the root of the frontend directory:
+Checkout the code and run the following commands from the root of the frontend directory:
 
 ```bash
 npm install
