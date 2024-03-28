@@ -1,0 +1,14 @@
+html, body, #app-root {
+  font-family: 'Source Sans 3', sans-serif;
+  height: 100%;
+  margin: 0;
+
+  --background-color-primary: #282828;
+  --blue: #007bff;
+  --border-primary: #424242;
+  --text-color-primary: #ffffff;
+  --text-color-secondary: #899090;
+
+  background-color: var(--background-color-primary);
+  color: var(--text-color-primary);
+}

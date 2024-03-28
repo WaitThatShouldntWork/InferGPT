@@ -1,0 +1,37 @@
+{
+  "name": "llm-chat-ui",
+  "type": "module",
+  "version": "0.0.0",
+  "description": "UI for a chatbot with restful api",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack serve --port 8650",
+    "build": "webpack",
+    "lint": "eslint . --fix"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.2.70",
+    "@types/react-dom": "^18.2.22",
+    "@types/webpack-dev-server": "^4.7.2",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "css-loader": "^6.10.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.8.1",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
+  },
+  "dependencies": {
+    "classnames": "^2.5.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
