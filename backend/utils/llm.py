@@ -16,13 +16,17 @@ except FileNotFoundError:
 except:
    raise Exception("Missing .env file property. See the Getting Started guide on the README.md")
 
-def call_model(prompt):
+def call_model(system_prompt, user_prompt):
    response = client.chat(
       model=model,
       messages=[
          ChatMessage(
+            role="system",
+            content=system_prompt
+         ),
+         ChatMessage(
             role="user",
-            content=prompt
+            content=user_prompt
          )
       ],
       max_tokens=125
