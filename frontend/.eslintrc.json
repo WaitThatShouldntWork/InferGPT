@@ -25,12 +25,13 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react"],
+  "plugins": ["@typescript-eslint", "react", "@stylistic/js"],
   "rules": {
     "indent": ["error", 2],
     "linebreak-style": ["error", "windows"],
     "quotes": ["error", "single"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "@stylistic/js/eol-last": ["error", "always"]
   },
   "settings": {
     "react": {
