@@ -17,6 +17,17 @@ Once installed follow the steps below:
 5. Run the database in Neo4j desktop.
 6. Call the `test_connection()` function in `data/graph_db_utils.py` to check whether app is connected to database.
 
+## Schema
+
+Currently the schema consists of 1 node. This node is a `Goal` and has 2 properties:
+
+```
+{
+    name: "name of goal"
+    description: "description of goal"
+}
+```
+
 ### To do
 
 - [x] Create `neo4j_utils` module and connect to a neo4j knowledge graph
