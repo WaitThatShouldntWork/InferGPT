@@ -11,11 +11,11 @@ export const getResponse = async (message: string): Promise<Response> => {
   //     'Content-Type': 'application/json',
   //   },
   // });
-  const response = await fetch('http://127.0.0.1:8000/health');
+  const response = await fetch(`${process.env.BACKEND_ENDPOINT}/health`);
   console.log('HELLO - response: ', response.json());
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve({ message });
-    }, 3000);
+    }, 1000);
   });
 };
