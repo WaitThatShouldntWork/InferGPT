@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 
 class Config(object):
     def __init__(self):
-        self.port = None
+        self.frontend_url = None
         self.mlarge_url = None
         self.mlarge_key = None
         self.mlarge_model = None
@@ -15,7 +15,7 @@ class Config(object):
         """
         load_dotenv()
         try:
-            self.port = os.getenv("INFER_GPT_BACKEND_PORT", "8605")
+            self.frontend_url = os.getenv("INFER_GPT_FRONTEND_URL", "http://localhost:8650")
             self.mlarge_url = os.getenv("INFER_GPT_MISTRAL_LARGE_URL")
             self.mlarge_key = os.getenv("INFER_GPT_MISTRAL_LARGE_KEY")
             self.mlarge_model = os.getenv("INFER_GPT_MISTRAL_LARGE_MODEL")

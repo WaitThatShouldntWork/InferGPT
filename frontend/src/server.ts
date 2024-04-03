@@ -20,7 +20,7 @@ export const getResponse = async (message: string): Promise<ChatMessageResponse>
 
 const checkBackendHealth = async (): Promise<ChatMessageResponse> => {
   try {
-    const response = await fetch(`${process.env.BACKEND_ENDPOINT}/health`);
+    const response = await fetch(`${process.env.INFER_GPT_BACKEND_URL}/health`);
     console.log('InferGPT backend is healthy!: ', response);
     return happyResponse;
   } catch {
@@ -29,9 +29,10 @@ const checkBackendHealth = async (): Promise<ChatMessageResponse> => {
 };
 
 const callChatEndpoint = async (message: string): Promise<ChatMessageResponse> => {
-  return await fetch(`${process.env.BACKEND_ENDPOINT}/chat?utterance=${message}`)
+  return await fetch(`${process.env.INFER_GPT_BACKEND_URL}/chat?utterance=${message}`)
     .then(response => {
       if (!response.ok) {
+        console.log("error found")
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       return response;

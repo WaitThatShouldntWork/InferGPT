@@ -7,9 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 app = FastAPI()
 config = Config()
 
-origins = [
-    "http://localhost:" + config.port,
-]
+origins = [ config.frontend_url ]
 
 app.add_middleware(
     CORSMiddleware,
