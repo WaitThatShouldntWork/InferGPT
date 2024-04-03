@@ -1,12 +1,14 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from backend.config import Config
 from director import question
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+config = Config()
 
 origins = [
-    "http://localhost:8650",
+    "http://localhost:" + config.port,
 ]
 
 app.add_middleware(
