@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
-from backend.config import Config
+from utils import Config
 from director import question
 from fastapi.middleware.cors import CORSMiddleware
 
