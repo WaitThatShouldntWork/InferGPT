@@ -23,12 +23,12 @@ app.add_middleware(
 
 @app.get("/health")
 async def health_check():
-    logger.debug('health_check method called')
+    logger.info("health_check method called successfully")
     return {"message": "Infer GPT is running!"}
 
 @app.get("/chat")
 async def chat(utterance: str):
-    logger.debug('chat method called')
+    logger.info("chat method called with utterance \"{0}\"".format(utterance))
     try:
         return JSONResponse(status_code=200, content=question(utterance))
     except:

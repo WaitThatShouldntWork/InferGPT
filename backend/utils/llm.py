@@ -9,7 +9,7 @@ config = Config()
 client = MistralClient(api_key=config.mlarge_key, endpoint=config.mlarge_url)
 
 def call_model(system_prompt, user_prompt):
-   logger.debug("call model " + model + " with prompt:\nsystem_prompt: " + system_prompt + "\nuser_prompt: " + user_prompt)
+   logger.info("called llm. Waiting on response model with prompt {0}".format(str([system_prompt, user_prompt])))
    response = client.chat(
       model=config.mlarge_model,
       messages=[
@@ -24,5 +24,5 @@ def call_model(system_prompt, user_prompt):
       ],
       max_tokens=125
    )
-   logger.debug("response content received: " + response.choices[0].message.content)
+   logger.info("{0} response : \"{1}\"".format(model, response.choices[0].message.content))
    return response.choices[0].message.content
