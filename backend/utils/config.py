@@ -7,6 +7,9 @@ class Config(object):
         self.mlarge_url = None
         self.mlarge_key = None
         self.mlarge_model = None
+        self.neo4j_uri = None
+        self.neo4j_user = None
+        self.neo4j_password = None
         self.load_env()
 
     def load_env(self):
@@ -19,6 +22,9 @@ class Config(object):
             self.mlarge_url = os.getenv("INFER_GPT_MISTRAL_LARGE_URL")
             self.mlarge_key = os.getenv("INFER_GPT_MISTRAL_LARGE_KEY")
             self.mlarge_model = os.getenv("INFER_GPT_MISTRAL_LARGE_MODEL")
+            self.neo4j_uri = os.getenv("NEO4J_URI")
+            self.neo4j_user = os.getenv("NEO4J_USERNAME")
+            self.neo4j_password = os.getenv("NEO4J_PASSWORD")
         except FileNotFoundError:
             raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
         except:
