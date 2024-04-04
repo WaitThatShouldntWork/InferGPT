@@ -1,12 +1,13 @@
 import os
 import logging
+from utils import Config
 from dotenv import load_dotenv
 from neo4j import GraphDatabase
 
-load_dotenv()
+config = Config()
 
-URI = os.getenv("NEO4J_URI")
-AUTH = (os.getenv("NEO4J_USERNAME"), os.getenv("NEO4J_PASSWORD"))
+URI = config.neo4j_uri
+AUTH = (config.neo4j_user, config.neo4j_password)
 
 driver = GraphDatabase.driver(URI, auth=AUTH)
 
