@@ -4,7 +4,7 @@ import { getResponse } from './server';
 
 const starterMessage: Message = {
   role: Role.Bot,
-  content: 'Hello, how can I Help you?',
+  content: 'Hello, how can I help you?',
   time: new Date().toLocaleTimeString(),
 };
 
