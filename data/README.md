@@ -12,12 +12,12 @@ Once installed follow the steps below:
 
 1. Create new project to host your DBMS.
 2. Create a new database within the project.
-3. Add the username and password to the `.env` file.
-4. The default URI to add to the `.env` file will be `bolt://localhost:7687`.
+3. Add the username and password to the `backend/.env` file.
+4. Add the database uri to the `backend/.env` file. The default value for this is `bolt://localhost:7687`
 5. Run the database in Neo4j desktop.
-6. Call the `test_connection()` function in `data/graph_db_utils.py` to check whether app is connected to database.
+6. Call the `test_connection()` function in `backend/utils/graph_db_utils.py` to check whether app is connected to database.
 
-## Schema
+### Schema
 
 Currently the schema consists of 1 node. This node is a `Goal` and has 2 properties:
 
