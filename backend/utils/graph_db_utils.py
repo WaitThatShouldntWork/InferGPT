@@ -1,4 +1,5 @@
 import os
+import logging
 from dotenv import load_dotenv
 from neo4j import GraphDatabase
 
@@ -12,33 +13,30 @@ driver = GraphDatabase.driver(URI, auth=AUTH)
 def test_connection():
     try:
         driver.verify_connectivity()
-        print("database connection active")
+        logging.debug("database connection active")
         
     except Exception as e:
-        print(f"Error: {e}")
+        logging.exception(f"Error: {e}")
+        raise
         
     finally:
         driver.close()
-        
-
-
-def create_node(name, description):
+    
+def create_goal(name, description):
     try:
         session = driver.session()
         query = """
-        CREATE (g:Goal {name: $name, description: $description})
+        MERGE (g:Goal {name: $name, description: $description})
         RETURN g
         """
         result = session.run(query, name=name, description=description)
-        for record in result:
-            print(f"Created goal node: {record['g']}")
+        logging.debug("goal created")
 
     except Exception as e:
-        print(f"Error: {e}")
+        logging.exception(f"Error: {e}")
+        raise
 
     finally:
         if session:
             session.close()
-        driver.close()
-            
-            
+        driver.close()    
