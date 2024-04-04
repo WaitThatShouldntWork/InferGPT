@@ -1,8 +1,12 @@
+import logging
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from utils import Config
 from director import question
 from fastapi.middleware.cors import CORSMiddleware
+
+logging.config.fileConfig(fname='config.ini', disable_existing_loggers=False)
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 config = Config()
@@ -19,10 +23,12 @@ app.add_middleware(
 
 @app.get("/health")
 async def health_check():
+    logger.debug('health_check method called')
     return {"message": "Infer GPT is running!"}
 
 @app.get("/chat")
 async def chat(utterance: str):
+    logger.debug('chat method called')
     try:
         return JSONResponse(status_code=200, content=question(utterance))
     except:
