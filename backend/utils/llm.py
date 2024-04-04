@@ -1,24 +1,14 @@
-import os
-from dotenv import load_dotenv
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
+from utils import Config
 
-load_dotenv()
+config = Config()
 
-try:
-  endpoint = os.environ["INFER_GPT_MISTRAL_LARGE_ENDPOINT"]
-  api_key = os.environ["INFER_GPT_MISTRAL_LARGE_KEY"]
-  model = os.environ["INFER_GPT_MODEL"]# might me mistral-large
-
-  client = MistralClient(api_key=api_key, endpoint=endpoint)
-except FileNotFoundError:
-   raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
-except:
-   raise Exception("Missing .env file property. See the Getting Started guide on the README.md")
+client = MistralClient(api_key=config.mlarge_key, endpoint=config.mlarge_url)
 
 def call_model(system_prompt, user_prompt):
    response = client.chat(
-      model=model,
+      model=config.mlarge_model,
       messages=[
          ChatMessage(
             role="system",
