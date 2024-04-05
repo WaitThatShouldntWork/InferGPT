@@ -24,5 +24,5 @@ def call_model(system_prompt, user_prompt):
       ],
       max_tokens=125
    )
-   logger.info("{0} response : \"{1}\"".format(model, response.choices[0].message.content))
+   logger.info("{0} response : \"{1}\"".format(config.mlarge_model, response.choices[0].message.content))
    return response.choices[0].message.content
