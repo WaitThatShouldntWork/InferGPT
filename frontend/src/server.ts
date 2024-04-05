@@ -21,8 +21,13 @@ export const getResponse = async (message: string): Promise<ChatMessageResponse>
 const checkBackendHealth = async (): Promise<ChatMessageResponse> => {
   try {
     const response = await fetch(`${process.env.INFER_GPT_BACKEND_URL}/health`);
-    console.log('InferGPT backend is healthy!: ', response);
-    return happyResponse;
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+      return unhappyResponse;
+    } else {
+      console.log('InferGPT backend is healthy!: ', response);
+      return happyResponse;
+    }
   } catch {
     return unhappyResponse;
   }
