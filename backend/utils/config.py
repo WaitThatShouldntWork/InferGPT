@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 class Config(object):
     def __init__(self):
         self.frontend_url = None
-        self.mlarge_url = None
-        self.mlarge_key = None
-        self.mlarge_model = None
+        self.mistral_url = None
+        self.mistral_key = None
+        self.mistral_model = None
         self.neo4j_uri = None
         self.neo4j_user = None
         self.neo4j_password = None
@@ -18,10 +18,10 @@ class Config(object):
         """
         load_dotenv()
         try:
-            self.frontend_url = os.getenv("INFER_GPT_FRONTEND_URL", "http://localhost:8650")
-            self.mlarge_url = os.getenv("INFER_GPT_MISTRAL_LARGE_URL")
-            self.mlarge_key = os.getenv("INFER_GPT_MISTRAL_LARGE_KEY")
-            self.mlarge_model = os.getenv("INFER_GPT_MISTRAL_LARGE_MODEL")
+            self.frontend_url = os.getenv("FRONTEND_URL", "http://localhost:8650")
+            self.mistral_url = os.getenv("MISTRAL_URL")
+            self.mistral_key = os.getenv("MISTRAL_KEY")
+            self.mistral_model = os.getenv("MODEL")
             self.neo4j_uri = os.getenv("NEO4J_URI")
             self.neo4j_user = os.getenv("NEO4J_USERNAME")
             self.neo4j_password = os.getenv("NEO4J_PASSWORD")
