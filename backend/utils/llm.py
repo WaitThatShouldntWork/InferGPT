@@ -6,12 +6,12 @@ from utils import Config
 logger = logging.getLogger(__name__)
 config = Config()
 
-client = MistralClient(api_key=config.mlarge_key, endpoint=config.mlarge_url)
+client = MistralClient(api_key=config.mistral_key)
 
 def call_model(system_prompt, user_prompt):
    logger.info("called llm. Waiting on response model with prompt {0}".format(str([system_prompt, user_prompt])))
    response = client.chat(
-      model=config.mlarge_model,
+      model=config.mistral_model,
       messages=[
          ChatMessage(
             role="system",
