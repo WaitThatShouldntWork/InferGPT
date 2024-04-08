@@ -23,14 +23,14 @@ def test_connection():
     finally:
         driver.close()
     
-def create_goal(name, description):
+def create_goal(goal_name, goal_description):
     try:
         session = driver.session()
         query = """
-        MERGE (g:Goal {name: $name, description: $description})
+        MERGE (g:Goal {goal_name: $goal_name, goal_description: $goal_description})
         RETURN g
         """
-        result = session.run(query, name=name, description=description)
+        result = session.run(query, goal_name=goal_name, goal_description=goal_description)
         logging.debug("goal created")
 
     except Exception as e:
