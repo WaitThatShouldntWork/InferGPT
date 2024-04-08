@@ -1,7 +1,5 @@
-import os
 import logging
 from utils import Config
-from dotenv import load_dotenv
 from neo4j import GraphDatabase
 
 config = Config()

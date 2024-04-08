@@ -1,3 +1,4 @@
+import json
 import logging
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
@@ -42,7 +43,10 @@ def call_model_with_tools(system_prompt, user_prompt, tools):
          )
       ], 
       tools=tools, 
-      tool_choice="auto"
+      tool_choice="any"
    )
    logger.info("{0} response : \"{1}\"".format(config.mistral_model, response.choices[0].message.content))
-   return response
+   tool_call = response.choices[0].message.tool_calls[0]
+   function_name = tool_call.function.name
+   function_params = json.loads(tool_call.function.arguments)
+   return (function_name, function_params)
