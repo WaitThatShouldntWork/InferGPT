@@ -1,15 +1,12 @@
 import functools
 import logging
 import json
-from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
 from utils import Config
 from utils import graph_db_utils
+from utils.llm import call_model_with_tools
 
 logger = logging.getLogger(__name__)
 config = Config()
-
-client = MistralClient(api_key=config.mistral_key)
 
 tools = [
     {
@@ -29,7 +26,7 @@ tools = [
                         "description": "A string to summarise the goal",
                     },
                 },
-                "required": ["title"],
+                "required": ["goal_name"],
             },
         },
     }
@@ -39,7 +36,7 @@ names_to_functions = {
     'create_goal': functools.partial(graph_db_utils.create_goal),
 }
  
-agent_system_message = """
+system_prompt = """
     You are an agent specifically designed to accomplish one task:  
     extract a goal from a user's utterance and save it in the
     graph database.
@@ -48,25 +45,13 @@ agent_system_message = """
     reply saying that you are not able to do so.
 """
 user_prompt = "I want to save for a house in 5 years time"
- 
-messages=[
-        ChatMessage(
-            role="system",
-            content=agent_system_message
-        ),
-        ChatMessage(
-            role="user",
-            content=user_prompt
-        )
-    ]
 
-response = client.chat(model=config.mistral_model, messages=messages, tools=tools, tool_choice="any")
- 
-print(response.choices[0])
+def create_user_goal():   
+    response = call_model_with_tools(system_prompt, user_prompt, tools)
 
-tool_call = response.choices[0].message.tool_calls[0]
-function_name = tool_call.function.name
-function_params = json.loads(tool_call.function.arguments)
-print("\nfunction_name: ", function_name, "\nfunction_params: ", function_params)
-
-names_to_functions[function_name](**function_params)
+    tool_call = response.choices[0].message.tool_calls[0]
+    function_name = tool_call.function.name
+    function_params = json.loads(tool_call.function.arguments)
+    logger.info("\nfunction_name: ", function_name, "\nfunction_params: ", function_params)
+    logger.info("Calling function: {0}".format(function_name))
+    names_to_functions[function_name](**function_params)
