@@ -16,16 +16,16 @@ tools = [
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "goal_name": {
+                    "name": {
                         "type": "string",
                         "description": "As a string, A single title keyword to summarise the goal eg. mortgage",
                     },
-                    "goal_description": {
+                    "description": {
                         "type": "string",
                         "description": "A string to summarise the goal",
                     },
                 },
-                "required": ["goal_name"],
+                "required": ["name"],
             },
         },
     }
