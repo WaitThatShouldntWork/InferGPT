@@ -24,5 +24,25 @@ def call_model(system_prompt, user_prompt):
       ],
       max_tokens=125
    )
-   logger.info("{0} response : \"{1}\"".format(config.mlarge_model, response.choices[0].message.content))
+   logger.info("{0} response : \"{1}\"".format(config.mistral_model, response.choices[0].message.content))
    return response.choices[0].message.content
+
+def call_model_with_tools(system_prompt, user_prompt, tools):
+   logger.info("called llm with tools. Waiting on response model with prompt {0}".format(str([system_prompt, user_prompt])))
+   response = client.chat(
+      model=config.mistral_model, 
+      messages=[
+         ChatMessage(
+            role="system",
+            content=system_prompt
+         ),
+         ChatMessage(
+            role="user",
+            content=user_prompt
+         )
+      ], 
+      tools=tools, 
+      tool_choice="auto"
+   )
+   logger.info("{0} response : \"{1}\"".format(config.mistral_model, response.choices[0].message.content))
+   return response
