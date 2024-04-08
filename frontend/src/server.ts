@@ -3,11 +3,15 @@ export interface ChatMessageResponse {
 }
 
 const happyResponse: ChatMessageResponse = {
-  message: 'InferGPT backend is healthy!'
+  message: 'Healthcheck: InferGPT backend is healthy!'
 };
 
 const unhappyResponse: ChatMessageResponse = {
-  message: 'Error: InferGPT backend is unhealthy'
+  message: 'Healthcheck: InferGPT backend is unhealthy'
+};
+
+const unhappyChatResponse: ChatMessageResponse = {
+  message: 'I\'m sorry, but I was unable to get a response from InferGPT. Please check the status of the service using the phrase \"healthcheck\"'
 };
 
 export const getResponse = async (message: string): Promise<ChatMessageResponse> => {
@@ -23,11 +27,9 @@ const checkBackendHealth = async (): Promise<ChatMessageResponse> => {
     const response = await fetch(`${process.env.INFER_GPT_BACKEND_URL}/health`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
-      return unhappyResponse;
-    } else {
-      console.log('InferGPT backend is healthy!: ', response);
-      return happyResponse;
     }
+    console.log('InferGPT backend is healthy!: ', response);
+    return happyResponse;
   } catch {
     return unhappyResponse;
   }
@@ -51,6 +53,6 @@ const callChatEndpoint = async (message: string): Promise<ChatMessageResponse> =
     })
     .catch(error => {
       console.error('Error making REST call to /chat: ', error);
-      return unhappyResponse;
+      return unhappyChatResponse;
     });
 };
