@@ -11,7 +11,7 @@ const unhappyResponse: ChatMessageResponse = {
 };
 
 const unhappyChatResponse: ChatMessageResponse = {
-  message: 'I\'m sorry, but I was unable to get a response from InferGPT. Please check the status of the service using the phrase \"healthcheck\"'
+  message: 'I\'m sorry, but I was unable to process your message. Please check the status of the service using the phrase \"healthcheck\"'
 };
 
 export const getResponse = async (message: string): Promise<ChatMessageResponse> => {
