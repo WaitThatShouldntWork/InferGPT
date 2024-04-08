@@ -1,6 +1,5 @@
 import functools
 import logging
-import json
 from utils import Config
 from utils import graph_db_utils
 from utils.llm import call_model_with_tools
@@ -44,14 +43,10 @@ system_prompt = """
     than extract a goal and save it
     reply saying that you are not able to do so.
 """
-user_prompt = "I want to save for a house in 5 years time"
 
-def create_user_goal():   
-    response = call_model_with_tools(system_prompt, user_prompt, tools)
+def create_user_goal(user_prompt):   
+    (function_name, function_params) = call_model_with_tools(system_prompt, user_prompt, tools)
 
-    tool_call = response.choices[0].message.tool_calls[0]
-    function_name = tool_call.function.name
-    function_params = json.loads(tool_call.function.arguments)
     logger.info("\nfunction_name: ", function_name, "\nfunction_params: ", function_params)
     logger.info("Calling function: {0}".format(function_name))
     names_to_functions[function_name](**function_params)
