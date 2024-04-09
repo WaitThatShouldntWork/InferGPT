@@ -6,6 +6,9 @@ on:
 jobs:
   linting:
     name: Linting
+    defaults:
+      run:
+        working-directory: ./frontend
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -16,19 +19,8 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Move to frontend directory
-        run: |
-          echo "Before Move"
-          ls
-          cd ./frontend
-          echo "After Move"
-          ls
-
       - name: Install dependencies
-        run: |
-          echo "Before Install"
-          ls
-          npm install
+        run: npm install
 
-      # - name: Lint
-      #   run: npm run lint
+      - name: Lint
+        run: npm run lint
