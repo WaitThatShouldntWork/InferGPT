@@ -23,7 +23,7 @@ def call_model_with_tools(system_prompt, user_prompt, tools):
 def getResponse(system_prompt, user_prompt, tools=None):
    tool_choice = None if tools == None else 'any'
    
-   logger.info("Called llm. Waiting on response model with prompt {0}. Tool choice: {1}".format(str([system_prompt, user_prompt, tool_choice])))
+   logger.info("Called llm. Waiting on response model with prompt {0}. Tool choice: {1}".format(str([system_prompt, user_prompt]), tool_choice))
  
    response = client.chat(
       model=config.mistral_model,
