@@ -1,7 +1,5 @@
-import os
 import logging
 from utils import Config
-from dotenv import load_dotenv
 from neo4j import GraphDatabase
 
 config = Config()
@@ -30,7 +28,7 @@ def create_goal(name, description):
         MERGE (g:Goal {name: $name, description: $description})
         RETURN g
         """
-        result = session.run(query, name=name, description=description)
+        session.run(query, name=name, description=description)
         logging.debug("goal created")
 
     except Exception as e:
