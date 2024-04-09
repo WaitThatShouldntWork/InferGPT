@@ -1,8 +1,8 @@
 import functools
 import logging
 from utils import Config
-from utils import graph_db_utils
-from utils.llm import call_model_with_tools
+from utils import create_goal
+from utils import call_model_with_tools
 
 logger = logging.getLogger(__name__)
 config = Config()
@@ -25,14 +25,14 @@ tools = [
                         "description": "A string to summarise the goal",
                     },
                 },
-                "required": ["name"],
+                "required": ["name", "description"],
             },
         },
     }
 ]
  
 names_to_functions = {
-    'create_goal': functools.partial(graph_db_utils.create_goal),
+    'create_goal': functools.partial(create_goal),
 }
  
 system_prompt = """
@@ -47,6 +47,6 @@ system_prompt = """
 def create_user_goal(user_prompt):   
     (function_name, function_params) = call_model_with_tools(system_prompt, user_prompt, tools)
 
-    logger.info("\nfunction_name: ", function_name, "\nfunction_params: ", function_params)
+    logger.info("function_name: {0} function_params: {1}".format(function_name, function_params))
     logger.info("Calling function: {0}".format(function_name))
     names_to_functions[function_name](**function_params)
