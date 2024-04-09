@@ -24,8 +24,11 @@ jobs:
           echo "After Move"
           ls
 
-      # - name: Install dependencies
-      #   run: npm install
+      - name: Install dependencies
+        run: |
+          echo "Before Install"
+          ls
+          npm install
 
       # - name: Lint
       #   run: npm run lint
