@@ -24,12 +24,13 @@ app.add_middleware(
 @app.get("/health")
 async def health_check():
     logger.info("health_check method called successfully")
-    return {"message": "Infer GPT is running!"}
+    return {"message": "InferGPT backend is healthy"}
 
 @app.get("/chat")
 async def chat(utterance: str):
     logger.info("chat method called with utterance \"{0}\"".format(utterance))
     try:
         return JSONResponse(status_code=200, content=question(utterance))
-    except:
+    except Exception as e:
+        logger.exception(e)
         return JSONResponse(status_code=500, content="Unable to formulate InferGPT response")
