@@ -19,7 +19,7 @@ jobs:
       - name: Move to frontend directory
         run: |
           ls
-          cd frontend
+          cd ./frontend
           ls
 
       - name: Install dependencies
