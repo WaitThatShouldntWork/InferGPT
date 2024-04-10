@@ -28,7 +28,7 @@
   "plugins": ["@typescript-eslint", "react", "@stylistic/js"],
   "rules": {
     "indent": ["error", 2],
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "@stylistic/js/eol-last": ["error", "always"]

@@ -11,7 +11,7 @@ const unhappyResponse: ChatMessageResponse = {
 };
 
 const unhappyChatResponse: ChatMessageResponse = {
-  message: 'I\'m sorry, but I was unable to process your message. Please check the status of the service using the phrase \"healthcheck\"'
+  message: 'I\'m sorry, but I was unable to process your message. Please check the status of the service using the phrase "healthcheck"'
 };
 
 export const getResponse = async (message: string): Promise<ChatMessageResponse> => {
@@ -39,7 +39,7 @@ const callChatEndpoint = async (message: string): Promise<ChatMessageResponse> =
   return await fetch(`${process.env.INFER_GPT_BACKEND_URL}/chat?utterance=${message}`)
     .then(response => {
       if (!response.ok) {
-        console.log("error found")
+        console.log('error found');
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       return response;
