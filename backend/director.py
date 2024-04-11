@@ -24,12 +24,13 @@ If you reply more than one word, you will be disconnected
 
 def question(question):
   logger.info("director calling call_model method")
-  response = determine_intent(question)
-  if response == "FALSE":
-    return call_model(system_prompt, user_prompt=question)
-  else: 
+  hasIntent = determine_intent(question) == 'TRUE'
+  
+  if hasIntent:
     goal_saved = create_user_goal(question)
     return "I have created a goal for you. Goal: {0}. Description: {1}".format(goal_saved['name'], goal_saved['description'])
+  
+  return call_model(system_prompt, user_prompt=question)
 
 def determine_intent(question):
   return call_model(system_prompt_to_determine_intent, user_prompt=question)
