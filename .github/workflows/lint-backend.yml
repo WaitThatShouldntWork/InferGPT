@@ -5,18 +5,15 @@ on:
 jobs:
   linting:
     name: Linting Backend
-    defaults:
-      run:
-        working-directory: ./backend
     runs-on: ubuntu-latest 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Python
         uses: actions/setup-python@v2
 
-      - name: Lint and Fix
+      - name: Lint
         uses: chartboost/ruff-action@v1
         with:
-          args: --check .
+          src: ./backend
