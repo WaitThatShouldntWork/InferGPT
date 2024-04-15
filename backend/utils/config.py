@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 
+
 class Config(object):
     def __init__(self):
         self.frontend_url = None
@@ -27,5 +28,5 @@ class Config(object):
             self.neo4j_password = os.getenv("NEO4J_PASSWORD")
         except FileNotFoundError:
             raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
-        except:
+        except Exception:
             raise Exception("Missing .env file property. See the Getting Started guide on the README.md")

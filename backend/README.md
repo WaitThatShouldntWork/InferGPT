@@ -12,3 +12,35 @@ Python service for the InferGPT backend.
 - To install all project dependencies (listed in `requirements.txt`) run `pip install -r requirements.txt`.
 - Once all dependencies have been pulled run `uvicorn api:app --port 8250` to start the app. 
 - Check the backend app is running at [http://127.0.0.1:8250/health](http://127.0.0.1:8250/health).
+
+## Backend Linting
+
+Ruff is being used for the backend linting. See the docs: [here](https://docs.astral.sh/ruff/)
+
+Make sure the ruff dependency is downloaded, it should have been included in `requirements.txt`.
+
+Run the following command to check:
+
+```bash
+ruff --version
+```
+
+If it is not installed use the follwoing command:
+
+```bash
+pip install ruff
+```
+
+If ruff is installed correctly, the python files in the backend will be checked using the following command, from the backend directory:
+
+```bash
+ruff check
+```
+
+The ruff vscode plugin can also be installed from the store to show linting errors in the IDE.
+
+### Linting Rules
+
+Currently there are 4 rule groups selected in`ruff.toml`. All rule groups can be found [here](https://docs.astral.sh/ruff/rules/).
+
+To add further rules, these are added to `ruff.toml` by using the letter asssigned to the rules as in the docs linked above. ie. pep8-naming uses the letter "N".

@@ -30,29 +30,30 @@ tools = [
         },
     }
 ]
- 
+
 names_to_functions = {
-    'create_goal': functools.partial(create_goal),
+    "create_goal": functools.partial(create_goal),
 }
- 
+
 system_prompt = """
-    You are an agent specifically designed to accomplish one task:  
+    You are an agent specifically designed to accomplish one task:
     extract a goal from a user's utterance and save it in the
     graph database.
     If the task is to do something other
     than extract a goal and save it
     reply saying that you are not able to do so.
-    
+
     A goal should be saved as one or 2 words that extract the main purpose of the goal.
-    
+
     EG. prompt: "I want to save for a house"
     goal: "House"
     description: "Save for a house"
-    
+
     If you do not do this you will be disconnected.
 """
 
-def create_user_goal(user_prompt):   
+
+def create_user_goal(user_prompt):
     (function_name, function_params) = call_model_with_tools(system_prompt, user_prompt, tools)
 
     logger.info("function_name: {0} function_params: {1}".format(function_name, function_params))
