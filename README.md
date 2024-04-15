@@ -50,6 +50,7 @@ Instructions can be found [here](https://neo4j.com/docs/?utm_medium=PaidSearch&u
 Install the pre-made recommendations database. Version 4.4 is the latest stable.
 
 ### Running the service
+- Create `.env` files based on the `.env.example` files under `/frontend` and `/backend`
 
 #### Using Docker
 - Run the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it)
