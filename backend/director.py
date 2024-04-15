@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 system_prompt = """
 You are a Chat Bot called InferGPT.
 Your sole purpose is to get the user to tell you their goal.
-If the user does not provide a goal, ask them to provide a goal 
+If the user does not provide a goal, ask them to provide a goal
 """
 
 system_prompt_to_determine_intent = """
@@ -26,9 +26,9 @@ If you reply more than one word, you will be disconnected
 
 def question(question):
     logger.info("director calling call_model method")
-    hasIntent = determine_intent(question) == "TRUE"
+    has_intent = determine_intent(question) == "TRUE"
 
-    if hasIntent:
+    if has_intent:
         goal_saved = create_user_goal(question)
         return "I have created a goal for you. Goal: {0}. Description: {1}".format(
             goal_saved["name"], goal_saved["description"]

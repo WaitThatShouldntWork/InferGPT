@@ -38,3 +38,9 @@ ruff check backend
 ```
 
 The ruff vscode plugin can also be installed from the store to show linting errors in the IDE.
+
+### Linting Rules
+
+Currently there are 4 rule groups selected in`ruff.toml`. All rule groups can be found [here](https://docs.astral.sh/ruff/rules/).
+
+To add further rules, these are added to `ruff.toml` by using the code in the docs linked above.

@@ -1,2 +1,2 @@
 line-length = 120
-lint.select = ["E", "F"]
+lint.select = ["E", "W", "F", "N"]
