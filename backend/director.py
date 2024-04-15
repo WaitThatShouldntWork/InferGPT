@@ -11,7 +11,8 @@ If the user does not provide a goal, ask them to provide a goal
 """
 
 system_prompt_to_determine_intent = """
-Your purpose is to determine whether the user prompt contains a goal. If the user prompt contains a goal return "TRUE". If it does not contain a goal return "FALSE".
+Your purpose is to determine whether the user prompt contains a goal.
+If the user prompt contains a goal return "TRUE". If it does not contain a goal return "FALSE".
 
 Your reply should be one word only:
 If goal:
