@@ -1,9 +1,6 @@
 # Choose our version of Python
 FROM python:3.12
 
-# Get args from .env
-ARG frontend_url_in_dockerfile=$FRONTEND_URL
-
 # Set up a working directory
 WORKDIR /backend_code
 
