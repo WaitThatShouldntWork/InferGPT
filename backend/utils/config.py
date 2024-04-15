@@ -5,9 +5,9 @@ from dotenv import load_dotenv
 class Config(object):
     def __init__(self):
         self.frontend_url = None
-        self.mistralruf_url = None
-        self.mistralruf_key = None
-        self.mistralruf_model = None
+        self.mistral_url = None
+        self.mistral_key = None
+        self.mistral_model = None
         self.neo4j_uri = None
         self.neo4j_user = None
         self.neo4j_password = None
@@ -27,10 +27,6 @@ class Config(object):
             self.neo4j_user = os.getenv("NEO4J_USERNAME")
             self.neo4j_password = os.getenv("NEO4J_PASSWORD")
         except FileNotFoundError:
-            raise FileNotFoundError(
-                "Please provide a .env file. See the Getting Started guide on the README.md"
-            )
+            raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
         except Exception:
-            raise Exception(
-                "Missing .env file property. See the Getting Started guide on the README.md"
-            )
+            raise Exception("Missing .env file property. See the Getting Started guide on the README.md")

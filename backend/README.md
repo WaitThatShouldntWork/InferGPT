@@ -31,10 +31,10 @@ If it is not installed use the follwoing command:
 pip install ruff
 ```
 
-If ruff is installed correctly, the python files in the backend will be checked using the following command
+If ruff is installed correctly, the python files in the backend will be checked using the following command, from the backend directory:
 
 ```bash
-ruff check backend
+ruff check
 ```
 
 The ruff vscode plugin can also be installed from the store to show linting errors in the IDE.
