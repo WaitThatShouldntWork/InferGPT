@@ -1,0 +1,16 @@
+version: '1'
+services:
+  # infergpt-neo4j:
+  #   image: 4.4-enterprise
+  backend:
+    build: "./backend/"
+    env_file:
+      - "./backend/.env"
+    ports:
+      - 8250:8250
+  frontend:
+    build: "./frontend/"
+    env_file:
+      - "./frontend/.env"
+    ports:
+      - 8650:8650
