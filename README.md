@@ -53,8 +53,10 @@ Install the pre-made recommendations database. Version 4.4 is the latest stable.
 - Create `.env` files based on the `.env.example` files under `/frontend` and `/backend`
 
 #### Using Docker
+- Start and open the Neo4J Desktop app. Start the default database (neo4j).
+- create `.env` files as instructed within the [frontend README](frontend/README.md) and [backend README](backend/README.md)
 - Run the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it)
-- In the root directory of the project run `docker-compose up`
+- In the root directory of the project run `docker compose up`
   - Note the first time you do this it may take longer as the compose file builds the images
 
 #### Using pip and python

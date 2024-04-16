@@ -1,7 +1,7 @@
 version: '1'
 services:
-  # infergpt-neo4j:
-  #   image: 4.4-enterprise
+  # neo4j-store:
+  #   build: "./data/"
   backend:
     build: "./backend/"
     env_file:
