@@ -5,3 +5,5 @@ pycodestyle==2.11.1
 python-dotenv==1.0.1
 neo4j==5.18.0
 ruff==0.3.5
+pytest==8.1.1
+pytest-mock==3.14.0

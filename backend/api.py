@@ -1,4 +1,5 @@
 import logging
+import logging.config
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -21,11 +22,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+healthy_response = {"message": "InferGPT backend is healthy"}
+error_message = "Unable to formulate InferGPT response"
+
 
 @app.get("/health")
 async def health_check():
     logger.info("health_check method called successfully")
-    return {"message": "InferGPT backend is healthy"}
+    return healthy_response
 
 
 @app.get("/chat")
@@ -35,6 +39,4 @@ async def chat(utterance: str):
         return JSONResponse(status_code=200, content=question(utterance))
     except Exception as e:
         logger.exception(e)
-        return JSONResponse(
-            status_code=500, content="Unable to formulate InferGPT response"
-        )
+        return JSONResponse(status_code=500, content=error_message)
