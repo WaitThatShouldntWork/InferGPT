@@ -1,6 +1,17 @@
 # Sequence diagrams of the happy flow
 
-*TODO: add happy path where there is no question*
+## "Hello! What can you do?"
+
+I am a user who is asking about the bots capabilities
+
+### Find tasks from question
+```mermaid
+sequenceDiagram
+    Frontend -->> Director: "Hello! What can you do?"
+    Director -->> LLM: "Is this a processable question?"
+    LLM -->> Director: "No, return this generic response"
+    Director -->> Frontend: "I'm InferGPT and can..."
+```
 
 ## "What did I spend more on last month, Amazon or Netflix?"
 
@@ -10,6 +21,8 @@ I am a user who wants to know if last month I spent more on my Netflix subscript
 ```mermaid
 sequenceDiagram
     Frontend -->> Director: "What did I spend more on last month, Amazon or Netflix?"
+    Director -->> LLM: "Is this a processable question?"
+    LLM -->> Director: "Yes"
     Director -->> TaskAgent: "Give me a list of tasks from this question"
     TaskAgent -->> LLM: "Split "What did I spend more on last month, Amazon or Netflix?" into up to 5 goals"
     LLM -->> TaskAgent: "1. get Amazon spending, 2. get Netflix spending, 3. find greater amount"
