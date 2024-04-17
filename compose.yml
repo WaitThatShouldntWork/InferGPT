@@ -3,14 +3,14 @@ services:
   # neo4j-store:
   #   build: "./data/"
   backend:
-    build: "./backend/"
+    build: "backend/"
     env_file:
-      - "./backend/.env"
+      - "backend/.env"
     ports:
       - 8250:8250
   frontend:
-    build: "./frontend/"
+    build: "frontend/"
     env_file:
-      - "./frontend/.env"
+      - "frontend/.env"
     ports:
       - 8650:8650

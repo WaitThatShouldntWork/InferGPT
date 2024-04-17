@@ -1,6 +1,7 @@
 import logging
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
+from utils import test_connection
 from utils import Config
 from director import question
 from fastapi.middleware.cors import CORSMiddleware
@@ -23,8 +24,14 @@ app.add_middleware(
 
 @app.get("/health")
 async def health_check():
-    logger.info("health_check method called successfully")
-    return {"message": "InferGPT backend is healthy"}
+    try:
+        logger.info("health_check method called successfully")
+        neo4j_status = "healthy" if test_connection() == True else "unhealthy. Please check the README files for further guidance"
+        logging.info("health_check method complete")
+        return JSONResponse(status_code=200, content="InferGPT healthcheck: backend is healthy. Neo4J is " + neo4j_status)
+    except Exception as e:
+        logger.critical("health_check method failed with error: " + e)
+        return JSONResponse(status_code=500, content="InferGPT healthcheck: backend is unhealthy. Unable to healthcheck Neo4J. Please check the README files for further guidance")
 
 @app.get("/chat")
 async def chat(utterance: str):
@@ -33,4 +40,4 @@ async def chat(utterance: str):
         return JSONResponse(status_code=200, content=question(utterance))
     except Exception as e:
         logger.exception(e)
-        return JSONResponse(status_code=500, content="Unable to formulate InferGPT response")
+        return JSONResponse(status_code=500, content="Unable to generate InferGPT response")
