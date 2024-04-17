@@ -81,5 +81,3 @@ sequenceDiagram
     Supervisor -->> Director: "Answer is 'Amazon £65.15 is greater than Netflix £12.99 by £52.16'"
     Director -->> Frontend: "response.body - 'Amazon £65.15 is greater than Netflix £12.99 by £52.16'"
 ```
-
-*TODO: remove LLM calls, might make diagrams easier to read*
