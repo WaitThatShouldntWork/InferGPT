@@ -26,12 +26,12 @@ const checkBackendHealth = async (): Promise<ChatMessageResponse> => {
       return response;
     })
     .then(response => response.json())
-    .then(responseJson => { return createChatMessageResponse(responseJson) })
+    .then(responseJson => { return createChatMessageResponse(responseJson); })
     .catch(error => {
       console.error('Error making REST call to /chat: ', error);
       return unhappyHealthcheckResponse;
     });
-}
+};
 
 const unhappyChatResponse = createChatMessageResponse('I\'m sorry, but I was unable to process your message. Please check the status of the service using the phrase "healthcheck"');
 
