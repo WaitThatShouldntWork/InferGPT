@@ -10,7 +10,7 @@ Python service for the InferGPT backend.
 
 ## Set up
 
-Unless otherwise stated all of the commands mentioned in this README should be run from this directory.
+Unless otherwise stated all of the commands mentioned in this README should be run from `./backend`.
 
 1. Install dependencies
 ```bash
@@ -47,7 +47,7 @@ If ruff is installed correctly, the python files in the backend will be checked 
 ruff check
 ```
 
-You can run the following from the backend directory to attempt to fix any errors automatically:
+You can run the following command to fix any errors automatically:
 
 ```bash
 ruff format
@@ -63,7 +63,7 @@ To add further rules, these are added to `ruff.toml` by using the letter asssign
 
 ## Test
 
-`pytest` is being used for testing the backend. Like with linting running the [setup](#set-up) steps should download `pytest` for you. To then run the tests, use the following command:
+`pytest` is being used for testing the backend. Like with linting, running the [setup](#set-up) steps should download `pytest` for you. To then run the tests, use the following command:
 
 ```bash
 pytest
