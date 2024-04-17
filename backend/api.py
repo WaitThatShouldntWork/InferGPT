@@ -25,6 +25,7 @@ app.add_middleware(
 healthy_response = {"message": "InferGPT backend is healthy"}
 error_message = "Unable to formulate InferGPT response"
 
+
 @app.get("/health")
 async def health_check():
     logger.info("health_check method called successfully")
