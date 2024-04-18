@@ -50,11 +50,22 @@ Instructions can be found [here](https://neo4j.com/docs/?utm_medium=PaidSearch&u
 Install the pre-made recommendations database. Version 4.4 is the latest stable.
 
 ### Running the service
-It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your terminal.
+- Create `.env` files based on the `.env.example` files under `/frontend` and `/backend`
 
+#### Using Docker
+- Start and open the Neo4J Desktop app. Start the default database (neo4j).
+- create `.env` files as instructed within the [frontend README](frontend/README.md) and [backend README](backend/README.md)
+- Run the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it)
+- In the root directory of the project run `docker compose up`
+  - Note the first time you do this it may take longer as the compose file builds the images
+
+#### Using pip and python
+- Open your preferred terminal.
+It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your active terminal.
 - Follow the [frontend README](frontend/README.md) to set up the front end
 - Follow the [backend README](backend/README.md) to set up the back end
-
+- Once all dependencies have been pulled run `uvicorn app:api` to start the app. Check the backend app is running at [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
+ 
 ### Usage
 Coming
 

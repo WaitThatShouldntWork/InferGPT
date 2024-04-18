@@ -2,17 +2,9 @@ export interface ChatMessageResponse {
   message: string;
 }
 
-const happyResponse: ChatMessageResponse = {
-  message: 'Healthcheck: InferGPT backend is healthy!'
-};
-
-const unhappyResponse: ChatMessageResponse = {
-  message: 'Healthcheck: InferGPT backend is unhealthy'
-};
-
-const unhappyChatResponse: ChatMessageResponse = {
-  message: 'I\'m sorry, but I was unable to process your message. Please check the status of the service using the phrase "healthcheck"'
-};
+function createChatMessageResponse(message: string): ChatMessageResponse {
+  return { message };
+}
 
 export const getResponse = async (message: string): Promise<ChatMessageResponse> => {
   if (message == 'healthcheck') {
@@ -22,21 +14,10 @@ export const getResponse = async (message: string): Promise<ChatMessageResponse>
   }
 };
 
-const checkBackendHealth = async (): Promise<ChatMessageResponse> => {
-  try {
-    const response = await fetch(`${process.env.INFER_GPT_BACKEND_URL}/health`);
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-    console.log('InferGPT backend is healthy!: ', response);
-    return happyResponse;
-  } catch {
-    return unhappyResponse;
-  }
-};
+const unhappyHealthcheckResponse = createChatMessageResponse('InferGPT healthcheck: backend is unhealthy. Unable to healthcheck Neo4J. Please check the README files for further guidance');
 
-const callChatEndpoint = async (message: string): Promise<ChatMessageResponse> => {
-  return await fetch(`${process.env.INFER_GPT_BACKEND_URL}/chat?utterance=${message}`)
+const checkBackendHealth = async (): Promise<ChatMessageResponse> => {
+  return await fetch(`${process.env.BACKEND_URL}/health`)
     .then(response => {
       if (!response.ok) {
         console.log('error found');
@@ -45,12 +26,26 @@ const callChatEndpoint = async (message: string): Promise<ChatMessageResponse> =
       return response;
     })
     .then(response => response.json())
-    .then(responseJson => {
-      const responseAsChatMessageResponse: ChatMessageResponse = {
-        message: responseJson
-      };
-      return responseAsChatMessageResponse;
+    .then(responseJson => { return createChatMessageResponse(responseJson); })
+    .catch(error => {
+      console.error('Error making REST call to /chat: ', error);
+      return unhappyHealthcheckResponse;
+    });
+};
+
+const unhappyChatResponse = createChatMessageResponse('I\'m sorry, but I was unable to process your message. Please check the status of the service using the phrase "healthcheck"');
+
+const callChatEndpoint = async (message: string): Promise<ChatMessageResponse> => {
+  return await fetch(`${process.env.BACKEND_URL}/chat?utterance=${message}`)
+    .then(response => {
+      if (!response.ok) {
+        console.log('error found');
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response;
     })
+    .then(response => response.json())
+    .then(responseJson => { return createChatMessageResponse(responseJson); })
     .catch(error => {
       console.error('Error making REST call to /chat: ', error);
       return unhappyChatResponse;
