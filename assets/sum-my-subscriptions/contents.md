@@ -1,5 +1,8 @@
 # Sequence Diagrams
 
+## General architecture
+- [Overview](overview.md)
+
 ## "Hello! What can you do?"
 - [Overview](happy_flows_basic_question_top_level_concepts.md)
 
