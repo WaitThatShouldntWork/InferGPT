@@ -3,9 +3,6 @@
 I am a user who wants to know if last month I spent more on my Netflix subscription than my Amazon one
 
 ### Find tasks from question
-```mermaid
-sequenceDiagram
-```
 
 ```mermaid
 sequenceDiagram
