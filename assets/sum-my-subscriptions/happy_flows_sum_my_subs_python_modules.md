@@ -11,52 +11,36 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     box Purple Frontend
-    participant UI
+    participant server.ts
     end
-    box DarkBlue Main backend logic
+    box DarkBlue Backend
     participant director.py
     participant supervisor.py
-    participant router.py
     end
-    box DarkBlue Agents and Tools
+    box DarkBlue Backend: Agents and Tools
     participant tasks.py
-    participant datastore_agent.py
-    participant comparer.py
     end
-    box Brown Databases
-    participant graph_db_utils.py
-    end
-    UI -->> director.py: pass utterance
+    server.ts -->> director.py: pass utterance
     director.py -->> tasks.py: Request list of tasks
     tasks.py -->> director.py: tasks as array
-    director.py -->> supervisor.py: tasks
+    director.py -->> supervisor.py: solve these tasks
 ```
     
 ### Solve step 1. get Amazon spending
 ```mermaid
 sequenceDiagram
-    box Purple Frontend
-    participant UI
-    end
-    box DarkBlue Main backend logic
-    participant director.py
+    box DarkBlue Backend
     participant supervisor.py
     participant router.py
     end
-    box DarkBlue Agents and Tools
-    participant tasks.py
+    box DarkBlue Backend: Agents and Tools
     participant datastore_agent.py
-    participant comparer.py
-    end
-    box Brown Databases
     participant graph_db_utils.py
     end
     supervisor.py -->> router.py: Find the Agent I should assign 'get Amazon spending' task to
-    router.py -->> router.py: Determine which agent is best for this task
     router.py -->> supervisor.py: Call datastore_agent.py with prompt 'get Amazon spending'
     supervisor.py -->> datastore_agent.py: Find the answer to the following: 'get Amazon spending'
-    datastore_agent.py -->> datastore_agent.py: Function call: identify methods
-    datastore_agent.py -->> graph_db_utils.py: Use getSubscriptionTotalForLastXDays('Amazon', 31). Cypher query for Amazon spending in 31 days
+    datastore_agent.py -->> graph_db_utils.py: Use getSubscriptionTotalForLastXDays('Amazon', 31)
     graph_db_utils.py -->> datastore_agent.py: £65.15
     datastore_agent.py -->> supervisor.py: method: getSubscriptionTotalForLastXDays('Amazon', 31), result: £65.15
 ```
@@ -64,24 +48,17 @@ sequenceDiagram
 ### Solve step 2. get Netflix spending
 ```mermaid
 sequenceDiagram
-    box Purple Frontend
-    participant UI
-    end
-    box DarkBlue Main backend logic
-    participant director.py
+    box DarkBlue Backend
     participant supervisor.py
     participant router.py
     end
-    box DarkBlue Agents and Tools
-    participant tasks.py
+    box DarkBlue Backend: Agents and Tools
     participant datastore_agent.py
-    participant comparer.py
+    participant graph_db_utils.py
     end
     supervisor.py -->> router.py: Find the Agent I should assign 'get Netflix spending' task to
-    router.py -->> router.py: Determine which agent is best for this task
     router.py -->> supervisor.py: Call datastore_agent.py with prompt 'get Netflix spending'
     supervisor.py -->> datastore_agent.py: Find the answer to the following: 'get Netflix spending'
-    datastore_agent.py -->> datastore_agent.py: Function call: identify methods
     datastore_agent.py -->> graph_db_utils.py: Use getSubscriptionTotalForLastXDays('Netflix', 31).  Cypher query for Netflix spending in 31 days
     graph_db_utils.py -->> datastore_agent.py: £12.99
     datastore_agent.py -->> supervisor.py: method: getSubscriptionTotalForLastXDays('Netflix' 31), result: £12.99
@@ -91,26 +68,22 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     box Purple Frontend
-    participant UI
+    participant server.ts
     end
-    box DarkBlue Main backend logic
+    box DarkBlue Backend
     participant director.py
     participant supervisor.py
     participant router.py
     end
-    box DarkBlue Agents and Tools
-    participant tasks.py
-    participant datastore_agent.py
+    box DarkBlue Backend: Agents and Tools
     participant comparer.py
     end
     supervisor.py -->> router.py: Find the Agent I should assign 'find greater amount' task to
-    router.py -->> router.py: Next best step prompt
     router.py -->> supervisor.py: Use comparer.py with args 'Amazon: £65.15', 'Netflix: £12.99'
     supervisor.py -->> comparer.py: comparer.py.compare('Amazon: £65.15', 'Netflix: £12.99')
     comparer.py -->> supervisor.py: 'Amazon £65.15 is greater than Netflix £12.99 by £52.16'
     supervisor.py -->> router.py: Find the next best step
-    router.py -->> router.py: Next best step prompt
     router.py -->> supervisor.py: All tasks complete
     supervisor.py -->> director.py: Answer is 'Amazon £65.15 is greater than Netflix £12.99 by £52.16'
-    director.py -->> UI: return answer
+    director.py -->> server.ts: return answer
 ```
