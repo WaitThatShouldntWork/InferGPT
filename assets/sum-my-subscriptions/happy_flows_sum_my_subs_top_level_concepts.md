@@ -31,16 +31,16 @@ sequenceDiagram
     Director -->> Supervisor: solve all tasks
     Supervisor -->> Router: Find 'get Amazon spending' Agent
     Router -->> DatastoreAgent: solve 'get Amazon spending'
-    DatastoreAgent -->> Neo4J: getSubscriptionTotalForLastXDays('Amazon', 31)
+    DatastoreAgent -->> Neo4J: get spending
     Neo4J -->> DatastoreAgent: £65.15
     DatastoreAgent -->> Supervisor: result: £65.15
     Supervisor -->> Router: Find 'get Netflix spending' Agent
     Router -->> DatastoreAgent: solve 'get Netflix spending'
-    DatastoreAgent -->> Neo4J: getSubscriptionTotalForLastXDays('Netflix', 31)
+    DatastoreAgent -->> Neo4J: get spending
     Neo4J -->> DatastoreAgent: £12.99
     DatastoreAgent -->> Supervisor: result: £12.99
     Supervisor -->> Router: Find 'find greater amount' Agent
-    Router -->> ComparerTool: ComparerTool.compare('Amazon: £65.15', 'Netflix: £12.99')
+    Router -->> ComparerTool: compare values
     ComparerTool -->> Supervisor: result: 'Amazon > Netflix'
     Supervisor -->> Router: Find the next best step
     Router -->> Supervisor: All tasks complete

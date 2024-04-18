@@ -2,7 +2,6 @@
 
 I am a user who is asking about the bots capabilities
 
-### Find tasks from question
 ```mermaid
 sequenceDiagram
     box Purple Frontend
