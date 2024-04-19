@@ -58,6 +58,10 @@ Install the pre-made recommendations database. Version 4.4 is the latest stable.
 - Run the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it)
 - In the root directory of the project run `docker compose up`
   - Note the first time you do this it may take longer as the compose file builds the images
+  - to delete and recreate the images use
+    - kill containers `docker rm $(docker ps -a -f status=exited -q)`
+	  - kill images `docker rmi infergpt-backend infergpt-frontend`
+	  - restart `docker compose up`
 
 #### Using pip and python
 - Open your preferred terminal.
@@ -69,5 +73,5 @@ It's recommended (though not technically required) to create a virtual environme
 ### Usage
 Coming
 
-### LICENCE 
+### LICENCE
 See [LICENCE.md](LICENCE.md)
