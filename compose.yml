@@ -1,7 +1,10 @@
 version: '1'
 services:
-  # neo4j-store:
-  #   build: "./data/"
+  neo4j-dbms:
+    build: "data/"
+    ports:
+      - 7474:7474
+      - 7687:7687
   backend:
     build: "backend/"
     env_file:

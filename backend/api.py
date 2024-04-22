@@ -1,5 +1,7 @@
+from cgi import test
 import logging
 import logging.config
+from typing import final
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,24 +24,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-healthy_response = {"message": "InferGPT backend is healthy"}
-error_message = "Unable to formulate InferGPT response"
 health_prefix = "InferGPT healthcheck: "
-unhealthy_neo4j_response = "unhealthy. Please check the README files for further guidance"
+further_guidance = "Please check the README files for further guidance."
 
+healthy_response = health_prefix + "backend is healthy. Neo4J is healthy."
+unhealthy_backend_response = health_prefix + "backend is unhealthy. Unable to healthcheck Neo4J. " + further_guidance
+unhealthy_neo4j_response = health_prefix + "backend is healthy. Neo4J is unhealthy. " + further_guidance
+
+chat_fail_response = "Unable to generate a response. Check the service by using the keyphrase 'healthcheck'"
 
 @app.get("/health")
 async def health_check():
+    logger.info("health_check method called")
+    response = JSONResponse(status_code=200, content=healthy_response)
     try:
-        logger.info("health_check method called successfully")
-        neo4j_status = "healthy" if test_connection() else unhealthy_neo4j_response
-        logging.info("health_check method complete")
-        return JSONResponse(status_code=200, content=health_prefix + "backend is healthy. Neo4J is " + neo4j_status)
+        if not test_connection():
+            logging.info("health_check method failed - neo4j connection unsuccessful")
+            response = JSONResponse(status_code=500, content=unhealthy_neo4j_response)
     except Exception as e:
         logger.critical("health_check method failed with error: " + e)
-        return JSONResponse(status_code=500, content=health_prefix +
-            "backend is unhealthy. Unable to healthcheck Neo4J. Please check the README files for further guidance"
-        )
+        response = JSONResponse(status_code=500, content=unhealthy_backend_response)
+    finally:
+        logging.info("health_check method complete")
+        return response
 
 @app.get("/chat")
 async def chat(utterance: str):
@@ -48,4 +55,4 @@ async def chat(utterance: str):
         return JSONResponse(status_code=200, content=question(utterance))
     except Exception as e:
         logger.exception(e)
-        return JSONResponse(status_code=500, content="Unable to generate InferGPT response")
+        return JSONResponse(status_code=500, content=chat_fail_response)
