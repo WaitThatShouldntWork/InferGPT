@@ -1,13 +1,9 @@
-from fastapi.responses import JSONResponse
 from fastapi.testclient import TestClient
-from api import app, healthy_response, unhealthy_backend_response, unhealthy_neo4j_response, chat_fail_response
+from api import app, healthy_response, unhealthy_neo4j_response, chat_fail_response
 
 client = TestClient(app)
 utterance = "Hello there"
 expected_message = "Hello to you too! From InferGPT"
-
-# TODO: Neo4J Desktop needs running for these tests to work
-#       - consider implementing a Neo4J database embedded as part of running the tests to remove this dependency
 
 def test_health_check_response_healthy():
     response = client.get("/health")
