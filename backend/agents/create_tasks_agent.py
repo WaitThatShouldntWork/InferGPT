@@ -35,7 +35,7 @@ create_tasks_prompt = """
     2) Sum all transactions. Explanation: {your reasoning}
 """
 
-def create_tasks(user_prompt):
+def create_tasks(user_prompt: str) -> str:
     logger.info("create_tasks function is called")
     response = call_model(create_tasks_prompt, user_prompt)
-    return(response)
+    return response
