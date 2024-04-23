@@ -10,15 +10,15 @@ sequenceDiagram
 ### Find tasks from question
 ```mermaid
 sequenceDiagram
-    box Purple Frontend
+    box Frontend
     participant server.ts
     end
-    box DarkBlue Backend
+    box Backend
     participant llm.py
     participant director.py
     participant supervisor.py
     end
-    box DarkBlue Backend: Agents and Tools
+    box Backend: Agents and Tools
     participant tasks.py
     end
     server.ts -->> director.py: pass utterance
@@ -34,12 +34,12 @@ sequenceDiagram
 ### Solve step 1. get Amazon spending
 ```mermaid
 sequenceDiagram
-    box DarkBlue Backend
+    box Backend
     participant supervisor.py
     participant router.py
     participant llm.py
     end
-    box DarkBlue Backend: Agents and Tools
+    box Backend: Agents and Tools
     participant datastore_agent.py
     participant graph_db_utils.py
     end
@@ -58,12 +58,12 @@ sequenceDiagram
 ### Solve step 2. get Netflix spending
 ```mermaid
 sequenceDiagram
-    box DarkBlue Backend
+    box Backend
     participant supervisor.py
     participant router.py
     participant llm.py
     end
-    box DarkBlue Backend: Agents and Tools
+    box Backend: Agents and Tools
     participant datastore_agent.py
     participant graph_db_utils.py
     end
@@ -82,16 +82,16 @@ sequenceDiagram
 ### Solve step 3. find greater amount
 ```mermaid
 sequenceDiagram
-    box Purple Frontend
+    box Frontend
     participant server.ts
     end
-    box DarkBlue Backend
+    box Backend
     participant director.py
     participant supervisor.py
     participant router.py
     participant llm.py
     end
-    box DarkBlue Backend: Agents and Tools
+    box Backend: Agents and Tools
     participant comparer.py
     end
     supervisor.py -->> router.py: Find the Agent I should assign 'find greater amount' task to

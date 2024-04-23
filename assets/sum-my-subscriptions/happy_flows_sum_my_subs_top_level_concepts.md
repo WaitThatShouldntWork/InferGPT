@@ -6,20 +6,20 @@ I am a user who wants to know if last month I spent more on my Netflix subscript
 
 ```mermaid
 sequenceDiagram
-    box Purple Frontend
+    box Frontend
     participant UI
     end
-    box DarkBlue Main backend logic
+    box Main backend logic
     participant Director
     participant Supervisor
     participant Router
     end
-    box DarkBlue Agents and Tools
+    box Agents and Tools
     participant TaskAgent
     participant DatastoreAgent
     participant ComparerTool
     end
-    box Brown Databases
+    box Databases
     participant Neo4J
     end
     UI -->> Director: pass utterance

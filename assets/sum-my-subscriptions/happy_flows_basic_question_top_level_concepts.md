@@ -4,10 +4,10 @@ I am a user who is asking about the bots capabilities
 
 ```mermaid
 sequenceDiagram
-    box Purple Frontend
+    box Frontend
     participant UI
     end
-    box DarkBlue Main backend logic
+    box Main backend logic
     participant Director
     end
     UI -->> Director: Hello! What can you do?

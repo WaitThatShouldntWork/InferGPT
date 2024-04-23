@@ -2,10 +2,10 @@
 
 ```mermaid
 sequenceDiagram
-    box Purple Frontend
+    box Frontend
     participant UI
     end
-    box DarkBlue Main backend logic
+    box Main backend logic
     participant Director
     participant Supervisor
     participant Router
