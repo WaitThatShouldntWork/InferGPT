@@ -53,10 +53,7 @@ Once you have Git installed, follow these steps:
 - **Ensure Docker is installed and running**. The easiest way to do this is by using the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it).
 - In the root directory of the project run `docker compose up`
   - Note the first time you do this it may take longer as the compose file builds the images
-  - to delete and recreate the images use
-    - kill & delete containers `docker rm $(docker ps -a -f status=exited -q)`
-    - kill & delete images `docker rmi infergpt-backend infergpt-frontend`
-    - restart `docker compose up`
+  - to delete and recreate the images use `docker compose down`
 
 #### Using pip and python
 - Open your preferred terminal where the project is cloned
