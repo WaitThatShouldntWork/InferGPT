@@ -5,11 +5,6 @@ I am a user who wants to know if last month I spent more on my Netflix subscript
 ### Find tasks from question
 ```mermaid
 sequenceDiagram
-```
-
-### Find tasks from question
-```mermaid
-sequenceDiagram
     box Frontend
     participant server.ts
     end
@@ -30,7 +25,7 @@ sequenceDiagram
     tasks.py -->> director.py: tasks as array
     director.py -->> supervisor.py: solve these tasks
 ```
-    
+
 ### Solve step 1. get Amazon spending
 ```mermaid
 sequenceDiagram
