@@ -41,7 +41,7 @@ If you reply more than one word, you will be disconnected
 """
 
 
-def question(question):
+def question(question: str) -> str:
     has_intent = determine_intention(question) == "TRUE"
     logger.info(f"intention identified: {has_intent}")
     if has_intent:
@@ -51,6 +51,6 @@ def question(question):
     return call_model(director_prompt, user_prompt=question)
 
 
-def determine_intention(question):
+def determine_intention(question: str) -> str:
     logger.info("director calling determine_intention function")
     return call_model(determine_intention_prompt, user_prompt=question)
