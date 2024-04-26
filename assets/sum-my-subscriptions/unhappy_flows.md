@@ -13,7 +13,7 @@ The below assume no looping for error cases:
 sequenceDiagram
     Router -->> LLM: "Determine which agent is best for this task"
     LLM -->> Router: "No suitable agent found"
-    Router -->> Supervisor: "No more avaialble agents, task failed"
+    Router -->> Supervisor: "No more available agents, task failed"
     Supervisor -->> Director: "Unable to solve task: 'task_description'"
     Director -->> frontend: "I'm sorry, I was unable to solve that task"
 ```
@@ -29,7 +29,7 @@ sequenceDiagram
     LLM -->> DatastoreAgent: "No appropriate method found"
     DatastoreAgent -->> Supervisor: "I cannot solve this task"
     Supervisor -->> Router: "Agent failed, try again"
-    Router -->> Supervisor: "No more avaialble agents, task failed"
+    Router -->> Supervisor: "No more available agents, task failed"
     Supervisor -->> Director: "Unable to solve task: 'task_description'"
     Director -->> frontend: "I'm sorry, I was unable to solve that task"
 ```
