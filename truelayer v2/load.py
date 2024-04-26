@@ -80,38 +80,40 @@ class Load:
     def write_transactions(self, transactions, account):
         # establish session with neo4j
         with self.driver.session(database=self.database) as self.session:
-            for transaction in transactions:
-                print(account + ' | ' + transaction['transaction_id'] + ' | ' + transaction['timestamp'] + ' | ' +
-                      transaction['description'] + ' | ' + str(transaction['amount']))
+            with open("chrisboothtransactions.txt", 'w') as file:
+                for transaction in transactions:
+                    print(account + ' | ' + transaction['transaction_id'] + ' | ' + transaction['timestamp'] + ' | ' +
+                        transaction['description'] + ' | ' + str(transaction['amount']))
 
-                query = "MATCH (c:Customer) WHERE c.id = 1\n"
-                query += "MATCH (a) WHERE (a:Account OR a:Card) AND a.id = '%s'\n" % account
-                query += "MERGE (c)-[:HAS_ACCOUNT]->(a)\n"
-                query += "MERGE (b:Transactions {id: '%s'})\n" % account
-                query += "MERGE (a)-[:HAS_TRANSACTIONS]->(b)\n"
+                    query = "MATCH (c:Customer) WHERE c.id = 1\n"
+                    query += "MATCH (a) WHERE (a:Account OR a:Card) AND a.id = '%s'\n" % account
+                    query += "MERGE (c)-[:HAS_ACCOUNT]->(a)\n"
+                    query += "MERGE (b:Transactions {id: '%s'})\n" % account
+                    query += "MERGE (a)-[:HAS_TRANSACTIONS]->(b)\n"
 
-                # create transaction
-                query += "MERGE (t:Transaction {transaction_id: '%s'})\n" % transaction['transaction_id']
-                query += "SET t.timestamp = datetime('%s')\n" % transaction['timestamp']
-                query += 'SET t.description = "%s"\n' % transaction['description']
-                query += "SET t.transaction_type = '%s'\n" % transaction['transaction_type']
-                query += "SET t.transaction_classification = %s\n" % transaction['transaction_classification']
-                query += "SET t.amount = %s\n" % transaction['amount']
-                query += "SET t.currency = '%s'\n" % transaction['currency']
+                    # create transaction
+                    query += "MERGE (t:Transaction {transaction_id: '%s'})\n" % transaction['transaction_id']
+                    query += "SET t.timestamp = datetime('%s')\n" % transaction['timestamp']
+                    query += 'SET t.description = "%s"\n' % transaction['description']
+                    query += "SET t.transaction_type = '%s'\n" % transaction['transaction_type']
+                    query += "SET t.transaction_classification = %s\n" % transaction['transaction_classification']
+                    query += "SET t.amount = %s\n" % transaction['amount']
+                    query += "SET t.currency = '%s'\n" % transaction['currency']
 
-                if 'meta' in transaction and 'provider_merchant_name' in transaction['meta']:
-                    query += 'SET t.provider_merchant_name = "%s"\n' % transaction['meta']['provider_merchant_name']
-
-                if 'merchant_name' in transaction:
-                    query += 'SET t.merchant_name = "%s"\n' % transaction['merchant_name']
-                else:
                     if 'meta' in transaction and 'provider_merchant_name' in transaction['meta']:
-                        query += 'SET t.merchant_name = "%s"\n' % transaction['meta']['provider_merchant_name']
+                        query += 'SET t.provider_merchant_name = "%s"\n' % transaction['meta']['provider_merchant_name']
 
-                query += "MERGE (b)-[:TRANSACTION]->(t);\n"
+                    if 'merchant_name' in transaction:
+                        query += 'SET t.merchant_name = "%s"\n' % transaction['merchant_name']
+                    else:
+                        if 'meta' in transaction and 'provider_merchant_name' in transaction['meta']:
+                            query += 'SET t.merchant_name = "%s"\n' % transaction['meta']['provider_merchant_name']
 
-                self.session.run(query)
-        self.driver.close()
+                    query += "MERGE (b)-[:TRANSACTION]->(t);\n"
+
+                    file.write(query)
+                    self.session.run(query)
+            self.driver.close()
 
     def set_up(self):
         # establish session with neo4j
