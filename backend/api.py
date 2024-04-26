@@ -16,6 +16,9 @@ logger = logging.getLogger(__name__)
 app = FastAPI()
 config = Config()
 
+if config.frontend_url is None:
+    raise ValueError("Frontend URL is not set in the configuration file")
+
 origins = [config.frontend_url]
 
 app.add_middleware(
