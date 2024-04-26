@@ -46,20 +46,21 @@ Once you have Git installed, follow these steps:
 - Run the git clone command for the fork you just created.
 
 ### Running the service
-- create `.env` files as instructed within the [frontend README](frontend/README.md) and [backend README](backend/README.md)
+- create `.env` files as instructed within the [frontend README](frontend/README.md), [backend README](backend/README.md) and [data README](data/README.md)
 
 #### Using Docker
 - Open your preferred terminal where the project is cloned
 - **Ensure Docker is installed and running**. The easiest way to do this is by using the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it).
 - In the root directory of the project run `docker compose up`
-  - Note the first time you do this it may take longer as the compose file builds the images
-  - to delete and recreate the images use `docker compose down`
+> [!WARNING]  
+> the first time you do this it may take longer as the compose file builds the images.
+> Backend unittests cannot be run against the docker installation - please follow the [backend README](backend/README.md) for testing guidance
+- View the frontend at [localhost:8650](localhost:8650) and the Neo4j Browser as [localhost:7474](localhost:8650)
 
 #### Using pip and python
 - Open your preferred terminal where the project is cloned
-- **Ensure Neo4J Desktop is installed and running**
-  - Instructions can be found [here](https://neo4j.com/docs/desktop-manual/current/installation/)
 - It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your active terminal.
+- Follow the [data README](data/README.md) for guidance on how to set up Neo4j Desktop
 - Follow the [frontend README](frontend/README.md) to set up and run the front end
 - Follow the [backend README](backend/README.md) to set up and run the back end
  

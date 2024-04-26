@@ -10,24 +10,27 @@ Python service for the InferGPT backend.
 
 ## Set up
 
+1. Create .env files. There are template files (.env.example) for you to copy with comments for guidance. You will need a chosen LLM to run the service
+
 Unless otherwise stated all of the commands mentioned in this README should be run from `./backend`.
 
-1. Install dependencies
+2. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
-2. Run the app
+
+3. Run the app
 ```bash
 uvicorn api:app --port 8250
 ```
 
-3. Check the backend app is running at [http://127.0.0.1:8250/health](http://127.0.0.1:8250/health)
+4. Check the backend app is running at [http://localhost:8250/health](http://localhost:8250/health)
 
 ## Backend Linting
 
 Ruff is being used for the backend linting. See the docs: [here](https://docs.astral.sh/ruff/)
 
-Make sure the ruff dependency is downloaded, it is in `requirements.txt` so step `1` of [setup](#set-up) should do this for you.
+Make sure the ruff dependency is downloaded; It is defined in the `requirements.txt` so step `1` of [setup](#set-up) should do this for you.
 
 Run the following command to check:
 
