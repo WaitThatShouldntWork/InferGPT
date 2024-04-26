@@ -40,6 +40,25 @@ def get_response(system_prompt, user_prompt, tools=None) -> ChatCompletionRespon
         ],
         tools=tools,
         tool_choice=tool_choice,
+        temperature=0
     )
     logger.info('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
     return response
+
+
+# TODO: Refactor - 1 get_response method and 1 call_model method
+def get_response_three_prompts(agent_list_prompt, response_format_prompt, best_next_step_prompt) -> ChatCompletionResponse:
+    logger.info("Called llm. Waiting on response model with prompts{0}".format(
+        str([agent_list_prompt, response_format_prompt, best_next_step_prompt])
+    ))
+
+    response = client.chat(
+        model=config.mistral_model,
+        messages=[
+            ChatMessage(role="system", content=agent_list_prompt),
+            ChatMessage(role="system", content=response_format_prompt),
+            ChatMessage(role="user", content=best_next_step_prompt),
+        ]
+    )
+    logger.info('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
+    return response.choices[0].message.content
