@@ -1,9 +1,9 @@
-from .tool import ToolMetadata
+from .tool import toolMetadata
 from .types import Parameter
-from .agent import Agent, AgentMetadata
+from .agent import Agent, agentMetadata
 
 
-@ToolMetadata(
+@toolMetadata(
     name="Get Database Data",
     description="This tool gets data from the database",
     parameters={
@@ -28,7 +28,7 @@ Merchant: Netflix
 """
 
 
-@AgentMetadata(
+@agentMetadata(
     name="dB Agent",
     description="This agent is responsible for handling database queries",
     prompt=data_store_prompt,
