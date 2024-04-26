@@ -31,7 +31,7 @@ def test_chat_response_success(mocker):
     assert response.json() == expected_message
 
 
-def test_chat_response(mocker):
+def test_chat_response_failure(mocker):
     mock_question = mocker.patch("api.question", return_value=expected_message)
     mock_question.side_effect = Exception("An error occurred")
 
