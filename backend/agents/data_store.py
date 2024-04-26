@@ -6,10 +6,12 @@ from .agent import Agent, AgentMetadata
 @ToolMetadata(
     name="Get Database Data",
     description="This tool gets data from the database",
-    parameters={ "merchant": Parameter(
-        type = "string",
-        description = "Merchant name eg. Amazon",
-    )}
+    parameters={
+        "merchant": Parameter(
+            type="string",
+            description="Merchant name eg. Amazon",
+        )
+    },
 )
 def get_db_data(merchant: str) -> str:
     print(f"Getting data from database with merchant: {merchant}")
@@ -25,11 +27,12 @@ e.g. "Calculate the sum of Netflix spend over the last month"
 Merchant: Netflix
 """
 
+
 @AgentMetadata(
     name="dB Agent",
     description="This agent is responsible for handling database queries",
     prompt=data_store_prompt,
-    tools=[get_db_data]
+    tools=[get_db_data],
 )
 class DatastoreAgent(Agent):
     pass

@@ -26,6 +26,7 @@ def test_connection():
         driver.close()
         return connection_healthy
 
+
 def create_goal(name, description):
     try:
         session = driver.session()

@@ -53,6 +53,7 @@ async def health_check():
         logging.info("health_check method complete")
         return response
 
+
 @app.get("/chat")
 async def chat(utterance: str):
     logger.info(f"chat method called with utterance: {utterance}")

@@ -10,17 +10,13 @@ def get_mistral_tool(tool: Tool):
             "parameters": {
                 "type": "object",
                 "properties": {
-                    key: { 
+                    key: {
                         "type": inner_dict.type,
                         "description": inner_dict.description,
                     }
                     for key, inner_dict in tool.parameters.items()
                 },
-                "required": [
-                    key
-                    for key, inner_dict in tool.parameters.items()
-                    if inner_dict.required
-                ],
+                "required": [key for key, inner_dict in tool.parameters.items() if inner_dict.required],
             },
         },
     }

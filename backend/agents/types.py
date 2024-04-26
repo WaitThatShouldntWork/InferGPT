@@ -5,6 +5,7 @@ Action = Callable[..., str]
 T = TypeVar("T")
 Action_and_args = Tuple[Action, T]
 
+
 class Parameter:
     type: str
     description: str

@@ -19,23 +19,20 @@ class Agent(ABC):
 
         if function is None:
             raise ValueError(f"Tool {function_name} not found in agent {self.name}")
-                
+
         return (function.action, function_params)
 
-    
     def invoke(self, utterance: str) -> str:
         (action, args) = self.get_action(utterance)
         return action(**args)
 
 
-def AgentMetadata(
-        name: str, description: str, prompt: str, tools: List[Tool]
-):
+def AgentMetadata(name: str, description: str, prompt: str, tools: List[Tool]):
     def decorator(agent: Type[Agent]):
         agent.name = name
         agent.description = description
         agent.prompt = prompt
         agent.tools = tools
         return agent
-    
+
     return decorator
