@@ -1,7 +1,7 @@
 from .types import Parameter, Tool
 
 
-def toolMetadata(name: str, description: str, parameters: dict[str, Parameter]):
+def tool_metadata(name: str, description: str, parameters: dict[str, Parameter]):
     def decorator(tool) -> Tool:
         tool.name = name
         tool.description = description

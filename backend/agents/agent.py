@@ -27,7 +27,7 @@ class Agent(ABC):
         return action(**args)
 
 
-def agentMetadata(name: str, description: str, prompt: str, tools: List[Tool]):
+def agent_metadata(name: str, description: str, prompt: str, tools: List[Tool]):
     def decorator(agent: Type[Agent]):
         agent.name = name
         agent.description = description
