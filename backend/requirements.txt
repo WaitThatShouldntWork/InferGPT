@@ -7,3 +7,4 @@ neo4j==5.18.0
 ruff==0.3.5
 pytest==8.1.1
 pytest-mock==3.14.0
+jinja2==3.1.3
