@@ -1,14 +1,12 @@
 import logging
 import logging.config
-import os
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from utils import Config, test_connection
 from director import question
 
-filepath = os.path.join(os.getcwd(), "backend/config.ini")
-logging.config.fileConfig(fname=filepath, disable_existing_loggers=False)
+logging.config.fileConfig(fname="config.ini", disable_existing_loggers=False)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
@@ -43,7 +41,7 @@ async def health_check():
             response = JSONResponse(status_code=500, content=unhealthy_neo4j_response)
     except Exception as e:
         logger.critical("health_check method failed with error: " + e)
-        response = JSONResponse(status_code=500, content=unhealthy_backend_response)
+        response = JSONResponse(status_code=500, content=unhealthy_neo4j_response)
     finally:
         logging.info("health_check method complete")
         return response

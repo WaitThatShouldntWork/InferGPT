@@ -67,7 +67,12 @@ To add further rules, these are added to `ruff.toml` by using the letter asssign
 
 ## Test
 
-`pytest` is being used for testing the backend. Like with linting, running the [setup](#set-up) steps should download `pytest` for you. To then run the tests, use the following command:
+`pytest` is being used for testing the backend. Like with linting, running the [setup](#set-up) steps should download `pytest` for you. 
+
+> [!WARNING]  
+> running the `pytest` tests only works when running the service locally (not through the Docker setup)
+
+To then run the tests, change to the `/backend` directory and run the following command:
 
 ```bash
 pytest

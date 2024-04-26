@@ -54,7 +54,8 @@ Once you have Git installed, follow these steps:
 > [!WARNING]  
 > the first time you do this it may take longer as the compose file builds the images.
 > Backend unittests cannot be run against the docker installation - please follow the [backend README](backend/README.md) for testing guidance
-- View the frontend at [localhost:8650](http://localhost:8650) and the Neo4j Browser as [localhost:7474](http://localhost:8650)
+- View the frontend at [localhost:8650](http://localhost:8650) and the Neo4j Browser at [localhost:7474](http://localhost:7474)
+- use the keyphrase "healthcheck" to test if everything is collected successfully
 
 #### Using pip and python
 - Open your preferred terminal where the project is cloned

@@ -6,7 +6,7 @@ UI service for interfacing with InferGPT.
 
 1. Create the `.env` files. There are template files (.env.example) for you to copy with comments for guidance. If you are running the service in Docker you can skip the rest of the setup.
 
-2. Change directory to the `/backend` space, then run the following to install the dependencies
+2. Change directory to the `/frontend` space, then run the following to install the dependencies
 
 ```bash
 npm install
