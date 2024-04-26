@@ -49,13 +49,12 @@ Once you have Git installed, follow these steps:
 - create `.env` files as instructed within the [frontend README](frontend/README.md), [backend README](backend/README.md) and [data README](data/README.md)
 
 #### Using Docker
-- Open your preferred terminal where the project is cloned
 - **Ensure Docker is installed and running**. The easiest way to do this is by using the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it).
 - In the root directory of the project run `docker compose up`
 > [!WARNING]  
 > the first time you do this it may take longer as the compose file builds the images.
 > Backend unittests cannot be run against the docker installation - please follow the [backend README](backend/README.md) for testing guidance
-- View the frontend at [localhost:8650](localhost:8650) and the Neo4j Browser as [localhost:7474](localhost:8650)
+- View the frontend at [localhost:8650](http://localhost:8650) and the Neo4j Browser as [localhost:7474](http://localhost:8650)
 
 #### Using pip and python
 - Open your preferred terminal where the project is cloned

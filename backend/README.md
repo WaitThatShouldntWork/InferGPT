@@ -10,11 +10,12 @@ Python service for the InferGPT backend.
 
 ## Set up
 
-1. Create .env files. There are template files (.env.example) for you to copy with comments for guidance. You will need a chosen LLM to run the service
+1. Create the `.env` files. There are template files (.env.example) for you to copy with comments for guidance. You will need a chosen LLM to run the service. If you are running the service in Docker you can skip the rest of the setup.
 
 Unless otherwise stated all of the commands mentioned in this README should be run from `./backend`.
 
-2. Install dependencies
+2. Change directory to the `/backend` space, then run the following to install the dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
