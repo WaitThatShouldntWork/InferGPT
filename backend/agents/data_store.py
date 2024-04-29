@@ -15,7 +15,7 @@ from .agent import Agent, agent_metadata
 )
 def get_db_data(merchant: str) -> str:
     print(f"Getting data from database with merchant: {merchant}")
-    return "£6.99"
+    return "6.99"
 
 
 data_store_prompt = """
