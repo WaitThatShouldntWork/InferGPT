@@ -44,11 +44,11 @@ def test_create_goal_is_successful(mock_driver, mock_session):
     response = create_goal("Test Name", "Test Description")
 
     assert response is None
-    mock_session.run.assert_called_once_with(ANY, name="Test Name", description="Test Description")
-    args = mock_session.run.call_args
+    args, kwargs = mock_session.run.call_args
+    assert kwargs == { "name":"Test Name", "description":"Test Description" }
     actual_cypher_query = remove_whitespace_and_newlines(str(args[0]))
     expected_cypher_query = "MERGE (g:Goal {name: $name, description: $description}) RETURN g"
-    assert expected_cypher_query in actual_cypher_query
+    assert expected_cypher_query == actual_cypher_query
     mock_session.close.assert_called_once()
     mock_driver.close.assert_called_once()
 
