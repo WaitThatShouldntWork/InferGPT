@@ -5,19 +5,8 @@ from jinja2 import Environment, FileSystemLoader
 
 
 class PromptEngine:
-    """
-    Class to handle loading and populating Jinja2 templates for prompts.
-    """
 
-    def __init__(self, model: str):
-        """
-        Initialize the PromptEngine with the specified model.
-
-        Args:
-            model (str): The model to use for loading prompts.
-            debug_enabled (bool): Enable or disable debug logging.
-        """
-        self.model = model
+    def __init__(self):
         logging.debug("Initializing PromptEngine")
 
         try:
@@ -28,16 +17,6 @@ class PromptEngine:
             raise
 
     def load_prompt(self, template_name: str, **kwargs) -> str:
-        """
-        Load and populate the specified template.
-
-        Args:
-            template_name (str): The name of the template to load.
-            **kwargs: The arguments to populate the template with.
-
-        Returns:
-            str: The populated template.
-        """
         try:
             logging.debug(f"Loading template: {template_name}.j2")
             template_name = self.env.get_template(f"{template_name}.j2")
