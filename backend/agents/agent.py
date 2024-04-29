@@ -11,7 +11,7 @@ class Agent(ABC):
     tools: List[Tool]
     prompt: str
 
-    def get_action(self, utterance: str) -> Action_and_args:
+    def __get_action(self, utterance: str) -> Action_and_args:
         tools = map(get_mistral_tool, self.tools)
         (function_name, function_params) = call_model_with_tools(self.prompt, utterance, tools)
 
@@ -23,7 +23,7 @@ class Agent(ABC):
         return (function.action, function_params)
 
     def invoke(self, utterance: str) -> str:
-        (action, args) = self.get_action(utterance)
+        (action, args) = self.__get_action(utterance)
         return action(**args)
 
 
