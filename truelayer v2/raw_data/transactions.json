@@ -1,0 +1,3160 @@
+{
+    "fromDate": "2024-03-25",
+    "toDate": "2024-04-25",
+    "transactions": [
+        {
+            "timestamp": "2024-04-25T00:00:00Z",
+            "description": "CASHBACK",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CASH",
+            "transaction_classification": [],
+            "amount": 70,
+            "currency": "GBP",
+            "transaction_id": "bbd5b722e1ec4f7c55e925f8354a7572",
+            "provider_transaction_id": "5a010663dc54d7c09e",
+            "normalised_provider_transaction_id": "txn-f0ab849246c47d2dc",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -573.52
+            },
+            "meta": {
+                "provider_transaction_category": "CSH"
+            }
+        },
+        {
+            "timestamp": "2024-04-25T00:00:00Z",
+            "description": "MENS HEALTH SUBSCRIPTION",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -24.5,
+            "currency": "GBP",
+            "transaction_id": "da325f20430a5300b595e27a800cc9bd",
+            "provider_transaction_id": "d10f36a263353743e3",
+            "normalised_provider_transaction_id": "txn-df3d31cb104689fa5",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -598.02
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-25T00:00:00Z",
+            "description": "OUTGOING DD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -10,
+            "currency": "GBP",
+            "transaction_id": "154d00e885b69c6e04a22c2b0052c0f8",
+            "provider_transaction_id": "2fdd9fe6f9d96d1ec4",
+            "normalised_provider_transaction_id": "txn-2883d66fd1d8bb37b",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -608.02
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-25T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.41,
+            "currency": "GBP",
+            "transaction_id": "90feac4030950448f4a2295e6518b9a3",
+            "provider_transaction_id": "4ec5bb495d82abfbeb",
+            "normalised_provider_transaction_id": "txn-85c191c7e7e4aa232",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -608.43
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-25T00:00:00Z",
+            "description": "AMAZON PLC",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping"
+            ],
+            "merchant_name": "Amazon",
+            "amount": -36.59,
+            "currency": "GBP",
+            "transaction_id": "03afa29176c7aa893ff2aba243272821",
+            "provider_transaction_id": "bf89fcf55e685b35aa",
+            "normalised_provider_transaction_id": "txn-5f7fa97ee244b081d",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -645.02
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-25T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.5,
+            "currency": "GBP",
+            "transaction_id": "55cf56f578f1d49cfa97c91403a1ae65",
+            "provider_transaction_id": "8fe5dc5dc7656ba189",
+            "normalised_provider_transaction_id": "txn-698573ae6611c0ab1",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -645.52
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-25T00:00:00Z",
+            "description": "WWW.BINGO.COM",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Gambling",
+                "Betting"
+            ],
+            "merchant_name": "J & S Bingo",
+            "amount": -10.5,
+            "currency": "GBP",
+            "transaction_id": "188c17ca0a8ff39d96375ec9efea5396",
+            "provider_transaction_id": "99a6d498cfe5edcce4",
+            "normalised_provider_transaction_id": "txn-068bd6746c9eca627",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -656.02
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-23T00:00:00Z",
+            "description": "MORSES CLUB LTD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Personal Services",
+                "Financial Services"
+            ],
+            "merchant_name": "Morses Club",
+            "amount": -30,
+            "currency": "GBP",
+            "transaction_id": "826b5cc502e3423179cf84622eb23419",
+            "provider_transaction_id": "cf031747ea0b5747ba",
+            "normalised_provider_transaction_id": "txn-31634123328348f36",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -626.02
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-23T00:00:00Z",
+            "description": "ANYVAN LTD",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 32.5,
+            "currency": "GBP",
+            "transaction_id": "561a3b8d78b28b7702e1003a69f1cf13",
+            "provider_transaction_id": "5c28f5d3c41e189295",
+            "normalised_provider_transaction_id": "txn-26332a3766b1ee1d8",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -593.52
+            },
+            "meta": {
+                "provider_transaction_category": "FPI"
+            }
+        },
+        {
+            "timestamp": "2024-04-23T00:00:00Z",
+            "description": "LNK ATM WITHDRAWAL",
+            "transaction_type": "DEBIT",
+            "transaction_category": "ATM",
+            "transaction_classification": [],
+            "amount": -100,
+            "currency": "GBP",
+            "transaction_id": "c6a8a88f9a28233a43784938dfd679f4",
+            "provider_transaction_id": "803096328597600e6f",
+            "normalised_provider_transaction_id": "txn-f2038104f9ade587b",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -693.52
+            },
+            "meta": {
+                "provider_transaction_category": "CPT"
+            }
+        },
+        {
+            "timestamp": "2024-04-23T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -1.57,
+            "currency": "GBP",
+            "transaction_id": "f96be969a891d2eea967136642bba04a",
+            "provider_transaction_id": "75ab05d89d7bc134eb",
+            "normalised_provider_transaction_id": "txn-4dd6b877798acd797",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -695.09
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-23T00:00:00Z",
+            "description": "WWW.METROBANK.COM",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -20,
+            "currency": "GBP",
+            "transaction_id": "b4dc4ca929191e28d8e23a4e756386e5",
+            "provider_transaction_id": "fa0e5cd8422b0c83ee",
+            "normalised_provider_transaction_id": "txn-895b8aa5ee6eb5b5f",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -715.09
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-22T00:00:00Z",
+            "description": "AMAZON INT'L",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping"
+            ],
+            "merchant_name": "Amazon",
+            "amount": -5,
+            "currency": "GBP",
+            "transaction_id": "ff9073245c56077255ade4c130430657",
+            "provider_transaction_id": "f821cb80d4cd75df61",
+            "normalised_provider_transaction_id": "txn-7f6b71cec32ffee92",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -720.09
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-22T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "2a8b0c56f281ad2a941aaffe260673c7",
+            "provider_transaction_id": "8db5acfd42182ab5df",
+            "normalised_provider_transaction_id": "txn-ea491835e1fd48408",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -720.1
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-22T00:00:00Z",
+            "description": "TESCO MOBILE LTD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Bills and Utilities",
+                "Mobile Phone"
+            ],
+            "merchant_name": "Tesco Mobile",
+            "amount": -39.25,
+            "currency": "GBP",
+            "transaction_id": "6f7da2c77a9eb8980b352c2a2cba9515",
+            "provider_transaction_id": "9d7f61dee637473806",
+            "normalised_provider_transaction_id": "txn-02141d018cd3bfbe5",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -759.35
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-22T00:00:00Z",
+            "description": "PAYPAL WWW.EBAY.COM",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "General"
+            ],
+            "merchant_name": "Ebay",
+            "amount": -36.59,
+            "currency": "GBP",
+            "transaction_id": "1f3c703b85192625990fb5c3f257f04a",
+            "provider_transaction_id": "d12fbb4214c0b3e259",
+            "normalised_provider_transaction_id": "txn-9281983e888035501",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -795.94
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-22T00:00:00Z",
+            "description": "OAKAM LIMITED",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Personal Services",
+                "Financial Services"
+            ],
+            "merchant_name": "Oakam",
+            "amount": -36.59,
+            "currency": "GBP",
+            "transaction_id": "f624113fc348203bcedea064ab906ca7",
+            "provider_transaction_id": "82e4e780724e4b7857",
+            "normalised_provider_transaction_id": "txn-5a0c9fe50f2c7c1f9",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -832.53
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-20T00:00:00Z",
+            "description": "REGENDA REDWING",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -150,
+            "currency": "GBP",
+            "transaction_id": "184d82bb696d25b5a9c788d80997a933",
+            "provider_transaction_id": "f47267c78d5ad6f94e",
+            "normalised_provider_transaction_id": "txn-881fc47bdc96801fc",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -982.53
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-20T00:00:00Z",
+            "description": "WORKING TAX CREDIT",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 22.42,
+            "currency": "GBP",
+            "transaction_id": "3a50d46eb6e60ebf91b258952a9dc953",
+            "provider_transaction_id": "86cccb3f662f0c090b",
+            "normalised_provider_transaction_id": "txn-870653af68afeefc0",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -960.11
+            },
+            "meta": {
+                "provider_transaction_category": "BGC"
+            }
+        },
+        {
+            "timestamp": "2024-04-20T00:00:00Z",
+            "description": "PARKRETAIL.CO.UK",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping"
+            ],
+            "merchant_name": "Park Retail",
+            "amount": -550,
+            "currency": "GBP",
+            "transaction_id": "10dca6bfd4f7a9290b07ac8e3d59d8d1",
+            "provider_transaction_id": "cf3967e445224fec36",
+            "normalised_provider_transaction_id": "txn-fdf0cf40cceb48aae",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -1510.11
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-20T00:00:00Z",
+            "description": "CHILD TAX CREDIT",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 345.13,
+            "currency": "GBP",
+            "transaction_id": "bc2d4ba709d5c4cf6758c4769e48eab0",
+            "provider_transaction_id": "07dc819faa2fd7afdc",
+            "normalised_provider_transaction_id": "txn-a738817eb76dbe750",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -1164.98
+            },
+            "meta": {
+                "provider_transaction_category": "BGC"
+            }
+        },
+        {
+            "timestamp": "2024-04-19T00:00:00Z",
+            "description": "AMAZON PRIME",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping"
+            ],
+            "merchant_name": "Amazon",
+            "amount": -7.99,
+            "currency": "GBP",
+            "transaction_id": "aa86eebea377442b4285908fdf2ff7fe",
+            "provider_transaction_id": "ca32b7d05f75cea403",
+            "normalised_provider_transaction_id": "txn-85bd4fa91a05deab0",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -1172.97
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-19T00:00:00Z",
+            "description": "CLEVELEYS.COM",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 1450.42,
+            "currency": "GBP",
+            "transaction_id": "f1098b9ac19d94205c9d3a0a2fe41fe1",
+            "provider_transaction_id": "96a10d44f84bd53690",
+            "normalised_provider_transaction_id": "txn-55c327eb74237801e",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 277.45
+            },
+            "meta": {
+                "provider_transaction_category": "DEP"
+            }
+        },
+        {
+            "timestamp": "2024-04-18T00:00:00Z",
+            "description": "CIRCLE UK TRADING",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 82.21,
+            "currency": "GBP",
+            "transaction_id": "cf280296800caefb21629483f2260ee5",
+            "provider_transaction_id": "589fdeeb562f0f2586",
+            "normalised_provider_transaction_id": "txn-460ddc330f1822211",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 359.66
+            },
+            "meta": {
+                "provider_transaction_category": "FPI"
+            }
+        },
+        {
+            "timestamp": "2024-04-17T00:00:00Z",
+            "description": "MR JOHN SMITH",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 137.6,
+            "currency": "GBP",
+            "transaction_id": "7d7456ea3c7febf2769b920739897bcf",
+            "provider_transaction_id": "9236366c176eebee95",
+            "normalised_provider_transaction_id": "txn-c1ab9830b9cdd61ad",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 497.26
+            },
+            "meta": {
+                "provider_transaction_category": "BGC"
+            }
+        },
+        {
+            "timestamp": "2024-04-17T00:00:00Z",
+            "description": "AA INSURANCE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [
+                "Auto & Transport",
+                "Auto Insurance"
+            ],
+            "merchant_name": "Axa",
+            "amount": -12.73,
+            "currency": "GBP",
+            "transaction_id": "bcaf768cc11e06761a36800be4746f48",
+            "provider_transaction_id": "b470415d3e4c49f1e1",
+            "normalised_provider_transaction_id": "txn-707b92ce13c178580",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 484.53
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-17T00:00:00Z",
+            "description": "AXA WEALTH LTD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -40,
+            "currency": "GBP",
+            "transaction_id": "8b8695e46d8fe49d2b8d6aade9cfa27b",
+            "provider_transaction_id": "0fe37f6addea5f3edb",
+            "normalised_provider_transaction_id": "txn-19f06505965f03eac",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 444.53
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-17T00:00:00Z",
+            "description": "MORRISONS PETROL",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "WM Morrisons",
+            "amount": -20,
+            "currency": "GBP",
+            "transaction_id": "f3dccb0f91f0183a4c1c403d9700281e",
+            "provider_transaction_id": "c00a9ce54faf336067",
+            "normalised_provider_transaction_id": "txn-a6d15625a5545940b",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 424.53
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-17T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.63,
+            "currency": "GBP",
+            "transaction_id": "db72b929e0e9f931b9346d0170e5b35d",
+            "provider_transaction_id": "e7d2d43a42621f22fb",
+            "normalised_provider_transaction_id": "txn-aa35bdc8167e50c79",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 423.9
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-17T00:00:00Z",
+            "description": "TAILSCOM",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -6.37,
+            "currency": "GBP",
+            "transaction_id": "2a217bdcdb71875808d1822a498fd56b",
+            "provider_transaction_id": "22fa43af12dff76ed7",
+            "normalised_provider_transaction_id": "txn-9ea12da6afb83f767",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 417.53
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-15T00:00:00Z",
+            "description": "ASDA STOES LTD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "Asda Store",
+            "amount": -32,
+            "currency": "GBP",
+            "transaction_id": "bd21c619825bd10114e819a311a87e47",
+            "provider_transaction_id": "486b1fe36c73f17280",
+            "normalised_provider_transaction_id": "txn-27936cbe0a3ccd852",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 385.53
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-15T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.55,
+            "currency": "GBP",
+            "transaction_id": "e809b098ae3af2cfa2e5ac41fd17598d",
+            "provider_transaction_id": "c5defc83b8d81b4982",
+            "normalised_provider_transaction_id": "txn-956459d7b147ba58a",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 384.98
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-15T00:00:00Z",
+            "description": "AMAZON BLACK FRIDAY",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -15.45,
+            "currency": "GBP",
+            "transaction_id": "71f97f612125a134405650bcf3d60917",
+            "provider_transaction_id": "4143d3b90c047bc26e",
+            "normalised_provider_transaction_id": "txn-51444b295ccc305f2",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 369.53
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-15T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.5,
+            "currency": "GBP",
+            "transaction_id": "23fcb96d429bff6d51f28137cfe1f2e8",
+            "provider_transaction_id": "1dcd295428f3676d90",
+            "normalised_provider_transaction_id": "txn-c6e687d3453a275c7",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 369.03
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-15T00:00:00Z",
+            "description": "TESCO EXTRA",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -3.59,
+            "currency": "GBP",
+            "transaction_id": "f174c697605f1f05e350c2fe9c0e9829",
+            "provider_transaction_id": "46cfb1ae495395251a",
+            "normalised_provider_transaction_id": "txn-8633e969ccbe7e369",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 365.44
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-15T00:00:00Z",
+            "description": "PAYPAL EBAY",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "General"
+            ],
+            "merchant_name": "Ebay",
+            "amount": -10,
+            "currency": "GBP",
+            "transaction_id": "d674e9181c2984c8805d5954a40440e2",
+            "provider_transaction_id": "5e7682385a2594a2f4",
+            "normalised_provider_transaction_id": "txn-97a4e5a3430d14745",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 355.44
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-14T00:00:00Z",
+            "description": "PAYPAL BETFRED",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Gambling",
+                "Betting"
+            ],
+            "merchant_name": "Betfred",
+            "amount": -2,
+            "currency": "GBP",
+            "transaction_id": "4cbc233bbaf62117229471d792bf830c",
+            "provider_transaction_id": "09a9bdd239ead8b694",
+            "normalised_provider_transaction_id": "txn-54c839b9396ea1cb2",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 353.44
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-14T00:00:00Z",
+            "description": "MT SECURETRADE LIM",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -20.5,
+            "currency": "GBP",
+            "transaction_id": "a2626a7dd45f324bd8e103de84d3c657",
+            "provider_transaction_id": "30c647c7cf6822b195",
+            "normalised_provider_transaction_id": "txn-d376542cd1bed727b",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 332.94
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-14T00:00:00Z",
+            "description": "MT SECURETRADE LIM",
+            "transaction_type": "CREDIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": 43.5,
+            "currency": "GBP",
+            "transaction_id": "f434c5404c39faf097f14f3c7f9cfc03",
+            "provider_transaction_id": "20a54b2c9b343f568b",
+            "normalised_provider_transaction_id": "txn-8357cc436051ccf9f",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 376.44
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-12T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.41,
+            "currency": "GBP",
+            "transaction_id": "13d22eb8614b94897ca56153dd902078",
+            "provider_transaction_id": "28c5c0237d359c3c92",
+            "normalised_provider_transaction_id": "txn-adc61659da02fe005",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 376.03
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-12T00:00:00Z",
+            "description": "AA MEMBERSHIP",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [
+                "Auto & Transport",
+                "Auto Payment"
+            ],
+            "merchant_name": "Aa Membership",
+            "amount": -23.11,
+            "currency": "GBP",
+            "transaction_id": "1420b3e524345938e10ff4de4db5a578",
+            "provider_transaction_id": "353e8e67f88ecacc51",
+            "normalised_provider_transaction_id": "txn-3c0d85b64f07762d6",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 352.92
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-11T00:00:00Z",
+            "description": "CIRCLE UK TRADING",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 50,
+            "currency": "GBP",
+            "transaction_id": "5ca369f7d5eca131c85b753a36d76e42",
+            "provider_transaction_id": "7e17b362cca0ed22e7",
+            "normalised_provider_transaction_id": "txn-f6f1cac667251984c",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 402.92
+            },
+            "meta": {
+                "provider_transaction_category": "FPI"
+            }
+        },
+        {
+            "timestamp": "2024-04-11T00:00:00Z",
+            "description": "MS JANE DOE",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 50,
+            "currency": "GBP",
+            "transaction_id": "d624f657743c5a6bf2ef2bf111916ad1",
+            "provider_transaction_id": "a68cd56965edb4cc64",
+            "normalised_provider_transaction_id": "txn-d82f43662009fa445",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 452.92
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-11T00:00:00Z",
+            "description": "WORKING TAX CREDIT",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 22.42,
+            "currency": "GBP",
+            "transaction_id": "da51f9370f00b322cc1afb5f0d581675",
+            "provider_transaction_id": "420e14c77e70119c8b",
+            "normalised_provider_transaction_id": "txn-9cf0380167b54843b",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 475.34
+            },
+            "meta": {
+                "provider_transaction_category": "BGC"
+            }
+        },
+        {
+            "timestamp": "2024-04-11T00:00:00Z",
+            "description": "BUTLINS HOLIDAYS",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -17,
+            "currency": "GBP",
+            "transaction_id": "c0c2588e9649e77c451a90611f9258a5",
+            "provider_transaction_id": "c827961ac1419d81bc",
+            "normalised_provider_transaction_id": "txn-fa9da8387c01227e7",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 458.34
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-10T00:00:00Z",
+            "description": "AXA WEALTH LTD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -40,
+            "currency": "GBP",
+            "transaction_id": "d30d19ed623a15e0f0a07244ef2e35ba",
+            "provider_transaction_id": "9b6ecf1c25377be83b",
+            "normalised_provider_transaction_id": "txn-852d4dbdd5012eca2",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 418.34
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-10T00:00:00Z",
+            "description": "ASDA STORES LTD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "Asda",
+            "amount": -5,
+            "currency": "GBP",
+            "transaction_id": "924cdb181a75a58c10d45975f75375c0",
+            "provider_transaction_id": "14eaad182562efae76",
+            "normalised_provider_transaction_id": "txn-c1778fb2f99c3737f",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 413.34
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-10T00:00:00Z",
+            "description": "RETURNED DD",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 40,
+            "currency": "GBP",
+            "transaction_id": "bbbb46e06455cccc431a9697d899b7d7",
+            "provider_transaction_id": "a1ed7bac35f7fcb0bb",
+            "normalised_provider_transaction_id": "txn-fe2b1f50b31bfcc3c",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 453.34
+            },
+            "meta": {
+                "provider_transaction_category": "DEP"
+            }
+        },
+        {
+            "timestamp": "2024-04-10T00:00:00Z",
+            "description": "CIRCLE UK TRADING",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 50.36,
+            "currency": "GBP",
+            "transaction_id": "153ea32cc714a72837562e315c8bc46e",
+            "provider_transaction_id": "363b9c693c7dae530e",
+            "normalised_provider_transaction_id": "txn-7791998b6b2e0fccb",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 503.7
+            },
+            "meta": {
+                "provider_transaction_category": "FPI"
+            }
+        },
+        {
+            "timestamp": "2024-04-10T00:00:00Z",
+            "description": "OUTGOING DD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -30,
+            "currency": "GBP",
+            "transaction_id": "0d6906c1f12a64c711023324ee7c9469",
+            "provider_transaction_id": "a73951b36cafeb63f6",
+            "normalised_provider_transaction_id": "txn-12c88a87d409ae7d4",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 473.7
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-10T00:00:00Z",
+            "description": "EDF ENERGY",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [
+                "Bills and Utilities",
+                "Utilities"
+            ],
+            "merchant_name": "Edf Energy",
+            "amount": -24.5,
+            "currency": "GBP",
+            "transaction_id": "2255d48f6ed2027ded24d0ef3ed3c982",
+            "provider_transaction_id": "71adaa1002e31876d4",
+            "normalised_provider_transaction_id": "txn-4829ffa0dba324735",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 449.2
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-09T00:00:00Z",
+            "description": "DVLA LICENCE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -23.62,
+            "currency": "GBP",
+            "transaction_id": "ec309685c35331287c2f5f039f710923",
+            "provider_transaction_id": "8604ee1d7720a9fecb",
+            "normalised_provider_transaction_id": "txn-b8afdf3fed7d58c3c",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 425.58
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-09T00:00:00Z",
+            "description": "DVLA TAX",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -20.56,
+            "currency": "GBP",
+            "transaction_id": "cc2a06e73010720069d3161af96ef180",
+            "provider_transaction_id": "14ae72ca53b7621e5e",
+            "normalised_provider_transaction_id": "txn-df086d209c8cbed94",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 405.02
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-09T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.41,
+            "currency": "GBP",
+            "transaction_id": "8455e3e8ae8589b57e6aafc1d28038c3",
+            "provider_transaction_id": "d4ebfad2cabff35060",
+            "normalised_provider_transaction_id": "txn-9a338ab22fb82603c",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 404.61
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-09T00:00:00Z",
+            "description": "MS JANE DOE",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 70,
+            "currency": "GBP",
+            "transaction_id": "a470a2ee9a7045e1e9cc30eaa9d96528",
+            "provider_transaction_id": "75d4bbdcf328e5e25d",
+            "normalised_provider_transaction_id": "txn-3fb2ac546f900e9d7",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 474.61
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-08T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "fd9adab3e1793c782be03667056e40c0",
+            "provider_transaction_id": "02844716e6f24e8176",
+            "normalised_provider_transaction_id": "txn-dbd1d34ef325055d5",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 474.6
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-08T00:00:00Z",
+            "description": "WORKING TAX CREDIT",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 22.42,
+            "currency": "GBP",
+            "transaction_id": "1cbcf3ae54add4e82def4c68302cd666",
+            "provider_transaction_id": "bc0f88c894fba34704",
+            "normalised_provider_transaction_id": "txn-dc42141bac13cbb8b",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 497.02
+            },
+            "meta": {
+                "provider_transaction_category": "BGC"
+            }
+        },
+        {
+            "timestamp": "2024-04-08T00:00:00Z",
+            "description": "CREDITREPORTSERVIC",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -14.99,
+            "currency": "GBP",
+            "transaction_id": "96fc6eddb814c06e99f2d7dc57ff9d78",
+            "provider_transaction_id": "f66bfc1f7131a91c1b",
+            "normalised_provider_transaction_id": "txn-09f77a34bece48d39",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 482.03
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-08T00:00:00Z",
+            "description": "REGENDA REDWING RE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -100,
+            "currency": "GBP",
+            "transaction_id": "586d940e828e619558ea6038324797d9",
+            "provider_transaction_id": "df5acbfc5bc01c75d9",
+            "normalised_provider_transaction_id": "txn-bd2a0bc08df5f62fc",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 382.03
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-08T00:00:00Z",
+            "description": "BROADWAY GAMING LT CD 0315",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Gambling",
+                "Betting"
+            ],
+            "merchant_name": "Broadway Gaming",
+            "amount": -10,
+            "currency": "GBP",
+            "transaction_id": "57d04de6ac6f43d4a3ee7e0a0be68f39",
+            "provider_transaction_id": "f0ef9c04fde46f8222",
+            "normalised_provider_transaction_id": "txn-bfeb7c16d41bfae62",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 372.03
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-08T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.69,
+            "currency": "GBP",
+            "transaction_id": "ebed444734b281c7c85db472fe35e4a3",
+            "provider_transaction_id": "de88c02412b09ed5e5",
+            "normalised_provider_transaction_id": "txn-5f6bb4747bb19739e",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 371.34
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-08T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -1.04,
+            "currency": "GBP",
+            "transaction_id": "e9519a75d6d119aec187e89a030ffb4a",
+            "provider_transaction_id": "1a6c919d65411aeb0c",
+            "normalised_provider_transaction_id": "txn-8c6e761af05d88894",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 370.3
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-08T00:00:00Z",
+            "description": "BOOKER LIMITED BLA",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "Booker Wholesale",
+            "amount": -24.31,
+            "currency": "GBP",
+            "transaction_id": "8a3bfdf9aa7698cbb20abc1d32f4b36f",
+            "provider_transaction_id": "95e1ceae1a68608585",
+            "normalised_provider_transaction_id": "txn-162e666e9e660935d",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 345.99
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-07T00:00:00Z",
+            "description": "EE & T-MOBILE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Bills and Utilities",
+                "Internet"
+            ],
+            "merchant_name": "Ee",
+            "amount": -82.37,
+            "currency": "GBP",
+            "transaction_id": "0ed056e51ac93fd1807bb687c9d12f95",
+            "provider_transaction_id": "e5462c29ac1db1a0f2",
+            "normalised_provider_transaction_id": "txn-50d74d1b1b089d462",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 263.62
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-07T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -1.15,
+            "currency": "GBP",
+            "transaction_id": "806659d6fef3cf4685562be955c8a7cb",
+            "provider_transaction_id": "a7fd76a22f7e800067",
+            "normalised_provider_transaction_id": "txn-28186c86378ba7bbd",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 262.47
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-07T00:00:00Z",
+            "description": "MS JANE DOE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": -70,
+            "currency": "GBP",
+            "transaction_id": "367b8f16df90d28c54e1327ece3b7385",
+            "provider_transaction_id": "8cb03f2b0e7cae18d8",
+            "normalised_provider_transaction_id": "txn-f6e213ce25d2c58fe",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 192.47
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "TESCO MOBILE LTD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Bills and Utilities",
+                "Mobile Phone"
+            ],
+            "merchant_name": "Tesco Mobile",
+            "amount": -28.25,
+            "currency": "GBP",
+            "transaction_id": "c19a1a8912c870cac7c2985acd771bbc",
+            "provider_transaction_id": "fee50ffdc096dfc478",
+            "normalised_provider_transaction_id": "txn-b0da64f3918eaddd4",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 164.22
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "WORKING TAX CREDIT",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 22.42,
+            "currency": "GBP",
+            "transaction_id": "d2beb54b50c4d9664f6f80a7033727c9",
+            "provider_transaction_id": "0e713ff57e78202db4",
+            "normalised_provider_transaction_id": "txn-c5549a399899ee678",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 186.64
+            },
+            "meta": {
+                "provider_transaction_category": "BGC"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "W M MORRISONS PLC",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "WM Morrisons",
+            "amount": -12.89,
+            "currency": "GBP",
+            "transaction_id": "0896a3e700b6f93e54475e3cf96b920e",
+            "provider_transaction_id": "c3f6ba9f0c0414297c",
+            "normalised_provider_transaction_id": "txn-9fca52fd792037827",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 173.75
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "TESCO MOBILE LTD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Bills and Utilities",
+                "Mobile Phone"
+            ],
+            "merchant_name": "Tesco Mobile",
+            "amount": -50,
+            "currency": "GBP",
+            "transaction_id": "da4cf643b449578c2c5487cb6f069994",
+            "provider_transaction_id": "3cdb4416e46df785aa",
+            "normalised_provider_transaction_id": "txn-a7f4110a7098f9f6d",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 123.75
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "HOME BARGAINS FLEE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Home"
+            ],
+            "merchant_name": "Home Bargains",
+            "amount": -9.71,
+            "currency": "GBP",
+            "transaction_id": "247b50fd04196e603a59c82d9dcd48c9",
+            "provider_transaction_id": "c6e675ac3a94b4e66e",
+            "normalised_provider_transaction_id": "txn-6b6ac274dd007c579",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 114.04
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "CHILD TAX CREDIT",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 346.35,
+            "currency": "GBP",
+            "transaction_id": "e17aab8fb145aace30de2d0a9caf8cec",
+            "provider_transaction_id": "c2361c1f6402f888e9",
+            "normalised_provider_transaction_id": "txn-85cb9b01f3aae4256",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 460.39
+            },
+            "meta": {
+                "provider_transaction_category": "BGC"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "MR JOHN SMITH",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 137.6,
+            "currency": "GBP",
+            "transaction_id": "23b0eda37678f44163dbbcf60b2ac994",
+            "provider_transaction_id": "f3ef1b40683f1ec3cb",
+            "normalised_provider_transaction_id": "txn-9b0c86b63cd1865f1",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 597.99
+            },
+            "meta": {
+                "provider_transaction_category": "BGC"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "MS JANE DOE",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 61.89,
+            "currency": "GBP",
+            "transaction_id": "56b8b18ac8e49441a2f705b956424308",
+            "provider_transaction_id": "569d8aee209f6ab07a",
+            "normalised_provider_transaction_id": "txn-7f72fd041ae0ee022",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 659.88
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "7d9c811a403e1c5c2163f98c41695e9c",
+            "provider_transaction_id": "f7aa9e657a2c31a5ae",
+            "normalised_provider_transaction_id": "txn-36d1f257121a083fc",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 659.87
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-06T00:00:00Z",
+            "description": "AMAZON PRIME",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping"
+            ],
+            "merchant_name": "Amazon",
+            "amount": -5,
+            "currency": "GBP",
+            "transaction_id": "f63274c7f8923ab04f28a570b98adef1",
+            "provider_transaction_id": "a4d5b5e8ccce176fec",
+            "normalised_provider_transaction_id": "txn-f2d4e36566f541328",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 654.87
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-05T00:00:00Z",
+            "description": "LNK ATM WITHDRAWAL",
+            "transaction_type": "DEBIT",
+            "transaction_category": "ATM",
+            "transaction_classification": [],
+            "amount": -60,
+            "currency": "GBP",
+            "transaction_id": "b1074302729266c8bd7dca4b86fbe832",
+            "provider_transaction_id": "e0c7dfdfe3a68a4f77",
+            "normalised_provider_transaction_id": "txn-a00f6f9253ba5cb97",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 594.87
+            },
+            "meta": {
+                "provider_transaction_category": "CPT"
+            }
+        },
+        {
+            "timestamp": "2024-04-05T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -1.89,
+            "currency": "GBP",
+            "transaction_id": "5495b91593f99e670e72f1cde245d56e",
+            "provider_transaction_id": "55e3b77d7982816618",
+            "normalised_provider_transaction_id": "txn-5f3621fb1769b3776",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 592.98
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-05T00:00:00Z",
+            "description": "THE INSURANCE EMPO",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -5.79,
+            "currency": "GBP",
+            "transaction_id": "23fc3909177fcca6e97dd53f54af5139",
+            "provider_transaction_id": "bb55d060ba46dc26cf",
+            "normalised_provider_transaction_id": "txn-594e81544cae6889e",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 587.19
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-05T00:00:00Z",
+            "description": "AMAZON PRIME",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping"
+            ],
+            "merchant_name": "Amazon",
+            "amount": -7.99,
+            "currency": "GBP",
+            "transaction_id": "cb9fdb8704ab23c0d8cbed2e722c2bf1",
+            "provider_transaction_id": "1b7e4a10859165db7a",
+            "normalised_provider_transaction_id": "txn-90fc03d70ad00be72",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 579.2
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-05T00:00:00Z",
+            "description": "VANQUIS BANK",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Uncategorized",
+                "Cash & ATM"
+            ],
+            "merchant_name": "Vanquis Bank",
+            "amount": -23.15,
+            "currency": "GBP",
+            "transaction_id": "ffe48ad88f919dfe48256344725b01f3",
+            "provider_transaction_id": "cba9eaff4c847076cd",
+            "normalised_provider_transaction_id": "txn-b9a383b6d4f05e3ed",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 556.05
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-05T00:00:00Z",
+            "description": "AA INSURANCE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [
+                "Auto & Transport",
+                "Auto Insurance"
+            ],
+            "merchant_name": "Axa",
+            "amount": -12.73,
+            "currency": "GBP",
+            "transaction_id": "34c1a75b7dfda3e6ac9b1a48a4822ea4",
+            "provider_transaction_id": "a73c9c2caebf5ed301",
+            "normalised_provider_transaction_id": "txn-e3f268a56b063d597",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 543.32
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-05T00:00:00Z",
+            "description": "WWW.TAILS.COM",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Pets"
+            ],
+            "merchant_name": "Tails.com",
+            "amount": -6.37,
+            "currency": "GBP",
+            "transaction_id": "d5f259f98e81f2161879a4dfe75c7fa9",
+            "provider_transaction_id": "a7ab3deaa9f19e9058",
+            "normalised_provider_transaction_id": "txn-399f2d6ed0436c1e4",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 536.95
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-05T00:00:00Z",
+            "description": "ANNATAR",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -20,
+            "currency": "GBP",
+            "transaction_id": "2676bed38f0e96020664f226a4d4047d",
+            "provider_transaction_id": "ce8c63bf97989b061e",
+            "normalised_provider_transaction_id": "txn-0245c7723bc17ac87",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 516.95
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "ANNATAR LIMITED",
+            "transaction_type": "CREDIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": 10,
+            "currency": "GBP",
+            "transaction_id": "2c9a5df335c17ec8684075248247c9cc",
+            "provider_transaction_id": "46daef020e3d79d628",
+            "normalised_provider_transaction_id": "txn-d9693ca20a16ce73c",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 526.95
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "ANYVAN LTD",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 70,
+            "currency": "GBP",
+            "transaction_id": "a0e385557d9b134078528835809eff20",
+            "provider_transaction_id": "a7ba334a11b8c34c6f",
+            "normalised_provider_transaction_id": "txn-1a56b097f0d7089ad",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 596.95
+            },
+            "meta": {
+                "provider_transaction_category": "FPI"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "ANYVAN LTD",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 59.17,
+            "currency": "GBP",
+            "transaction_id": "7a397a876d6a6fc4c8722be02af1f378",
+            "provider_transaction_id": "a486259bf983932b1d",
+            "normalised_provider_transaction_id": "txn-04c9d5cc29b2f28d6",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 656.12
+            },
+            "meta": {
+                "provider_transaction_category": "FPI"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "LNK ATM LONDON",
+            "transaction_type": "DEBIT",
+            "transaction_category": "ATM",
+            "transaction_classification": [],
+            "amount": -20,
+            "currency": "GBP",
+            "transaction_id": "446579ab2d6192db48ba649a66dbbf9c",
+            "provider_transaction_id": "83436931db4d8ddee3",
+            "normalised_provider_transaction_id": "txn-24f11cb1e578a229a",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 636.12
+            },
+            "meta": {
+                "provider_transaction_category": "CPT"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "LAPTOP DIRECT LTD.",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Electronics & Software"
+            ],
+            "merchant_name": "Laptop",
+            "amount": -5,
+            "currency": "GBP",
+            "transaction_id": "400602de9018dec1d5e02c87d0005d7e",
+            "provider_transaction_id": "c0dab7760978798702",
+            "normalised_provider_transaction_id": "txn-a5d4dd1d169c7b184",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 631.12
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "ANIMAL FRIENDS LTD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -3.07,
+            "currency": "GBP",
+            "transaction_id": "cf086fd8931b92b4f7fbfd81088e9891",
+            "provider_transaction_id": "e93ca83b9cbe3d55a4",
+            "normalised_provider_transaction_id": "txn-380bd33aa35c5a498",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 628.05
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "LNK ATM WITHDRAWAL",
+            "transaction_type": "DEBIT",
+            "transaction_category": "ATM",
+            "transaction_classification": [],
+            "amount": -100,
+            "currency": "GBP",
+            "transaction_id": "475298ee2faf0139ff8c095c3dd2cf73",
+            "provider_transaction_id": "50117e22ada6dc0b5a",
+            "normalised_provider_transaction_id": "txn-3e0516be8a0d9267e",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 528.05
+            },
+            "meta": {
+                "provider_transaction_category": "CPT"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "MR JOHN SMITH",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 100,
+            "currency": "GBP",
+            "transaction_id": "b19b05c9f9fa0453485246c1e2187bf9",
+            "provider_transaction_id": "0d7dc953df50c4fdf8",
+            "normalised_provider_transaction_id": "txn-4df44b7b77de5009f",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 628.05
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "INTUIT LIMITED",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -3.59,
+            "currency": "GBP",
+            "transaction_id": "44729b755b11c7bb0c1d15d04144f4a1",
+            "provider_transaction_id": "c2de61722a53254f09",
+            "normalised_provider_transaction_id": "txn-72891ef75994913b9",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 624.46
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "PAYPAL EBAY",
+            "transaction_type": "CREDIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "General"
+            ],
+            "merchant_name": "Ebay",
+            "amount": 25,
+            "currency": "GBP",
+            "transaction_id": "0462c6ef5650bd1d3359191494dfb573",
+            "provider_transaction_id": "639aab05613e72846f",
+            "normalised_provider_transaction_id": "txn-a106c339dfddc5e11",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 649.46
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-04T00:00:00Z",
+            "description": "RENT",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [
+                "Uncategorized"
+            ],
+            "merchant_name": "L&Q",
+            "amount": -130,
+            "currency": "GBP",
+            "transaction_id": "c90f0a186caa5c5696ab9348da764272",
+            "provider_transaction_id": "a713fff1bd34a1dfb8",
+            "normalised_provider_transaction_id": "txn-f3199e2e8e8ed9b87",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 519.46
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "MS JANE DOE",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 0.89,
+            "currency": "GBP",
+            "transaction_id": "70091c985f7f37230fb3224f68f1fa9f",
+            "provider_transaction_id": "3485832563a718fadb",
+            "normalised_provider_transaction_id": "txn-5f2ef8fcc9acfa238",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 520.35
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.41,
+            "currency": "GBP",
+            "transaction_id": "712a4e7094a500b9d40dfa5a52fbc6b3",
+            "provider_transaction_id": "e6fc63aca65c316308",
+            "normalised_provider_transaction_id": "txn-4794bf5793deb2b3e",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 519.94
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "MS JANE DOE",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 130,
+            "currency": "GBP",
+            "transaction_id": "7b433254c114f732557352e74c79d58e",
+            "provider_transaction_id": "0d9736038f5862c9f7",
+            "normalised_provider_transaction_id": "txn-0ec57ab0d1833591a",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 649.94
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "MR JOHN SMITH",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 7,
+            "currency": "GBP",
+            "transaction_id": "4bea834b23b5e41c39c4efeefbbe266d",
+            "provider_transaction_id": "1d5648d4b4f7642607",
+            "normalised_provider_transaction_id": "txn-996bea1c476a30caf",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 656.94
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "AA MEMBERSHIP",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [
+                "Auto & Transport",
+                "Auto Payment"
+            ],
+            "merchant_name": "Aa Membership",
+            "amount": -23.11,
+            "currency": "GBP",
+            "transaction_id": "5d5069ed06396f7d9b5e4567a5f46333",
+            "provider_transaction_id": "e8bbc5ac5fed01fb3d",
+            "normalised_provider_transaction_id": "txn-26487c24a441a82c3",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 633.83
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "VIRGIN GAMES",
+            "transaction_type": "CREDIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Gambling",
+                "Casino"
+            ],
+            "merchant_name": "Virgin Games",
+            "amount": 35.49,
+            "currency": "GBP",
+            "transaction_id": "dc31d6af6396a5579a21b5e4b4f2cb84",
+            "provider_transaction_id": "9917695cafe49ec03f",
+            "normalised_provider_transaction_id": "txn-125969a10e760a233",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 669.32
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "44e0941f6d50552cb0aea6dad2f242ca",
+            "provider_transaction_id": "63920a03814bb27908",
+            "normalised_provider_transaction_id": "txn-53ff2caaaed7ae055",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 669.31
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "GOOGLE PLAY STORE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Electronics & Software"
+            ],
+            "merchant_name": "Google Play",
+            "amount": -2.99,
+            "currency": "GBP",
+            "transaction_id": "c9ed39c2b7820b637032e66615cdfc7b",
+            "provider_transaction_id": "5b72f435220c07c720",
+            "normalised_provider_transaction_id": "txn-9d7826032d266f76d",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 666.32
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "TESCO EXTRA",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -30,
+            "currency": "GBP",
+            "transaction_id": "49e7119e4dd1d7bd657852bedd1aa2e4",
+            "provider_transaction_id": "65f7c101e7420621f5",
+            "normalised_provider_transaction_id": "txn-124aefd9148867fcc",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 636.32
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "RETURNED DIRECT DEBIT",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 40,
+            "currency": "GBP",
+            "transaction_id": "17bccde7d60ce648f8a72f99863010ce",
+            "provider_transaction_id": "9317a163a10be3b95f",
+            "normalised_provider_transaction_id": "txn-e78e963c946d3b4f1",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 676.32
+            },
+            "meta": {
+                "provider_transaction_category": "DEP"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "LNK ATM LONDON",
+            "transaction_type": "DEBIT",
+            "transaction_category": "ATM",
+            "transaction_classification": [],
+            "amount": -40,
+            "currency": "GBP",
+            "transaction_id": "4cae041d571d6580b79fe9abb9461e09",
+            "provider_transaction_id": "2318b29000ad02ec90",
+            "normalised_provider_transaction_id": "txn-12effe6430ebf524f",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 636.32
+            },
+            "meta": {
+                "provider_transaction_category": "CPT"
+            }
+        },
+        {
+            "timestamp": "2024-04-03T00:00:00Z",
+            "description": "WWW.ASDA.COM",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "Asda",
+            "amount": -5,
+            "currency": "GBP",
+            "transaction_id": "6609036fa0b0ffd8f34cf87ed732e24d",
+            "provider_transaction_id": "29080f34a2a4370c0e",
+            "normalised_provider_transaction_id": "txn-e06e4561de5326629",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 631.32
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-02T00:00:00Z",
+            "description": "MR JOHN SMITH",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 30,
+            "currency": "GBP",
+            "transaction_id": "5e6d946b124e5cbb8fbce6a41385ff6d",
+            "provider_transaction_id": "7ab652ed9ddc8165de",
+            "normalised_provider_transaction_id": "txn-bc0c3d2b1feac3115",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 661.32
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-02T00:00:00Z",
+            "description": "LNK ATM LONDON",
+            "transaction_type": "DEBIT",
+            "transaction_category": "ATM",
+            "transaction_classification": [],
+            "amount": -30,
+            "currency": "GBP",
+            "transaction_id": "6c413a9280910be64861c875ec90c026",
+            "provider_transaction_id": "6de9697078a0209018",
+            "normalised_provider_transaction_id": "txn-130b5913d7b320ddf",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 631.32
+            },
+            "meta": {
+                "provider_transaction_category": "CPT"
+            }
+        },
+        {
+            "timestamp": "2024-04-02T00:00:00Z",
+            "description": "MR JOHN SMITH",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 10,
+            "currency": "GBP",
+            "transaction_id": "f0b4f47d5943d0c8d32363e2d97fa140",
+            "provider_transaction_id": "03190f6658ea70184c",
+            "normalised_provider_transaction_id": "txn-ca4cb794f485d1f44",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 641.32
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-02T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.59,
+            "currency": "GBP",
+            "transaction_id": "1491267730145ca789f528a5ee9577e0",
+            "provider_transaction_id": "07b7a0d6e10ca4610d",
+            "normalised_provider_transaction_id": "txn-9870c564b90cf91bb",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 640.73
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "TALKTALK TELECOM",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Bills and Utilities",
+                "Internet"
+            ],
+            "merchant_name": "Talktalk",
+            "amount": -46.82,
+            "currency": "GBP",
+            "transaction_id": "4a6e0401b5c1410dab1bd9db2bc579f4",
+            "provider_transaction_id": "d89b5bd9c6cec4f249",
+            "normalised_provider_transaction_id": "txn-7de0826f0d4f4ba73",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 593.91
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "ACCOUNT OVERDRAFT FEE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "2f72b984171cf80d7d73d8b6585f842f",
+            "provider_transaction_id": "04f7904cb9215f00e4",
+            "normalised_provider_transaction_id": "txn-521c2c019158c48e1",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 593.9
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "MR JOHN SMITH",
+            "transaction_type": "DEBIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": -227,
+            "currency": "GBP",
+            "transaction_id": "bcb29a64bd4adc3447f0a468e8d3bc3f",
+            "provider_transaction_id": "b02b8beafafcce8416",
+            "normalised_provider_transaction_id": "txn-a437e5454c44db628",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 366.9
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "TESCO",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "Tesco",
+            "amount": -39.99,
+            "currency": "GBP",
+            "transaction_id": "5b28eb61f8731afb864a328518462e25",
+            "provider_transaction_id": "ee29538b524495d2d3",
+            "normalised_provider_transaction_id": "txn-bbe89b3e96bf5eddb",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.91
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "REVOLUT",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Personal Services",
+                "Financial Services"
+            ],
+            "merchant_name": "Revolut",
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "6ec7cf90d225d2cec953fda40423c83d",
+            "provider_transaction_id": "cdb9e4afcfdde9d527",
+            "normalised_provider_transaction_id": "txn-d287ba85b4af405a1",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.9
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "CENTRA",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "Centra",
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "bfa1668d0659165a66bee0a812e1e816",
+            "provider_transaction_id": "42cfad183d9a465593",
+            "normalised_provider_transaction_id": "txn-0ed14d98c5da62d35",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.89
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "DUNNES STORES",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "0c3c0d6a4b1bc86881c552f77e4e61c5",
+            "provider_transaction_id": "2d4337e7591ff66713",
+            "normalised_provider_transaction_id": "txn-88aa261281d1979d0",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.88
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "SPAR",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "Spar",
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "989d115cf898fae426768123a8379d7a",
+            "provider_transaction_id": "bd90541c445fa31cea",
+            "normalised_provider_transaction_id": "txn-c5ef52c9b3772103a",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.87
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "SPAR",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "Spar",
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "4e22531192594315fc6d8b52eee5e7df",
+            "provider_transaction_id": "bd9314c59c368c7372",
+            "normalised_provider_transaction_id": "txn-e2f69e1b0057affaa",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.86
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "SUPERVALUE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "670ab551a23917134d20d0e744c857c5",
+            "provider_transaction_id": "c9ccc75d20c1fe5adc",
+            "normalised_provider_transaction_id": "txn-2814a5cec1962ba9b",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.85
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "LIDL",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "Groceries"
+            ],
+            "merchant_name": "Lidl",
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "8ae80bc6a7c15390a20a25647d16b12f",
+            "provider_transaction_id": "c6e237a314e6885943",
+            "normalised_provider_transaction_id": "txn-dc56cf67b6cdfb13f",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.84
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "APLLEGREEN",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "f127337c0b58b00637012463e4da6933",
+            "provider_transaction_id": "13091e6184211908f6",
+            "normalised_provider_transaction_id": "txn-727aaab038f663537",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.83
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "MCDONALD'S",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Food & Dining",
+                "Restaurants"
+            ],
+            "merchant_name": "McDonald's",
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "42edbe8ece5c501c45337f8616011ddc",
+            "provider_transaction_id": "27de5db843fc38e92c",
+            "normalised_provider_transaction_id": "txn-6bd9dd70a2025490f",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.82
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "HARVEY NORMAN",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "81941dc240bb18a1d2b64a278db46b55",
+            "provider_transaction_id": "815f908900c966e92c",
+            "normalised_provider_transaction_id": "txn-4ac17468fbf3aa14c",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.81
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "ULSTER BANK",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "ef95659a1c17ac07109f6e480c65245b",
+            "provider_transaction_id": "ff4fa15895bdeb8fd5",
+            "normalised_provider_transaction_id": "txn-5813fc9bae635bac7",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.8
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "CIRCLE K",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Auto & Transport",
+                "Gas & Fuel"
+            ],
+            "merchant_name": "Circle K",
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "3c47035ff08dc21e6b56f4c35706705f",
+            "provider_transaction_id": "762ec7fe8a4d12e657",
+            "normalised_provider_transaction_id": "txn-103b0adf15db567c9",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.79
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "BET365",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Gambling",
+                "Betting"
+            ],
+            "merchant_name": "Bet365",
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "715d9cb0008b5cd2552189bd06d0a814",
+            "provider_transaction_id": "56cb6b937d4c8b94dc",
+            "normalised_provider_transaction_id": "txn-bf4cbec0ba7ea27fd",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.78
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "ACCOUNT OVERDRAFT FEE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.01,
+            "currency": "GBP",
+            "transaction_id": "b50e38a98e57b57233d748d288e2739e",
+            "provider_transaction_id": "096353d02002e2e59e",
+            "normalised_provider_transaction_id": "txn-38860c6f200b7ea99",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 326.77
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "Sainsbury's",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping"
+            ],
+            "merchant_name": "Sainsbury's",
+            "amount": -23.99,
+            "currency": "GBP",
+            "transaction_id": "446169192a07cbb1a686f54f244271fb",
+            "provider_transaction_id": "27b2111604a7a66d78",
+            "normalised_provider_transaction_id": "txn-4a862c6de772794be",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 302.78
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "MR JOHN SMITH",
+            "transaction_type": "DEBIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": -20.91,
+            "currency": "GBP",
+            "transaction_id": "8a666c936c4bf3e1582426b1dbabe459",
+            "provider_transaction_id": "4e9ed98c203d879abc",
+            "normalised_provider_transaction_id": "txn-69d408db0858e8fa0",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 282.78
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "NUDE FINANCE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Business Services",
+                "Financial Services"
+            ],
+            "merchant_name": "Nude Finance",
+            "amount": -10,
+            "currency": "GBP",
+            "transaction_id": "0de058657b2109036d94b012a7d291ac",
+            "provider_transaction_id": "3acb9753e4a597619a",
+            "normalised_provider_transaction_id": "txn-42723ff56608e9e28",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 272.78
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "E.ON NEXT",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Bills and Utilities",
+                "Utilities"
+            ],
+            "merchant_name": "E.on Next",
+            "amount": -10,
+            "currency": "GBP",
+            "transaction_id": "3bf2e131f6e20504b4d775b9a714c5d8",
+            "provider_transaction_id": "611244eeb6a1d51117",
+            "normalised_provider_transaction_id": "txn-3e3809c5cb4c239f7",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 262.78
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "L&G INSURANCE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [],
+            "amount": -10,
+            "currency": "GBP",
+            "transaction_id": "7815836989c3bd215c2b0795bfb8eae4",
+            "provider_transaction_id": "81c7e4629dd5acbae9",
+            "normalised_provider_transaction_id": "txn-0cbba7cc2bc984133",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 252.78
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "HALIFAX",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Business Services",
+                "Financial Services"
+            ],
+            "merchant_name": "Halifax",
+            "amount": -10,
+            "currency": "GBP",
+            "transaction_id": "3076fadbec57939068ea99ef8e9fb415",
+            "provider_transaction_id": "f2176da57a5e09e507",
+            "normalised_provider_transaction_id": "txn-95d26ec292623ed89",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 242.78
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-04-01T00:00:00Z",
+            "description": "OVO ENERGY",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Bills and Utilities",
+                "Utilities"
+            ],
+            "amount": -10,
+            "currency": "GBP",
+            "transaction_id": "76b3d8457b167d6878daf534551c2876",
+            "provider_transaction_id": "9264d6bacabd40dd7e",
+            "normalised_provider_transaction_id": "txn-f25a2b1653da1ac49",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": 232.78
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-03-28T00:00:00Z",
+            "description": "TSB CLEVELEYS",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CASH",
+            "transaction_classification": [],
+            "amount": 420,
+            "currency": "GBP",
+            "transaction_id": "d707b5521b6e3efe2bf064e9f5c7eb1e",
+            "provider_transaction_id": "cf69b7de996c4407a0",
+            "normalised_provider_transaction_id": "txn-2db5da37180252c32",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -640.42
+            },
+            "meta": {
+                "provider_transaction_category": "CSH"
+            }
+        },
+        {
+            "timestamp": "2024-03-28T00:00:00Z",
+            "description": "AMAZON INT'L",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping"
+            ],
+            "merchant_name": "Amazon",
+            "amount": -36.59,
+            "currency": "GBP",
+            "transaction_id": "3ca8e1a1e0c075418a37e0b1ef91b8b1",
+            "provider_transaction_id": "44a53fa3be95f7fed3",
+            "normalised_provider_transaction_id": "txn-7f5f649e30fad1590",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -677.01
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-03-28T00:00:00Z",
+            "description": "RETURNED DD",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 40,
+            "currency": "GBP",
+            "transaction_id": "1aaf8be065a3771b7a2d967621834ab7",
+            "provider_transaction_id": "dad8a9b021855ccff0",
+            "normalised_provider_transaction_id": "txn-db754f8fb11eb553e",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -637.01
+            },
+            "meta": {
+                "provider_transaction_category": "DEP"
+            }
+        },
+        {
+            "timestamp": "2024-03-28T00:00:00Z",
+            "description": "MR JOHN SMITH",
+            "transaction_type": "DEBIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": -32.72,
+            "currency": "GBP",
+            "transaction_id": "b67dda52cb34b96dc0e759dced4bebea",
+            "provider_transaction_id": "c719950aa1cf02181f",
+            "normalised_provider_transaction_id": "txn-f648c7914acfbcc1b",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -669.73
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-03-28T00:00:00Z",
+            "description": "WORKING TAX CREDIT",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 22.42,
+            "currency": "GBP",
+            "transaction_id": "32eb9f91ccd7a27fe5af65d8b60f5e57",
+            "provider_transaction_id": "7334126034dbd11b0a",
+            "normalised_provider_transaction_id": "txn-b8f591c6f30357f82",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -647.31
+            },
+            "meta": {
+                "provider_transaction_category": "BGC"
+            }
+        },
+        {
+            "timestamp": "2024-03-27T00:00:00Z",
+            "description": "MS JANE DOE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": -7.93,
+            "currency": "GBP",
+            "transaction_id": "357884c4ba90977d071dbe2ee72682e6",
+            "provider_transaction_id": "5f630671d1093b7b40",
+            "normalised_provider_transaction_id": "txn-57529adf2ff4cea06",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -655.24
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-03-27T00:00:00Z",
+            "description": "CIRCLE UK TRADING REFUND",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CREDIT",
+            "transaction_classification": [],
+            "amount": 50.59,
+            "currency": "GBP",
+            "transaction_id": "9f4b67cdbeaa8721dcd869c64bed6582",
+            "provider_transaction_id": "6b2bf8326729df8149",
+            "normalised_provider_transaction_id": "txn-0a7e85b2402345e24",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -604.65
+            },
+            "meta": {
+                "provider_transaction_category": "DEP"
+            }
+        },
+        {
+            "timestamp": "2024-03-27T00:00:00Z",
+            "description": "MS JANE DOE",
+            "transaction_type": "CREDIT",
+            "transaction_category": "TRANSFER",
+            "transaction_classification": [],
+            "amount": 15.86,
+            "currency": "GBP",
+            "transaction_id": "3ec934efb58f619a7b1d38896d3981e9",
+            "provider_transaction_id": "819d94e98d74cec71b",
+            "normalised_provider_transaction_id": "txn-0b470d66c33e8f4a8",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -588.79
+            },
+            "meta": {
+                "provider_transaction_category": "TFR"
+            }
+        },
+        {
+            "timestamp": "2024-03-27T00:00:00Z",
+            "description": "DVLA LICENSE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -20.56,
+            "currency": "GBP",
+            "transaction_id": "ec3794829c00dd1758d8e47cd0ca30af",
+            "provider_transaction_id": "edde0cda63ddff5013",
+            "normalised_provider_transaction_id": "txn-03768bea7b1114cd1",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -609.35
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-03-27T00:00:00Z",
+            "description": "E&L INSURANCE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -2.99,
+            "currency": "GBP",
+            "transaction_id": "37fca90b5c8833e69f091f51dce3d085",
+            "provider_transaction_id": "550200a5486488bfe5",
+            "normalised_provider_transaction_id": "txn-a8c6506b96345dd55",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -612.34
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-03-27T00:00:00Z",
+            "description": "TESCO ONLINE SHOPPING",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -23.62,
+            "currency": "GBP",
+            "transaction_id": "9561dcd810aef7023bc2eff049d849f3",
+            "provider_transaction_id": "05fe34cf81c56d69a9",
+            "normalised_provider_transaction_id": "txn-6fb9c95901772fc64",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -635.96
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-03-27T00:00:00Z",
+            "description": "PAYPAL EBAY",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping",
+                "General"
+            ],
+            "merchant_name": "Ebay",
+            "amount": -7.56,
+            "currency": "GBP",
+            "transaction_id": "8295213703ee5ffb93f43532184e995d",
+            "provider_transaction_id": "0dfbd56248ca038112",
+            "normalised_provider_transaction_id": "txn-7ce5ccdf6fd6ddb78",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -643.52
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-03-25T00:00:00Z",
+            "description": "CASHBACK",
+            "transaction_type": "CREDIT",
+            "transaction_category": "CASH",
+            "transaction_classification": [],
+            "amount": 70,
+            "currency": "GBP",
+            "transaction_id": "8fa5a22decf78a110a154ddc4e21f877",
+            "provider_transaction_id": "a1cde8475bf8c6cd95",
+            "normalised_provider_transaction_id": "txn-c678fb793cd2c5bca",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -573.52
+            },
+            "meta": {
+                "provider_transaction_category": "CSH"
+            }
+        },
+        {
+            "timestamp": "2024-03-25T00:00:00Z",
+            "description": "MENS HEALTH SUBSCRIPTION",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -24.5,
+            "currency": "GBP",
+            "transaction_id": "57665cfc508e6925d6f6a64fec439402",
+            "provider_transaction_id": "90f59835bd9372f58f",
+            "normalised_provider_transaction_id": "txn-6342cdf7eab39e135",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -598.02
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-03-25T00:00:00Z",
+            "description": "OUTGOING DD",
+            "transaction_type": "DEBIT",
+            "transaction_category": "DIRECT_DEBIT",
+            "transaction_classification": [],
+            "amount": -10,
+            "currency": "GBP",
+            "transaction_id": "f254b3a0ea6fcd93a91b935e1b7a6f1f",
+            "provider_transaction_id": "bb9b0a4ced7037e9b3",
+            "normalised_provider_transaction_id": "txn-c773649552956fe21",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -608.02
+            },
+            "meta": {
+                "provider_transaction_category": "DD"
+            }
+        },
+        {
+            "timestamp": "2024-03-25T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.41,
+            "currency": "GBP",
+            "transaction_id": "64c0e9e90241871b109429e041c5d1ee",
+            "provider_transaction_id": "fd2307fa488f3b0a45",
+            "normalised_provider_transaction_id": "txn-fbaa73a7f4eb06d57",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -608.43
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-03-25T00:00:00Z",
+            "description": "AMAZON PLC",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Shopping"
+            ],
+            "merchant_name": "Amazon",
+            "amount": -36.59,
+            "currency": "GBP",
+            "transaction_id": "8696509c77467042daa65049b13c5fe4",
+            "provider_transaction_id": "2856ef0629d101ec9c",
+            "normalised_provider_transaction_id": "txn-ed8abec7fe25dcd96",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -645.02
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        },
+        {
+            "timestamp": "2024-03-25T00:00:00Z",
+            "description": "SAVE THE CHANGE",
+            "transaction_type": "DEBIT",
+            "transaction_category": "BILL_PAYMENT",
+            "transaction_classification": [],
+            "amount": -0.5,
+            "currency": "GBP",
+            "transaction_id": "910f34758375a21eae3166116c7ed3e0",
+            "provider_transaction_id": "8b114ac5339ce0056a",
+            "normalised_provider_transaction_id": "txn-d12c4685a79b54d8b",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -645.52
+            },
+            "meta": {
+                "provider_transaction_category": "BP"
+            }
+        },
+        {
+            "timestamp": "2024-03-25T00:00:00Z",
+            "description": "WWW.BINGO.COM",
+            "transaction_type": "DEBIT",
+            "transaction_category": "PURCHASE",
+            "transaction_classification": [
+                "Gambling",
+                "Betting"
+            ],
+            "merchant_name": "J & S Bingo",
+            "amount": -10.5,
+            "currency": "GBP",
+            "transaction_id": "99fabce746200538550e63e47c5a4827",
+            "provider_transaction_id": "fdd5bd2965eb488f0f",
+            "normalised_provider_transaction_id": "txn-56240db70b144e71f",
+            "running_balance": {
+                "currency": "GBP",
+                "amount": -656.02
+            },
+            "meta": {
+                "provider_transaction_category": "DEB"
+            }
+        }
+    ]
+}
