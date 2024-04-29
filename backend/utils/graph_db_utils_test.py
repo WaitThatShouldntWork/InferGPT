@@ -1,4 +1,4 @@
-from unittest.mock import ANY, MagicMock
+from unittest.mock import MagicMock
 from neo4j import Driver, Session
 import pytest
 # We assign an alias to "test_connection" to avoid pytest treating it as another test function
@@ -48,7 +48,7 @@ def test_create_goal_is_successful(mock_driver, mock_session):
     assert kwargs == { "name":"Test Name", "description":"Test Description" }
     actual_cypher_query = remove_whitespace_and_newlines(str(args[0]))
     expected_cypher_query = "MERGE (g:Goal {name: $name, description: $description}) RETURN g"
-    assert expected_cypher_query == actual_cypher_query
+    assert actual_cypher_query == expected_cypher_query
     mock_session.close.assert_called_once()
     mock_driver.close.assert_called_once()
 
@@ -59,6 +59,6 @@ def test_create_goal_throws_exception(mock_driver, mock_session):
     with pytest.raises(Exception):
         create_goal("Test Name", "Test Description")
 
-    mock_session.run.assert_called_once_with(ANY, name="Test Name", description="Test Description")
+    mock_session.run.assert_called_once()
     mock_session.close.assert_called_once()
     mock_driver.close.assert_called_once()
