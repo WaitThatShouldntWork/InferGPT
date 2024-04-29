@@ -5,19 +5,21 @@ client = TestClient(app)
 utterance = "Hello there"
 expected_message = "Hello to you too! From InferGPT"
 
-def test_health_check_response_healthy():
+def test_health_check_response_healthy(mocker):
+    mock_test_connection = mocker.patch("api.test_connection", return_value=True)
+
     response = client.get("/health")
 
+    mock_test_connection.assert_called()
     assert response.status_code == 200
     assert response.json() == healthy_response
 
 def test_health_check_response_neo4j_unhealthy(mocker):
-    mock_connection_test = mocker.patch("api.test_connection", return_value=False)
+    mock_test_connection = mocker.patch("api.test_connection", return_value=False)
 
     response = client.get("/health")
 
-    mock_connection_test.assert_called()
-
+    mock_test_connection.assert_called()
     assert response.status_code == 500
     assert response.json() == unhealthy_neo4j_response
 
