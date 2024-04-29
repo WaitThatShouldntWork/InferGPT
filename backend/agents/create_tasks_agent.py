@@ -79,7 +79,7 @@ create_tasks_prompt = """
 """
 
 def create_tasks(user_prompt: str) -> str:
-    logger.info("create_tasks function is called")
+    logger.debug("create_tasks function is called")
     response = call_model(create_tasks_prompt, user_prompt)
 
     try:
@@ -87,4 +87,5 @@ def create_tasks(user_prompt: str) -> str:
     except Exception:
         raise Exception("Failed to interpret LLM next step format")
 
+    logger.info("tasks created: " + str(all_tasks_json))
     return all_tasks_json

@@ -43,16 +43,16 @@ If you reply more than one word, you will be disconnected
 
 
 def question(question):
-    logging.info("finding tasks from question: {question}")
+    logging.debug("Received utterance: {question}")
 
     if determine_intention(question) == "TRUE":
         tasks_from_question_json = create_tasks(question)
         return solve_all_tasks(tasks_from_question_json)
 
     else:
-        logging.info("director calling call_model function")
+        logging.info("Passing utterance straight to call_model function")
         return call_model(director_prompt, user_prompt=question)
 
 def determine_intention(question: str) -> str:
-    logging.info("director calling determine_intention function")
+    logging.debug("director calling determine_intention function")
     return call_model(determine_intention_prompt, user_prompt=question)

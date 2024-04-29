@@ -9,4 +9,4 @@ def solve_all_tasks(tasks_json):
     next_step_json = pick_agent(str(first_task))
     logging.info("agent picked: " + next_step_json["agent"])
 
-    return next_step_json["thoughts"]["speak"]
+    return next_step_json["agent"]

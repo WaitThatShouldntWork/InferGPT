@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 
 class Config(object):
+
     def __init__(self):
         self.frontend_url = None
         self.mistral_url = None

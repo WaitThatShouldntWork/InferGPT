@@ -1,14 +1,14 @@
 import json
 import logging
 from utils import get_response_three_prompts
-from prompts import PromptEngine
+from prompts.prompting import PromptEngine # TODO: remove need for .prompting
 
 # TODO: Create pick_agent test with mocked calls
 
 def pick_agent(task_string):
-    logging.info("Picking agent for task: " + task_string)
+    logging.debug("Picking agent for task: " + task_string)
 
-    prompt_engine = PromptEngine("mistral")
+    prompt_engine = PromptEngine()
     list_of_agents = ["DatastoreRetrievalAgent, FinancialAssistantAgent, GoalAgent"]
 
     agent_list_prompt = prompt_engine.load_prompt("agents-list", list_of_agents=list_of_agents)
@@ -22,13 +22,13 @@ def pick_agent(task_string):
         # system-prompt: Expected response shape (probably a json)
         # user-prompt: "pick an agent and fit to the response shape to solve {taskString}
 
-    logging.info("Found next best step:")
+    logging.debug("Found next best step:")
 
     try:
         next_step_json = json.loads(next_step)
     except Exception:
         raise Exception("Failed to interpret LLM next step format")
 
-    logging.info(next_step_json["thoughts"])
+    logging.debug(next_step_json["thoughts"])
 
     return next_step_json
