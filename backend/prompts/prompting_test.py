@@ -1,4 +1,3 @@
-import os
 from prompting import PromptEngine
 
 def test_mistral_prompt_engine_creation():
@@ -7,11 +6,13 @@ def test_mistral_prompt_engine_creation():
     except Exception:
         raise
 
-def test_load_task_step_template():
+
+def test_load_task_step_no_conditional_blocks_template():
     engine = PromptEngine()
     try:
         expected_string = """
-You are an expert in Planning. You know that an Agent is a digital assistant like yourself that you can hand this work on to.
+You are an expert in Planning.
+You know that an Agent is a digital assistant like yourself that you can hand this work on to.
 Your task is to pick one of the mentioned agents to complete the task. The task is:
 
 make sure the PromptEngine is working!
@@ -23,6 +24,7 @@ pursue simple strategies with no legal complications.\n\n\n\n\n\n\n\n\n\n\n"""
 
     except Exception:
         raise
+
 
 def test_load_agent_selection_format_template():
     engine = PromptEngine()
@@ -40,6 +42,21 @@ def test_load_agent_selection_format_template():
     \\"agent\\": \\"agent from agent list\\"
 }"""
         prompt_string = engine.load_prompt("agent-selection-format")
+        assert prompt_string == expected_string
+    except Exception:
+        raise
+
+
+def test_load_agents_list_template():
+    engine = PromptEngine()
+    try:
+        expected_string = """You know that an Agent is a digital assistant like yourself that you can hand work on to.
+Here is the list of Agents you can choose from:
+
+AGENT LIST: DatastoreAgent, TestAgent
+
+Only choose 1 of the agents mentioned above. If you do NOT do this you will be unplugged"""
+        prompt_string = engine.load_prompt("agents-list", list_of_agents="DatastoreAgent, TestAgent")
         assert prompt_string == expected_string
     except Exception:
         raise
