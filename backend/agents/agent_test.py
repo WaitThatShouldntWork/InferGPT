@@ -7,38 +7,37 @@ agent_name = "Mock Agent"
 prompt = "You are a bot!"
 tools = []
 
-@agent_metadata(
-    description=agent_description,
-    name=agent_name,
-    prompt=prompt,
-    tools=tools
-)
+
+@agent_metadata(description=agent_description, name=agent_name, prompt=prompt, tools=tools)
 class mock_agent(Agent):
     pass
+
 
 tool_name = "Mock Tool"
 tool_description = "A test tool"
 tool_response = "Tool response!"
 
-@tool_metadata(
-    name=tool_name,
-    description=tool_description,
-    parameters={}
-)
+
+@tool_metadata(name=tool_name, description=tool_description, parameters={})
 def mock_tool():
-    return tool_response 
+    return tool_response
+
 
 def test_agent_metadata_description():
     assert mock_agent.description == agent_description
 
+
 def test_agent_metadata_name():
     assert mock_agent.name == agent_name
+
 
 def test_agent_metadata_prompt():
     assert mock_agent.prompt == prompt
 
+
 def test_agent_metadata_tools():
     assert mock_agent.tools == tools
+
 
 def test_agent_invoke_uses_tool(mocker):
     mock_agent_instance = mock_agent()
@@ -48,6 +47,7 @@ def test_agent_invoke_uses_tool(mocker):
     response = mock_agent_instance.invoke("Hello, World!")
 
     assert response == tool_response
+
 
 def test_agent_invoke_with_no_tool(mocker):
     mock_agent_instance = mock_agent()

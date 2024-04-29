@@ -6,25 +6,17 @@ name = "Mock Tool"
 description = "A test tool"
 param_description = "A string"
 
+
 @tool_metadata(
     name=name,
     description=description,
     parameters={
-        "input": Parameter(
-            type="string",
-            description=param_description,
-            required=True
-        ),
-        "optional": Parameter(
-            type="string",
-            description=param_description,
-            required=False
-        )
+        "input": Parameter(type="string", description=param_description, required=True),
+        "optional": Parameter(type="string", description=param_description, required=False),
     },
-
 )
 def mock_tool(input: str):
-    return input 
+    return input
 
 
 def test_tool_conversion():
@@ -36,8 +28,8 @@ def test_tool_conversion():
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "input": { "type": "string", "description": param_description }, 
-                    "optional": { "type": "string", "description": param_description }, 
+                    "input": {"type": "string", "description": param_description},
+                    "optional": {"type": "string", "description": param_description},
                 },
                 "required": ["input"],
             },
