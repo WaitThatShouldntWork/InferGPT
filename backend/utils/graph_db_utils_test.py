@@ -16,6 +16,10 @@ def mock_driver(mocker, mock_session):
     return mock_driver
 
 
+def remove_whitespace_and_newlines(original):
+    return " ".join(original.replace(r'\n', ' ').replace(r'\r', '').split())
+    
+    
 def test_database_connectivity_is_healthy(mock_driver):
     mock_driver.verify_connectivity.return_value = None
 
@@ -41,6 +45,10 @@ def test_create_goal_is_successful(mock_driver, mock_session):
 
     assert response is None
     mock_session.run.assert_called_once_with(ANY, name="Test Name", description="Test Description")
+    args = mock_session.run.call_args
+    actual_cypher_query = remove_whitespace_and_newlines(str(args[0]))
+    expected_cypher_query = "MERGE (g:Goal {name: $name, description: $description}) RETURN g"
+    assert expected_cypher_query in actual_cypher_query
     mock_session.close.assert_called_once()
     mock_driver.close.assert_called_once()
 
