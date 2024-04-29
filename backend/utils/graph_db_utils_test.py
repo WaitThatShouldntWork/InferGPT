@@ -4,8 +4,19 @@ import pytest
 # We assign an alias to "test_connection" to avoid pytest treating it as another test function
 from utils.graph_db_utils import test_connection as verify_connection, create_goal
 
-def test_database_connectivity_is_healthy(mocker):
+@pytest.fixture
+def mock_session():
+    return MagicMock(spec=Session)
+
+
+@pytest.fixture
+def mock_driver(mocker, mock_session):
     mock_driver = mocker.patch("utils.graph_db_utils.driver", return_value=MagicMock(spec=Driver))
+    mock_driver.session.return_value = mock_session
+    return mock_driver
+
+
+def test_database_connectivity_is_healthy(mock_driver):
     mock_driver.verify_connectivity.return_value = None
 
     connected = verify_connection()
@@ -15,8 +26,7 @@ def test_database_connectivity_is_healthy(mocker):
     mock_driver.close.assert_called_once()
 
 
-def test_database_connectivity_is_unhealthy(mocker):
-    mock_driver = mocker.patch("utils.graph_db_utils.driver", return_value=MagicMock(spec=Driver))
+def test_database_connectivity_is_unhealthy(mock_driver):
     mock_driver.verify_connectivity.side_effect = Exception
 
     connected = verify_connection()
@@ -26,11 +36,7 @@ def test_database_connectivity_is_unhealthy(mocker):
     mock_driver.close.assert_called_once()
 
 
-def test_create_goal_is_successful(mocker):
-    mock_driver = mocker.patch("utils.graph_db_utils.driver", return_value=MagicMock(spec=Driver))
-    mock_session = MagicMock(spec=Session)
-    mock_driver.session.return_value = mock_session
-
+def test_create_goal_is_successful(mock_driver, mock_session):
     response = create_goal("Test Name", "Test Description")
 
     assert response is None
@@ -39,10 +45,7 @@ def test_create_goal_is_successful(mocker):
     mock_driver.close.assert_called_once()
 
 
-def test_create_goal_throws_exception(mocker):
-    mock_driver = mocker.patch("utils.graph_db_utils.driver", return_value=MagicMock(spec=Driver))
-    mock_session = MagicMock(spec=Session)
-    mock_driver.session.return_value = mock_session
+def test_create_goal_throws_exception(mock_driver, mock_session):
     mock_session.run.side_effect = Exception
 
     with pytest.raises(Exception):
