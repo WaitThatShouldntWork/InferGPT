@@ -15,12 +15,12 @@ class Agent(ABC):
         tools = map(get_mistral_tool, self.tools)
         (function_name, function_params) = call_model_with_tools(self.prompt, utterance, tools)
 
-        function = next((tool for tool in self.tools if tool.action.__name__ == function_name), None)
+        tool = next((tool for tool in self.tools if tool.action.__name__ == function_name), None)
 
-        if function is None:
+        if tool is None:
             raise ValueError(f"Tool {function_name} not found in agent {self.name}")
 
-        return (function.action, function_params)
+        return (tool.action, function_params)
 
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
