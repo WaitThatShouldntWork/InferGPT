@@ -35,7 +35,7 @@ def test_tool_input_description():
 
 
 def test_tool_input_required():
-    assert mock_tool.parameters["input"].required == True
+    assert mock_tool.parameters["input"].required is True
 
 
 def test_tool_optional_type():
@@ -47,7 +47,7 @@ def test_tool_optional_description():
 
 
 def test_tool_optional_required():
-    assert mock_tool.parameters["optional"].required == False
+    assert mock_tool.parameters["optional"].required is False
 
 
 def test_tool_action():

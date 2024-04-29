@@ -9,7 +9,7 @@ tools = []
 
 
 @agent_metadata(description=agent_description, name=agent_name, prompt=prompt, tools=tools)
-class mock_agent(Agent):
+class MockAgent(Agent):
     pass
 
 
@@ -24,23 +24,23 @@ def mock_tool():
 
 
 def test_agent_metadata_description():
-    assert mock_agent.description == agent_description
+    assert MockAgent.description == agent_description
 
 
 def test_agent_metadata_name():
-    assert mock_agent.name == agent_name
+    assert MockAgent.name == agent_name
 
 
 def test_agent_metadata_prompt():
-    assert mock_agent.prompt == prompt
+    assert MockAgent.prompt == prompt
 
 
 def test_agent_metadata_tools():
-    assert mock_agent.tools == tools
+    assert MockAgent.tools == tools
 
 
 def test_agent_invoke_uses_tool(mocker):
-    mock_agent_instance = mock_agent()
+    mock_agent_instance = MockAgent()
     mock_agent_instance.tools = [mock_tool]
     mocker.patch("utils.call_model_with_tools", return_value=("mock_tool", {}))
 
@@ -50,7 +50,7 @@ def test_agent_invoke_uses_tool(mocker):
 
 
 def test_agent_invoke_with_no_tool(mocker):
-    mock_agent_instance = mock_agent()
+    mock_agent_instance = MockAgent()
     mock_agent_instance.tools = [mock_tool]
     non_existant_tool_name = "non_existent_tool"
     mocker.patch("agents.agent.call_model_with_tools", return_value=(non_existant_tool_name, {}))
