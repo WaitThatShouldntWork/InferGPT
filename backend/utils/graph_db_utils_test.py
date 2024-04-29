@@ -7,9 +7,9 @@ def test_database_connectivity_is_healthy(mocker):
     mock_driver = mocker.patch("utils.graph_db_utils.driver", return_value=MagicMock(spec=Driver))
     mock_driver.verify_connectivity.return_value = None
 
-    connectivity = utils.graph_db_utils.test_connection()
+    connected = utils.graph_db_utils.test_connection()
 
-    assert connectivity
+    assert connected
     mock_driver.verify_connectivity.assert_called_once()
     mock_driver.close.assert_called_once()
 
@@ -18,9 +18,9 @@ def test_database_connectivity_is_unhealthy(mocker):
     mock_driver = mocker.patch("utils.graph_db_utils.driver", return_value=MagicMock(spec=Driver))
     mock_driver.verify_connectivity.side_effect = Exception
 
-    connectivity = utils.graph_db_utils.test_connection()
+    connected = utils.graph_db_utils.test_connection()
 
-    assert not connectivity
+    assert not connected
     mock_driver.verify_connectivity.assert_called_once()
     mock_driver.close.assert_called_once()
 
