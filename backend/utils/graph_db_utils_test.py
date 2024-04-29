@@ -18,8 +18,8 @@ def mock_driver(mocker, mock_session):
 
 def remove_whitespace_and_newlines(original):
     return " ".join(original.replace(r'\n', ' ').replace(r'\r', '').split())
-    
-    
+
+
 def test_database_connectivity_is_healthy(mock_driver):
     mock_driver.verify_connectivity.return_value = None
 
