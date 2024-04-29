@@ -1,27 +1,28 @@
 # Frontend
-UI service for a chat bot.
 
-# Run Locally
+UI service for interfacing with InferGPT.
 
-Checkout the code and run the following commands from the root of the frontend directory:
+## Set up
+
+1. Create the `.env` files. There are template files (.env.example) for you to copy with comments for guidance. If you are running the service in Docker you can skip the rest of the setup.
+
+2. Change directory to the `/frontend` space, then run the following to install the dependencies
 
 ```bash
 npm install
+```
+
+3. Run the app using
+
+```bash
 npm start
 ```
 
-The app should now be running on [localhost:8650](http://localhost:8650/).
+Check the frontend app is running at [http://localhost:8650](http://localhost:8650)
 
-# Connect to Backend
+### Frontend Linting
 
-To connect to the backend you will need to have the correct `.env` file locally. To do this:
-
-- Make a copy of the `.env.example` file in the root of the frontend directory and name it `.env`
-- Update the values in your `.env` file
-
-# Code linting
-
-We have set up ESLint. To run the linter, run the following command:
+We have set up ESLint for the frontend ccode. To run the linter, use the following command:
 
 ```bash
 npm run lint
