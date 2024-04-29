@@ -47,7 +47,8 @@ def question(question):
 
     if determine_intention(question) == "TRUE":
         tasks_from_question_json = create_tasks(question)
-        return solve_all_tasks(tasks_from_question_json)
+        final_answer = solve_all_tasks(tasks_from_question_json)
+        return final_answer
 
     else:
         logging.info("Passing utterance straight to call_model function")

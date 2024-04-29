@@ -54,7 +54,8 @@ async def health_check():
 async def chat(utterance: str):
     logger.info(f"chat method called with utterance: {utterance}")
     try:
-        return JSONResponse(status_code=200, content=question(utterance))
+        final_result = question(utterance)
+        return JSONResponse(status_code=200, content=final_result)
     except Exception as e:
         logger.exception(e)
         return JSONResponse(status_code=500, content=chat_fail_response)

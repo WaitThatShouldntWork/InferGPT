@@ -9,7 +9,7 @@ def pick_agent(task_string):
     logging.debug("Picking agent for task: " + task_string)
 
     prompt_engine = PromptEngine()
-    list_of_agents = ["DatastoreRetrievalAgent, FinancialAssistantAgent, GoalAgent"]
+    list_of_agents = ["unresolvable_task, database_agent, fiancial_advisor_agent, web_search_agent"]
 
     agent_list_prompt = prompt_engine.load_prompt("agents-list", list_of_agents=list_of_agents)
     response_format_prompt = prompt_engine.load_prompt("agent-selection-format")
@@ -31,4 +31,4 @@ def pick_agent(task_string):
 
     logging.debug(next_step_json["thoughts"])
 
-    return next_step_json
+    return next_step_json["agent"]
