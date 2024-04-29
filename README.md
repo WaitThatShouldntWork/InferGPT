@@ -41,33 +41,31 @@ To clone the repository, you need to have Git installed on your system. Use the 
 
 Once you have Git installed, follow these steps:
 
-- Open your terminal.
+- Open your preferred terminal.
 - Navigate to the directory where you want to clone the repository.
 - Run the git clone command for the fork you just created.
 
-### Install Neo4j Desktop or Aura DB
-Instructions can be found [here](https://neo4j.com/docs/?utm_medium=PaidSearch&utm_source=google&utm_campaign=GDB&utm_content=EMEA-X-Conversion-GDB-Text&utm_term=neo4j&gclid=Cj0KCQiA1rSsBhDHARIsANB4EJY8wQONKSyNCofQBGAcOGWwNpNh4Z0yj7oGxok8vs2CipPJMjGPcpkaAuw1EALw_wcB).  
-Install the pre-made recommendations database. Version 4.4 is the latest stable.
-
 ### Running the service
-- Create `.env` files based on the `.env.example` files under `/frontend` and `/backend`
+- create `.env` files as instructed within the [frontend README](frontend/README.md), [backend README](backend/README.md) and [data README](data/README.md)
 
 #### Using Docker
-- Start and open the Neo4J Desktop app. Start the default database (neo4j).
-- create `.env` files as instructed within the [frontend README](frontend/README.md) and [backend README](backend/README.md)
-- Run the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it)
+- **Ensure Docker is installed and running**. The easiest way to do this is by using the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it).
 - In the root directory of the project run `docker compose up`
-  - Note the first time you do this it may take longer as the compose file builds the images
+> [!WARNING]  
+> the first time you do this it may take longer as the compose file builds the images.
+> Backend unittests cannot be run against the docker installation - please follow the [backend README](backend/README.md) for testing guidance
+- View the frontend at [localhost:8650](http://localhost:8650) and the Neo4j Browser at [localhost:7474](http://localhost:7474)
+- use the keyphrase "healthcheck" to test if everything is collected successfully
 
 #### Using pip and python
-- Open your preferred terminal.
-It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your active terminal.
-- Follow the [frontend README](frontend/README.md) to set up the front end
-- Follow the [backend README](backend/README.md) to set up the back end
-- Once all dependencies have been pulled run `uvicorn app:api` to start the app. Check the backend app is running at [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
+- Open your preferred terminal where the project is cloned
+- It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your active terminal.
+- Follow the [data README](data/README.md) for guidance on how to set up Neo4j Desktop
+- Follow the [frontend README](frontend/README.md) to set up and run the front end
+- Follow the [backend README](backend/README.md) to set up and run the back end
  
 ### Usage
 Coming
 
-### LICENCE 
+### LICENCE
 See [LICENCE.md](LICENCE.md)

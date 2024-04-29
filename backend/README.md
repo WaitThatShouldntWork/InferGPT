@@ -10,24 +10,28 @@ Python service for the InferGPT backend.
 
 ## Set up
 
+1. Create the `.env` files. There are template files (.env.example) for you to copy with comments for guidance. You will need a chosen LLM to run the service. If you are running the service in Docker you can skip the rest of the setup.
+
 Unless otherwise stated all of the commands mentioned in this README should be run from `./backend`.
 
-1. Install dependencies
+2. Change directory to the `/backend` space, then run the following to install the dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
-2. Run the app
+
+3. Run the app
 ```bash
 uvicorn api:app --port 8250
 ```
 
-3. Check the backend app is running at [http://127.0.0.1:8250/health](http://127.0.0.1:8250/health)
+4. Check the backend app is running at [http://localhost:8250/health](http://localhost:8250/health)
 
 ## Backend Linting
 
 Ruff is being used for the backend linting. See the docs: [here](https://docs.astral.sh/ruff/)
 
-Make sure the ruff dependency is downloaded, it is in `requirements.txt` so step `1` of [setup](#set-up) should do this for you.
+Make sure the ruff dependency is downloaded; It is defined in the `requirements.txt` so step `1` of [setup](#set-up) should do this for you.
 
 Run the following command to check:
 
@@ -63,7 +67,12 @@ To add further rules, these are added to `ruff.toml` by using the letter asssign
 
 ## Test
 
-`pytest` is being used for testing the backend. Like with linting, running the [setup](#set-up) steps should download `pytest` for you. To then run the tests, use the following command:
+`pytest` is being used for testing the backend. Like with linting, running the [setup](#set-up) steps should download `pytest` for you. 
+
+> [!WARNING]  
+> running the `pytest` tests only works when running the service locally (not through the Docker setup)
+
+To then run the tests, change to the `/backend` directory and run the following command:
 
 ```bash
 pytest

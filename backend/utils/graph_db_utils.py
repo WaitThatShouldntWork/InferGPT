@@ -19,7 +19,7 @@ def test_connection():
         connection_healthy = True
 
     except Exception as e:
-        logging.critical("connection connection failed")
+        logging.critical("database connection failed")
         logging.critical(e)
 
     finally:

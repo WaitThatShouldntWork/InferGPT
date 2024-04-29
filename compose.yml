@@ -1,6 +1,11 @@
 services:
-  # neo4j-store:
-  #   build: "./data/"
+  neo4j-dbms:
+    build: "data/"
+    ports:
+      - 7474:7474
+      - 7687:7687
+    env_file:
+      - "data/.env"
   backend:
     build: "backend/"
     env_file:

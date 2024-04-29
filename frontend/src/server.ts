@@ -18,13 +18,6 @@ const unhappyHealthcheckResponse = createChatMessageResponse('InferGPT healthche
 
 const checkBackendHealth = async (): Promise<ChatMessageResponse> => {
   return await fetch(`${process.env.BACKEND_URL}/health`)
-    .then(response => {
-      if (!response.ok) {
-        console.log('error found');
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response;
-    })
     .then(response => response.json())
     .then(responseJson => { return createChatMessageResponse(responseJson); })
     .catch(error => {
