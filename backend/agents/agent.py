@@ -1,8 +1,7 @@
 from abc import ABC
 from typing import List, Type
 from utils import call_model_with_tools
-from .adapters import get_mistral_tool
-from .types import Action_and_args, Tool
+from agents import get_mistral_tool, Action_and_args, Tool
 
 
 class Agent(ABC):

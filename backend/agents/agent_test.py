@@ -1,6 +1,5 @@
 from pytest import raises
-from agents.agent import Agent, agent_metadata
-from agents.tool import tool_metadata
+from agents import tool_metadata, Agent, agent_metadata
 
 agent_description = "A test agent"
 agent_name = "Mock Agent"

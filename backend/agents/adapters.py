@@ -1,4 +1,4 @@
-from .tool import Tool
+from agents import Tool
 
 
 def get_mistral_tool(tool: Tool):
