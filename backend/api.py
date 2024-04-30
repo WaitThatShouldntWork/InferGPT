@@ -4,6 +4,7 @@ import os
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from agents.data_store import run
 from utils import Config, test_connection
 from director import question
 
@@ -15,9 +16,6 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI()
 config = Config()
-
-if config.frontend_url is None:
-    raise ValueError("Frontend URL is not set in the configuration file")
 
 origins = [config.frontend_url]
 
