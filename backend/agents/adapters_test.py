@@ -1,4 +1,6 @@
-from agents import tool_metadata, get_mistral_tool, Parameter
+from agents import tool_metadata
+from .adapters import convert_to_mistral_tool
+from .types import Parameter
 
 name = "Mock Tool"
 description = "A test tool"
@@ -34,4 +36,4 @@ def test_tool_conversion():
         },
     }
 
-    assert get_mistral_tool(mock_tool) == expected_output
+    assert convert_to_mistral_tool(mock_tool) == expected_output

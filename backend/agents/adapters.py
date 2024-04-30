@@ -1,7 +1,7 @@
-from agents import Tool
+from .tool import Tool
 
 
-def get_mistral_tool(tool: Tool):
+def convert_to_mistral_tool(tool: Tool):
     return {
         "type": "function",
         "function": {

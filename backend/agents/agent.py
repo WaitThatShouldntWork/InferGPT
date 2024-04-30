@@ -1,7 +1,9 @@
 from abc import ABC
 from typing import List, Type
 from utils import call_model_with_tools
-from agents import get_mistral_tool, Action_and_args, Tool
+from .adapters import convert_to_mistral_tool
+from .tool import Tool
+from .types import Action_and_args
 
 
 class Agent(ABC):
@@ -11,7 +13,7 @@ class Agent(ABC):
     prompt: str
 
     def __get_action(self, utterance: str) -> Action_and_args:
-        tools = map(get_mistral_tool, self.tools)
+        tools = map(convert_to_mistral_tool, self.tools)
         (function_name, function_params) = call_model_with_tools(self.prompt, utterance, tools)
 
         tool = next((tool for tool in self.tools if tool.action.__name__ == function_name), None)
