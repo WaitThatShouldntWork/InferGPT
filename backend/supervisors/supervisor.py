@@ -11,7 +11,7 @@ def solve_all_tasks(tasks_json):
 
     stub_final_answer = "Something went wrong. The agent picked was " + agent_for_first_task + " which does not exist"
 
-    # TODO: adjust to call an agent's pick_method method
+    # TODO: This is a temp setup. Adjust to call an agent's pick_method method
     if (agent_for_first_task == "database_agent"):
         # will call agent here
         stub_final_answer = "I have used database_agent to retrieve personal information about you"
