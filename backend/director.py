@@ -24,8 +24,6 @@ How much did I spend last month?
 Not an intention:
 How are you?
 How many grams are there in an ounce?
-
-
 """
 
 determine_intention_prompt = """
