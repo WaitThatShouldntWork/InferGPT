@@ -53,9 +53,10 @@ def test_load_agents_list_template():
         expected_string = """You know that an Agent is a digital assistant like yourself that you can hand work on to.
 Here is the list of Agents you can choose from:
 
-AGENT LIST: DatastoreAgent, TestAgent
+AGENT LIST: DatastoreAgent, TestAgent, unresolvable_agent
 
-Only choose 1 of the agents mentioned above. If you do NOT do this you will be unplugged"""
+Only choose 1 of the agents mentioned above. If you do NOT do this you will be unplugged
+If none of the agents are appropriate for solving this goal, return "unresolvable_agent\""""
         prompt_string = engine.load_prompt("agents-list", list_of_agents="DatastoreAgent, TestAgent")
         assert prompt_string == expected_string
     except Exception:

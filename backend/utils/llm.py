@@ -26,7 +26,7 @@ def call_model_with_tools(system_prompt, user_prompt, tools):
 def get_response(system_prompt, user_prompt, tools=None) -> ChatCompletionResponse:
     tool_choice = None if tools is None else "any"
 
-    logger.info(
+    logger.debug(
         "Called llm. Waiting on response model with prompt {0}. Tool choice: {1}".format(
             str([system_prompt, user_prompt]), tool_choice
         )
@@ -40,6 +40,30 @@ def get_response(system_prompt, user_prompt, tools=None) -> ChatCompletionRespon
         ],
         tools=tools,
         tool_choice=tool_choice,
+        temperature=0
     )
-    logger.info('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
+    logger.debug('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
     return response
+
+
+# TODO: Refactor - 1 get_response method and 1 call_model method
+def get_response_three_prompts(
+        agent_list_prompt,
+        response_format_prompt,
+        best_next_step_prompt
+    ) -> ChatCompletionResponse:
+
+    logger.debug("Called llm. Waiting on response model with prompts{0}".format(
+        str([agent_list_prompt, response_format_prompt, best_next_step_prompt])
+    ))
+
+    response = client.chat(
+        model=config.mistral_model,
+        messages=[
+            ChatMessage(role="system", content=agent_list_prompt),
+            ChatMessage(role="system", content=response_format_prompt),
+            ChatMessage(role="user", content=best_next_step_prompt),
+        ]
+    )
+    logger.debug('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
+    return response.choices[0].message.content

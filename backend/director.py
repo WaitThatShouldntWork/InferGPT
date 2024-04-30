@@ -1,8 +1,9 @@
 import logging
 from utils.llm import call_model
 from agents.create_tasks_agent import create_tasks
+from supervisors import solve_all_tasks
 
-logger = logging.getLogger(__name__)
+logging = logging.getLogger(__name__)
 
 director_prompt = """
 You are a Chat Bot called InferGPT.
@@ -23,8 +24,6 @@ How much did I spend last month?
 Not an intention:
 How are you?
 How many grams are there in an ounce?
-
-
 """
 
 determine_intention_prompt = """
@@ -41,16 +40,17 @@ If you reply more than one word, you will be disconnected
 """
 
 
-def question(question: str) -> str:
-    has_intent = determine_intention(question) == "TRUE"
-    logger.info(f"intention identified: {has_intent}")
-    if has_intent:
-        return create_tasks(question)
+def question(question):
+    logging.debug("Received utterance: {question}")
 
-    logger.info("director calling call_model function")
+    if determine_intention(question) == "TRUE":
+        tasks_from_question_json = create_tasks(question)
+        final_answer = solve_all_tasks(tasks_from_question_json)
+        return final_answer
+
+    logging.info("Passing utterance straight to call_model function")
     return call_model(director_prompt, user_prompt=question)
 
-
 def determine_intention(question: str) -> str:
-    logger.info("director calling determine_intention function")
+    logging.debug("director calling determine_intention function")
     return call_model(determine_intention_prompt, user_prompt=question)

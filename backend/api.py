@@ -1,12 +1,16 @@
 import logging
 import logging.config
+import os
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from utils import Config, test_connection
 from director import question
 
-logging.config.fileConfig(fname="config.ini", disable_existing_loggers=False)
+# TODO: Add back in api_test .py from PR #37
+
+config_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "config.ini"))
+logging.config.fileConfig(fname=config_file_path, disable_existing_loggers=False)
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
@@ -50,7 +54,8 @@ async def health_check():
 async def chat(utterance: str):
     logger.info(f"chat method called with utterance: {utterance}")
     try:
-        return JSONResponse(status_code=200, content=question(utterance))
+        final_result = question(utterance)
+        return JSONResponse(status_code=200, content=final_result)
     except Exception as e:
         logger.exception(e)
         return JSONResponse(status_code=500, content=chat_fail_response)

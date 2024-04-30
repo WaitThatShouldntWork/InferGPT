@@ -44,7 +44,11 @@ def test_call_model_calls_client_chat(mocker):
         ChatMessage(role="user", content=user_prompt),
     ]
     client_instance.chat.assert_called_once_with(
-        messages=expected_messages, model=config_instance.mistral_model, tool_choice=None, tools=None
+        messages=expected_messages,
+        model=config_instance.mistral_model,
+        tool_choice=None,
+        tools=None,
+        temperature=0
     )
 
 
@@ -93,5 +97,9 @@ def test_call_model_with_tools_calls_client_chat(mocker):
         ChatMessage(role="user", content=user_prompt),
     ]
     client_instance.chat.assert_called_once_with(
-        messages=expected_messages, model=config_instance.mistral_model, tool_choice="any", tools=tools
+        messages=expected_messages,
+        model=config_instance.mistral_model,
+        tool_choice="any",
+        tools=tools,
+        temperature=0
     )
