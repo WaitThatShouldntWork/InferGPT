@@ -4,10 +4,4 @@ from .tool import tool_metadata
 from .tool import tool_metadata
 from .agent import Agent, agent_metadata
 
-__all__ = [
-    "Agent",
-    "agent_metadata",
-    "create_tasks",
-    "tool_metadata",
-    "create_user_goal"
-]
+__all__ = ["Agent", "agent_metadata", "create_tasks", "tool_metadata", "create_user_goal"]

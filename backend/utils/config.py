@@ -3,8 +3,8 @@ from dotenv import load_dotenv
 
 default_frontend_url = "http://localhost:8650"
 
-class Config(object):
 
+class Config(object):
     def __init__(self):
         self.frontend_url = default_frontend_url
         self.mistral_url = None
