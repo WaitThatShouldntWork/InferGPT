@@ -2,7 +2,7 @@ from unittest.mock import MagicMock
 from neo4j import Driver, Session
 import pytest
 # We assign an alias to "test_connection" to avoid pytest treating it as another test function
-from utils.graph_db_utils import test_connection as verify_connection, create_goal
+from utils import test_connection as verify_connection, create_goal
 
 @pytest.fixture
 def mock_session():
