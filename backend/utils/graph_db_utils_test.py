@@ -1,8 +1,10 @@
 from unittest.mock import MagicMock
 from neo4j import Driver, Session
 import pytest
+
 # We assign an alias to "test_connection" to avoid pytest treating it as another test function
 from utils import test_connection as verify_connection, create_goal
+
 
 @pytest.fixture
 def mock_session():
@@ -17,7 +19,7 @@ def mock_driver(mocker, mock_session):
 
 
 def remove_whitespace_and_newlines(original):
-    return " ".join(original.replace(r'\n', ' ').replace(r'\r', '').split())
+    return " ".join(original.replace(r"\n", " ").replace(r"\r", "").split())
 
 
 def test_database_connectivity_is_healthy(mock_driver):
@@ -45,7 +47,7 @@ def test_create_goal_is_successful(mock_driver, mock_session):
 
     assert response is None
     args, kwargs = mock_session.run.call_args
-    assert kwargs == { "name":"Test Name", "description":"Test Description" }
+    assert kwargs == {"name": "Test Name", "description": "Test Description"}
     actual_cypher_query = remove_whitespace_and_newlines(str(args[0]))
     expected_cypher_query = "MERGE (g:Goal {name: $name, description: $description}) RETURN g"
     assert actual_cypher_query == expected_cypher_query

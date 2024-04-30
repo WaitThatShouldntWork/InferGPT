@@ -1,10 +1,11 @@
 import json
 import logging
 from utils import get_response_three_prompts
-from prompts.prompting import PromptEngine # TODO: remove need for .prompting
+from prompts.prompting import PromptEngine  # TODO: remove need for .prompting
 
 # TODO: Create pick_agent test with mocked calls
 prompt_engine = PromptEngine()
+
 
 def pick_agent(task_string):
     logging.debug("Picking agent for task: " + task_string)
@@ -18,9 +19,9 @@ def pick_agent(task_string):
     next_step = get_response_three_prompts(agent_list_prompt, response_format_prompt, best_next_step_prompt)
 
     # collect all required prompts
-        # system-prompt: List of agents that can be called
-        # system-prompt: Expected response shape (probably a json)
-        # user-prompt: "pick an agent and fit to the response shape to solve {taskString}
+    # system-prompt: List of agents that can be called
+    # system-prompt: Expected response shape (probably a json)
+    # user-prompt: "pick an agent and fit to the response shape to solve {taskString}
 
     logging.debug("Found next best step:")
 

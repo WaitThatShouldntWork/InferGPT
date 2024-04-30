@@ -51,6 +51,7 @@ def question(question):
     logging.info("Passing utterance straight to call_model function")
     return call_model(director_prompt, user_prompt=question)
 
+
 def determine_intention(question: str) -> str:
     logging.debug("director calling determine_intention function")
     return call_model(determine_intention_prompt, user_prompt=question)

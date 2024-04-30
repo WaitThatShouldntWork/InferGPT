@@ -8,5 +8,5 @@ __all__ = [
     "call_model_with_tools",
     "get_response_three_prompts",
     "create_goal",
-    "test_connection"
+    "test_connection",
 ]
