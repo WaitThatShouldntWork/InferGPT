@@ -4,7 +4,7 @@ import os
 from jinja2 import Environment, FileSystemLoader
 
 
-class PromptEngine(object):
+class PromptEngine():
 
     def __init__(self):
         logging.debug("Initializing PromptEngine")
