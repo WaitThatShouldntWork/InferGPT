@@ -1,5 +1,6 @@
 from prompting import PromptEngine
 
+
 def test_mistral_prompt_engine_creation():
     try:
         PromptEngine()

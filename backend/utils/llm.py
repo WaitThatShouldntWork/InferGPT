@@ -17,7 +17,10 @@ def call_model(system_prompt, user_prompt):
 
 def call_model_with_tools(system_prompt, user_prompt, tools):
     response = get_response(system_prompt, user_prompt, tools)
-    tool_call = response.choices[0].message.tool_calls[0]
+    tool_calls = response.choices[0].message.tool_calls
+    if tool_calls is None:
+        raise ValueError("No tool calls found in response")
+    tool_call = tool_calls[0]
     function_name = tool_call.function.name
     function_params = json.loads(tool_call.function.arguments)
     return (function_name, function_params)
@@ -40,7 +43,7 @@ def get_response(system_prompt, user_prompt, tools=None) -> ChatCompletionRespon
         ],
         tools=tools,
         tool_choice=tool_choice,
-        temperature=0
+        temperature=0,
     )
     logger.debug('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
     return response
@@ -48,14 +51,13 @@ def get_response(system_prompt, user_prompt, tools=None) -> ChatCompletionRespon
 
 # TODO: Refactor - 1 get_response method and 1 call_model method
 def get_response_three_prompts(
-        agent_list_prompt,
-        response_format_prompt,
-        best_next_step_prompt
-    ) -> ChatCompletionResponse:
-
-    logger.debug("Called llm. Waiting on response model with prompts{0}".format(
-        str([agent_list_prompt, response_format_prompt, best_next_step_prompt])
-    ))
+    agent_list_prompt, response_format_prompt, best_next_step_prompt
+) -> ChatCompletionResponse:
+    logger.debug(
+        "Called llm. Waiting on response model with prompts{0}".format(
+            str([agent_list_prompt, response_format_prompt, best_next_step_prompt])
+        )
+    )
 
     response = client.chat(
         model=config.mistral_model,
@@ -63,7 +65,7 @@ def get_response_three_prompts(
             ChatMessage(role="system", content=agent_list_prompt),
             ChatMessage(role="system", content=response_format_prompt),
             ChatMessage(role="user", content=best_next_step_prompt),
-        ]
+        ],
     )
     logger.debug('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
     return response.choices[0].message.content

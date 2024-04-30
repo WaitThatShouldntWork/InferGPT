@@ -1,11 +1,12 @@
 import os
 from dotenv import load_dotenv
 
+default_frontend_url = "http://localhost:8650"
+
 
 class Config(object):
-
     def __init__(self):
-        self.frontend_url = None
+        self.frontend_url = default_frontend_url
         self.mistral_url = None
         self.mistral_key = None
         self.mistral_model = None
@@ -20,7 +21,7 @@ class Config(object):
         """
         load_dotenv()
         try:
-            self.frontend_url = os.getenv("FRONTEND_URL", "http://localhost:8650")
+            self.frontend_url = os.getenv("FRONTEND_URL", default_frontend_url)
             self.mistral_url = os.getenv("MISTRAL_URL")
             self.mistral_key = os.getenv("MISTRAL_KEY")
             self.mistral_model = os.getenv("MODEL")

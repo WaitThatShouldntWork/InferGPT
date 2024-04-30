@@ -35,6 +35,7 @@ unhealthy_neo4j_response = health_prefix + "backend is healthy. Neo4J is unhealt
 
 chat_fail_response = "Unable to generate a response. Check the service by using the keyphrase 'healthcheck'"
 
+
 @app.get("/health")
 async def health_check():
     logger.info("health_check method called")
@@ -44,11 +45,12 @@ async def health_check():
             logging.info("health_check method failed - neo4j connection unsuccessful")
             response = JSONResponse(status_code=500, content=unhealthy_neo4j_response)
     except Exception as e:
-        logger.critical("health_check method failed with error: " + e)
+        logger.critical(f"health_check method failed with error: {e}")
         response = JSONResponse(status_code=500, content=unhealthy_neo4j_response)
     finally:
         logging.info("health_check method complete")
         return response
+
 
 @app.get("/chat")
 async def chat(utterance: str):
