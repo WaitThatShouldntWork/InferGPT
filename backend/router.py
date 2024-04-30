@@ -4,11 +4,11 @@ from utils import get_response_three_prompts
 from prompts.prompting import PromptEngine # TODO: remove need for .prompting
 
 # TODO: Create pick_agent test with mocked calls
+prompt_engine = PromptEngine()
 
 def pick_agent(task_string):
     logging.debug("Picking agent for task: " + task_string)
 
-    prompt_engine = PromptEngine()
     list_of_agents = ["unresolvable_task, database_agent, financial_advisor_agent, web_search_agent"]
 
     agent_list_prompt = prompt_engine.load_prompt("agents-list", list_of_agents=list_of_agents)

@@ -26,7 +26,6 @@ you should provide the tasks in valid JSON format following this template:
 {
     "tasks": [
         {
-            "number": <descending-order-of-the-tasks>,
             "summary": <A short (10-20 word) summary of the task>,
             "explanation": <A short (20-30 word) justification of completing the task>
         }
@@ -39,17 +38,14 @@ response:
 {
     "tasks": [
         {
-            "number": 1,
             "summary": "Find the interest rate for Lloyds Bank's savings account.",
             "explanation": "To compare the two I need to know latest interest rate for Lloyds Bank's main savings account."
         },
         {
-            "number": 2,
             "summary": "Find the interest rate for Tesco Bank's savings account.",
             "explanation": "To compare the two I need to know latest interest rate for Tesco Bank's main savings account."
         },
         {
-            "number": 3,
             "summary": "Compare both interest rate values.",
             "explanation": "I need to compare my findings from task 1 and 2 to determine the account with the better interest rate."
         }
@@ -61,13 +57,11 @@ response:
 {
     "tasks": [
         {
-            "number": 1,
             "summary": "Find all spending transactions last month on all of the user's debit card.",
             "explanation": "To understand the total amount spent I must first search and retrieve every transaction the user made on their debit card in the last 31 days."
         },
         {
-            "number": 2,
-            "summary": "Sum all transactions.",s
+            "summary": "Sum all transactions.",
             "explanation": "To give the user the total amount spent on their debit card I need to summate all amounts from the transactions found in the last step."
         }
     ]

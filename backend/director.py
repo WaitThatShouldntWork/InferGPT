@@ -48,9 +48,8 @@ def question(question):
         final_answer = solve_all_tasks(tasks_from_question_json)
         return final_answer
 
-    else:
-        logging.info("Passing utterance straight to call_model function")
-        return call_model(director_prompt, user_prompt=question)
+    logging.info("Passing utterance straight to call_model function")
+    return call_model(director_prompt, user_prompt=question)
 
 def determine_intention(question: str) -> str:
     logging.debug("director calling determine_intention function")

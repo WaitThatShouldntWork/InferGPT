@@ -5,7 +5,6 @@ hair_task = """
 {
     "tasks": [
         {
-            "number": 1,
             "summary": "Find a hair salon near you",
             "explanation": "To dye your hair we need to find somewhere that offers hair dyes"
         }
