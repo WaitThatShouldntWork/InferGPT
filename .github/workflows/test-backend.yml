@@ -21,8 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest-md pytest-emoji
+          pip install pytest pytest-md pytest-emoji
 
         # we require an .env file to run some tests.
         # file should contain all the required properties.  
