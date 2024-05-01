@@ -24,6 +24,24 @@ jobs:
           pip install -r requirements.txt
           pip install pytest-md pytest-emoji
 
+      - name: Create environment file
+        run: |
+          touch .env
+          echo MODEL="my-model" >> .env
+          echo MISTRAL_KEY="123456" >> .env
+          echo NEO4J_URI="bolt://localhost:1234" >> .env
+          echo NEO4J_USERNAME="neo4j" >> .env
+          echo NEO4J_PASSWORD="my-password" >> .env
+          echo "cat .env
+          cat .env
+
+          echo "ls -a ."
+          ls -a .
+
+          echo "ls -a ${{ github.workspace }}"
+          ls -a ${{ github.workspace }}
+        shell: bash
+
       - name: Run tests
         run: |
             pytest
