@@ -22,7 +22,7 @@ pip install -r requirements.txt
 
 3. Run the app
 ```bash
-uvicorn api:app --port 8250
+uvicorn src.api:app --port 8250
 ```
 
 4. Check the backend app is running at [http://localhost:8250/health](http://localhost:8250/health)
