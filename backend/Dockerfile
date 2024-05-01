@@ -15,7 +15,5 @@ COPY ./src/. /backend/src
 
 EXPOSE 8250
 
-RUN ls -la
-
 # Tell uvicorn to start spin up our code, which will be running inside the container now
 CMD ["uvicorn", "src.api:app", "--host", "0.0.0.0", "--port", "8250"]
