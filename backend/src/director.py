@@ -1,6 +1,6 @@
 import logging
 from src.utils import call_model
-from src.agents.create_tasks_agent import create_tasks
+from src.agents import create_tasks
 from src.supervisors import solve_all_tasks
 
 logging = logging.getLogger(__name__)

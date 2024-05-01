@@ -1,6 +1,6 @@
 import json
 
-from src.prompts.prompting import PromptEngine
+from src.prompts import PromptEngine
 from src.utils import call_model, Config
 import logging
 
