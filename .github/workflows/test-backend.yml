@@ -6,9 +6,6 @@ jobs:
   testing:
     name: Testing Backend
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./backend 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,8 +23,8 @@ jobs:
 
       - name: Run tests
         uses: pavelzw/pytest-action@v2
+        working-directory: ./backend
         with:
           emoji: false
           verbose: false
           job-summary: true
-          working-directory: ./backend
