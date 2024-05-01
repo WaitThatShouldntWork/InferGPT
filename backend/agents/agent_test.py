@@ -41,7 +41,7 @@ def test_agent_metadata_tools():
 def test_agent_invoke_uses_tool(mocker):
     mock_agent_instance = MockAgent()
     mock_agent_instance.tools = [mock_tool]
-    mocker.patch("utils.call_model_with_tools", return_value=("mock_tool", {}))
+    mocker.patch("agents.agent.call_model_with_tools", return_value=("mock_tool", {}))
 
     response = mock_agent_instance.invoke("Hello, World!")
 
