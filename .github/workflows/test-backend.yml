@@ -30,7 +30,7 @@ jobs:
       - name: Create environment file
         run: |
           cp .env.example .env2
-          echo "cat .env2
+          echo "cat .env2"
           cat .env2
         
           echo "ls -a ."
@@ -42,7 +42,7 @@ jobs:
           echo NEO4J_URI=bolt://localhost:1234 >> .env
           echo NEO4J_USERNAME=neo4j >> .env
           echo NEO4J_PASSWORD=my-password >> .env
-          echo "cat .env
+          echo "cat .env"
           cat .env
 
           echo "ls -a ."
