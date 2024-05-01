@@ -25,17 +25,10 @@ jobs:
           pip install pytest-md pytest-emoji
 
         # we require an .env file to run some tests.
-        # copy the example file that should have
+        # copy the example file. that should have
         # all the required properties.  
       - name: Create environment file
         run: |
-          cp .env.example .env2
-          echo "cat .env2"
-          cat .env2
-        
-          echo "ls -a ."
-          ls -a .
-
           touch .env
           echo MODEL=my-model >> .env
           echo MISTRAL_KEY=123456 >> .env
@@ -44,13 +37,6 @@ jobs:
           echo NEO4J_PASSWORD=my-password >> .env
           echo "cat .env"
           cat .env
-
-          echo "ls -a ."
-          ls -a .
-
-          echo "ls -a ${{ github.workspace }}"
-          ls -a ${{ github.workspace }}
-        shell: bash
 
       - name: Run tests
         run: |
