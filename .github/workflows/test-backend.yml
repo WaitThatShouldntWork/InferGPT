@@ -26,6 +26,9 @@ jobs:
 
       - name: Create environment file
         run: |
+          echo "ls -a ."
+          ls -a .
+          
           touch .env
           echo MODEL="my-model" >> .env
           echo MISTRAL_KEY="123456" >> .env
