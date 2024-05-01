@@ -1,0 +1,22 @@
+name: Test Backend
+on: 
+  pull_request:
+
+jobs:
+  build:
+    name: Testing Backend
+    runs-on: ubuntu-latest 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+
+      - name: Run pytest
+        uses: pavelzw/pytest-action@v2
+        with:
+          src: ./backend
+          emoji: false
+          verbose: false
+          job-summary: true
