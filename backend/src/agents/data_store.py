@@ -1,6 +1,6 @@
+from src.agents import Agent, agent_metadata
 from .tool import tool_metadata
 from .types import Parameter
-from agents import Agent, agent_metadata
 
 
 @tool_metadata(

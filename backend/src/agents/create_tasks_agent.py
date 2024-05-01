@@ -1,8 +1,7 @@
 import json
 
-from prompts.prompting import PromptEngine
-from utils import Config
-from utils import call_model
+from src.prompts.prompting import PromptEngine
+from src.utils import call_model, Config
 import logging
 
 logger = logging.getLogger(__name__)

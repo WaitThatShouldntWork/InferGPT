@@ -1,5 +1,5 @@
 import json
-from supervisors import solve_all_tasks
+from src.supervisors import solve_all_tasks
 
 hair_task = """
 {

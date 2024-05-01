@@ -1,6 +1,6 @@
 from abc import ABC
 from typing import List, Type
-from utils import call_model_with_tools
+from src.utils import call_model_with_tools
 from .adapters import convert_to_mistral_tool
 from .tool import Tool
 from .types import Action_and_args

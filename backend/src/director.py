@@ -1,7 +1,7 @@
 import logging
-from utils.llm import call_model
-from agents.create_tasks_agent import create_tasks
-from supervisors import solve_all_tasks
+from src.utils import call_model
+from src.agents.create_tasks_agent import create_tasks
+from src.supervisors import solve_all_tasks
 
 logging = logging.getLogger(__name__)
 

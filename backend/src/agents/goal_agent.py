@@ -1,8 +1,6 @@
 import functools
 import logging
-from utils import Config
-from utils import create_goal
-from utils import call_model_with_tools
+from src.utils import call_model_with_tools, Config, create_goal
 
 logger = logging.getLogger(__name__)
 config = Config()

@@ -4,8 +4,8 @@ import os
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from utils import Config, test_connection
-from director import question
+from src.utils import Config, test_connection
+from src.director import question
 
 # TODO: Add back in api_test .py from PR #37
 

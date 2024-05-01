@@ -1,7 +1,7 @@
 import json
 import logging
-from utils import get_response_three_prompts
-from prompts.prompting import PromptEngine  # TODO: remove need for .prompting
+from src.utils import get_response_three_prompts
+from src.prompts.prompting import PromptEngine  # TODO: remove need for .prompting
 
 # TODO: Create pick_agent test with mocked calls
 prompt_engine = PromptEngine()
