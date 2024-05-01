@@ -10,6 +10,7 @@ config = Config()
 
 client = MistralClient(api_key=config.mistral_key)
 
+
 def get_response_content(response: ChatCompletionResponse) -> str:
     content = response.choices[0].message.content
     return content if isinstance(content, str) else " ".join(content)
@@ -55,9 +56,7 @@ def get_response(system_prompt, user_prompt, tools=None) -> ChatCompletionRespon
 
 
 # TODO: Refactor - 1 get_response method and 1 call_model method
-def get_response_three_prompts(
-    agent_list_prompt, response_format_prompt, best_next_step_prompt
-) -> str:
+def get_response_three_prompts(agent_list_prompt, response_format_prompt, best_next_step_prompt) -> str:
     logger.debug(
         "Called llm. Waiting on response model with prompts{0}".format(
             str([agent_list_prompt, response_format_prompt, best_next_step_prompt])
@@ -73,5 +72,5 @@ def get_response_three_prompts(
         ],
     )
     logger.debug('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
-    
+
     return get_response_content(response)
