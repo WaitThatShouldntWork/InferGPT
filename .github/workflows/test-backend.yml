@@ -18,17 +18,17 @@ jobs:
         with:
           python-version: '3.12'
 
+        # pip install -r requirements.txt
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pytest-md pytest-emoji
+          pip install pytest pytest-md pytest-emoji
 
         # we require an .env file to run some tests.
-        # copy the example file. that should have
-        # all the required properties.  
+        # file should contain all the required properties.  
       - name: Create environment file
         run: |
+          echo "Create environment file"
           cat <<EOF > .env
           MODEL=my-model
           MISTRAL_KEY=123456
@@ -36,15 +36,13 @@ jobs:
           NEO4J_USERNAME=neo4j
           NEO4J_PASSWORD=my-password
           EOF
-
-          echo "cat .env"
           cat .env
 
       - name: Run tests
-        run: |
-            pytest
-        # uses: pavelzw/pytest-action@v2
-        # with:
-        #   emoji: false
-        #   verbose: false
-        #   job-summary: true
+        # run: |
+        #     pytest
+        uses: pavelzw/pytest-action@v2
+        with:
+          emoji: false
+          verbose: false
+          job-summary: true
