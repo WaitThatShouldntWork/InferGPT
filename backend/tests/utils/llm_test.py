@@ -23,9 +23,19 @@ mock_client = MagicMock(spec=MistralClient)
 mock_config = MagicMock(spec=Config)
 
 
-def test_call_model_returns_string(mocker):
+def test_call_model_content_string_returns_string(mocker):
     client_instance = mocker.patch("src.utils.llm.client", return_value=mock_client)
     client_instance.chat.return_value = create_mock_chat_response(content_response)
+
+    response = call_model(system_prompt, user_prompt)
+
+    assert response == content_response
+
+
+def test_call_model_content_list_returns_string(mocker):
+    content_list = ["Hello", "there"]
+    client_instance = mocker.patch("src.utils.llm.client", return_value=mock_client)
+    client_instance.chat.return_value = create_mock_chat_response(content_list)
 
     response = call_model(system_prompt, user_prompt)
 

@@ -18,9 +18,9 @@ class PromptEngine:
     def load_prompt(self, template_name: str, **kwargs) -> str:
         try:
             logging.debug(f"Loading template: {template_name}.j2")
-            template_name = self.env.get_template(f"{template_name}.j2")
+            template = self.env.get_template(f"{template_name}.j2")
             logging.debug(f"Rendering template: {template_name} with args: {kwargs}")
-            return template_name.render(**kwargs)
+            return template.render(**kwargs)
         except Exception as e:
             logging.error(f"Error loading or rendering template: {e}")
             raise

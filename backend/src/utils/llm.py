@@ -1,5 +1,6 @@
 import json
 import logging
+from typing import Tuple
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatCompletionResponse, ChatMessage
 from src.utils import Config
@@ -9,13 +10,17 @@ config = Config()
 
 client = MistralClient(api_key=config.mistral_key)
 
+def get_response_content(response: ChatCompletionResponse) -> str:
+    content = response.choices[0].message.content
+    return content if isinstance(content, str) else " ".join(content)
 
-def call_model(system_prompt, user_prompt):
+
+def call_model(system_prompt, user_prompt) -> str:
     response = get_response(system_prompt, user_prompt)
-    return response.choices[0].message.content
+    return get_response_content(response)
 
 
-def call_model_with_tools(system_prompt, user_prompt, tools):
+def call_model_with_tools(system_prompt, user_prompt, tools) -> Tuple[str, dict]:
     response = get_response(system_prompt, user_prompt, tools)
     tool_calls = response.choices[0].message.tool_calls
     if tool_calls is None:
@@ -52,7 +57,7 @@ def get_response(system_prompt, user_prompt, tools=None) -> ChatCompletionRespon
 # TODO: Refactor - 1 get_response method and 1 call_model method
 def get_response_three_prompts(
     agent_list_prompt, response_format_prompt, best_next_step_prompt
-) -> ChatCompletionResponse:
+) -> str:
     logger.debug(
         "Called llm. Waiting on response model with prompts{0}".format(
             str([agent_list_prompt, response_format_prompt, best_next_step_prompt])
@@ -68,4 +73,5 @@ def get_response_three_prompts(
         ],
     )
     logger.debug('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
-    return response.choices[0].message.content
+    
+    return get_response_content(response)
