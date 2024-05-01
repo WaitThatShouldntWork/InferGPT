@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
           pip install pytest-md pytest-emoji
 
-        # we require an .env file to run some tests.
+        # some tests require an .env file to run.
         # file should contain all the required properties.  
       - name: Create environment file
         run: |
