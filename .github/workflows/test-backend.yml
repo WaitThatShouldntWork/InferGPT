@@ -29,12 +29,14 @@ jobs:
         # all the required properties.  
       - name: Create environment file
         run: |
-          touch .env
-          echo MODEL=my-model >> .env
-          echo MISTRAL_KEY=123456 >> .env
-          echo NEO4J_URI=bolt://localhost:1234 >> .env
-          echo NEO4J_USERNAME=neo4j >> .env
-          echo NEO4J_PASSWORD=my-password >> .env
+          cat <<EOF > .env
+          MODEL=my-model
+          MISTRAL_KEY=123456
+          NEO4J_URI=bolt://localhost:1234
+          NEO4J_USERNAME=neo4j
+          NEO4J_PASSWORD=my-password
+          EOF
+
           echo "cat .env"
           cat .env
 
