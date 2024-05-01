@@ -7,14 +7,13 @@ the Current Task is:
 
 {{ current_task }}
 
-{% if current_task_outcome %}
-## Last attempt at Current Task
-{% for current_task_outcome in all_current_task_attempts %}
-- {{ current_task_outcome }}
+
+## History
+below is your history of all work you have assigned and had completed by Agents
+Trust the information below completely (100% accurate)
+{% for attempt in history %}
+- {{ attempt }}
 {% endfor %}
-{% else %}
-You have not attempted to solve the Current Task
-{% endif %}
 
 
 ## Next task
@@ -25,6 +24,7 @@ If you believe you have solved the Current Task, this is the Next Task:
 
 ## Agents
 You know that an Agent is a digital assistant like yourself that you can hand this work on to.
+Choose 1 agent to delegate the task to. If you choose more than 1 agent you will be unplugged.
 Here is the list of Agents you can choose from:
 
 AGENT LIST:
@@ -32,7 +32,6 @@ AGENT LIST:
 
 If none of the agents are appropriate for solving this goal, choose "unresolvable_agent".
 If you believe you have solved the final problem, choose "goal_achieved_agent"
-Only choose 1 of the agents mentioned above. If you choose more than 1 agent you will be unplugged.
 
 
 ## Determine the next best step
