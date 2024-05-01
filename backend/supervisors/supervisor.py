@@ -38,6 +38,7 @@ def call_agent_picked(agent_str):
 def solve_all_tasks(tasks_json):
 
     current_agent = "initial_agent"
+    final_result = ""
     history = [""]
     attempts_count = 0
     task_step = 0
@@ -58,10 +59,18 @@ def solve_all_tasks(tasks_json):
         else:
             next_task = str(tasks_json["tasks"][task_step+1])
 
-        # Decide next best step
+        # Call LLM to decide next best step
         logging.info("Decide next best step")
         best_next_step_json = pick_agent(current_task, next_task, history)
         current_agent = best_next_step_json["agent"]
+
+        # Check if we are done
+        if current_agent == "unresolvable_agent":
+            logging.info("unresolvable_agent called :( returning fail case")
+            return "I am sorry, but I was unable to find an answer to your question"
+        if current_agent == "goal_achieved_agent":
+            logging.info("goal achieved!")
+            return best_next_step_json["thoughts"]["speak"] # TODO: Properly return answer when problem is solved
 
         # Call agent
         logging.info("Call agent")
@@ -79,7 +88,6 @@ def solve_all_tasks(tasks_json):
 
         attempts_count += 1
 
-
     logging.info("agent picked: " + best_next_step_json["agent"])
 
-    return best_next_step_json["thoughts"]["speak"]
+    return final_result
