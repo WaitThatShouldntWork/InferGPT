@@ -16,7 +16,7 @@ hair_task = """
 # TODO: Mock out LLM call
 def test_load_task_step_template(mocker):
     tasks_json = json.loads(hair_task)
-    mocker.patch("supervisors.supervisor.pick_agent", return_value=str(tasks_json["tasks"][0]))
+    mocker.patch("src.supervisors.supervisor.pick_agent", return_value=str(tasks_json["tasks"][0]))
     try:
         solve_all_tasks(tasks_json)
     except Exception:
