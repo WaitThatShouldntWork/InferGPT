@@ -3,7 +3,7 @@ from neo4j import Driver, Session
 import pytest
 
 # We assign an alias to "test_connection" to avoid pytest treating it as another test function
-from utils import test_connection as verify_connection, create_goal
+from src.utils import test_connection as verify_connection, create_goal
 
 
 @pytest.fixture
@@ -13,7 +13,7 @@ def mock_session():
 
 @pytest.fixture
 def mock_driver(mocker, mock_session):
-    mock_driver = mocker.patch("utils.graph_db_utils.driver", return_value=MagicMock(spec=Driver))
+    mock_driver = mocker.patch("src.utils.graph_db_utils.driver", return_value=MagicMock(spec=Driver))
     mock_driver.session.return_value = mock_session
     return mock_driver
 

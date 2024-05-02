@@ -1,5 +1,4 @@
-from agents import tool_metadata
-from .types import Parameter
+from src.agents import tool_metadata, Parameter
 
 
 name = "Mock Tool"

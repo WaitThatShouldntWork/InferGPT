@@ -1,6 +1,6 @@
 import logging
-from utils import Config
 from neo4j import GraphDatabase
+from src.utils import Config
 
 config = Config()
 

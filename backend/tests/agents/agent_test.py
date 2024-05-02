@@ -1,5 +1,5 @@
 from pytest import raises
-from agents import tool_metadata, Agent, agent_metadata
+from src.agents import tool_metadata, Agent, agent_metadata
 
 agent_description = "A test agent"
 agent_name = "Mock Agent"
@@ -41,7 +41,7 @@ def test_agent_metadata_tools():
 def test_agent_invoke_uses_tool(mocker):
     mock_agent_instance = MockAgent()
     mock_agent_instance.tools = [mock_tool]
-    mocker.patch("agents.agent.call_model_with_tools", return_value=("mock_tool", {}))
+    mocker.patch("src.utils.call_model_with_tools", return_value=("mock_tool", {}))
 
     response = mock_agent_instance.invoke("Hello, World!")
 
@@ -52,7 +52,7 @@ def test_agent_invoke_with_no_tool(mocker):
     mock_agent_instance = MockAgent()
     mock_agent_instance.tools = [mock_tool]
     non_existant_tool_name = "non_existent_tool"
-    mocker.patch("agents.agent.call_model_with_tools", return_value=(non_existant_tool_name, {}))
+    mocker.patch("src.agents.agent.call_model_with_tools", return_value=(non_existant_tool_name, {}))
 
     with raises(ValueError) as error:
         mock_agent_instance.invoke("Hello, World!")
