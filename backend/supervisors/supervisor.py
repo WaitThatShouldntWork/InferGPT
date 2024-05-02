@@ -62,7 +62,7 @@ def solve_all_tasks(tasks_json):
         # Call agent
         current_agent = next(find_agent_from_name(current_agent_name), unresolvable_task_agent)
         task_to_send_to_agent = current_task if best_next_step_json["current_or_next_task"] == "current" else next_task
-        agent_result = current_agent.invoke(task_to_send_to_agent)
+        agent_result = current_agent.invoke(task_to_send_to_agent + "\n\nIn the past you found out the following:\n" + str(history))
 
         # Store the result in the prompt
         history.append(prompt_engine.load_prompt(
