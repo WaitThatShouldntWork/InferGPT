@@ -26,7 +26,6 @@ def find_agent_from_name(current_agent_name):
 
 def solve_all_tasks(tasks_json):
     current_agent_name = "initial_agent"
-    final_result = ""
     history = []
     attempts_count = 0
     task_step = 0
@@ -82,4 +81,4 @@ def solve_all_tasks(tasks_json):
         logging.info("Did we just solve the current or next task? " + task_progression_status)
         attempts_count += 1
 
-    return final_result
+    return agent_result

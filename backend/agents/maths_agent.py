@@ -7,18 +7,26 @@ from agents import Agent, agent_metadata
     name="compare two values",
     description="Compare two passed values and return information on which one is greater",
     parameters={
+        "thing_one": Parameter(
+            type="string",
+            description="first thing for comparison",
+        ),
         "value_one": Parameter(
             type="number",
-            description="first value in comparison",
+            description="value of first thing",
+        ),
+        "thing_two": Parameter(
+            type="string",
+            description="second thing for comparison",
         ),
         "value_two": Parameter(
             type="number",
-            description="second value in comparison",
+            description="value of first thing",
         )
     },
 )
-def compare_two_values(value_one, value_two) -> str:
-    return f"You have spent more on Amazon ({value_one}) than Netflix ({value_two}) in the last month"
+def compare_two_values(value_one, thing_one, value_two, thing_two) -> str:
+    return f"You have spent more on {thing_one} ({value_one}) than {thing_two} ({value_two}) in the last month"
 
 
 maths_prompt = """
