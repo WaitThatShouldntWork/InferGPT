@@ -1,4 +1,5 @@
 from abc import ABC
+import logging
 from typing import List, Type
 from utils import call_model_with_tools
 from .adapters import convert_to_mistral_tool
@@ -25,6 +26,8 @@ class Agent(ABC):
 
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
+        result_of_action = action(**args)
+        logging.info(f"Tool \"{action.name}\" chosen for agent \"{self.name}\" with result: {result_of_action}")
         return action(**args)
 
 

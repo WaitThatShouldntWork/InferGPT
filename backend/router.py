@@ -1,21 +1,17 @@
 import json
 import logging
-from agents import DatastoreAgent, GoalAchievedAgent, UnresolvableTaskAgent
 from utils import call_model
 from prompts import PromptEngine
 
+prompt_engine = PromptEngine()
 
-def convert_agents_to_objects(agent):
+
+def convert_agents_to_json_shaped_string(agent):
     agent_as_object = {
         "name": agent.name,
         "description": agent.description
     }
     return agent_as_object
-
-
-list_of_agents = [ DatastoreAgent(), GoalAchievedAgent, UnresolvableTaskAgent ]
-list_of_agent_objects = [convert_agents_to_objects(agent) for agent in list_of_agents]
-prompt_engine = PromptEngine()
 
 
 def convert_step_to_json(next_step):
@@ -26,15 +22,17 @@ def convert_step_to_json(next_step):
 
 
 # TODO: Create pick_agent test with mocked calls
-def pick_agent(current_task_string, next_task_string, history):
+def pick_agent(current_task_string, next_task_string, list_of_agents, history):
     logging.debug("Picking agent")
+
+    list_of_agent_string = [convert_agents_to_json_shaped_string(agent) for agent in list_of_agents]
 
     # Generate prompts with tasks
     best_next_step_prompt = prompt_engine.load_prompt(
         "best-next-step",
-        current_task=current_task_string,
+        current_task=json.dumps(current_task_string, indent=4),
         next_task=next_task_string,
-        list_of_agents=json.dumps(list_of_agent_objects, indent=4),
+        list_of_agents=json.dumps(list_of_agent_string, indent=4),
         history=history
     )
 
