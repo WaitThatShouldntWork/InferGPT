@@ -81,4 +81,4 @@ def solve_all_tasks(tasks_json):
         logging.info("Did we just solve the current or next task? " + task_progression_status)
         attempts_count += 1
 
-    return agent_result
+    return agent_result # TODO: Add summariser method
