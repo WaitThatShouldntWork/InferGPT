@@ -1,4 +1,4 @@
-from prompting import PromptEngine
+from src.prompts import PromptEngine
 
 
 def test_mistral_prompt_engine_creation():

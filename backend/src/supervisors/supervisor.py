@@ -1,5 +1,5 @@
 import logging
-from router import pick_agent
+from src.router import pick_agent
 
 
 def solve_all_tasks(tasks_json):

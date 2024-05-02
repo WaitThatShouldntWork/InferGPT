@@ -1,6 +1,4 @@
-from agents import tool_metadata
-from .adapters import convert_to_mistral_tool
-from .types import Parameter
+from src.agents import tool_metadata, convert_to_mistral_tool, Parameter
 
 name = "Mock Tool"
 description = "A test tool"

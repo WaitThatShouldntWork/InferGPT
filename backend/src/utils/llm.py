@@ -2,7 +2,7 @@ import json
 import logging
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatCompletionResponse, ChatMessage
-from utils import Config
+from src.utils import Config
 
 logger = logging.getLogger(__name__)
 config = Config()
