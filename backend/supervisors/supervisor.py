@@ -41,9 +41,9 @@ def solve_all_tasks(tasks_json):
         # Assign tasks
         current_task = str(tasks_json["tasks"][task_step])
 
-        # Don't assign a next task if only 1 has been generated
-        if (task_step >= task_total_count):
-            next_task = "There is no next task - the Current Task is the final task"
+        # If on the last task don't iterate
+        if (task_step == task_total_count-1):
+            next_task = "There is no next task - the Next Task is the final task (sorry I know this is confusing)"
         else:
             next_task = str(tasks_json["tasks"][task_step+1])
 
@@ -74,8 +74,11 @@ def solve_all_tasks(tasks_json):
         # Are we solving the current or next task?
         task_progression_status = "We attempted to solve the current task"
         if onto_next_task(best_next_step_json):
-            task_progression_status = "We attempted to solve the next task - will move next task to current task for next iteration"
-            task_step += 1
+            if task_step == task_total_count:
+                task_progression_status = "We attempted to solve the final task!"
+            else:
+                task_progression_status = "We attempted to solve the next task - will move next task to current task for next iteration"
+                task_step += 1
         logging.info("Did we just solve the current or next task? " + task_progression_status)
         attempts_count += 1
 

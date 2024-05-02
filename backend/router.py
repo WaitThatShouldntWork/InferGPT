@@ -31,7 +31,7 @@ def pick_agent(current_task_string, next_task_string, list_of_agents, history):
     best_next_step_prompt = prompt_engine.load_prompt(
         "best-next-step",
         current_task=json.dumps(current_task_string, indent=4),
-        next_task=next_task_string,
+        next_task=json.dumps(next_task_string, indent=4),
         list_of_agents=json.dumps(list_of_agent_string, indent=4),
         history=history
     )

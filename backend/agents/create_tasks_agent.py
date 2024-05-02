@@ -9,13 +9,13 @@ logger = logging.getLogger(__name__)
 config = Config()
 engine = PromptEngine()
 
+list_of_agents = [ "DatastoreAgent", "MathsAgent", "UnresolvableTaskAgent", "GoalAchievedAgent" ]
 
 def create_tasks(user_prompt: str) -> str:
-    # TODO: Make single source of agent choice knowledge
-    agents = "unresolvable_agent, database_agent, fiancial_advisor_agent, web_search_agent"
 
-    create_tasks_prompt = engine.load_prompt("create-tasks", list_of_agents=agents)
-
+    create_tasks_prompt = engine.load_prompt("create-tasks", list_of_agents=list_of_agents)
+    logger.info("create_tasks_prompt")
+    logger.info(create_tasks_prompt)
     logger.info(f"Creating tasks from \"{user_prompt}\" user utterance...")
     response = call_model(create_tasks_prompt, user_prompt)
 
