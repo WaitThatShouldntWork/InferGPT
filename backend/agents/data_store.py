@@ -30,7 +30,7 @@ Merchant: Netflix
 
 @agent_metadata(
     name="DatastoreAgent",
-    description="This agent is responsible for handling database queries. It is best at finding personal data on the user",
+    description="This agent is responsible for handling database queries.",
     prompt=data_store_prompt,
     tools=[get_db_data],
 )

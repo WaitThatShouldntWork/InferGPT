@@ -16,7 +16,7 @@ def create_tasks(user_prompt: str) -> str:
 
     create_tasks_prompt = engine.load_prompt("create-tasks", list_of_agents=agents)
 
-    logger.debug("create_tasks function is called")
+    logger.info(f"Creating tasks from \"{user_prompt}\" user utterance...")
     response = call_model(create_tasks_prompt, user_prompt)
 
     try:
@@ -24,5 +24,5 @@ def create_tasks(user_prompt: str) -> str:
     except Exception:
         raise Exception("Failed to interpret LLM next step format")
 
-    logger.info("tasks created: " + str(all_tasks_json))
+    logger.info("tasks created: " + json.dumps(all_tasks_json, indent=4))
     return all_tasks_json

@@ -40,12 +40,15 @@ def pick_agent(current_task_string, next_task_string, history):
 
     response_format_prompt = prompt_engine.load_prompt("agent-selection-format")
 
-    # Call model to choose agent
-    best_next_step = call_model(response_format_prompt, best_next_step_prompt)
-    next_step_json = convert_step_to_json(best_next_step)
+    logging.info("best_next_step_prompt:")
+    logging.info(best_next_step_prompt)
 
-    logging.info("For iteration:\n" + best_next_step_prompt)
-    logging.info("Found next best step:")
-    logging.info(next_step_json)
+    # Call model to choose agent
+    logging.info("Calling LLM for next best step...")
+    best_next_step = call_model(response_format_prompt, best_next_step_prompt)
+
+    next_step_json = convert_step_to_json(best_next_step)
+    logging.info("Next best step response:")
+    logging.info(json.dumps(next_step_json, indent=4))
 
     return next_step_json
