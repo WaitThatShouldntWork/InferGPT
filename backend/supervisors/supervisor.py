@@ -3,7 +3,7 @@ from router import pick_agent
 
 
 def still_solving_tasks(current_agent, iter_count):
-    agent_calling_unresolved = current_agent != "unresolvable_agent" and current_agent != "goal_achieved_agent"
+    agent_calling_unresolved = current_agent != "UnresolvableTaskAgent" and current_agent != "GoalAchievedAgent"
     count_not_exceeded = iter_count < 5
     return agent_calling_unresolved and count_not_exceeded
 
@@ -25,10 +25,10 @@ def call_agent_picked(agent_str):
         case "web_search_agent":
             logging.info("Web search agent called!")
             answer = "The Labrador Retriever or simply Labrador is a British breed of retriever gun dog"
-        case "unresolvable_agent":
-            logging.info("unresolvable_agent called :( throwing exception")
+        case "UnresolvableTaskAgent":
+            logging.info("UnresolvableTaskAgent called :( throwing exception")
             raise Exception("router could not find an agent to call for the task")
-        case "goal_achieved_agent":
+        case "GoalAchievedAgent":
             logging.info("goal achieved!")
             answer = "goal achieved"
 
@@ -64,10 +64,10 @@ def solve_all_tasks(tasks_json):
         current_agent = best_next_step_json["agent"]
 
         # Check if we are done
-        if current_agent == "unresolvable_agent":
-            logging.info("unresolvable_agent called :( returning fail case")
+        if current_agent == "UnresolvableTaskAgent":
+            logging.info("UnresolvableTaskAgent called :( returning fail case")
             return "I am sorry, but I was unable to find an answer to your question"
-        if current_agent == "goal_achieved_agent":
+        if current_agent == "GoalAchievedAgent":
             logging.info("goal achieved!")
             return best_next_step_json["thoughts"]["speak"] # TODO: Properly return answer when problem is solved
 
