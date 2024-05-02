@@ -1,6 +1,6 @@
 import json
 import logging
-from agents import DatastoreAgent
+from agents import DatastoreAgent, GoalAchievedAgent, UnresolvableTaskAgent
 from utils import call_model
 from prompts import PromptEngine
 
@@ -13,7 +13,7 @@ def convert_agents_to_objects(agent):
     return agent_as_object
 
 
-list_of_agents = [ DatastoreAgent() ]
+list_of_agents = [ DatastoreAgent(), GoalAchievedAgent, UnresolvableTaskAgent ]
 list_of_agent_objects = [convert_agents_to_objects(agent) for agent in list_of_agents]
 prompt_engine = PromptEngine()
 
@@ -34,7 +34,7 @@ def pick_agent(current_task_string, next_task_string, history):
         "best-next-step",
         current_task=current_task_string,
         next_task=next_task_string,
-        list_of_agents=list_of_agent_objects,
+        list_of_agents=json.dumps(list_of_agent_objects, indent=4),
         history=history
     )
 
