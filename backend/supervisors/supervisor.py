@@ -1,11 +1,11 @@
 import logging
 from prompts import PromptEngine
 from router import pick_agent
-from agents import DatastoreAgent, GoalAchievedAgent, UnresolvableTaskAgent
+from agents import DatastoreAgent, GoalAchievedAgent, UnresolvableTaskAgent, MathsAgent
 
 unresolvable_task_agent = UnresolvableTaskAgent()
 goal_achieved_agent = GoalAchievedAgent()
-list_of_agents = [ DatastoreAgent(), goal_achieved_agent, unresolvable_task_agent ]
+list_of_agents = [ DatastoreAgent(), MathsAgent(), goal_achieved_agent, unresolvable_task_agent ]
 
 prompt_engine = PromptEngine()
 

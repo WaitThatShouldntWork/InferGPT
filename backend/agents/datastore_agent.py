@@ -24,7 +24,7 @@ def get_month_data(merchant: str) -> str:
 data_store_prompt = """
 You are an expert database agent. You can help with database queries and are connected to a neo4j database.
 
-When looking for an input to any tool being used, a single mechant should be provided.
+When looking for an input to any tool being used, a single merchant should be provided.
 
 e.g. "Calculate the sum of Netflix spend over the last month"
 Merchant: Netflix
