@@ -27,7 +27,7 @@ uvicorn src.api:app --port 8250
 
 4. Check the backend app is running at [http://localhost:8250/health](http://localhost:8250/health)
 
-## Backend Linting
+## Linting
 
 Ruff is being used for the backend linting. See the docs: [here](https://docs.astral.sh/ruff/)
 
@@ -82,3 +82,17 @@ pytest
 
 More documentation on `pytest` can be found [here](https://docs.pytest.org/en/8.0.x/).
 
+## Contributing
+
+### Type errors
+
+The vscode extension [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) can be used to highlight basic type errors in your python code. To set this up do the following:
+
+- Install the extension
+- Add the following to your `../.vscode/settings.json` file:
+
+```json
+{
+    "python.analysis.typeCheckingMode": "basic",
+}
+```
