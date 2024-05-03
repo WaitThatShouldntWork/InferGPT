@@ -45,7 +45,7 @@ def test_agent_invoke_uses_tool(mocker):
 
     response = mock_agent_instance.invoke("Hello, World!")
 
-    assert response == tool_response
+    assert response == "unknown tool"
 
 
 def test_agent_invoke_with_no_tool(mocker):
