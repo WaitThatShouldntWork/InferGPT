@@ -14,8 +14,6 @@ class Agent(ABC):
     prompt: str
 
     def __get_action(self, utterance: str) -> Action_and_args:
-        print("hello!")
-        print(self.tools)
         tools = map(convert_to_mistral_tool, self.tools)
         (function_name, function_params) = call_model_with_tools(self.prompt, utterance, tools)
 
