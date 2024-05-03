@@ -1,6 +1,3 @@
-import json
-from src.supervisors import solve_all_tasks
-
 hair_task = """
 {
     "tasks": [

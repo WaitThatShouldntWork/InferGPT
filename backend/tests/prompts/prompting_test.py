@@ -1,6 +1,6 @@
 from src.prompts import PromptEngine
 
-
+# ruff: noqa: E501
 def test_mistral_prompt_engine_creation():
     try:
         PromptEngine()
@@ -132,8 +132,8 @@ Your decisions must always be made independently without seeking user assistance
 Play to your strengths as an LLM and pursue simple strategies with no legal complications.
 """
         prompt_string = engine.load_prompt(
-            "best-next-step", 
-            task="make sure the PromptEngine is working!", 
+            "best-next-step",
+            task="make sure the PromptEngine is working!",
             history=["First action", "Second action", "Third action"]
         )
         assert prompt_string == expected_string

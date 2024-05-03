@@ -61,7 +61,9 @@ def solve_all_tasks(tasks_json):
         # Call agent
         current_agent = next(find_agent_from_name(current_agent_name), unresolvable_task_agent)
         task_to_send_to_agent = current_task if best_next_step_json["current_or_next_task"] == "current" else next_task
-        agent_result = current_agent.invoke(task_to_send_to_agent + "\n\nIn the past you found out the following:\n" + str(history))
+        agent_result = current_agent.invoke(
+            task_to_send_to_agent + "\n\nIn the past you found out the following:\n" + str(history)
+        )
 
         # Store the result in the prompt
         history.append(prompt_engine.load_prompt(
@@ -76,7 +78,7 @@ def solve_all_tasks(tasks_json):
             if task_step == task_total_count:
                 task_progression_status = "We attempted to solve the final task!"
             else:
-                task_progression_status = "We attempted to solve the next task - will move next task to current task for next iteration"
+                task_progression_status = "We attempted to solve the next task - will move next task to current task"
                 task_step += 1
         logging.info("Did we just solve the current or next task? " + task_progression_status)
         attempts_count += 1
