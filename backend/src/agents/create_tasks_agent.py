@@ -19,9 +19,9 @@ def create_tasks(user_prompt: str) -> str:
     response = call_model(create_tasks_prompt, user_prompt)
 
     try:
-        all_tasks_json = json.loads(response)
+        tasks_dict = json.loads(response)
     except Exception:
         raise Exception("Failed to interpret LLM next step format")
 
-    logger.info("tasks created: " + json.dumps(all_tasks_json, indent=4))
-    return all_tasks_json
+    logger.info("tasks created: " + json.dumps(tasks_dict, indent=4))
+    return tasks_dict
