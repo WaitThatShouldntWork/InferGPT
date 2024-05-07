@@ -6,7 +6,7 @@ from src.prompts import PromptEngine
 prompt_engine = PromptEngine()
 
 
-def convert_agents_to_json_shaped_string(agent):
+def create_agent_object(agent):
     agent_as_object = {
         "name": agent.name,
         "description": agent.description
@@ -18,21 +18,21 @@ def convert_step_to_json(next_step):
     try:
         return json.loads(next_step)
     except Exception:
-        raise Exception("Failed to interpret LLM next step format")
+        raise Exception(f"Failed to interpret LLM next step format from step string\"{next_step}\"")
 
 
 # TODO: Create pick_agent test with mocked calls
-def pick_agent(current_task_string, next_task_string, list_of_agents, history):
+def pick_agent(current_task_object, next_task_object, agents_list, history):
     logging.debug("Picking agent")
 
-    list_of_agent_string = [convert_agents_to_json_shaped_string(agent) for agent in list_of_agents]
+    available_agents_object = [create_agent_object(agent) for agent in agents_list]
 
     # Generate prompts with tasks
     best_next_step_prompt = prompt_engine.load_prompt(
         "best-next-step",
-        current_task=json.dumps(current_task_string, indent=4),
-        next_task=json.dumps(next_task_string, indent=4),
-        list_of_agents=json.dumps(list_of_agent_string, indent=4),
+        current_task=json.dumps(current_task_object, indent=4),
+        next_task=json.dumps(next_task_object, indent=4),
+        list_of_agents=json.dumps(available_agents_object, indent=4),
         history=history
     )
 

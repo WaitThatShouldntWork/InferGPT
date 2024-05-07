@@ -17,7 +17,7 @@ def still_solving_tasks(current_agent, iter_count):
 
 
 def onto_next_task(best_next_step_json):
-    return best_next_step_json["current_or_next_task"].__contains__("next")
+    return best_next_step_json["current_or_next_task"] == "next"
 
 
 def find_agent_from_name(current_agent_name):
