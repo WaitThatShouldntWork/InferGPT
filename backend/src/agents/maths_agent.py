@@ -26,7 +26,10 @@ from .agent import Agent, agent_metadata
     },
 )
 def compare_two_values(value_one, thing_one, value_two, thing_two) -> str:
-    return f"You have spent more on {thing_one} ({value_one}) than {thing_two} ({value_two}) in the last month"
+    if (value_one > value_two):
+        return f"You have spent more on {thing_one} ({value_one}) than {thing_two} ({value_two}) in the last month"
+    else:
+        return f"You have spent more on {thing_two} ({value_two}) than {thing_one} ({value_one}) in the last month"
 
 
 maths_prompt = """
