@@ -69,7 +69,7 @@ def solve_all_tasks(tasks_dict):
         # Store the result in the prompt
         history.append(prompt_engine.load_prompt(
             "write-to-history",
-            agent_name=current_agent_name,
+            agent_name=next_step_dict["agent"],
             agent_result=agent_result
         ))
 
