@@ -29,7 +29,6 @@ const checkBackendHealth = async (): Promise<ChatMessageResponse> => {
 const unhappyChatResponse = createChatMessageResponse('I\'m sorry, but I was unable to process your message. Please check the status of the service using the phrase "healthcheck"');
 
 const callChatEndpoint = async (message: string): Promise<ChatMessageResponse> => {
-  console.log(process.env.BACKEND_URL)
   return await fetch(`${process.env.BACKEND_URL}/chat?utterance=${message}`)
     .then(response => {
       if (!response.ok) {
