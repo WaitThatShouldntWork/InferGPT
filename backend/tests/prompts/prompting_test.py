@@ -19,9 +19,9 @@ def test_load_agent_selection_format_template():
         \\"plan\\": \\"description of the plan for the chosen agent\\",
         \\"reasoning\\": \\"reasoning behind choosing the agent\\",
         \\"criticism\\": \\"constructive self-criticism\\",
-        \\"speak\\": \\"thoughts summary to say to user on 1. if you're solving the current or next task and why 2. which agent you've chosen and why\\",
+        \\"speak\\": \\"thoughts summary to say to user on 1. if your solving the current or next task and why 2. which agent you've chosen and why\\",
     },
-    \\"current_or_next_task\\": \\"either the word "current" or the word "next" depending on which task you're trying to solve\\",
+    \\"current_or_next_task\\": \\"either the word "current" or the word "next" depending on which task your trying to solve\\",
     \\"agent\\": \\"exact string of the agent to solve task chosen\\"
 }"""
         prompt_string = engine.load_prompt("agent-selection-format")

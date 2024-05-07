@@ -48,7 +48,7 @@ def solve_all_tasks(tasks_dict):
 
         # If on the last task don't iterate
         if (task_step == num_of_tasks-1):
-            next_task = "There is no next task - the Next Task is the final task"
+            next_task = "There is no next task. Please solve the Current Task"
         else:
             next_task = str(tasks_dict["tasks"][task_step+1])
 
