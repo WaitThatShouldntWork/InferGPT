@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.utils import Config, test_connection
 from src.director import question
 
-# TODO: Add back in api_test .py from PR #37
+# TODO: Add back in api_test.py from PR #37
 
 config_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "config.ini"))
 logging.config.fileConfig(fname=config_file_path, disable_existing_loggers=False)

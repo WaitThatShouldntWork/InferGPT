@@ -3,7 +3,7 @@ from .agent import Agent, agent_metadata
 @agent_metadata(
     name="GoalAchievedAgent",
     prompt="",
-    description="Pick this agent if you believe you have solved BOTH the Current Task and the Next Task",
+    description="This agent triggers the end of solving the overall problem and returns the final answer to the user",
     tools=[],
 )
 class GoalAchievedAgent(Agent):

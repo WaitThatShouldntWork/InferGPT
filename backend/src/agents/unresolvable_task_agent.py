@@ -2,7 +2,7 @@ from .agent import Agent, agent_metadata
 
 @agent_metadata(
     name="UnresolvableTaskAgent",
-    description="Pick this agent if you believe (based on the History of actions) you cannot solve the Current Task.",
+    description="This agent triggers the end of solving the overall problem if it cannot be solved",
     prompt="",
     tools=[],
 )
