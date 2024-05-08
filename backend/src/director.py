@@ -44,8 +44,8 @@ def question(question):
     logging.debug("Received utterance: {question}")
 
     if determine_intention(question) == "TRUE":
-        tasks_from_question_json = create_tasks(question)
-        final_answer = solve_all_tasks(tasks_from_question_json)
+        task_dict = create_tasks(question)
+        final_answer = solve_all_tasks(task_dict)
         return final_answer
 
     logging.info("Passing utterance straight to call_model function")
