@@ -32,15 +32,9 @@ def compare_two_values(value_one, thing_one, value_two, thing_two) -> str:
         return f"You have spent more on {thing_two} ({value_two}) than {thing_one} ({value_one}) in the last month"
 
 
-maths_prompt = """
-You are an expert mathematician. You can help with solving mathematical problems
-"""
-
-
 @agent_metadata(
     name="MathsAgent",
     description="This agent is responsible for solving number comparison and calculation tasks",
-    prompt=maths_prompt,
     tools=[compare_two_values],
 )
 class MathsAgent(Agent):

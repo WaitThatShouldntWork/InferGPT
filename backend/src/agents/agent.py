@@ -1,21 +1,25 @@
 from abc import ABC
 import logging
 from typing import List, Type
-from src.utils import call_model_with_tools
+from src.utils import call_model
+from src.prompts import PromptEngine
 from .adapters import convert_to_mistral_tool
 from .tool import Tool
 from .types import Action_and_args
 
+engine = PromptEngine()
 
 class Agent(ABC):
     name: str
     description: str
     tools: List[Tool]
-    prompt: str
 
     def __get_action(self, utterance: str) -> Action_and_args:
         tools = map(convert_to_mistral_tool, self.tools)
-        (function_name, function_params) = call_model_with_tools(self.prompt, utterance, tools)
+        (function_name, function_params) = call_model(
+            engine.load_prompt("tool-selection-format"),
+            engine.load_prompt("best-tool", task=utterance, tools=tools)
+        )
 
         tool = next((tool for tool in self.tools if tool.action.__name__ == function_name), None)
 
@@ -31,11 +35,10 @@ class Agent(ABC):
         return result_of_action
 
 
-def agent_metadata(name: str, description: str, prompt: str, tools: List[Tool]):
+def agent_metadata(name: str, description: str, tools: List[Tool]):
     def decorator(agent: Type[Agent]):
         agent.name = name
         agent.description = description
-        agent.prompt = prompt
         agent.tools = tools
         return agent
 

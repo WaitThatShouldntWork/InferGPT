@@ -3,11 +3,10 @@ from src.agents import tool_metadata, Agent, agent_metadata
 
 agent_description = "A test agent"
 agent_name = "Mock Agent"
-prompt = "You are a bot!"
 tools = []
 
 
-@agent_metadata(description=agent_description, name=agent_name, prompt=prompt, tools=tools)
+@agent_metadata(description=agent_description, name=agent_name, tools=tools)
 class MockAgent(Agent):
     pass
 
@@ -28,10 +27,6 @@ def test_agent_metadata_description():
 
 def test_agent_metadata_name():
     assert MockAgent.name == agent_name
-
-
-def test_agent_metadata_prompt():
-    assert MockAgent.prompt == prompt
 
 
 def test_agent_metadata_tools():
