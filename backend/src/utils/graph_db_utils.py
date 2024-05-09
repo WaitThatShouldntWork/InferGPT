@@ -25,23 +25,3 @@ def test_connection():
     finally:
         driver.close()
         return connection_healthy
-
-
-def create_goal(name, description):
-    try:
-        session = driver.session()
-        query = """
-        MERGE (g:Goal {name: $name, description: $description})
-        RETURN g
-        """
-        session.run(query, name=name, description=description)
-        logging.debug("goal created")
-
-    except Exception as e:
-        logging.exception(f"Error: {e}")
-        raise
-
-    finally:
-        if session:
-            session.close()
-        driver.close()

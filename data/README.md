@@ -24,16 +24,6 @@ Once installed follow the steps below:
 6. Test the connection is working by asking InferGPT the keyphrase "healthcheck". 
 It will return with a status update on the state of the backend and database
 
-# Schema
-
-Currently the schema consists of 1 node. This node is a `Goal` and has 2 properties:
-
-```
-{
-    name: "name of goal"
-    description: "description of goal"
-}
-```
 
 # To do
 
