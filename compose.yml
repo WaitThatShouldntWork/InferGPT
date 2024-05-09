@@ -1,16 +1,73 @@
-version: '1'
+# Docker compose file that allows each of the services we require to start
+# only when their dependent service(s) have started. This is achieved through
+# the use of a docker healthcheck for each service.
+
+# First, construct private network for our services to communicate with each other
+networks:
+  network:
+    driver: bridge
+
 services:
-  # neo4j-store:
-  #   build: "./data/"
+  # neo4j service
+  neo4j-db:
+    image: neo4j:latest
+    environment:
+      NEO4J_AUTH: neo4j/6ti_qvusR!p37WwszTLvzrKbR
+    networks:
+      - network
+    # network ports, we expose non-standard ports so that we
+    # don't conflict with other neo4j instances that may be running
+    ports:
+      - 8474:7474 # HTTP for Neo4j Browser
+      - 8687:7687 # Bolt port
+    expose:
+      - 8474
+      - 8687
+    healthcheck:
+      test: wget http://neo4j-db:7474 || exit 1
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 3s
+
+  # InferGPT Backend
   backend:
-    build: "backend/"
-    env_file:
-      - "backend/.env"
+    image: infergpt/backend
+    build:
+      context: backend
+      dockerfile: ./Dockerfile
+    env_file: backend/.env
+    environment:
+      NEO4J_URI: bolt://neo4j-db:7687
+      NEO4J_USERNAME: neo4j
+      NEO4J_PASSWORD: 6ti_qvusR!p37WwszTLvzrKbR
+    depends_on:
+      neo4j-db:
+        condition: service_healthy
+    networks:
+      - network
     ports:
       - 8250:8250
+    healthcheck:
+      test: wget http://backend:8250/health || exit 1
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 3s
+
+  # InferGPT Frontend
   frontend:
-    build: "frontend/"
-    env_file:
-      - "frontend/.env"
+    image: infergpt/frontend
+    build:
+      context: frontend
+      dockerfile: ./Dockerfile
+    env_file: frontend/.env
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - network
     ports:
       - 8650:8650
+    expose:
+      - 8650
