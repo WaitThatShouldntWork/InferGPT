@@ -49,11 +49,6 @@ Trust the information below completely (100% accurate)
 
 
 
-## Next task
-If you believe you have solved the Current Task, this is the Next Task:
-
-
-
 
 ## Agents
 You know that an Agent is a digital assistant like yourself that you can hand this work on to.
@@ -61,10 +56,6 @@ Choose 1 agent to delegate the task to. If you choose more than 1 agent you will
 Here is the list of Agents you can choose from:
 
 AGENT LIST:
-
-
-If none of the agents are appropriate for solving this goal, choose "UnresolvableTaskAgent".
-If you believe you have solved the final problem, choose "GoalAchievedAgent"
 
 
 ## Determine the next best step
@@ -106,9 +97,6 @@ Trust the information below completely (100% accurate)
 
 
 
-## Next task
-If you believe you have solved the Current Task, this is the Next Task:
-
 
 
 
@@ -119,9 +107,6 @@ Here is the list of Agents you can choose from:
 
 AGENT LIST:
 
-
-If none of the agents are appropriate for solving this goal, choose "UnresolvableTaskAgent".
-If you believe you have solved the final problem, choose "GoalAchievedAgent"
 
 
 ## Determine the next best step
@@ -214,16 +199,6 @@ response:
     ]
 }"""
         prompt_string = engine.load_prompt("create-tasks", list_of_agents="TestAgentOne, TestAgentTwo, TestAgentThree")
-        assert prompt_string == expected_string
-    except Exception:
-        raise
-
-
-def test_load_write_to_history_template():
-    engine = PromptEngine()
-    try:
-        expected_string = "You have called TestAgent. You received the following result: Example result"
-        prompt_string = engine.load_prompt("write-to-history", agent_name="TestAgent", agent_result="Example result")
         assert prompt_string == expected_string
     except Exception:
         raise

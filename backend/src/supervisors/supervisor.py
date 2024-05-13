@@ -1,87 +1,48 @@
+import json
 import logging
-from src.prompts import PromptEngine
-from src.router import pick_agent
-from src.agents import DatastoreAgent, GoalAchievedAgent, UnresolvableTaskAgent, MathsAgent
+from typing import Tuple
 
-unresolvable_task_agent = UnresolvableTaskAgent()
-goal_achieved_agent = GoalAchievedAgent()
-list_of_agents = [ DatastoreAgent(), MathsAgent(), goal_achieved_agent, unresolvable_task_agent ]
+from src.router import get_agent_for_task
+from src.agents import validator_agent
 
-prompt_engine = PromptEngine()
+def is_valid_answer(answer, task):
+    isValid = (validator_agent.invoke(f"Task: {task}  Answer: {answer}")).lower() == "true"
 
+    logging.info(f"Task: '{task}' Success: '{isValid}'")
 
-def still_solving_tasks(current_agent, iter_count):
-    agent_calling_unresolved = current_agent != "UnresolvableTaskAgent" and current_agent != "GoalAchievedAgent"
-    count_not_exceeded = iter_count < 5
-    return agent_calling_unresolved and count_not_exceeded
+    return isValid
 
+def update_scratchpad(scratchpad, agent_name, task, result):
+    scratchpad.append({
+        "agent_name": agent_name,
+        "task": task["summary"],
+        "result": result
+    })
 
-def onto_next_task(best_next_step_json):
-    return best_next_step_json["current_or_next_task"] == "next"
+def solve_task(task, scratchpad, attempt = 0) -> Tuple[str | None, str]:
+    if attempt == 5:
+        return (None, "I am sorry, but I was unable to find an answer to this task")
+    
+    agent = get_agent_for_task(task, scratchpad)
+    if agent is None:
+        return (None, "I am sorry, but I was unable to find an agent to solve this task")
 
+    answer = agent.invoke(task["summary"])
+    if is_valid_answer(answer, task):
+        return (agent.name, answer)
 
-def find_agent_from_name(current_agent_name):
-    return (agent for agent in list_of_agents if agent.name == current_agent_name)
-
-
-def call_agent(next_step_dict, current_task, next_task, history):
-    current_agent = next(find_agent_from_name(next_step_dict["agent"]), unresolvable_task_agent)
-    task_to_send_to_agent = current_task if next_step_dict["current_or_next_task"] == "current" else next_task
-    return current_agent.invoke(task_to_send_to_agent + "\n\nIn the past you found out the following:\n" + str(history))
-
+    update_scratchpad(scratchpad, agent.name, task, answer)
+    return solve_task(task, scratchpad, attempt + 1)
 
 def solve_all_tasks(tasks_dict):
-    current_agent_name = "InitialAgent"
-    history = []
-    attempts_count = 0
-    task_step = 0
-    num_of_tasks = len(tasks_dict["tasks"])
-    logging.info("Solving all (" + str(num_of_tasks) + ") tasks")
+    scratchpad = []
 
-    # Check where we should keep iterating to call more agents
-    while still_solving_tasks(current_agent_name, attempts_count):
-        logging.info(f"attempts_count: {attempts_count}, task_step: {task_step}")
-        logging.info(f"current_agent: {current_agent_name}, history: {history}")
+    for task in tasks_dict["tasks"]:
+        (agent_name, answer) = solve_task(task, scratchpad)
+        update_scratchpad(scratchpad, agent_name, task, answer)
 
-        # Assign tasks
-        current_task = str(tasks_dict["tasks"][task_step])
+    logging.info("Final scratchpad:")
+    logging.info(json.dumps(scratchpad, indent=4))
 
-        # If on the last task don't iterate
-        if (task_step == num_of_tasks-1):
-            next_task = "There is no next task. Please solve the Current Task"
-        else:
-            next_task = str(tasks_dict["tasks"][task_step+1])
-
-        # Call LLM to decide next best step
-        next_step_dict = pick_agent(current_task, next_task, list_of_agents, history)
-
-        # Check if we are done
-        if next_step_dict["agent"] == "UnresolvableTaskAgent":
-            logging.info("UnresolvableTaskAgent called :( returning fail case")
-            return "I am sorry, but I was unable to find an answer to your question"
-        if next_step_dict["agent"] == "GoalAchievedAgent":
-            logging.info("goal achieved!")
-            return next_step_dict["thoughts"]["speak"] # TODO: Properly return answer when problem is solved
-
-        # Call agent
-        agent_result = call_agent(next_step_dict, current_task, next_task, history)
-
-        # Store the result in the prompt
-        history.append(prompt_engine.load_prompt(
-            "write-to-history",
-            agent_name=next_step_dict["agent"],
-            agent_result=agent_result
-        ))
-
-        # Are we solving the current or next task?
-        task_progression_status = "We attempted to solve the current task"
-        if onto_next_task(next_step_dict):
-            if task_step == num_of_tasks:
-                task_progression_status = "We attempted to solve the final task!"
-            else:
-                task_progression_status = "We attempted to solve the next task - will move next task to current task"
-                task_step += 1
-        logging.info("Did we just solve the current or next task? " + task_progression_status)
-        attempts_count += 1
-
-    return agent_result # TODO: Add summariser method
+    final_answer = scratchpad[-1]
+    return final_answer["result"] # TODO: Add summariser method

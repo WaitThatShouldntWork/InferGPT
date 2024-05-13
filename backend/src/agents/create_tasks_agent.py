@@ -1,18 +1,16 @@
 import json
+import logging
 
 from src.prompts import PromptEngine
 from src.utils import call_model, Config
-import logging
 
 logger = logging.getLogger(__name__)
 config = Config()
 engine = PromptEngine()
 
-list_of_agents = [ "DatastoreAgent", "MathsAgent", "UnresolvableTaskAgent", "GoalAchievedAgent" ]
+def create_tasks(user_prompt: str, agents_details: list[dict[str, str]]) -> str:
 
-def create_tasks(user_prompt: str) -> str:
-
-    create_tasks_prompt = engine.load_prompt("create-tasks", list_of_agents=list_of_agents)
+    create_tasks_prompt = engine.load_prompt("create-tasks", list_of_agents=agents_details)
     logger.info("create_tasks_prompt")
     logger.info(create_tasks_prompt)
     logger.info(f"Creating tasks from \"{user_prompt}\" user utterance...")
