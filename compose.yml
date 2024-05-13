@@ -26,10 +26,11 @@ services:
       - ${NEO4J_BOLT_PORT:-7687}
     healthcheck:
       test: wget http://neo4j-db:7474 || exit 1
-      interval: 5s
+      interval: 60s
       timeout: 10s
       retries: 5
-      start_period: 3s
+      start_interval: 5s
+      start_period: 60s
 
   # InferGPT Backend
   backend:
@@ -38,6 +39,8 @@ services:
       context: backend
       dockerfile: ./Dockerfile
     env_file: ./backend/.env
+    environment:
+      NEO4J_URI: bolt://neo4j-db:7687
     depends_on:
       neo4j-db:
         condition: service_healthy
@@ -47,10 +50,11 @@ services:
       - 8250:8250
     healthcheck:
       test: wget http://backend:8250/health || exit 1
-      interval: 5s
+      interval: 60s
       timeout: 10s
       retries: 5
-      start_period: 3s
+      start_interval: 5s
+      start_period: 60s
 
   # InferGPT Frontend
   frontend:
