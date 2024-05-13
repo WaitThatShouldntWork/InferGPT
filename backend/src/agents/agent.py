@@ -2,7 +2,7 @@ from abc import ABC
 import json
 import logging
 from typing import List, Type
-from src.agents.adapters import create_all_tools_str, extract_tool, extract_args, find_tool
+from .adapters import create_all_tools_str, extract_tool
 from src.utils import call_model
 from src.prompts import PromptEngine
 from .tool import Tool
@@ -18,26 +18,31 @@ class Agent(ABC):
     def __get_action(self, utterance: str) -> Action_and_args:
         format_prompt = engine.load_prompt("tool-selection-format")
         tools_available = engine.load_prompt("best-tool", task=utterance, tools=create_all_tools_str(self.tools))
-        logging.info("#################################tools_object_list_as_string#############################################")
-
 
         logging.info("#################################tools_available#############################################")
         logging.info(tools_available)
 
         response = json.loads(call_model(format_prompt, tools_available))
-        logging.info("#####################################chosen_tool (by llm)###########################################")
+        try:
+            tool_name = response["tool_name"]
+            tool_parameters = response["tool_parameters"]
+        except Exception:
+            raise Exception(f"Unable to extract tool name and parameters from {response}")
+        logging.info("#####################################chosen_tool (by llm)####################################")
         logging.info(response)
+        logging.info(tool_name)
+        logging.info(tool_parameters)
 
-        chosen_tool = extract_tool(response, self.tools) # TODO: add logic for check
-        chosen_args = extract_args(response) # TODO: add logic for check
-        logging.info("#####################################tools validated and extracted###########################################")
+        chosen_tool = extract_tool(tool_name, self.tools) # TODO: add logic for check
+        # chosen_args = extract_args(tool_parameters) # TODO: add logic for check
+        logging.info("#####################################tools validated and extracted###########################")
 
         logging.info(chosen_tool)
-        logging.info(chosen_args)
+        logging.info(tool_parameters)
 
         # Find tool arguments
 
-        return (chosen_tool, chosen_args)
+        return (chosen_tool, tool_parameters)
 
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)

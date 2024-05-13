@@ -1,6 +1,6 @@
 from typing import List
 
-from src.agents.types import Action, Parameter
+from src.agents.types import Action
 from .tool import Tool
 import json
 import logging
@@ -16,7 +16,7 @@ def create_all_tools_str(tools: List[Tool]) -> str:
 def to_object(tool: Tool) -> str:
     obj = {
         "description": tool.description,
-        "name": tool.action.__name__,
+        "name": tool.name,
         "parameters": {
             key: {
                     "type": inner_dict.type,
@@ -29,10 +29,17 @@ def to_object(tool: Tool) -> str:
     return json.dumps(obj)
 
 
-def extract_tool(chosen_tool: str, agent_tools: List[Tool]) -> Action:
-    # new_tool = next((agent_tool for agent_tool in agent_tools if agent_tool.action.__name__ == chosen_tool.tool_name)
-    return None
+def extract_tool(chosen_tool_name: str, agent_tools: List[Tool]) -> Action:
+    return next(tool.action for tool in agent_tools if tool.name == chosen_tool_name)
 
 
-def extract_args(chosen_tool: str) -> List[Parameter]:
-    return None
+def extract_args(chosen_tool_args: dict) -> dict:
+    parameters_dict = {}
+    try:
+        # fit to object
+        for name, value in chosen_tool_args:
+            parameters_dict[name] = value
+    except Exception:
+        raise Exception("Unable to fit parameters")
+
+    return parameters_dict
