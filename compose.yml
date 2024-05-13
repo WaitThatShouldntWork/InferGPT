@@ -16,7 +16,7 @@ services:
       - network
     # network ports, we can customise exposed ports so that we
     # don't conflict with other neo4j instances that may be running.
-    # docker compose expects variables to exist in a root level .env file.
+    # docker compose expects custom ports to exist in a root level .env file.
     # if none are provided, we revert to defaults.
     ports:
       - ${NEO4J_HTTP_PORT:-7474}:7474 # HTTP for Neo4j Browser
