@@ -25,3 +25,23 @@ def test_connection():
     finally:
         driver.close()
         return connection_healthy
+
+
+def create_query(llm_query):
+    try:
+        session = driver.session()
+        query = llm_query
+        records = session.run(query)
+        record_dict = []
+        for record in records:
+            record_dict.append(record.data())
+        return record_dict
+
+    except Exception as e:
+        logging.exception(f"Error: {e}")
+        raise
+
+    finally:
+        if session:
+            session.close()
+        driver.close()
