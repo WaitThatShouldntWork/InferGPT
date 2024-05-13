@@ -1,5 +1,17 @@
+from typing import List
+
+from src.agents.types import Action, Parameter
 from .tool import Tool
 import json
+import logging
+
+def create_all_tools_str(tools: List[Tool]) -> str:
+    tools_object_list_as_string = ""
+    for tool in tools:
+        tools_object_list_as_string += to_object(tool) + "\n\n"
+    logging.info(tools_object_list_as_string)
+    return tools_object_list_as_string
+
 
 def to_object(tool: Tool) -> str:
     obj = {
@@ -15,3 +27,12 @@ def to_object(tool: Tool) -> str:
     }
 
     return json.dumps(obj)
+
+
+def extract_tool(chosen_tool: str, agent_tools: List[Tool]) -> Action:
+    # new_tool = next((agent_tool for agent_tool in agent_tools if agent_tool.action.__name__ == chosen_tool.tool_name)
+    return None
+
+
+def extract_args(chosen_tool: str) -> List[Parameter]:
+    return None
