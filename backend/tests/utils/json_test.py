@@ -7,10 +7,11 @@ def test_to_json_success():
 
     assert to_json(input) == {"key": "value"}
 
+
 def test_to_json_failure():
     input = "invalid"
-    
+
     with pytest.raises(Exception) as error:
         to_json(input)
 
-    assert str(error.value) == f"Failed to interpret JSON: \"{input}\""
+    assert str(error.value) == f'Failed to interpret JSON: "{input}"'

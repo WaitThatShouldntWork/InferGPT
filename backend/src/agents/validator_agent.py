@@ -26,7 +26,8 @@ Answer: Last month you spend £64.21 on Spotify
 Response: False
 Reasoning: The answer is for Spotify not Amazon.
 
-You must always return a single boolean value as the response, do not return any additional information, just the boolean value.
+You must always return a single boolean value as the response.
+Do not return any additional information, just the boolean value.
 """
 
 
@@ -34,7 +35,7 @@ You must always return a single boolean value as the response, do not return any
     name="ValidatorAgent",
     description="This agent is responsible for validating the answers to the tasks",
     prompt=validator_prompt,
-    tools=[]
+    tools=[],
 )
 class ValidatorAgent(Agent):
     def invoke(self, utterance: str) -> str:

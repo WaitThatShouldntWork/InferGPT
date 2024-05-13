@@ -1,5 +1,6 @@
 from src.prompts import PromptEngine
 
+
 # ruff: noqa: E501
 def test_mistral_prompt_engine_creation():
     try:
@@ -107,11 +108,7 @@ If from the history you see that the agent has failed to complete a task (by rep
 Your decisions must always be made independently without seeking user assistance.
 Play to your strengths as an LLM and pursue simple strategies with no legal complications.
 """
-        prompt_string = engine.load_prompt(
-            "best-next-step",
-            task=task,
-            history=history
-        )
+        prompt_string = engine.load_prompt("best-next-step", task=task, history=history)
         assert prompt_string == expected_string
 
     except Exception:

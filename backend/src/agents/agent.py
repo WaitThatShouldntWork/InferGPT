@@ -27,7 +27,7 @@ class Agent(ABC):
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
         result_of_action = action(**args)
-        logging.info(f"Tool \"{action.name}\" chosen for agent \"{self.name}\" with result: {result_of_action}")
+        logging.info(f'Tool "{action.name}" chosen for agent "{self.name}" with result: {result_of_action}')
         return result_of_action
 
 

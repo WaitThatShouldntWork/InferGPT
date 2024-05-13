@@ -10,5 +10,5 @@ __all__ = [
     "get_response_three_prompts",
     "MistralClient",
     "test_connection",
-    "to_json"
+    "to_json",
 ]

@@ -5,27 +5,27 @@ from typing import Tuple
 from src.router import get_agent_for_task
 from src.agents import validator_agent
 
+
 def is_valid_answer(answer, task):
-    isValid = (validator_agent.invoke(f"Task: {task}  Answer: {answer}")).lower() == "true"
+    is_valid = (validator_agent.invoke(f"Task: {task}  Answer: {answer}")).lower() == "true"
 
-    logging.info(f"Task: '{task}' Success: '{isValid}'")
+    logging.info(f"Task: '{task}' Success: '{is_valid}'")
 
-    return isValid
+    return is_valid
+
 
 def update_scratchpad(scratchpad, agent_name, task, result):
-    scratchpad.append({
-        "agent_name": agent_name,
-        "task": task["summary"],
-        "result": result
-    })
+    scratchpad.append({"agent_name": agent_name, "task": task["summary"], "result": result})
+
 
 unsolvable_response = "I am sorry, but I was unable to find an answer to this task"
 no_agent_response = "I am sorry, but I was unable to find an agent to solve this task"
 
-def solve_task(task, scratchpad, attempt = 0) -> Tuple[str | None, str]:
+
+def solve_task(task, scratchpad, attempt=0) -> Tuple[str | None, str]:
     if attempt == 5:
         return (None, unsolvable_response)
-    
+
     agent = get_agent_for_task(task, scratchpad)
     if agent is None:
         return (None, no_agent_response)
@@ -37,14 +37,16 @@ def solve_task(task, scratchpad, attempt = 0) -> Tuple[str | None, str]:
     update_scratchpad(scratchpad, agent.name, task, answer)
     return solve_task(task, scratchpad, attempt + 1)
 
+
 no_tasks_response = "No tasks found to solve"
+
 
 def solve_all_tasks(tasks_dict):
     tasks = tasks_dict["tasks"]
 
     if len(tasks) == 0:
         return no_tasks_response
-    
+
     scratchpad = []
 
     for task in tasks:
@@ -55,4 +57,4 @@ def solve_all_tasks(tasks_dict):
     logging.info(json.dumps(scratchpad, indent=4))
 
     final_answer = scratchpad[-1]
-    return final_answer["result"] # TODO: Add summariser method
+    return final_answer["result"]  # TODO: Add summariser method

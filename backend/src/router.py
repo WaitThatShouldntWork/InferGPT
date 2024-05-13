@@ -13,10 +13,12 @@ def build_best_next_step_prompt(task, scratchpad):
         "best-next-step",
         task=json.dumps(task, indent=4),
         list_of_agents=json.dumps(agents_details, indent=4),
-        history=json.dumps(scratchpad, indent=4)
+        history=json.dumps(scratchpad, indent=4),
     )
 
+
 response_format_prompt = prompt_engine.load_prompt("agent-selection-format")
+
 
 def get_plan(task, scratchpad):
     best_next_step_prompt = build_best_next_step_prompt(task, scratchpad)
@@ -34,8 +36,10 @@ def get_plan(task, scratchpad):
 
     return plan
 
+
 def find_agent_from_name(name):
     return (agent for agent in agents if agent.name == name)
+
 
 def get_agent_for_task(task, scratchpad) -> Agent | None:
     plan = get_plan(task, scratchpad)
