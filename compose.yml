@@ -11,18 +11,19 @@ services:
   # neo4j service
   neo4j-db:
     image: neo4j:latest
-    environment:
-      NEO4J_AUTH: neo4j/6ti_qvusR!p37WwszTLvzrKbR
+    env_file: ./data/.env
     networks:
       - network
-    # network ports, we expose non-standard ports so that we
-    # don't conflict with other neo4j instances that may be running
+    # network ports, we can customise exposed ports so that we
+    # don't conflict with other neo4j instances that may be running.
+    # docker compose expects variables to exist in a root level .env file.
+    # if none are provided, we revert to defaults.
     ports:
-      - 8474:7474 # HTTP for Neo4j Browser
-      - 8687:7687 # Bolt port
+      - ${NEO4J_HTTP_PORT:-7474}:7474 # HTTP for Neo4j Browser
+      - ${NEO4J_BOLT_PORT:-7687}:7687 # Bolt port
     expose:
-      - 8474
-      - 8687
+      - ${NEO4J_HTTP_PORT:-7474}
+      - ${NEO4J_BOLT_PORT:-7687}
     healthcheck:
       test: wget http://neo4j-db:7474 || exit 1
       interval: 5s
@@ -36,11 +37,7 @@ services:
     build:
       context: backend
       dockerfile: ./Dockerfile
-    env_file: backend/.env
-    environment:
-      NEO4J_URI: bolt://neo4j-db:7687
-      NEO4J_USERNAME: neo4j
-      NEO4J_PASSWORD: 6ti_qvusR!p37WwszTLvzrKbR
+    env_file: ./backend/.env
     depends_on:
       neo4j-db:
         condition: service_healthy
@@ -61,7 +58,7 @@ services:
     build:
       context: frontend
       dockerfile: ./Dockerfile
-    env_file: frontend/.env
+    env_file: ./frontend/.env
     depends_on:
       backend:
         condition: service_healthy
