@@ -1,15 +1,6 @@
 from pytest import raises
-from src.agents import tool_metadata, Agent, agent_metadata
-
-agent_description = "A test agent"
-agent_name = "Mock Agent"
-prompt = "You are a bot!"
-tools = []
-
-
-@agent_metadata(description=agent_description, name=agent_name, prompt=prompt, tools=tools)
-class MockAgent(Agent):
-    pass
+from tests.agents import MockAgent, mock_agent_description, mock_agent_name, mock_prompt, mock_tools
+from src.agents import tool_metadata
 
 
 tool_name = "Mock Tool"
@@ -23,38 +14,38 @@ def mock_tool():
 
 
 def test_agent_metadata_description():
-    assert MockAgent.description == agent_description
+    assert MockAgent.description == mock_agent_description
 
 
 def test_agent_metadata_name():
-    assert MockAgent.name == agent_name
+    assert MockAgent.name == mock_agent_name
 
 
 def test_agent_metadata_prompt():
-    assert MockAgent.prompt == prompt
+    assert MockAgent.prompt == mock_prompt
 
 
 def test_agent_metadata_tools():
-    assert MockAgent.tools == tools
+    assert MockAgent.tools == mock_tools
 
 
 def test_agent_invoke_uses_tool(mocker):
-    mock_agent_instance = MockAgent()
-    mock_agent_instance.tools = [mock_tool]
+    agent = MockAgent()
+    agent.tools = [mock_tool]
     mocker.patch("src.agents.agent.call_model_with_tools", return_value=("mock_tool", {}))
 
-    response = mock_agent_instance.invoke("Hello, World!")
+    response = agent.invoke("Hello, World!")
 
     assert response == tool_response
 
 
 def test_agent_invoke_with_no_tool(mocker):
-    mock_agent_instance = MockAgent()
-    mock_agent_instance.tools = [mock_tool]
+    agent = MockAgent()
+    agent.tools = [mock_tool]
     non_existant_tool_name = "non_existent_tool"
     mocker.patch("src.agents.agent.call_model_with_tools", return_value=(non_existant_tool_name, {}))
 
     with raises(ValueError) as error:
-        mock_agent_instance.invoke("Hello, World!")
+        agent.invoke("Hello, World!")
 
-    assert str(error.value) == f"Tool {non_existant_tool_name} not found in agent {mock_agent_instance.name}"
+    assert str(error.value) == f"Tool {non_existant_tool_name} not found in agent {agent.name}"
