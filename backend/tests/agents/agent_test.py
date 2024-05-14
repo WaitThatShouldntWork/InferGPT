@@ -53,4 +53,4 @@ def test_agent_invoke_with_no_tool(mocker):
     with raises(Exception) as error:
         mock_agent_instance.invoke("Undefined Tool")
 
-    assert str(error.value) == "Unable to find tool Undefined Tool in available tools"
+    assert str(error.value) == "Unable to extract chosen tool and parameters from {'tool_name': 'Undefined Tool', 'tool_parameters': {}, 'reasoning': 'Mock reasoning'}" # noqa: E501

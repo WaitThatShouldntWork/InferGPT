@@ -23,7 +23,7 @@ def convert_step_to_json(next_step):
 
 # TODO: Create pick_agent test with mocked calls
 def pick_agent(current_task_object, next_task_object, agents_list, history):
-    logging.debug("Picking agent")
+    logging.debug("Picking Agent")
 
     available_agents_object = [create_agent_object(agent) for agent in agents_list]
 

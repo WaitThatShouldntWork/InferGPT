@@ -227,3 +227,43 @@ def test_load_write_to_history_template():
         assert prompt_string == expected_string
     except Exception:
         raise
+
+
+def test_best_tool_template():
+    engine = PromptEngine()
+    tools = """"{"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}"""
+    try:
+        expected_string = """You are an expert at picking a tool to solve a task
+
+The task is as follows:
+
+Say hello world to the user
+
+Pick 1 tool (no more than 1) from the list below to complete this task.
+Fit the correct parameters from the task to the tool arguments.
+If the parameters are tagged as optional, you do not need to fill them in,
+but feel free to if it is necessary
+
+""" + tools
+        prompt_string = engine.load_prompt("best-tool", task="Say hello world to the user", tools=tools)
+        assert prompt_string == expected_string
+    except Exception:
+        raise
+
+
+def test_tool_selection_format_template():
+    engine = PromptEngine()
+    try:
+        expected_string = """Reply only in json with the following format:
+
+{
+    \\"tool_name\\":  \\"the exact string name of the tool chosen\\",
+    \\"tool_parameters\\":  \\"a python dictionary matching the tools dictionary shape\\",
+    \\"reasoning\\": \\"A sentence on why you chose that tool\\"
+}
+
+Use quotations (") and not any of the following: ', `"""
+        prompt_string = engine.load_prompt("tool-selection-format")
+        assert prompt_string == expected_string
+    except Exception:
+        raise

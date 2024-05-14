@@ -14,35 +14,28 @@ class Agent(ABC):
     name: str
     description: str
     tools: List[Tool]
-    # TODO: Test method
     def __get_action(self, utterance: str) -> Action_and_args:
-        # TODO: refine logging
+        logging.debug("Picking Action")
+
         format_prompt = engine.load_prompt("tool-selection-format")
         tools_available = engine.load_prompt("best-tool", task=utterance, tools=create_all_tools_str(self.tools))
 
-        logging.info("#################################tools_available#############################################")
+        logging.info("tools_available_prompt:")
         logging.info(tools_available)
 
         response = json.loads(call_model(format_prompt, tools_available))
-        try:
-            tool_name = response["tool_name"]
-            tool_parameters = response["tool_parameters"]
-        except Exception:
-            raise Exception(f"Unable to extract tool name and parameters from {response}")
-        logging.info("#####################################chosen_tool (by llm)####################################")
+
+        logging.info("Tool chosen - choice response:")
         logging.info(response)
-        logging.info(tool_name)
-        logging.info(tool_parameters)
 
-        chosen_tool = extract_tool(tool_name, self.tools)
+        try:
+            chosen_tool = extract_tool(response["tool_name"], self.tools)
+            chosen_tool_parameters = response["tool_parameters"]
+            validate_args(chosen_tool_parameters, chosen_tool)
+        except Exception:
+            raise Exception(f"Unable to extract chosen tool and parameters from {response}")
 
-        logging.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-        logging.info(tool_parameters.keys())
-        logging.info(chosen_tool.parameters.keys())
-        validate_args(tool_parameters, chosen_tool)
-        logging.info("#####################################tools validated and extracted###########################")
-
-        return (chosen_tool.action, tool_parameters)
+        return (chosen_tool.action, chosen_tool_parameters)
 
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
