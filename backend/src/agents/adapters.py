@@ -29,6 +29,8 @@ def to_object(tool: Tool) -> str:
 
 
 def extract_tool(chosen_tool_name: str, agent_tools: List[Tool]) -> Tool:
+    if chosen_tool_name == "None":
+        raise Exception("No tool deemed appropriate for task")
     try:
         tool = next(tool for tool in agent_tools if tool.name == chosen_tool_name)
     except Exception:

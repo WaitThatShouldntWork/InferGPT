@@ -231,7 +231,7 @@ def test_load_write_to_history_template():
 
 def test_best_tool_template():
     engine = PromptEngine()
-    tools = """"{"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}"""
+    tools = """{"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}"""
     try:
         expected_string = """You are an expert at picking a tool to solve a task
 
@@ -244,7 +244,15 @@ Fit the correct parameters from the task to the tool arguments.
 If the parameters are tagged as optional, you do not need to fill them in,
 but feel free to if it is necessary
 
-""" + tools
+{"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}
+
+If none of the tools are appropriate for the task, return the following tool
+
+{
+    \\"tool_name\\":  \\"None\\",
+    \\"tool_parameters\\":  \\"{}\\",
+    \\"reasoning\\": \\"No tool was appropriate for the task\\"
+}"""
         prompt_string = engine.load_prompt("best-tool", task="Say hello world to the user", tools=tools)
         assert prompt_string == expected_string
     except Exception:

@@ -54,6 +54,11 @@ def test_extract_tool_failure():
         extract_tool("Mock Tool Z", [mock_tool_a, mock_tool_b])
 
 
+def test_extract_tool_no_tool_found():
+    with pytest.raises(Exception, match="No tool deemed appropriate for task"):
+        extract_tool("None", [mock_tool_a, mock_tool_b])
+
+
 def test_validate_args_success():
     valid_args = {
         "input": "An example string value for input",

@@ -36,10 +36,10 @@ def test_agent_metadata_tools():
 def test_agent_invoke_uses_tool(mocker):
     mock_agent_instance = MockAgent()
     mock_agent_instance.tools = [mock_tool]
-    mock_response = """{"tool_name": "Mock Tool", "tool_parameters": {}, "reasoning": "Mock reasoning"}""" # noqa: E501
+    mock_response = """{"tool_name": "Mock Tool", "tool_parameters": {}, "reasoning": "Mock reasoning"}"""
     mocker.patch("src.agents.agent.call_model", return_value=mock_response)
 
-    response = mock_agent_instance.invoke("Mock Tool")
+    response = mock_agent_instance.invoke("Mock task to solve")
 
     assert response == tool_response
 
@@ -47,10 +47,22 @@ def test_agent_invoke_uses_tool(mocker):
 def test_agent_invoke_with_no_tool(mocker):
     mock_agent_instance = MockAgent()
     mock_agent_instance.tools = [mock_tool]
-    mock_response = """{"tool_name": "Undefined Tool", "tool_parameters": {}, "reasoning": "Mock reasoning"}""" # noqa: E501
+    mock_response = """{"tool_name": "Undefined Tool", "tool_parameters": {}, "reasoning": "Mock reasoning"}"""
     mocker.patch("src.agents.agent.call_model", return_value=mock_response)
 
     with raises(Exception) as error:
-        mock_agent_instance.invoke("Undefined Tool")
+        mock_agent_instance.invoke("Mock task to solve")
 
     assert str(error.value) == "Unable to extract chosen tool and parameters from {'tool_name': 'Undefined Tool', 'tool_parameters': {}, 'reasoning': 'Mock reasoning'}" # noqa: E501
+
+
+def test_agent_invoke_no_appropriate_tool_for_task(mocker):
+    mock_agent_instance = MockAgent()
+    mock_agent_instance.tools = [mock_tool]
+    mock_response = """{"tool_name": "None", "tool_parameters": {}, "reasoning": "No tool was appropriate for the task"}""" # noqa: E501
+    mocker.patch("src.agents.agent.call_model", return_value=mock_response)
+
+    with raises(Exception) as error:
+        mock_agent_instance.invoke("Mock task to solve")
+
+    assert str(error.value) == "Unable to extract chosen tool and parameters from {'tool_name': 'None', 'tool_parameters': {}, 'reasoning': 'No tool was appropriate for the task'}" # noqa: E501
