@@ -1,6 +1,4 @@
-import json
 import logging
-from typing import Tuple
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatCompletionResponse, ChatMessage
 from src.utils import Config

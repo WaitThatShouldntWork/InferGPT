@@ -1,6 +1,5 @@
 from typing import List
 
-from src.agents.types import Action
 from .tool import Tool
 import json
 import logging
