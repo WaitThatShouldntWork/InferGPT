@@ -1,37 +1,59 @@
-from src.agents import tool_metadata, convert_to_mistral_tool, Parameter
+from src.agents import tool_metadata, Parameter
+from src.agents.adapters import create_all_tools_str, to_object, extract_tool, extract_args
 
-name = "Mock Tool"
+name_a = "Mock Tool A"
+name_b = "Mock Tool B"
 description = "A test tool"
 param_description = "A string"
 
-
 @tool_metadata(
-    name=name,
+    name=name_a,
     description=description,
     parameters={
         "input": Parameter(type="string", description=param_description, required=True),
         "optional": Parameter(type="string", description=param_description, required=False),
     },
 )
-def mock_tool(input: str):
+def mock_tool_a(input: str):
     return input
 
+@tool_metadata(
+    name=name_b,
+    description=description,
+    parameters={
+        "input": Parameter(type="string", description=param_description, required=True),
+        "optional": Parameter(type="string", description=param_description, required=False),
+    },
+)
+def mock_tool_b(input: str):
+    return input
 
-def test_tool_conversion():
-    expected_output = {
-        "type": "function",
-        "function": {
-            "description": description,
-            "name": "mock_tool",
-            "parameters": {
-                "type": "object",
-                "properties": {
-                    "input": {"type": "string", "description": param_description},
-                    "optional": {"type": "string", "description": param_description},
-                },
-                "required": ["input"],
-            },
-        },
-    }
+expected_tools_str = """{"description": "A test tool", "name": "Mock Tool A", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}
 
-    assert convert_to_mistral_tool(mock_tool) == expected_output
+{"description": "A test tool", "name": "Mock Tool B", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}
+
+"""
+
+def test_create_all_tools_str():
+    tool_list = [mock_tool_a, mock_tool_b]
+    assert create_all_tools_str(tool_list) == expected_tools_str
+
+
+# def test_to_object():
+#     assert convert_to_mistral_tool(mock_tool) == expected_output
+
+
+# def test_extract_tool_success():
+#     assert convert_to_mistral_tool(mock_tool) == expected_output
+
+
+# def test_extract_tool_failure():
+#     assert convert_to_mistral_tool(mock_tool) == expected_output
+
+
+# def test_extract_args_failure():
+#     assert convert_to_mistral_tool(mock_tool) == expected_output
+
+
+# def test_extract_args_failure():
+#     assert convert_to_mistral_tool(mock_tool) == expected_output

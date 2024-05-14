@@ -14,8 +14,9 @@ class Agent(ABC):
     name: str
     description: str
     tools: List[Tool]
-
+    # TODO: Test method
     def __get_action(self, utterance: str) -> Action_and_args:
+        # TODO: refine logging
         format_prompt = engine.load_prompt("tool-selection-format")
         tools_available = engine.load_prompt("best-tool", task=utterance, tools=create_all_tools_str(self.tools))
 

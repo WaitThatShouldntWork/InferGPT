@@ -4,7 +4,7 @@ from src.agents.types import Action
 from .tool import Tool
 import json
 import logging
-
+# TODO: Test method
 def create_all_tools_str(tools: List[Tool]) -> str:
     tools_object_list_as_string = ""
     for tool in tools:
@@ -12,7 +12,7 @@ def create_all_tools_str(tools: List[Tool]) -> str:
     logging.info(tools_object_list_as_string)
     return tools_object_list_as_string
 
-
+# TODO: Test method
 def to_object(tool: Tool) -> str:
     obj = {
         "description": tool.description,
@@ -29,10 +29,15 @@ def to_object(tool: Tool) -> str:
     return json.dumps(obj)
 
 
+# TODO: Test method
 def extract_tool(chosen_tool_name: str, agent_tools: List[Tool]) -> Action:
-    return next(tool.action for tool in agent_tools if tool.name == chosen_tool_name)
+    try:
+        tool = next(tool.action for tool in agent_tools if tool.name == chosen_tool_name)
+    except Exception:
+        raise Exception(f"Unable to fit tool {chosen_tool_name}")
+    return tool
 
-
+# TODO: Test method
 def extract_args(chosen_tool_args: dict) -> dict:
     parameters_dict = {}
     try:
@@ -40,6 +45,6 @@ def extract_args(chosen_tool_args: dict) -> dict:
         for name, value in chosen_tool_args:
             parameters_dict[name] = value
     except Exception:
-        raise Exception("Unable to fit parameters")
+        raise Exception(f"Unable to fit parameters {chosen_tool_args}")
 
     return parameters_dict
