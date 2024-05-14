@@ -35,12 +35,13 @@ expected_tools_str = """{"description": "A test tool", "name": "Mock Tool A", "p
 """
 
 def test_create_all_tools_str():
-    tool_list = [mock_tool_a, mock_tool_b]
-    assert create_all_tools_str(tool_list) == expected_tools_str
+    assert create_all_tools_str([mock_tool_a, mock_tool_b]) == expected_tools_str
 
 
-# def test_to_object():
-#     assert convert_to_mistral_tool(mock_tool) == expected_output
+expected_tools_object = """{"description": "A test tool", "name": "Mock Tool A", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}"""
+
+def test_to_object():
+    assert to_object(mock_tool_a) == expected_tools_object
 
 
 # def test_extract_tool_success():
