@@ -36,9 +36,10 @@ def test_agent_metadata_tools():
 def test_agent_invoke_uses_tool(mocker):
     mock_agent_instance = MockAgent()
     mock_agent_instance.tools = [mock_tool]
-    mocker.patch("src.agents.agent.call_model_with_tools", return_value=("mock_tool", {}))
+    mock_response = """{"tool_name": "Mock Tool", "tool_parameters": {}, "reasoning": "Mock reasoning"}""" # noqa: E501
+    mocker.patch("src.agents.agent.call_model", return_value=mock_response)
 
-    response = mock_agent_instance.invoke("Hello, World!")
+    response = mock_agent_instance.invoke("Mock Tool")
 
     assert response == tool_response
 
@@ -46,10 +47,10 @@ def test_agent_invoke_uses_tool(mocker):
 def test_agent_invoke_with_no_tool(mocker):
     mock_agent_instance = MockAgent()
     mock_agent_instance.tools = [mock_tool]
-    non_existant_tool_name = "non_existent_tool"
-    mocker.patch("src.agents.agent.call_model_with_tools", return_value=(non_existant_tool_name, {}))
+    mock_response = """{"tool_name": "Undefined Tool", "tool_parameters": {}, "reasoning": "Mock reasoning"}""" # noqa: E501
+    mocker.patch("src.agents.agent.call_model", return_value=mock_response)
 
-    with raises(ValueError) as error:
-        mock_agent_instance.invoke("Hello, World!")
+    with raises(Exception) as error:
+        mock_agent_instance.invoke("Undefined Tool")
 
-    assert str(error.value) == f"Tool {non_existant_tool_name} not found in agent {mock_agent_instance.name}"
+    assert str(error.value) == "Unable to find tool Undefined Tool in available tools"

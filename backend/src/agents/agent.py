@@ -34,12 +34,12 @@ class Agent(ABC):
         logging.info(tool_name)
         logging.info(tool_parameters)
 
-        chosen_tool = extract_tool(tool_name, self.tools) # TODO: add logic for check
+        chosen_tool = extract_tool(tool_name, self.tools)
 
         logging.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         logging.info(tool_parameters.keys())
         logging.info(chosen_tool.parameters.keys())
-        validate_args(tool_parameters, chosen_tool) # TODO: add logic for check
+        validate_args(tool_parameters, chosen_tool)
         logging.info("#####################################tools validated and extracted###########################")
 
         return (chosen_tool.action, tool_parameters)

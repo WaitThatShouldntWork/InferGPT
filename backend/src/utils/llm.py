@@ -21,17 +21,6 @@ def call_model(system_prompt, user_prompt) -> str:
     return get_response_content(response)
 
 
-def call_model_with_tools(system_prompt, user_prompt, tools) -> Tuple[str, dict]:
-    response = get_response(system_prompt, user_prompt, tools)
-    tool_calls = response.choices[0].message.tool_calls
-    if tool_calls is None:
-        raise ValueError("No tool calls found in response")
-    tool_call = tool_calls[0]
-    function_name = tool_call.function.name
-    function_params = json.loads(tool_call.function.arguments)
-    return (function_name, function_params)
-
-
 def get_response(system_prompt, user_prompt, tools=None) -> ChatCompletionResponse:
     tool_choice = None if tools is None else "any"
 
