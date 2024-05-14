@@ -29,7 +29,7 @@ def to_object(tool: Tool) -> str:
     return json.dumps(obj)
 
 
-# TODO: Test method
+
 def extract_tool(chosen_tool_name: str, agent_tools: List[Tool]) -> Action:
     try:
         tool = next(tool.action for tool in agent_tools if tool.name == chosen_tool_name)

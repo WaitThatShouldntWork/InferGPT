@@ -1,3 +1,4 @@
+import pytest
 from src.agents import tool_metadata, Parameter
 from src.agents.adapters import create_all_tools_str, to_object, extract_tool, extract_args
 
@@ -44,12 +45,13 @@ def test_to_object():
     assert to_object(mock_tool_a) == expected_tools_object
 
 
-# def test_extract_tool_success():
-#     assert convert_to_mistral_tool(mock_tool) == expected_output
+def test_extract_tool_success():
+    assert extract_tool("Mock Tool A", [mock_tool_a, mock_tool_b]) == mock_tool_a
 
 
-# def test_extract_tool_failure():
-#     assert convert_to_mistral_tool(mock_tool) == expected_output
+def test_extract_tool_failure():
+    with pytest.raises(Exception):
+        extract_tool("Mock Tool Z", [mock_tool_a, mock_tool_b])
 
 
 # def test_extract_args_failure():
