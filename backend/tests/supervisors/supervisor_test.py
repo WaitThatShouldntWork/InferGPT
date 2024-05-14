@@ -7,6 +7,7 @@ task = {"summary": "Solve this problem"}
 task_dict = {"tasks": [task]}
 agent = MockAgent()
 
+
 def test_solve_all_tasks_no_tasks():
     answer = solve_all_tasks({"tasks": []})
 

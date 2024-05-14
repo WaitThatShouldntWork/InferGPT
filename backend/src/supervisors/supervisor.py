@@ -9,8 +9,6 @@ from src.agents import validator_agent
 def is_valid_answer(answer, task):
     is_valid = (validator_agent.invoke(f"Task: {task}  Answer: {answer}")).lower() == "true"
 
-    logging.info(f"Task: '{task}' Success: '{is_valid}'")
-
     return is_valid
 
 

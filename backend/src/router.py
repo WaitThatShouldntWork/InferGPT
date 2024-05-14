@@ -20,7 +20,7 @@ def build_best_next_step_prompt(task, scratchpad):
 response_format_prompt = prompt_engine.load_prompt("agent-selection-format")
 
 
-def get_plan(task, scratchpad):
+def build_plan(task, scratchpad):
     best_next_step_prompt = build_best_next_step_prompt(task, scratchpad)
 
     logging.info("best_next_step_prompt:")
@@ -42,7 +42,7 @@ def find_agent_from_name(name):
 
 
 def get_agent_for_task(task, scratchpad) -> Agent | None:
-    plan = get_plan(task, scratchpad)
+    plan = build_plan(task, scratchpad)
     agent = next(find_agent_from_name(plan["agent_name"]), None)
 
     return agent
