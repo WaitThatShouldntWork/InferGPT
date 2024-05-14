@@ -60,7 +60,7 @@ AGENT LIST:
 
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
-If the same agent_name and task are repeated more than twice in the histroy, you must not pick that agent_name.
+If the same agent_name and task are repeated more than twice in the history, you must not pick that agent_name.
 
 Your decisions must always be made independently without seeking user assistance.
 Play to your strengths as an LLM and pursue simple strategies with no legal complications.
@@ -103,7 +103,7 @@ AGENT LIST:
 
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
-If the same agent_name and task are repeated more than twice in the histroy, you must not pick that agent_name.
+If the same agent_name and task are repeated more than twice in the history, you must not pick that agent_name.
 
 Your decisions must always be made independently without seeking user assistance.
 Play to your strengths as an LLM and pursue simple strategies with no legal complications.
