@@ -2,7 +2,7 @@ from abc import ABC
 import json
 import logging
 from typing import List, Type
-from .adapters import create_all_tools_str, extract_tool
+from .adapters import create_all_tools_str, extract_tool, validate_args
 from src.utils import call_model
 from src.prompts import PromptEngine
 from .tool import Tool
@@ -35,15 +35,14 @@ class Agent(ABC):
         logging.info(tool_parameters)
 
         chosen_tool = extract_tool(tool_name, self.tools) # TODO: add logic for check
-        # chosen_args = extract_args(tool_parameters) # TODO: add logic for check
+
+        logging.info("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        logging.info(tool_parameters.keys())
+        logging.info(chosen_tool.parameters.keys())
+        validate_args(tool_parameters, chosen_tool) # TODO: add logic for check
         logging.info("#####################################tools validated and extracted###########################")
 
-        logging.info(chosen_tool)
-        logging.info(tool_parameters)
-
-        # Find tool arguments
-
-        return (chosen_tool, tool_parameters)
+        return (chosen_tool.action, tool_parameters)
 
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)

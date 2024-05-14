@@ -1,3 +1,0 @@
-{"description": "A test tool", "name": "Mock Tool A", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}
-
-{"description": "A test tool", "name": "Mock Tool B", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}

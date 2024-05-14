@@ -30,21 +30,14 @@ def to_object(tool: Tool) -> str:
 
 
 
-def extract_tool(chosen_tool_name: str, agent_tools: List[Tool]) -> Action:
+def extract_tool(chosen_tool_name: str, agent_tools: List[Tool]) -> Tool:
     try:
-        tool = next(tool.action for tool in agent_tools if tool.name == chosen_tool_name)
+        tool = next(tool for tool in agent_tools if tool.name == chosen_tool_name)
     except Exception:
-        raise Exception(f"Unable to fit tool {chosen_tool_name}")
+        raise Exception(f"Unable to find tool {chosen_tool_name} in available tools")
     return tool
 
-# TODO: Test method
-def extract_args(chosen_tool_args: dict) -> dict:
-    parameters_dict = {}
-    try:
-        # fit to object
-        for name, value in chosen_tool_args:
-            parameters_dict[name] = value
-    except Exception:
-        raise Exception(f"Unable to fit parameters {chosen_tool_args}")
 
-    return parameters_dict
+def validate_args(chosen_tool_args: dict, tool: Tool):
+    if tool.parameters.keys() != chosen_tool_args.keys():
+        raise Exception(f"Unable to fit parameters {chosen_tool_args} to Tool arguments {str(tool.parameters.keys())}")
