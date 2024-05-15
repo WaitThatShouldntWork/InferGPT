@@ -10,22 +10,59 @@ Python service for the InferGPT backend.
 
 ## Set up
 
-1. Create the `.env` files. There are template files (.env.example) for you to copy with comments for guidance. You will need a chosen LLM to run the service. If you are running the service in Docker you can skip the rest of the setup.
+1. Ensure the `.env` file has been configured as described in the main [README](../README.md).
+
+> Note: You will need to configure a LLM to run the service.
+
+This README covers instructions on how to run the application:
+- Locally
+- In a Docker Container
+
+For ease of use, we would recommended that you run the entire application using **Docker Compose** instead. See main [README](../README.md).
+
+If you would prefer not to use **Docker Compose**, read on...
 
 Unless otherwise stated all of the commands mentioned in this README should be run from `./backend`.
 
-2. Change directory to the `/backend` space, then run the following to install the dependencies
+## Running Locally
+
+Follow the instructions below to run the backend locally. Change directory to `/backend`, then follow the instructions below.
+
+1. Set-up a virtual environment
+
+> It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your active terminal.
+
+2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
 3. Run the app
+
 ```bash
 uvicorn src.api:app --port 8250
 ```
 
 4. Check the backend app is running at [http://localhost:8250/health](http://localhost:8250/health)
+
+## Running in a Docker Container
+
+1. Build the Docker image
+
+```bash
+docker build -t {my-backend-image-name} .
+```
+
+2. Run the backend within a Docker container
+
+```bash
+docker run --env-file ../.env -p 8250:8250 {my-backend-image-name}
+```
+
+> Note that we pass in the entire environment file that contains all our application's configuration. This means some unneccessary configuration is also being passed in. This is fine when testing locally. In production, we must limit this to only the essential backend configuration (see environment configuration within [Docker Compose](../compose.yml)).
+
+3. Check the backend app is running at [http://localhost:8250/health](http://localhost:8250/health)
 
 ## Linting
 

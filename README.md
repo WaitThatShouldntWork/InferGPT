@@ -45,24 +45,43 @@ Once you have Git installed, follow these steps:
 - Navigate to the directory where you want to clone the repository.
 - Run the git clone command for the fork you just created.
 
-### Running the service
-- create `.env` files as instructed within the [frontend README](frontend/README.md), [backend README](backend/README.md) and [data README](data/README.md)
+### Initial configuration
 
-#### Using Docker
+There is a example property file `.env.example` at the root of this project.
+
+Configuration steps:
+
+- Copy the `.env.example` file at the root of this project.
+- Rename the copied file as `.env`.
+- Update the `.env` file with your wanted configuration following the guidance in the file.
+
+
+### Running the application
+
+There are a few ways to run the application:
+
+1. **Docker Compose** - run the entire application within Docker containers configured by Docker Compose.
+2. **Locally** - run local instances of the front-end, back-end and a neo4j database.
+3. **Individual Docker Containers** - you may choose to run individual components within a Docker container.
+
+For ease of use, we would recommended that you run the application using **Docker Compose**.
+
+For instructions on how to run indivdual components locally or within Docker containers, refer to appropriate READMEs:
+
+- [frontend README](frontend/README.md)
+- [backend README](backend/README.md)
+- [data README](data/README.md)
+
+#### Running with Docker Compose
+
 - **Ensure Docker is installed and running**. The easiest way to do this is by using the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it).
 - In the root directory of the project run `docker compose up`
 > [!WARNING]  
 > the first time you do this it may take longer as the compose file builds the images.
-> Backend unittests cannot be run against the docker installation - please follow the [backend README](backend/README.md) for testing guidance
-- View the frontend at [localhost:8650](http://localhost:8650) and the Neo4j Browser at [localhost:7474](http://localhost:7474)
-- use the keyphrase "healthcheck" to test if everything is collected successfully
 
-#### Using pip and python
-- Open your preferred terminal where the project is cloned
-- It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your active terminal.
-- Follow the [data README](data/README.md) for guidance on how to set up Neo4j Desktop
-- Follow the [frontend README](frontend/README.md) to set up and run the front end
-- Follow the [backend README](backend/README.md) to set up and run the back end
+- View the frontend at [localhost:8650](http://localhost:8650)
+- View the Neo4j Browser at [localhost:7474](http://localhost:7474)
+- Type the phrase "healthcheck" into the frontend UI to test if everything is connected successfully
  
 ### Usage
 Coming
