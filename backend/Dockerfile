@@ -11,7 +11,7 @@ COPY ./requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /backend/requirements.txt
 
 # Copy the source code into the working directory
-COPY ./src/. /backend/src
+COPY ./src/. ./src
 
 EXPOSE 8250
 
