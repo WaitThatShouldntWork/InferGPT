@@ -38,6 +38,22 @@ def extract_tool(chosen_tool_name: str, agent_tools: List[Tool]) -> Tool:
     return tool
 
 
-def validate_args(chosen_tool_args: dict, tool: Tool):
-    if tool.parameters.keys() != chosen_tool_args.keys():
-        raise Exception(f"Unable to fit parameters {chosen_tool_args} to Tool arguments {str(tool.parameters.keys())}")
+def get_required_args(tool: Tool):
+    parameters_no_optional_args = tool.parameters.copy()
+    for key, param in tool.parameters.items():
+        if not param.required:
+            parameters_no_optional_args.pop(key)
+    return parameters_no_optional_args
+
+
+def validate_args(chosen_tool_args: dict, defined_tool: Tool):
+    # Get just the required arguments
+    all_args_set = set(defined_tool.parameters.keys())
+    required_args_set = set(get_required_args(defined_tool).keys())
+    passed_args_set = set(chosen_tool_args.keys())
+
+    if len(passed_args_set) > len(all_args_set):
+        raise Exception(f"Unable to fit parameters {chosen_tool_args} to Tool arguments {all_args_set}: Extra params")
+
+    if not required_args_set.issubset(passed_args_set):
+        raise Exception(f"Unable to fit parameters {chosen_tool_args} to Tool arguments {all_args_set}: Wrong params")
