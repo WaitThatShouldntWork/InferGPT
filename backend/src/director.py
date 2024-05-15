@@ -1,6 +1,6 @@
 import logging
 from src.utils import call_model
-from src.agents import create_tasks
+from src.agents import create_tasks, agents_details
 from src.supervisors import solve_all_tasks
 
 logging = logging.getLogger(__name__)
@@ -44,7 +44,7 @@ def question(question):
     logging.debug("Received utterance: {question}")
 
     if determine_intention(question) == "TRUE":
-        task_dict = create_tasks(question)
+        task_dict = create_tasks(question, agents_details)
         final_answer = solve_all_tasks(task_dict)
         return final_answer
 

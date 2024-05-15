@@ -1,5 +1,6 @@
 from src.prompts import PromptEngine
 
+
 # ruff: noqa: E501
 def test_mistral_prompt_engine_creation():
     try:
@@ -21,8 +22,7 @@ def test_load_agent_selection_format_template():
         \\"criticism\\": \\"constructive self-criticism\\",
         \\"speak\\": \\"thoughts summary to say to user on 1. if your solving the current or next task and why 2. which agent you've chosen and why\\",
     },
-    \\"current_or_next_task\\": \\"either the word "current" or the word "next" depending on which task you're trying to solve\\",
-    \\"agent\\": \\"exact string of the agent to solve task chosen\\"
+    \\"agent_name\\": \\"exact string of the single agent to solve task chosen\\"
 }"""
         prompt_string = engine.load_prompt("agent-selection-format")
         assert prompt_string == expected_string
@@ -33,25 +33,20 @@ def test_load_agent_selection_format_template():
 def test_load_best_next_step_template():
     engine = PromptEngine()
     try:
-        expected_string = """
+        task = "make sure the PromptEngine is working!"
+        expected_string = f"""
 You are an expert in determining the next best step towards completing a list of tasks.
 
 
 ## Current Task
 the Current Task is:
 
-
+{task}
 
 
 ## History
 below is your history of all work you have assigned and had completed by Agents
 Trust the information below completely (100% accurate)
-
-
-
-## Next task
-If you believe you have solved the Current Task, this is the Next Task:
-
 
 
 
@@ -63,18 +58,14 @@ Here is the list of Agents you can choose from:
 AGENT LIST:
 
 
-If none of the agents are appropriate for solving this goal, choose "UnresolvableTaskAgent".
-If you believe you have solved the final problem, choose "GoalAchievedAgent"
-
-
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
-If you\'re last attempt at the Current Task looks successful, move on to the Next Task
+If the same agent_name and task are repeated more than twice in the history, you must not pick that agent_name.
 
 Your decisions must always be made independently without seeking user assistance.
 Play to your strengths as an LLM and pursue simple strategies with no legal complications.
 """
-        prompt_string = engine.load_prompt("best-next-step", task="make sure the PromptEngine is working!")
+        prompt_string = engine.load_prompt("best-next-step", task=task)
         assert prompt_string == expected_string
 
     except Exception:
@@ -84,32 +75,22 @@ Play to your strengths as an LLM and pursue simple strategies with no legal comp
 def test_load_best_next_step_with_history_template():
     engine = PromptEngine()
     try:
-        expected_string = """
+        task = "make sure the PromptEngine is working!"
+        history = ["First action", "Second action", "Third action"]
+        expected_string = f"""
 You are an expert in determining the next best step towards completing a list of tasks.
 
 
 ## Current Task
 the Current Task is:
 
-
+{task}
 
 
 ## History
 below is your history of all work you have assigned and had completed by Agents
 Trust the information below completely (100% accurate)
-
-- First action
-
-- Second action
-
-- Third action
-
-
-
-## Next task
-If you believe you have solved the Current Task, this is the Next Task:
-
-
+{history}
 
 
 ## Agents
@@ -120,22 +101,14 @@ Here is the list of Agents you can choose from:
 AGENT LIST:
 
 
-If none of the agents are appropriate for solving this goal, choose "UnresolvableTaskAgent".
-If you believe you have solved the final problem, choose "GoalAchievedAgent"
-
-
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
-If you\'re last attempt at the Current Task looks successful, move on to the Next Task
+If the same agent_name and task are repeated more than twice in the history, you must not pick that agent_name.
 
 Your decisions must always be made independently without seeking user assistance.
 Play to your strengths as an LLM and pursue simple strategies with no legal complications.
 """
-        prompt_string = engine.load_prompt(
-            "best-next-step",
-            task="make sure the PromptEngine is working!",
-            history=["First action", "Second action", "Third action"]
-        )
+        prompt_string = engine.load_prompt("best-next-step", task=task, history=history)
         assert prompt_string == expected_string
 
     except Exception:
@@ -145,13 +118,15 @@ Play to your strengths as an LLM and pursue simple strategies with no legal comp
 def test_load_create_tasks_template():
     engine = PromptEngine()
     try:
+        list_of_agents = "TestAgentOne, TestAgentTwo, TestAgentThree"
         expected_string = """You are an agent who specialises in breaking down questions into smaller tasks that are performed to complete
 the question with allocated Agents to each of the tasks.
 
 You know that an Agent is a digital assistant like yourself that you can hand work on to.
 Here is the list of Agents you can choose from:
 
-AGENT LIST: TestAgentOne, TestAgentTwo, TestAgentThree
+AGENT LIST:
+TestAgentOne, TestAgentTwo, TestAgentThree
 
 You are dedicated to performing the job of breaking down a user question into up to 5 tasks that are easy
 to understand and manageable in size.
@@ -213,17 +188,7 @@ response:
         }
     ]
 }"""
-        prompt_string = engine.load_prompt("create-tasks", list_of_agents="TestAgentOne, TestAgentTwo, TestAgentThree")
-        assert prompt_string == expected_string
-    except Exception:
-        raise
-
-
-def test_load_write_to_history_template():
-    engine = PromptEngine()
-    try:
-        expected_string = "You have called TestAgent. You received the following result: Example result"
-        prompt_string = engine.load_prompt("write-to-history", agent_name="TestAgent", agent_result="Example result")
+        prompt_string = engine.load_prompt("create-tasks", list_of_agents=list_of_agents)
         assert prompt_string == expected_string
     except Exception:
         raise

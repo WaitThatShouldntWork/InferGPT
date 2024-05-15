@@ -1,34 +1,6 @@
 import pytest
-from src.agents import tool_metadata, Parameter
+from tests.agents import mock_tool_a, mock_tool_b
 from src.agents.adapters import create_all_tools_str, to_object, extract_tool, validate_args
-
-name_a = "Mock Tool A"
-name_b = "Mock Tool B"
-description = "A test tool"
-param_description = "A string"
-
-@tool_metadata(
-    name=name_a,
-    description=description,
-    parameters={
-        "input": Parameter(type="string", description=param_description, required=True),
-        "optional": Parameter(type="string", description=param_description, required=False),
-        "another_optional": Parameter(type="string", description=param_description, required=False),
-    },
-)
-def mock_tool_a(input: str):
-    return input
-
-@tool_metadata(
-    name=name_b,
-    description=description,
-    parameters={
-        "input": Parameter(type="string", description=param_description, required=True),
-        "optional": Parameter(type="string", description=param_description, required=False),
-    },
-)
-def mock_tool_b(input: str):
-    return input
 
 expected_tools_str = """{"description": "A test tool", "name": "Mock Tool A", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}, "another_optional": {"type": "string", "description": "A string"}}}
 
