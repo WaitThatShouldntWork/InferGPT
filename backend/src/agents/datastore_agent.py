@@ -37,5 +37,3 @@ class DatastoreAgent(Agent):
         print(db_response)
         logger.info(db_response)
         return db_response
-
-
