@@ -2,9 +2,11 @@ from abc import ABC
 import json
 import logging
 from typing import List, Type
+
 from .adapters import create_all_tools_str, extract_tool, validate_args
 from src.utils import call_model
 from src.prompts import PromptEngine
+from src.scratchpad import get_scratchpad
 from .tool import Tool
 from .types import Action_and_args
 
@@ -18,7 +20,12 @@ class Agent(ABC):
         logging.debug("Picking Action")
 
         format_prompt = engine.load_prompt("tool-selection-format")
-        tools_available = engine.load_prompt("best-tool", task=utterance, tools=create_all_tools_str(self.tools))
+        tools_available = engine.load_prompt(
+            "best-tool",
+            task=utterance,
+            history=get_scratchpad(),
+            tools=create_all_tools_str(self.tools),
+        )
 
         logging.info("tools_available_prompt:")
         logging.info(tools_available)
@@ -26,7 +33,7 @@ class Agent(ABC):
         response = json.loads(call_model(format_prompt, tools_available))
 
         logging.info("Tool chosen - choice response:")
-        logging.info(response)
+        logging.info(json.dumps(response))
 
         try:
             chosen_tool = extract_tool(response["tool_name"], self.tools)

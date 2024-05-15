@@ -2,7 +2,7 @@ import json
 import logging
 from typing import Tuple
 
-from src.scratchpad import get_scratchpad, update_scratchpad
+from src.scratchpad import clear_scratchpad, get_scratchpad, update_scratchpad
 from src.router import get_agent_for_task
 from src.agents import validator_agent
 
@@ -50,4 +50,5 @@ def solve_all_tasks(tasks_dict):
     logging.info(json.dumps(get_scratchpad(), indent=4))
 
     final_answer = get_scratchpad()[-1]
+    clear_scratchpad()
     return final_answer["result"]  # TODO: Add summariser method

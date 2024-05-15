@@ -15,14 +15,14 @@ def test_load_agent_selection_format_template():
         expected_string = """Reply only in json with the following format:
 
 {
-    \\"thoughts\\": {
-        \\"text\\":  \\"thoughts\\",
-        \\"plan\\": \\"description of the plan for the chosen agent\\",
-        \\"reasoning\\": \\"reasoning behind choosing the agent\\",
-        \\"criticism\\": \\"constructive self-criticism\\",
-        \\"speak\\": \\"thoughts summary to say to user on 1. if your solving the current or next task and why 2. which agent you've chosen and why\\",
+    \"thoughts\": {
+        \"text\":  \"thoughts\",
+        \"plan\": \"description of the plan for the chosen agent\",
+        \"reasoning\": \"reasoning behind choosing the agent\",
+        \"criticism\": \"constructive self-criticism\",
+        \"speak\": \"thoughts summary to say to user on 1. if your solving the current or next task and why 2. which agent you've chosen and why\",
     },
-    \\"agent_name\\": \\"exact string of the single agent to solve task chosen\\"
+    \"agent_name\": \"exact string of the single agent to solve task chosen\"
 }"""
         prompt_string = engine.load_prompt("agent-selection-format")
         assert prompt_string == expected_string
@@ -196,13 +196,18 @@ response:
 
 def test_best_tool_template():
     engine = PromptEngine()
-    tools = """{"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}"""
+    tools = """{\"description\": \"mock desc\", \"name\": \"say hello world\", \"parameters\": {\"name\": {\"type\": \"string\", \"description\": \"name of user\"}}}"""
     try:
         expected_string = """You are an expert at picking a tool to solve a task
 
 The task is as follows:
 
 Say hello world to the user
+
+## History
+below is your history of all work you have assigned and had completed by Agents
+Trust the information below completely (100% accurate)
+
 
 Pick 1 tool (no more than 1) from the list below to complete this task.
 Fit the correct parameters from the task to the tool arguments.
@@ -214,9 +219,9 @@ but feel free to if it is necessary
 If none of the tools are appropriate for the task, return the following tool
 
 {
-    \\"tool_name\\":  \\"None\\",
-    \\"tool_parameters\\":  \\"{}\\",
-    \\"reasoning\\": \\"No tool was appropriate for the task\\"
+    \"tool_name\":  \"None\",
+    \"tool_parameters\":  \"{}\",
+    \"reasoning\": \"No tool was appropriate for the task\"
 }"""
         prompt_string = engine.load_prompt("best-tool", task="Say hello world to the user", tools=tools)
         assert prompt_string == expected_string
@@ -230,12 +235,10 @@ def test_tool_selection_format_template():
         expected_string = """Reply only in json with the following format:
 
 {
-    \\"tool_name\\":  \\"the exact string name of the tool chosen\\",
-    \\"tool_parameters\\":  \\"a python dictionary matching the tools dictionary shape\\",
-    \\"reasoning\\": \\"A sentence on why you chose that tool\\"
-}
-
-Use quotations (") and not any of the following: ', `"""
+    \"tool_name\":  \"the exact string name of the tool chosen\",
+    \"tool_parameters\":  \"a python dictionary (using quotations (")) matching the chosen tools dictionary shape\",
+    \"reasoning\": \"A sentence on why you chose that tool\"
+}"""
         prompt_string = engine.load_prompt("tool-selection-format")
         assert prompt_string == expected_string
     except Exception:
