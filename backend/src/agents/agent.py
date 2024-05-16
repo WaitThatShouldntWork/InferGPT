@@ -17,7 +17,6 @@ class Agent(ABC):
     description: str
     tools: List[Tool]
     def __get_action(self, utterance: str) -> Action_and_args:
-        logging.debug("Picking Action")
 
         format_prompt = engine.load_prompt("tool-selection-format")
         tools_available = engine.load_prompt(
@@ -27,8 +26,8 @@ class Agent(ABC):
             tools=create_all_tools_str(self.tools),
         )
 
-        logging.info("tools_available_prompt:")
-        logging.info(tools_available)
+        logging.info("#####  ~  Picking Action from tools:  ~  #####")
+        logging.info(create_all_tools_str(self.tools))
 
         response = json.loads(call_model(format_prompt, tools_available))
 
@@ -47,7 +46,7 @@ class Agent(ABC):
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
         result_of_action = action(**args)
-        logging.info(f'Tool "{action.name}" chosen for agent "{self.name}" with result: {result_of_action}')
+        logging.info(f'Tool "{action.name}" gave result: {result_of_action}')
         return result_of_action
 
 

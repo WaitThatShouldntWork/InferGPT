@@ -23,11 +23,11 @@ response_format_prompt = prompt_engine.load_prompt("agent-selection-format")
 def build_plan(task, scratchpad):
     best_next_step_prompt = build_best_next_step_prompt(task, scratchpad)
 
-    logging.info("best_next_step_prompt:")
-    logging.info(best_next_step_prompt)
-
     # Call model to choose agent
-    logging.info("Calling LLM for next best step...")
+    logging.info("#####  ~  Calling LLM for next best step  ~  #####")
+
+    logging.info("Scratchpad so far:")
+    logging.info(scratchpad)
     best_next_step = call_model(response_format_prompt, best_next_step_prompt)
 
     plan = to_json(best_next_step, "Failed to interpret LLM next step format from step string")

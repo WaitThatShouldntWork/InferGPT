@@ -2,13 +2,11 @@ from typing import List
 
 from .tool import Tool
 import json
-import logging
 
 def create_all_tools_str(tools: List[Tool]) -> str:
     tools_object_list_as_string = ""
     for tool in tools:
         tools_object_list_as_string += to_object(tool) + "\n\n"
-    logging.info(tools_object_list_as_string)
     return tools_object_list_as_string
 
 
