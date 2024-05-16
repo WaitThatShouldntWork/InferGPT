@@ -79,6 +79,8 @@ For instructions on how to run indivdual components locally or within Docker con
 > [!WARNING]  
 > the first time you do this it may take longer as the compose file builds the images.
 
+> To re-build the docker images following any changes, run `docker compose build` first or use `docker compose up --build`.
+
 - View the frontend at [localhost:8650](http://localhost:8650)
 - View the Neo4j Browser at [localhost:7474](http://localhost:7474)
 - Type the phrase "healthcheck" into the frontend UI to test if everything is connected successfully
