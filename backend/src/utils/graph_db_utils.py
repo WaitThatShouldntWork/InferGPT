@@ -27,7 +27,7 @@ def test_connection():
         return connection_healthy
 
 
-def create_query(llm_query):
+def execute_query(llm_query):
     try:
         session = driver.session()
         query = llm_query
