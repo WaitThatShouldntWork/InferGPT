@@ -55,7 +55,6 @@ Configuration steps:
 - Rename the copied file as `.env`.
 - Update the `.env` file with your wanted configuration following the guidance in the file.
 
-
 ### Running the application
 
 There are a few ways to run the application:
