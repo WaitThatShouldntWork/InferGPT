@@ -1,7 +1,6 @@
 from src.utils import call_model
 from src.utils.graph_db_utils import execute_query
 from src.agents import Agent, agent_metadata
-from src.agents.graph_schema import graph_schema, narrative_options
 import logging
 from src.prompts import PromptEngine
 from datetime import datetime
@@ -11,10 +10,12 @@ logger = logging.getLogger(__name__)
 
 current_user = "John Doe"
 engine = PromptEngine()
+narrative_options = "Bills, Groceries, Entertainment, Rent, Shopping"
+
+graph_schema_prompt = engine.load_prompt("graph-schema", narrative_options=narrative_options)
 
 generate_cypher_query_prompt = engine.load_prompt("generate-cypher-query",
-                                                  graph_schema=graph_schema,
-                                                  narrative_options=narrative_options,
+                                                  graph_schema_prompt=graph_schema_prompt,
                                                   current_date=datetime.now())
 
 @agent_metadata(
