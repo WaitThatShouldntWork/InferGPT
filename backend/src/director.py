@@ -44,7 +44,17 @@ def question(question):
     logging.debug("Received utterance: {question}")
 
     if determine_intention(question) == "TRUE":
-        task_dict = create_tasks(question, agents_details)
+        # task_dict = create_tasks(question, agents_details)
+        # final_answer = solve_all_tasks(task_dict)
+        task_dict = {
+            "tasks": [
+                {
+                    "summary": question,
+                    "explanation": "solve the above question"
+                }
+            ]
+        }
+        logging.info(task_dict)
         final_answer = solve_all_tasks(task_dict)
         return final_answer
 
