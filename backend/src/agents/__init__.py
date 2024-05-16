@@ -1,3 +1,4 @@
+from .create_file_agent import CreateFileAgent
 from .create_tasks_agent import create_tasks
 from .tool import tool_metadata, Parameter
 from .agent import Agent, agent_metadata, convert_to_mistral_tool
@@ -12,7 +13,7 @@ def get_agent_details(agent):
     return {"name": agent.name, "description": agent.description}
 
 
-agents = [DatastoreAgent(), MathsAgent()]
+agents = [DatastoreAgent(), MathsAgent(), CreateFileAgent()]
 agents_details = [get_agent_details(agent) for agent in agents]
 
 __all__ = [
