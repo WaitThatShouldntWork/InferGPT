@@ -2,7 +2,7 @@ import json
 import logging
 from typing import Tuple
 
-from src.scratchpad import clear_scratchpad, get_scratchpad, update_scratchpad
+from src.utils import clear_scratchpad, get_scratchpad, update_scratchpad
 from src.router import get_agent_for_task
 from src.agents import validator_agent
 

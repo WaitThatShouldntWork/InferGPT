@@ -204,10 +204,10 @@ The task is as follows:
 
 Say hello world to the user
 
-## History
 below is your history of all work you have assigned and had completed by Agents
 Trust the information below completely (100% accurate)
 
+scratchpad of history
 
 Pick 1 tool (no more than 1) from the list below to complete this task.
 Fit the correct parameters from the task to the tool arguments.
@@ -223,7 +223,7 @@ If none of the tools are appropriate for the task, return the following tool
     \"tool_parameters\":  \"{}\",
     \"reasoning\": \"No tool was appropriate for the task\"
 }"""
-        prompt_string = engine.load_prompt("best-tool", task="Say hello world to the user", tools=tools)
+        prompt_string = engine.load_prompt("best-tool", task="Say hello world to the user", scratchpad="scratchpad of history", tools=tools)
         assert prompt_string == expected_string
     except Exception:
         raise
