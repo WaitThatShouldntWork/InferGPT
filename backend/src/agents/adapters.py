@@ -4,10 +4,7 @@ from .tool import Tool
 import json
 
 def create_all_tools_str(tools: List[Tool]) -> str:
-    tools_object_list_as_string = ""
-    for tool in tools:
-        tools_object_list_as_string += to_object(tool) + "\n\n"
-    return tools_object_list_as_string
+    return "".join(to_object(tool) + "\n\n" for tool in tools)
 
 
 def to_object(tool: Tool) -> str:
