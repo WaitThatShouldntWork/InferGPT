@@ -32,9 +32,7 @@ def execute_query(llm_query):
         session = driver.session()
         query = llm_query
         records = session.run(query)
-        record_dict = []
-        for record in records:
-            record_dict.append(record.data())
+        record_dict = [record.data() for record in records]
         return record_dict
 
     except Exception as e:
