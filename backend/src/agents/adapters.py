@@ -1,13 +1,15 @@
 from typing import List
 
+from agents import Parameter
+
 from .tool import Tool
 import json
 
 def create_all_tools_str(tools: List[Tool]) -> str:
-    return "".join(to_object(tool) + "\n\n" for tool in tools)
+    return "".join(convert_tool_to_obj_str(tool) + "\n\n" for tool in tools)
 
 
-def to_object(tool: Tool) -> str:
+def convert_tool_to_obj_str(tool: Tool) -> str:
     obj = {
         "description": tool.description,
         "name": tool.name,
@@ -33,7 +35,7 @@ def extract_tool(chosen_tool_name: str, agent_tools: List[Tool]) -> Tool:
     return tool
 
 
-def get_required_args(tool: Tool):
+def get_required_args(tool: Tool) -> dict[str, Parameter]:
     parameters_no_optional_args = tool.parameters.copy()
     for key, param in tool.parameters.items():
         if not param.required:
