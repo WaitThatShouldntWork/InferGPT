@@ -2,7 +2,7 @@ from src.utils.scratchpad import clear_scratchpad, get_scratchpad, update_scratc
 
 
 task = {
-    'summary': 'example task', 
+    'summary': 'example task',
     'explanation': 'This is an example task'
 }
 
