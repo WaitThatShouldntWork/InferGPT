@@ -10,6 +10,7 @@ from .tool import Tool
 from .types import Action_and_args
 
 engine = PromptEngine()
+format_prompt = engine.load_prompt("tool-selection-format")
 
 class Agent(ABC):
     name: str
@@ -17,7 +18,6 @@ class Agent(ABC):
     tools: List[Tool]
     def __get_action(self, utterance: str) -> Action_and_args:
 
-        format_prompt = engine.load_prompt("tool-selection-format")
         tools_available = engine.load_prompt(
             "best-tool",
             task=utterance,
