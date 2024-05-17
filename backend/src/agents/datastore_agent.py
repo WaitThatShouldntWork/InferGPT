@@ -5,6 +5,8 @@ import logging
 from src.prompts import PromptEngine
 from datetime import datetime
 from src.utils import to_json
+from .tool import tool_metadata
+from .types import Parameter
 
 logger = logging.getLogger(__name__)
 
@@ -18,15 +20,16 @@ generate_cypher_query_prompt = engine.load_prompt("generate-cypher-query",
                                                   graph_schema_prompt=graph_schema_prompt,
                                                   current_date=datetime.now())
 
-@agent_metadata(
-    name="DatastoreAgent",
-    description="This agent is responsible for handling database queries.",
-    prompt=generate_cypher_query_prompt,
-    tools=[],
-)
-class DatastoreAgent(Agent):
-    def invoke(self, user_prompt):
-        llm_query = call_model(self.prompt, user_prompt)
+@tool_metadata(
+    name="generate cypher query",
+    description="Generate Cypher query based on user utterance",
+    parameters={"user_prompt": Parameter(
+            type="string",
+            description="The utterance from the user that the query will be based on",
+        )})
+
+def generate_query(user_prompt):
+        llm_query = call_model(generate_cypher_query_prompt, user_prompt)
         logger.info("llm query: ")
         logger.info(llm_query)
         json_query = to_json(llm_query)
@@ -38,3 +41,12 @@ class DatastoreAgent(Agent):
         print(db_response)
         logger.info(db_response)
         return db_response
+
+@agent_metadata(
+    name="DatastoreAgent",
+    description="This agent is responsible for handling database queries.",
+    prompt=generate_cypher_query_prompt,
+    tools=[generate_query],
+)
+class DatastoreAgent(Agent):
+    pass
