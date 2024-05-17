@@ -22,7 +22,7 @@ class Agent(ABC):
         tools_available = engine.load_prompt(
             "best-tool",
             task=utterance,
-            history=get_scratchpad(),
+            scratchpad=get_scratchpad(),
             tools=create_all_tools_str(self.tools),
         )
 
