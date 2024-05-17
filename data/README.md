@@ -29,6 +29,7 @@ Once installed follow the steps below:
 5. Run the database in Neo4j desktop.
 6. Test the connection is working by asking InferGPT the keyphrase "healthcheck". 
 It will return with a status update on the state of the backend and database
+7. Load the data located at data/create_graph.cypher into the database and run it
 
 ## Running Neo4j in a Docker Container
 
@@ -52,4 +53,4 @@ docker run -e NEO4J_AUTH=neo4j/password -p 7474:7474 -p 7687:7687 {my-data-image
 
 - [x] Create `neo4j_utils` module and connect to a neo4j knowledge graph
 - [ ] Create dockerised neo4j graph that can be run here
-- [ ] Create cypher script for setting up graph if running the service locally
+- [x] Create cypher script for setting up graph if running the service locally

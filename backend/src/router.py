@@ -23,8 +23,8 @@ response_format_prompt = prompt_engine.load_prompt("agent-selection-format")
 def build_plan(task, scratchpad):
     best_next_step_prompt = build_best_next_step_prompt(task, scratchpad)
 
-    logging.info("best_next_step_prompt:")
-    logging.info(best_next_step_prompt)
+    logging.info("Scratchpad: ")
+    logging.info(scratchpad)
 
     # Call model to choose agent
     logging.info("Calling LLM for next best step...")
