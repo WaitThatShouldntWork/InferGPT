@@ -5,13 +5,13 @@ FROM python:3.12
 WORKDIR /backend
 
 # Copy just the requirements into the working directory so it gets cached by itself
-COPY requirements.txt /backend/requirements.txt
+COPY ./requirements.txt ./requirements.txt
 
 # Install the dependencies from the requirements file
 RUN pip install --no-cache-dir --upgrade -r /backend/requirements.txt
 
 # Copy the source code into the working directory
-COPY ./src/. /backend/src
+COPY ./src/. ./src
 
 EXPOSE 8250
 
