@@ -1,6 +1,6 @@
 from typing import List
 
-from agents import Parameter
+from .tool import Parameter
 
 from .tool import Tool
 import json

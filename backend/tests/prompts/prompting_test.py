@@ -211,8 +211,8 @@ scratchpad of history
 
 Pick 1 tool (no more than 1) from the list below to complete this task.
 Fit the correct parameters from the task to the tool arguments.
-If the parameters are tagged as optional, you do not need to fill them in,
-but feel free to if it is necessary
+Parameters with required as False do not need to be fit.
+Add if appropriate, but do not hallucinate arguments for these parameters
 
 {"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}
 
