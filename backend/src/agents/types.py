@@ -1,4 +1,4 @@
-from typing import Callable, Protocol, Tuple, TypeVar
+from typing import Callable, Tuple, TypeVar
 
 
 Action = Callable[..., str]
@@ -17,8 +17,3 @@ class Parameter:
         self.required = required
 
 
-class Tool(Protocol):
-    name: str
-    description: str
-    parameters: dict[str, Parameter]
-    action: Action

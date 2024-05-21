@@ -1,12 +1,10 @@
 from src.utils import call_model
 from src.utils.graph_db_utils import execute_query
-from src.agents import Agent, agent_metadata
+from src.agents import Agent, agent, tool, Parameter
 import logging
 from src.prompts import PromptEngine
 from datetime import datetime
 from src.utils import to_json
-from .tool import tool_metadata
-from .types import Parameter
 
 logger = logging.getLogger(__name__)
 
@@ -20,14 +18,13 @@ generate_cypher_query_prompt = engine.load_prompt("generate-cypher-query",
                                                   graph_schema_prompt=graph_schema_prompt,
                                                   current_date=datetime.now())
 
-@tool_metadata(
+@tool(
     name="generate cypher query",
     description="Generate Cypher query based on user utterance",
     parameters={"user_prompt": Parameter(
             type="string",
             description="The utterance from the user that the query will be based on",
         )})
-
 def generate_query(user_prompt):
         llm_query = call_model(generate_cypher_query_prompt, user_prompt)
         json_query = to_json(llm_query)
@@ -40,7 +37,7 @@ def generate_query(user_prompt):
         return db_response
 
 
-@agent_metadata(
+@agent(
     name="DatastoreAgent",
     description="This agent is responsible for handling database queries.",
     tools=[generate_query],

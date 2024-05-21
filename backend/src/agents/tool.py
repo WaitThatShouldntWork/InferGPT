@@ -1,13 +1,33 @@
-from .types import Parameter, Tool
+import json
+from .types import Action, Parameter
 
 
-def tool_metadata(name: str, description: str, parameters: dict[str, Parameter]):
-    def decorator(tool) -> Tool:
-        tool.name = name
-        tool.description = description
-        tool.parameters = parameters
-        tool.action = tool
+class Tool():
+    def __init__(self, name: str, description: str, parameters: dict[str, Parameter], action: Action):
+        self.name = name
+        self.description = description
+        self.parameters = parameters
+        self.action = action
 
-        return tool
+    def to_str(self) -> str:
+        obj = {
+            "description": self.description,
+            "name": self.name,
+            "parameters": {
+                key: {
+                        "type": inner_dict.type,
+                        "description": inner_dict.description,
+                    }
+                    for key, inner_dict in self.parameters.items()
+            },
+        }
 
-    return decorator
+        return json.dumps(obj)
+
+
+def tool(name: str, description: str, parameters: dict[str, Parameter]):
+
+    def create_tool_from(action) -> Tool:
+        return Tool(name, description, parameters, action)
+
+    return create_tool_from

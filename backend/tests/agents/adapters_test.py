@@ -1,6 +1,6 @@
 import pytest
 from tests.agents import mock_tool_a, mock_tool_b
-from src.agents.adapters import create_all_tools_str, convert_tool_to_obj_str, extract_tool, validate_args
+from src.agents.adapters import create_all_tools_str, extract_tool, validate_args
 
 expected_tools_str = """{"description": "A test tool", "name": "Mock Tool A", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}, "another_optional": {"type": "string", "description": "A string"}}}
 
@@ -10,12 +10,6 @@ expected_tools_str = """{"description": "A test tool", "name": "Mock Tool A", "p
 
 def test_create_all_tools_str():
     assert create_all_tools_str([mock_tool_a, mock_tool_b]) == expected_tools_str
-
-
-expected_tools_object = """{"description": "A test tool", "name": "Mock Tool A", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}, "another_optional": {"type": "string", "description": "A string"}}}""" # noqa: E501
-
-def test_to_object():
-    assert convert_tool_to_obj_str(mock_tool_a) == expected_tools_object
 
 
 def test_extract_tool_success():

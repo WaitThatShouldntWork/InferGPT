@@ -1,28 +1,9 @@
 from typing import List
+from .tool import Parameter, Tool
 
-from .tool import Parameter
-
-from .tool import Tool
-import json
 
 def create_all_tools_str(tools: List[Tool]) -> str:
-    return "".join(convert_tool_to_obj_str(tool) + "\n\n" for tool in tools)
-
-
-def convert_tool_to_obj_str(tool: Tool) -> str:
-    obj = {
-        "description": tool.description,
-        "name": tool.name,
-        "parameters": {
-            key: {
-                    "type": inner_dict.type,
-                    "description": inner_dict.description,
-                }
-                for key, inner_dict in tool.parameters.items()
-        },
-    }
-
-    return json.dumps(obj)
+    return "".join(tool.to_str() + "\n\n" for tool in tools)
 
 
 def extract_tool(chosen_tool_name: str, agent_tools: List[Tool]) -> Tool:

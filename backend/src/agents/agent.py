@@ -45,11 +45,11 @@ class Agent(ABC):
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
         result_of_action = action(**args)
-        logging.info(f'Tool "{action.name}" gave result: {result_of_action}')
+        logging.info(f'Action gave result: {result_of_action}')
         return result_of_action
 
 
-def agent_metadata(name: str, description: str, tools: List[Tool]):
+def agent(name: str, description: str, tools: List[Tool]):
     def decorator(agent: Type[Agent]):
         agent.name = name
         agent.description = description

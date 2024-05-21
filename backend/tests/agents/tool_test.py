@@ -1,11 +1,10 @@
-from src.agents import tool_metadata, Parameter
-
+from src.agents import Parameter, tool
 
 name = "Mock Tool"
 description = "A test tool"
 
 
-@tool_metadata(
+@tool(
     description=description,
     name=name,
     parameters={
@@ -50,4 +49,9 @@ def test_tool_optional_required():
 
 
 def test_tool_action():
-    assert mock_tool.action == mock_tool
+    assert mock_tool.action() == "Hello, World!"
+
+
+expected_tools_object = """{"description": "A test tool", "name": "Mock Tool", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}""" # noqa: E501
+def test_to_object():
+    assert mock_tool.to_str() == expected_tools_object

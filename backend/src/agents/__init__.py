@@ -1,6 +1,6 @@
 from .create_tasks_agent import create_tasks
-from .tool import tool_metadata, Parameter
-from .agent import Agent, agent_metadata
+from .tool import tool, Parameter
+from .agent import Agent, agent
 from .datastore_agent import DatastoreAgent
 from .maths_agent import MathsAgent
 from .validator_agent import ValidatorAgent
@@ -19,9 +19,9 @@ __all__ = [
     "Agent",
     "agents",
     "agents_details",
-    "agent_metadata",
+    "agent",
     "create_tasks",
-    "tool_metadata",
+    "tool",
     "Parameter",
     "validator_agent",
 ]

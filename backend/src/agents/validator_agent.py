@@ -1,12 +1,12 @@
 import logging
 from src.prompts import PromptEngine
 from src.utils import call_model
-from src.agents import Agent, agent_metadata
+from src.agents import Agent, agent
 
 engine = PromptEngine()
 validator_prompt = engine.load_prompt("validator")
 
-@agent_metadata(
+@agent(
     name="ValidatorAgent",
     description="This agent is responsible for validating the answers to the tasks",
     tools=[],
