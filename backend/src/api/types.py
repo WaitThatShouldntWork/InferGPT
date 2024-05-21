@@ -16,5 +16,6 @@ class Message:
     type: MessageTypes
     data: str | None
 
+
 Handler = Callable[[WebSocket, Callable, str | None], None]
-Handlers = Dict[MessageTypes, Handler]   
+Handlers = Dict[MessageTypes, Handler]

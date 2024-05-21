@@ -1,9 +1,8 @@
 import logging
 import logging.config
-from math import log
 import os
 from typing import NoReturn
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, WebSocket
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from src.utils import Config, test_connection
@@ -68,7 +67,7 @@ async def chat(utterance: str):
 
 connection_manager = ConnectionManager()
 
+
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket) -> NoReturn:
     await connection_manager.connect(websocket)
-    
