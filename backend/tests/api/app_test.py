@@ -1,4 +1,5 @@
 from fastapi.testclient import TestClient
+import pytest
 from src.api import app, healthy_response, unhealthy_neo4j_response, chat_fail_response
 
 client = TestClient(app)
@@ -45,3 +46,16 @@ def test_chat_response_failure(mocker):
     mock_question.assert_called_with(utterance)
     assert response.status_code == 500
     assert response.json() == chat_fail_response
+
+
+@pytest.mark.asyncio
+async def test_lifespan_populates_db(mocker) -> None:
+    mock_populate_db = mocker.patch("src.api.populate_db", return_value=mocker.Mock())
+    mock_annual_transactions_cypher_script = mocker.patch(
+        "src.api.annual_transactions_cypher_script", return_value=(mocker.Mock())
+    )
+    mock_annual_transaction_data = mocker.Mock()
+    mocker.patch("json.load", return_value=mock_annual_transaction_data)
+
+    with client:
+        mock_populate_db.assert_called_once_with(mock_annual_transactions_cypher_script, mock_annual_transaction_data)

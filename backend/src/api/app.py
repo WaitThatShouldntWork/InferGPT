@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+import json
 import logging
 import logging.config
 import os
@@ -5,9 +7,11 @@ from typing import NoReturn
 from fastapi import FastAPI, WebSocket
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from src.utils.graph_db_utils import populate_db
 from src.utils import Config, test_connection
 from src.director import question
 from .connection_manager import ConnectionManager
+from src.utils.annual_cypher_import import annual_transactions_cypher_script
 
 # TODO: Add back in api_test.py from PR #37
 
@@ -15,7 +19,20 @@ config_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "conf
 logging.config.fileConfig(fname=config_file_path, disable_existing_loggers=False)
 logger = logging.getLogger(__name__)
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, "utils", "mock_transactions", "annual_transactions.json")
+
+    with open(file_path) as monthly_transactions:
+        monthly_transaction_data = json.load(monthly_transactions)
+
+    populate_db(annual_transactions_cypher_script, monthly_transaction_data)
+    yield
+
+
+app = FastAPI(lifespan=lifespan)
 config = Config()
 
 origins = [config.frontend_url]
