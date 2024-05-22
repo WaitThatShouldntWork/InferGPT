@@ -53,5 +53,7 @@ def test_tool_action():
 
 
 expected_tools_object = """{"description": "A test tool", "name": "Mock Tool", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}""" # noqa: E501
+
+
 def test_to_object():
     assert mock_tool.to_str() == expected_tools_object
