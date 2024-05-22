@@ -7,7 +7,7 @@ expected_message = "Hello to you too! From InferGPT"
 
 
 def test_health_check_response_healthy(mocker):
-    mock_test_connection = mocker.patch("src.api.api.test_connection", return_value=True)
+    mock_test_connection = mocker.patch("src.api.app.test_connection", return_value=True)
 
     response = client.get("/health")
 
@@ -17,7 +17,7 @@ def test_health_check_response_healthy(mocker):
 
 
 def test_health_check_response_neo4j_unhealthy(mocker):
-    mock_test_connection = mocker.patch("src.api.api.test_connection", return_value=False)
+    mock_test_connection = mocker.patch("src.api.app.test_connection", return_value=False)
 
     response = client.get("/health")
 
@@ -27,7 +27,7 @@ def test_health_check_response_neo4j_unhealthy(mocker):
 
 
 def test_chat_response_success(mocker):
-    mock_question = mocker.patch("src.api.api.question", return_value=expected_message)
+    mock_question = mocker.patch("src.api.app.question", return_value=expected_message)
 
     response = client.get(f"/chat?utterance={utterance}")
 
@@ -37,7 +37,7 @@ def test_chat_response_success(mocker):
 
 
 def test_chat_response_failure(mocker):
-    mock_question = mocker.patch("src.api.api.question", return_value=expected_message)
+    mock_question = mocker.patch("src.api.app.question", return_value=expected_message)
     mock_question.side_effect = Exception("An error occurred")
 
     response = client.get(f"/chat?utterance={utterance}")
