@@ -1,11 +1,13 @@
 import logging
 import logging.config
 import os
-from fastapi import FastAPI
+from typing import NoReturn
+from fastapi import FastAPI, WebSocket
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from src.utils import Config, test_connection
 from src.director import question
+from .connection_manager import ConnectionManager
 
 # TODO: Add back in api_test.py from PR #37
 
@@ -61,3 +63,11 @@ async def chat(utterance: str):
     except Exception as e:
         logger.exception(e)
         return JSONResponse(status_code=500, content=chat_fail_response)
+
+
+connection_manager = ConnectionManager()
+
+
+@app.websocket("/ws")
+async def websocket_endpoint(websocket: WebSocket) -> NoReturn:
+    await connection_manager.connect(websocket)
