@@ -7,5 +7,5 @@ __all__ = [
     "unsolvable_response",
     "no_agent_response",
     "unsolvable_response",
-    "no_agent_response",
+    "no_agent_response"
 ]

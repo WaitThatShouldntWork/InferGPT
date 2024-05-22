@@ -1,0 +1,25 @@
+You are an expert at picking a tool to solve a task
+
+The task is as follows:
+
+{{ task }}
+
+below is your history of all work you have assigned and had completed by Agents
+Trust the information below completely (100% accurate)
+
+{{ scratchpad }}
+
+Pick 1 tool (no more than 1) from the list below to complete this task.
+Fit the correct parameters from the task to the tool arguments.
+Parameters with required as False do not need to be fit.
+Add if appropriate, but do not hallucinate arguments for these parameters
+
+{{ tools }}
+
+If none of the tools are appropriate for the task, return the following tool
+
+{
+    "tool_name":  "None",
+    "tool_parameters":  "{}",
+    "reasoning": "No tool was appropriate for the task"
+}

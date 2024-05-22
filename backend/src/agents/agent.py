@@ -1,41 +1,58 @@
 from abc import ABC
+import json
 import logging
 from typing import List, Type
-from src.utils import call_model_with_tools
-from .adapters import convert_to_mistral_tool
+
+from .adapters import create_all_tools_str, extract_tool, validate_args
+from src.utils import call_model, get_scratchpad
+from src.prompts import PromptEngine
 from .tool import Tool
 from .types import Action_and_args
 
+engine = PromptEngine()
+format_prompt = engine.load_prompt("tool-selection-format")
 
 class Agent(ABC):
     name: str
     description: str
     tools: List[Tool]
-    prompt: str
-
     def __get_action(self, utterance: str) -> Action_and_args:
-        tools = map(convert_to_mistral_tool, self.tools)
-        (function_name, function_params) = call_model_with_tools(self.prompt, utterance, tools)
 
-        tool = next((tool for tool in self.tools if tool.action.__name__ == function_name), None)
+        tools_available = engine.load_prompt(
+            "best-tool",
+            task=utterance,
+            scratchpad=get_scratchpad(),
+            tools=create_all_tools_str(self.tools),
+        )
 
-        if tool is None:
-            raise ValueError(f"Tool {function_name} not found in agent {self.name}")
+        logging.info("#####  ~  Picking Action from tools:  ~  #####")
+        logging.info(create_all_tools_str(self.tools))
 
-        return (tool.action, function_params)
+        response = json.loads(call_model(format_prompt, tools_available))
+
+        logging.info("Tool chosen - choice response:")
+        logging.info(json.dumps(response))
+
+        try:
+            chosen_tool = extract_tool(response["tool_name"], self.tools)
+            chosen_tool_parameters = response["tool_parameters"]
+            validate_args(chosen_tool_parameters, chosen_tool)
+        except Exception:
+            raise Exception(f"Unable to extract chosen tool and parameters from {response}")
+
+        return (chosen_tool.action, chosen_tool_parameters)
 
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
         result_of_action = action(**args)
-        logging.info(f'Tool "{action.name}" chosen for agent "{self.name}" with result: {result_of_action}')
+        logging.info(f'Action gave result: {result_of_action}')
         return result_of_action
 
 
-def agent_metadata(name: str, description: str, prompt: str, tools: List[Tool]):
+def agent(name: str, description: str, tools: List[Tool]):
     def decorator(agent: Type[Agent]):
         agent.name = name
         agent.description = description
-        agent.prompt = prompt
         agent.tools = tools
         return agent
 
