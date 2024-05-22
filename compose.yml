@@ -68,6 +68,7 @@ services:
       dockerfile: ./Dockerfile
     environment:
       BACKEND_URL: ${BACKEND_URL}
+      WS_URL: ${WS_URL}
     depends_on:
       backend:
         condition: service_healthy
