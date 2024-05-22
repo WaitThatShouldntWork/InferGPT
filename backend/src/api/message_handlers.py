@@ -15,7 +15,7 @@ def create_on_ping():
     async def heartbeat(disconnect: Callable):
         try:
             await asyncio.sleep(heartbeat_timeout)
-            logging.error("Heartbeat timeout")
+            logging.info("Heartbeat timeout")
             await disconnect()
         except asyncio.CancelledError:
             pass
