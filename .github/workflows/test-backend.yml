@@ -1,14 +1,11 @@
 name: Test Backend
 on: 
   pull_request:
-    paths:
-      - 'backend/**'
 
 jobs:
   testing:
     name: Testing Backend
     runs-on: ubuntu-latest
-    if: github.event.pull_request.changed_files != 0
     defaults:
       run:
         working-directory: ./backend
