@@ -65,4 +65,6 @@ def populate_db(query, data) -> str:
         logging.exception(f"Error: {e}")
         raise
     finally:
+        if session:
+            session.close()
         driver.close()

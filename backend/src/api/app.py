@@ -25,10 +25,10 @@ async def lifespan(app: FastAPI):
     base_dir = os.path.dirname(os.path.abspath(__file__))
     file_path = os.path.join(base_dir, "utils", "mock_transactions", "annual_transactions.json")
 
-    with open(file_path) as monthly_transactions:
-        monthly_transaction_data = json.load(monthly_transactions)
+    with open(file_path) as annual_transactions:
+        annual_transaction_data = json.load(annual_transactions)
 
-    populate_db(annual_transactions_cypher_script, monthly_transaction_data)
+    populate_db(annual_transactions_cypher_script, annual_transaction_data)
     yield
 
 

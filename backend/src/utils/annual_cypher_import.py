@@ -34,7 +34,7 @@ FOREACH (_ IN CASE WHEN info.account.display_name IS NOT NULL THEN [1] ELSE [] E
 """
 
 remove_credits = """
-MATCH (n:Transaction {type: "CREDIT"})
+MATCH (n:Transaction {type: 'CREDIT'})
 DETACH DELETE n
 """
 
