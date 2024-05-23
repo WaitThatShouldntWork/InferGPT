@@ -43,3 +43,7 @@ MATCH (n:Transaction)-[r:PAID_TO]->(a:Merchant)
 WHERE a IS NULL
 DETACH DELETE n
 """
+
+remove_connecting_nodes = """
+MATCH (n) WHERE NOT (n)--() DELETE (n)
+"""

@@ -1,7 +1,7 @@
 import logging
 from neo4j import GraphDatabase
 from src.utils import Config
-from src.utils.annual_cypher_import import remove_transactions_without_merchant, remove_credits
+from src.utils.annual_cypher_import import remove_connecting_nodes, remove_transactions_without_merchant, remove_credits
 
 config = Config()
 
@@ -61,6 +61,9 @@ def populate_db(query, data) -> str:
 
             session.run(remove_transactions_without_merchant)
             logging.info("Removed transactions without merchant from database")
+
+            session.run(remove_connecting_nodes)
+            logging.info("Removed connecting nodes to transactions without merchants")
     except Exception as e:
         logging.exception(f"Error: {e}")
         raise

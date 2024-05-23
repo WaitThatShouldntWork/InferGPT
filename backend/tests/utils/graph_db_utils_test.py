@@ -55,9 +55,11 @@ def test_populate_db_populates_db(mocker, mock_driver, mock_session):
     data = {"key": "value"}
     remove_credits = "REMOVE CREDITS"
     remove_transactions_without_merchant = "REMOVE TRANSACTIONS"
+    remove_connecting_nodes = "REMOVE NODES"
 
     mocker.patch("src.utils.graph_db_utils.remove_credits", remove_credits)
     mocker.patch("src.utils.graph_db_utils.remove_transactions_without_merchant", remove_transactions_without_merchant)
+    mocker.patch("src.utils.graph_db_utils.remove_connecting_nodes", remove_connecting_nodes)
 
     populate_db(query, data)
 
@@ -65,6 +67,7 @@ def test_populate_db_populates_db(mocker, mock_driver, mock_session):
     mock_session.run.assert_any_call(query, data={"all_data": data})
     mock_session.run.assert_any_call(remove_credits)
     mock_session.run.assert_any_call(remove_transactions_without_merchant)
+    mock_session.run.assert_any_call(remove_connecting_nodes)
 
     mock_session.close.assert_called_once()
     mock_driver.close.assert_called_once()
