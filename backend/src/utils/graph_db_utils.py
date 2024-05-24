@@ -46,7 +46,7 @@ def execute_query(llm_query):
         driver.close()
 
 
-def populate_db(query, data) -> str:
+def populate_db(query, data) -> None:
     data = {"all_data": data}
     try:
         with driver.session() as session:
