@@ -67,6 +67,12 @@ async def test_lifespan_populates_db(mocker, mock_initial_data) -> None:
     mock_annual_transactions_cypher_script = mocker.patch(
         "src.api.app.annual_transactions_cypher_script", return_value=(mocker.Mock())
     )
+    mock_config = {
+        "azure_initial_data_filename": "test_file",
+        "azure_storage_connection_string": "test_connection_string",
+        "azure_storage_container_name": "test_container",
+    }
+    mocker.patch("src.api.app.config", return_value=mock_config)
 
     with client:
         mock_populate_db.assert_called_once_with(mock_annual_transactions_cypher_script, mock_initial_data)
