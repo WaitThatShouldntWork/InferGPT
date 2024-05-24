@@ -8,6 +8,7 @@ from .types import Parameter
 from .agent import Agent, agent
 from .tool import tool
 
+
 logger = logging.getLogger(__name__)
 
 current_user = "John Doe"
@@ -19,6 +20,7 @@ graph_schema_prompt = engine.load_prompt("graph-schema", narrative_options=narra
 generate_cypher_query_prompt = engine.load_prompt(
     "generate-cypher-query", graph_schema_prompt=graph_schema_prompt, current_date=datetime.now()
 )
+
 
 
 @tool(

@@ -1,15 +1,52 @@
 Node properties are the following:\n
-Person { name: STRING, birth_date: DATE },
-Transaction
-{ transaction_id: INTEGER, transaction_date: DATE, narrative: STRING, type: STRING, amount: INTEGER, balance: INTEGER },
-"date format is 2024-02-15" "narrative can only be one of the following: {{ narrative_options }}"
-Account { account_number: INTEGER, sort_code: INTEGER, account_type: STRING },
-Shop { merchant_name: STRING, account_number: INTEGER, sort_code: INTEGER },
-Category { transaction_category: STRING } "This category can either be: { online shopping, in-store }"
+account: { 
+    update_timestamp: DATE, 
+    account_id: INTEGER ",
+    account_type: STRING
+    display_name: STRING,
+    currency: STRING,
+    account_number: {
+        iban: STRING
+        swift_bic: STRING
+        number: STRING
+        sort_code: STRING
+    },
+    provider: {
+        display_name: STRING
+        provider_id: STRING
+        logo_uri: STRING
+transaction: { 
+    timestamp: DATE "The date and time when the transaction was made, in ISO 8601 timestamp format"
+    description: STRING "a short summary of the transaction
+    transaction_type: STRING "DEBIT or CREDIT"
+    transaction_classification: STRING "Classification is the category that each transaction belong to. Transactions can belong to one or several categories. These categories are: {
+        Bills and utilities,
+        Shopping, 
+        Groceries,
+        Food & Dining, 
+        Restaurants,
+        Auto & Transport,
+        Auto Insurance,
+        Auto Payment,
+        Gas & Fuel,
+        Gambling,
+        Betting,
+        Business Services,
+        Financial Services,
+        Utilities,
+        General,
+        Mobile Phone
+    }"
+    merchant_name: STRING "the name of the provider that the transaction was made to"
+    amount: INTEGER "The amount taken during the DEBIT transaction"
+    currency: STRING "system of money in general use in a particular country. The currency is in acronym format such as GBP"
+    transaction_id: INTEGER "unique id for each transaction"
+    running_balance: { currency: STRING, amount: INTEGER "The remaining balance after the transaction is made. 
+    meta: { provider_transaction_category: STRING }
+}
 
 The relationships between the nodes are the following:\n
-(:Person)-[:MADE]->(:Transaction),
-(:Person)-[:HAS]->(:Account),
-(:Transaction)-[:PAID_TO]->(:Shop),
-(:Transaction)-[:CLASSIFIED_AS]->(:Category),
-(:Transaction)-[:PAID_BY]->(:Account)
+(:Transaction)-[:PAID_TO]->(:Merchant),
+(:Transaction)-[:CLASSIFIED_AS]->(:Classification),
+(:Transaction)-[:PAID_BY]->(:Account),
+
