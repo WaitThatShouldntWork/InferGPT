@@ -11,7 +11,6 @@ engine = PromptEngine()
 director_prompt = engine.load_prompt("director")
 determine_intention_prompt = engine.load_prompt("determine-intention")
 
-intent_prompt = engine.load_prompt("intent")
 
 def question(question):
     logging.debug("Received utterance: {question}")
