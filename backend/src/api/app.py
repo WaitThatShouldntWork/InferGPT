@@ -20,12 +20,17 @@ logger = logging.getLogger(__name__)
 
 config = Config()
 
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     try:
-        if config.azure_storage_connection_string is None or config.azure_storage_container_name is None or config.azure_initial_data_filename is None:
+        if (
+            config.azure_storage_connection_string is None
+            or config.azure_storage_container_name is None
+            or config.azure_initial_data_filename is None
+        ):
             raise Exception("Missing Azure Environment variables. Please check the README.md for guidance.")
-        
+
         blob_service_client = BlobServiceClient.from_connection_string(config.azure_storage_connection_string)
         container_client = blob_service_client.get_container_client(config.azure_storage_container_name)
         blob_client = container_client.get_blob_client(config.azure_initial_data_filename)
