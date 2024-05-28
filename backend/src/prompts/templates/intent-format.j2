@@ -1,0 +1,15 @@
+Reply only in json with the following format:
+
+{
+    "global_user_intent": "string of the overal intent of the user",
+    "questions": array of the following object: 
+            {
+                "question_intent": "string of the intent of the question",
+                "operation": "string of the operation to be performed",
+                "question_category": "string of the category of the question",
+                "parameters": "array of objects that have a type and value properties, both of which are strings",
+                "aggregation": "string of the aggregation to be performed or none if no aggregation is needed",
+                "sort_order": "string of the sort order to be performed or none if no sorting is needed",
+                "timeframe": "string of the timeframe to be considered or none if no timeframe is needed",
+            }
+}

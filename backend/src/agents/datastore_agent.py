@@ -1,10 +1,12 @@
+import logging
 from src.utils import call_model
 from src.utils.graph_db_utils import execute_query
-from src.agents import Agent, agent, tool, Parameter
-import logging
 from src.prompts import PromptEngine
 from datetime import datetime
 from src.utils import to_json
+from .types import Parameter
+from .agent import Agent, agent
+from .tool import tool
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +26,9 @@ generate_cypher_query_prompt = engine.load_prompt("generate-cypher-query",
     parameters={"user_prompt": Parameter(
             type="string",
             description="The utterance from the user that the query will be based on",
-        )})
+        )
+    }
+)
 def generate_query(user_prompt) -> str:
         llm_query = call_model(generate_cypher_query_prompt, user_prompt)
         json_query = to_json(llm_query)
