@@ -14,6 +14,9 @@ class Config(object):
         self.neo4j_uri = default_neo4j_uri
         self.neo4j_user = None
         self.neo4j_password = None
+        self.azure_storage_connection_string = None
+        self.azure_storage_container_name = None
+        self.azure_initial_data_filename = None
         self.load_env()
 
     def load_env(self):
@@ -29,6 +32,9 @@ class Config(object):
             self.neo4j_uri = os.getenv("NEO4J_URI", default_neo4j_uri)
             self.neo4j_user = os.getenv("NEO4J_USERNAME")
             self.neo4j_password = os.getenv("NEO4J_PASSWORD")
+            self.azure_storage_connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+            self.azure_storage_container_name = os.getenv("AZURE_STORAGE_CONTAINER_NAME")
+            self.azure_initial_data_filename = os.getenv("AZURE_INITIAL_DATA_FILENAME")
         except FileNotFoundError:
             raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
         except Exception:

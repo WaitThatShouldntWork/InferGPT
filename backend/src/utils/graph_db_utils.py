@@ -1,6 +1,7 @@
 import logging
 from neo4j import GraphDatabase
 from src.utils import Config
+from src.utils.annual_cypher_import import remove_connecting_nodes, remove_transactions_without_merchant, remove_credits
 
 config = Config()
 
@@ -39,6 +40,33 @@ def execute_query(llm_query):
         logging.exception(f"Error: {e}")
         raise
 
+    finally:
+        if session:
+            session.close()
+        driver.close()
+
+
+def populate_db(query, data) -> None:
+    data = {"all_data": data}
+    try:
+        with driver.session() as session:
+            session.run("MATCH (n) DETACH DELETE n")
+            logging.info("Cleared database")
+
+            session.run(query, data=data)
+            logging.info("Database populated")
+
+            session.run(remove_credits)
+            logging.info("Removed any credits from database")
+
+            session.run(remove_transactions_without_merchant)
+            logging.info("Removed transactions without merchant from database")
+
+            session.run(remove_connecting_nodes)
+            logging.info("Removed connecting nodes to transactions without merchants")
+    except Exception as e:
+        logging.exception(f"Error: {e}")
+        raise
     finally:
         if session:
             session.close()
