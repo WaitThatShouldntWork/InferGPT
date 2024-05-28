@@ -236,7 +236,7 @@ def test_tool_selection_format_template():
 
 {
     \"tool_name\":  \"the exact string name of the tool chosen\",
-    \"tool_parameters\":  \"a python dictionary (using quotations (")) matching the chosen tools dictionary shape\",
+    \"tool_parameters\":  \"a JSON object matching the chosen tools dictionary shape\",
     \"reasoning\": \"A sentence on why you chose that tool\"
 }"""
         prompt_string = engine.load_prompt("tool-selection-format")
