@@ -8,12 +8,11 @@ from .types import Parameter
 from .agent import Agent, agent
 from .tool import tool
 from src.utils.graph_db_utils import execute_query, run_query
-from src.agents import Agent, agent, tool, Parameter
+from src.agents import Agent, agent, tool, Parameter, semantic_layer
 import logging
 from src.prompts import PromptEngine
 from datetime import datetime
 from src.utils import to_json
-import json
 
 
 logger = logging.getLogger(__name__)
@@ -21,79 +20,11 @@ logger = logging.getLogger(__name__)
 current_user = "John Doe"
 engine = PromptEngine()
 
-neo4j_graph_why_prompt = engine.load_prompt("neo4j-graph-why")
+# graph_schema_prompt = engine.load_prompt("graph-schema")
 
-cypher_query = engine.load_prompt("relationships-query")
-node_relationship_query = engine.load_prompt("node-property-cypher-query")
-relationship_query = engine.load_prompt("relationships-query")
-node_query = engine.load_prompt("nodes-query")
-
-
-neo4j_relationships_understanding_prompt = engine.load_prompt("neo4j-relationship-understanding",
-                                                              neo4j_graph_why_prompt=neo4j_graph_why_prompt)
-
-neo4j_nodes_understanding_prompt = engine.load_prompt("neo4j-nodes-understanding",
-                                                      neo4j_graph_why_prompt=neo4j_graph_why_prompt)
-
-neo4j_relationship_property_prompt = engine.load_prompt("neo4j-property-intent-prompt",
-                                                      neo4j_graph_why_prompt=neo4j_graph_why_prompt)
-
-neo4j_node_property_prompt = engine.load_prompt("neo4j-node-property",
-                                                neo4j_graph_why_prompt=neo4j_graph_why_prompt)
-graph_schema_prompt = engine.load_prompt("graph-schema")
-
-generate_cypher_query_prompt = engine.load_prompt(
-    "generate-cypher-query", graph_schema_prompt=graph_schema_prompt, current_date=datetime.now()
-)
-
-
-finalised_graph_structure = {'nodes':{}, 'properties':{}}
-
-# GET ALL RELATIONSHIPS FROM NEO4J
-result = run_query(cypher_query)
-relationships_neo4j = result[0]
-
-enriched_relationships = call_model(neo4j_relationships_understanding_prompt, relationships_neo4j)
-
-# Check if the response is wrapped in ```json ``` markers
-if enriched_relationships.startswith("```json") and enriched_relationships.endswith("```"):
-    # Remove the code block markers for JSON
-    enriched_relationships = enriched_relationships[7:-3].strip()
-
-enriched_relationships = json.loads(enriched_relationships)
-finalised_graph_structure['relationships'] = enriched_relationships
-print("enriched relationships: " + json.dumps(enriched_relationships, indent=2))
-
-
-
-# GET ALL NODES FROM NEO4J
-nodes_neo4j = run_query(node_query)
-enriched_nodes = call_model(neo4j_nodes_understanding_prompt, nodes_neo4j)
-# finalised_graph_structure['nodes']['labels'] = enriched_nodes['nodes']
-print("enriched nodes: " + json.dumps(enriched_nodes, indent=2))
-
-# GET ALL RELATIONSHIP PROPERTIES FROM NEO4J
-properties_result = run_query(relationship_query)
-enriched_rel_properties = call_model(neo4j_relationship_property_prompt, properties_result)
-enriched_rel_properties = json.loads(enriched_rel_properties)
-finalised_graph_structure['properties']['relationship_properties'] = enriched_rel_properties['relProperties']
-print("enriched properties: " + json.dumps(enriched_rel_properties, indent=2))
-
-# GET ALL NODE RELATIONSHIP PROPERTIES FROM NEO4J
-node_properties_neo4j = run_query(node_relationship_query)
-# Update details via LLM call
-enriched_nodes_properties = call_model(neo4j_node_property_prompt, node_properties_neo4j)
-# Check if the response is wrapped in ```json ``` markers
-if enriched_nodes_properties.startswith("```json") and enriched_nodes_properties.endswith("```"):
-    # Remove the code block markers for JSON
-    enriched_nodes_properties = enriched_nodes_properties[7:-3].strip()
-enriched_node_properties = json.loads(enriched_nodes_properties)
-finalised_graph_structure['properties']['node_properties'] = enriched_node_properties['nodeProperties']
-print("enriched node properties: " + json.dumps(enriched_node_properties, indent=2))
-
-json.dumps(finalised_graph_structure, separators=(',', ':'))
-
-
+generate_cypher_query_prompt = engine.load_prompt("generate-cypher-query",
+                                                  semantic_layer=semantic_layer,
+                                                  current_date=datetime.now())
 
 @tool(
     name="generate cypher query",
