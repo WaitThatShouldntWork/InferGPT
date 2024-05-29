@@ -71,3 +71,11 @@ def populate_db(query, data) -> None:
         if session:
             session.close()
         driver.close()
+
+
+# Function to execute a query on a Neo4j database
+def run_query(query):
+    with driver.session() as session:
+        result = session.execute_read(lambda tx: tx.run(query).data())
+        driver.close()
+        return result

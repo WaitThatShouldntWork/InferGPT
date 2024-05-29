@@ -1,0 +1,13 @@
+CALL db.schema.nodeTypeProperties() YIELD nodeLabels, propertyName, propertyTypes
+WITH
+    nodeLabels[0] as node,
+    COLLECT({
+        name : propertyName,
+        data_type: propertyTypes[0],
+        detail : ""
+    }) as props
+RETURN  COLLECT({
+    node_label: node,
+    cypher_representation : "(:" + node + ")",
+    properties: props
+}) AS nodeProperties
