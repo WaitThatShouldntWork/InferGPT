@@ -1,4 +1,5 @@
 import logging
+from src.agents import intent_agent
 from src.prompts import PromptEngine
 from src.utils import call_model
 from src.agents import create_tasks, agents_details
@@ -10,8 +11,12 @@ engine = PromptEngine()
 director_prompt = engine.load_prompt("director")
 determine_intention_prompt = engine.load_prompt("determine-intention")
 
+
 def question(question):
     logging.debug("Received utterance: {question}")
+
+    intent = intent_agent.invoke(question)
+    logging.debug(f"Intent determined: {intent}")
 
     if determine_intention(question) == "TRUE":
         task_dict = create_tasks(question, agents_details)
