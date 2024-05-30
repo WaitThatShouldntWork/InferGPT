@@ -15,6 +15,7 @@ services:
       - network
     environment:
       NEO4J_AUTH: ${NEO4J_USERNAME}/${NEO4J_PASSWORD}
+      NEO4J_PLUGINS: '["apoc"]'
     # network ports, we can customise exposed ports so that we
     # don't conflict with other neo4j instances that may be running.
     # if none are provided, we revert to defaults.

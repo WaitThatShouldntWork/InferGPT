@@ -9,6 +9,7 @@ from .agent import Agent, agent
 from .tool import tool
 from src.utils.graph_db_utils import execute_query, run_query
 from src.agents import Agent, agent, tool, Parameter, semantic_layer
+from semantic_layer import graph_structure
 import logging
 from src.prompts import PromptEngine
 from datetime import datetime
@@ -17,13 +18,14 @@ from src.utils import to_json
 
 logger = logging.getLogger(__name__)
 
-current_user = "John Doe"
+current_account = "TRANSACTION ACCOUNT 1"
 engine = PromptEngine()
 
 # graph_schema_prompt = engine.load_prompt("graph-schema")
 
 generate_cypher_query_prompt = engine.load_prompt("generate-cypher-query",
                                                   semantic_layer=semantic_layer,
+                                                  graph_structure=graph_structure,
                                                   current_date=datetime.now())
 
 @tool(
