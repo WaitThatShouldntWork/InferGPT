@@ -1,3 +1,4 @@
+import json
 import logging
 from src.agents import intent_agent
 from src.prompts import PromptEngine
@@ -14,17 +15,14 @@ determine_intention_prompt = engine.load_prompt("determine-intention")
 
 def question(question):
     logging.debug("Received utterance: {question}")
-
     intent = intent_agent.invoke(question)
-    logging.debug(f"Intent determined: {intent}")
+    intent_json = json.loads(intent)
+    logging.info(f"Intent determined: {intent}")
+    final_answer = solve_all_tasks(intent_json)
+    return final_answer
 
-    if determine_intention(question) == "TRUE":
-        task_dict = create_tasks(question, agents_details)
-        final_answer = solve_all_tasks(task_dict)
-        return final_answer
-
-    logging.info("Passing utterance straight to call_model function")
-    return call_model(director_prompt, user_prompt=question)
+    # logging.info("Passing utterance straight to call_model function")
+    # return call_model(director_prompt, user_prompt=question)
 
 
 def determine_intention(question: str) -> str:

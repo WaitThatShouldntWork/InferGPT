@@ -25,7 +25,7 @@ def solve_task(task, scratchpad, attempt=0) -> Tuple[str | None, str]:
     if agent is None:
         return (None, no_agent_response)
 
-    answer = agent.invoke(task["summary"])
+    answer = agent.invoke(task)
     if is_valid_answer(answer, task):
         return (agent.name, answer)
 
@@ -36,15 +36,16 @@ def solve_task(task, scratchpad, attempt=0) -> Tuple[str | None, str]:
 no_tasks_response = "No tasks found to solve"
 
 
-def solve_all_tasks(tasks_dict):
-    tasks = tasks_dict["tasks"]
+def solve_all_tasks(intent_json):
+    questions = intent_json["questions"]
+    print(questions)
 
-    if len(tasks) == 0:
+    if len(questions) == 0:
         return no_tasks_response
 
-    for task in tasks:
-        (agent_name, answer) = solve_task(task, get_scratchpad())
-        update_scratchpad(agent_name, task, answer)
+    for question in questions:
+        (agent_name, answer) = solve_task(question, get_scratchpad())
+        update_scratchpad(agent_name, question, answer)
 
     logging.info("Final scratchpad:")
     logging.info(json.dumps(get_scratchpad(), indent=4))
