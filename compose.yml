@@ -16,6 +16,11 @@ services:
     environment:
       NEO4J_AUTH: ${NEO4J_USERNAME}/${NEO4J_PASSWORD}
       NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_apoc_export_file_enabled: true
+      NEO4J_apoc_import_file_enabled: true
+      NEO4J_apoc_import_file_use__neo4j__config: true
+      NEO4J_dbms_security_procedures_allowlist: gds.*, apoc.*
+      NEO4J_dbms_security_procedures_unrestricted: gds.*, apoc.*
     # network ports, we can customise exposed ports so that we
     # don't conflict with other neo4j instances that may be running.
     # if none are provided, we revert to defaults.

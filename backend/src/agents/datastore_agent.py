@@ -7,10 +7,9 @@ from src.utils import to_json
 from .types import Parameter
 from .agent import Agent, agent
 from .tool import tool
-from src.utils.graph_db_utils import execute_query, run_query
+from src.utils.graph_db_utils import execute_query
 from src.agents import Agent, agent, tool, Parameter, semantic_layer
 from semantic_layer import graph_structure
-import logging
 from src.prompts import PromptEngine
 from datetime import datetime
 from src.utils import to_json
@@ -27,6 +26,7 @@ generate_cypher_query_prompt = engine.load_prompt("generate-cypher-query",
                                                   semantic_layer=semantic_layer,
                                                   graph_structure=graph_structure,
                                                   current_date=datetime.now())
+print("generate cypher query prompt: " + generate_cypher_query_prompt)
 
 @tool(
     name="generate cypher query",

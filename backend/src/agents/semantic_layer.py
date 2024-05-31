@@ -22,7 +22,6 @@ relationship_property_query = engine.load_prompt("relationship-property-cypher-q
 # node property query
 node_relationship_query = engine.load_prompt("node-property-cypher-query")
 
-
 # relationship prompt
 neo4j_relationships_understanding_prompt = engine.load_prompt("neo4j-relationship-understanding",
                                                               neo4j_graph_why_prompt=neo4j_graph_why_prompt)
@@ -40,6 +39,8 @@ neo4j_node_property_prompt = engine.load_prompt("neo4j-node-property",
 
 # GET ALL RELATIONSHIPS FROM NEO4J
 relationship_result = run_query(relationship_query)
+print("relationship result: ")
+print(relationship_result)
 relationships_neo4j = relationship_result[0]
 
 enriched_relationships = call_model(neo4j_relationships_understanding_prompt, str(relationships_neo4j))
@@ -135,7 +136,7 @@ start_index = enriched_nodes_properties.find("```json")
 enriched_nodes_properties = enriched_nodes_properties[start_index + 8:]
 end_index = enriched_nodes_properties.rfind("```")
 enriched_nodes_properties = enriched_nodes_properties[:end_index]
-print("enriched node properties " + enriched_nodes_properties)
+
 # Check if the response is wrapped in ```json ``` markers
 if enriched_nodes_properties.startswith("```json") and enriched_nodes_properties.endswith("```"):
     # Remove the code block markers for JSON
@@ -143,6 +144,7 @@ if enriched_nodes_properties.startswith("```json") and enriched_nodes_properties
 enriched_node_properties = json.loads(enriched_nodes_properties)
 
 finalised_graph_structure['properties']['node_properties'] = enriched_node_properties['nodeProperties']
-print("enriched node properties: " + json.dumps(enriched_node_properties, indent=2))
+json.dumps(enriched_node_properties, indent=2)
 
 graph_structure = json.dumps(finalised_graph_structure, separators=(',', ':'))
+
