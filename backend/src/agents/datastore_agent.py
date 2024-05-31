@@ -25,7 +25,8 @@ engine = PromptEngine()
 generate_cypher_query_prompt = engine.load_prompt("generate-cypher-query",
                                                   semantic_layer=semantic_layer,
                                                   graph_structure=graph_structure,
-                                                  current_date=datetime.now())
+                                                  current_date=datetime.now(),
+                                                  current_account=current_account)
 print("generate cypher query prompt: " + generate_cypher_query_prompt)
 
 @tool(

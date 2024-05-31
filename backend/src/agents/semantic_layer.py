@@ -36,115 +36,54 @@ neo4j_node_property_prompt = engine.load_prompt("neo4j-node-property",
                                                 neo4j_graph_why_prompt=neo4j_graph_why_prompt)
 
 
+def extract_json_from_response(response):
+    """Extract JSON content from a response wrapped in ```json``` markers."""
+    start_index = response.find("```json")
+    if start_index == -1:
+        return None
+    start_index += 8
+    end_index = response.rfind("```")
+    if end_index == -1:
+        return None
+    return response[start_index:end_index]
 
-# GET ALL RELATIONSHIPS FROM NEO4J
+def enrich_data(prompt, data):
+    """Enrich data by calling the model with a prompt."""
+    enriched_data = call_model(prompt, str(data))
+    enriched_data = extract_json_from_response(enriched_data)
+    if enriched_data:
+        return json.loads(enriched_data)
+    return None
+
+# Fetch and enrich relationships
 relationship_result = run_query(relationship_query)
-print("relationship result: ")
-print(relationship_result)
 relationships_neo4j = relationship_result[0]
+enriched_relationships = enrich_data(neo4j_relationships_understanding_prompt, relationships_neo4j)
+finalised_graph_structure['relationships'] = enriched_relationships if enriched_relationships else {}
 
-enriched_relationships = call_model(neo4j_relationships_understanding_prompt, str(relationships_neo4j))
-
-start_index = enriched_relationships.find("```json")
-enriched_relationships = enriched_relationships[start_index + 8:]
-end_index = enriched_relationships.rfind("```")
-enriched_relationships = enriched_relationships[:end_index]
-
-# Check if the response is wrapped in ```json ``` markers
-if enriched_relationships.startswith("```json") and enriched_relationships.endswith("```"):
-    # Remove the code block markers for JSON
-    enriched_relationships = enriched_relationships[7:-3].strip()
-
-enriched_relationships = json.loads(enriched_relationships)
-finalised_graph_structure['relationships'] = enriched_relationships
-json.dumps(enriched_relationships, indent=2)
-
-
-
-# GET ALL NODES FROM NEO4J
+# Fetch and enrich nodes
 nodes_neo4j_result = run_query(node_query)
 nodes_neo4j = nodes_neo4j_result[0]
+enriched_nodes = enrich_data(neo4j_nodes_understanding_prompt, nodes_neo4j)
+finalised_graph_structure['nodes']['labels'] = enriched_nodes['nodes'] if enriched_nodes else []
 
-def call_llm(prompt, neo4j_data):
-    enriched_data = call_model(neo4j_relationships_understanding_prompt, str(nodes_neo4j))
-
-    start_index = enriched_data.find("```json")
-    enriched_data = enriched_data[start_index + 8:]
-    end_index = enriched_data.rfind("```")
-    enriched_data = enriched_data[:end_index]
-
-    enriched_data = json.dumps(enriched_data)
-
-    if enriched_data.startswith("```json") and enriched_data.endswith("```"):
-        # Remove the code block markers for JSON
-        enriched_data = enriched_data[7:-3].strip()
-
-    enriched_data = json.loads(enriched_data)
-    if enriched_data.startswith("```json") and enriched_data.endswith("```"):
-      # Remove the code block markers for JSON
-      enriched_data = enriched_data[7:-3].strip()
-
-    enriched_data = json.loads(enriched_data)
-
-    return enriched_data
-
-enriched_nodes = call_llm(
-    prompt = neo4j_relationships_understanding_prompt,
-    neo4j_data = nodes_neo4j
-)
-
-finalised_graph_structure['nodes']['labels'] = enriched_nodes['nodes']
-json.dumps(enriched_nodes, indent=2)
-
-
-# GET ALL RELATIONSHIP PROPERTIES FROM NEO4J
+# Fetch and enrich relationship properties
 properties_result = run_query(relationship_property_query)
 rel_properties_neo4j = properties_result[0]
 
+cleaned_rel_properties = [
+    {**rel_property, 'properties': [prop for prop in rel_property['properties'] if prop['name'] is not None]}
+    for rel_property in rel_properties_neo4j['relProperties']
+    if any(prop['name'] is not None for prop in rel_property['properties'])
+]
 
-# Loop through the payload to remove any properties where "name" = None
-cleaned_rel_properties = []
-for rel_property in rel_properties_neo4j['relProperties']:
-    cleaned_properties = [prop for prop in rel_property['properties'] if prop['name'] is not None]
-    if cleaned_properties:  # If there are any properties left after cleaning
-        rel_property['properties'] = cleaned_properties
-        cleaned_rel_properties.append(rel_property)
+enriched_rel_properties = enrich_data(neo4j_relationship_property_prompt, {'relProperties': cleaned_rel_properties})
+finalised_graph_structure['properties']['relationship_properties'] = enriched_rel_properties['relProperties'] if enriched_rel_properties else []
 
-rel_properties_neo4j = {'relProperties': cleaned_rel_properties}
-
-enriched_rel_properties = call_model(neo4j_relationship_property_prompt, str(rel_properties_neo4j))
-
-start_index = enriched_rel_properties.find("```json")
-enriched_rel_properties = enriched_rel_properties[start_index + 8:]
-end_index = enriched_rel_properties.rfind("```")
-enriched_rel_properties = enriched_rel_properties[:end_index]
-
-if enriched_rel_properties.startswith("```json") and enriched_rel_properties.endswith("```"):
-    # Remove the code block markers for JSON
-    enriched_rel_properties = enriched_rel_properties[7:-3].strip()
-enriched_rel_properties = json.loads(enriched_rel_properties)
-finalised_graph_structure['properties']['relationship_properties'] = enriched_rel_properties['relProperties']
-json.dumps(enriched_rel_properties, indent=2)
-
-# GET ALL NODE RELATIONSHIP PROPERTIES FROM NEO4J
+# Fetch and enrich node properties
 node_properties_neo4j_result = run_query(node_relationship_query)
 node_properties_neo4j = node_properties_neo4j_result[0]
-# Update details via LLM call
-enriched_nodes_properties = call_model(neo4j_node_property_prompt, str(node_properties_neo4j))
-
-start_index = enriched_nodes_properties.find("```json")
-enriched_nodes_properties = enriched_nodes_properties[start_index + 8:]
-end_index = enriched_nodes_properties.rfind("```")
-enriched_nodes_properties = enriched_nodes_properties[:end_index]
-
-# Check if the response is wrapped in ```json ``` markers
-if enriched_nodes_properties.startswith("```json") and enriched_nodes_properties.endswith("```"):
-    # Remove the code block markers for JSON
-    enriched_nodes_properties = enriched_nodes_properties[7:-3].strip()
-enriched_node_properties = json.loads(enriched_nodes_properties)
-
-finalised_graph_structure['properties']['node_properties'] = enriched_node_properties['nodeProperties']
-json.dumps(enriched_node_properties, indent=2)
+enriched_node_properties = enrich_data(neo4j_node_property_prompt, node_properties_neo4j)
+finalised_graph_structure['properties']['node_properties'] = enriched_node_properties['nodeProperties'] if enriched_node_properties else []
 
 graph_structure = json.dumps(finalised_graph_structure, separators=(',', ':'))
-
