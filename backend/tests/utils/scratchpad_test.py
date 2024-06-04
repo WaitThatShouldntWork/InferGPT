@@ -1,10 +1,10 @@
 from src.utils.scratchpad import clear_scratchpad, get_scratchpad, update_scratchpad
 
-
 task = {
     'summary': 'example task',
     'explanation': 'This is an example task'
 }
+
 
 def test_scratchpad():
     clear_scratchpad()

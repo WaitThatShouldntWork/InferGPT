@@ -6,6 +6,7 @@ from src.agents import Agent, agent
 engine = PromptEngine()
 validator_prompt = engine.load_prompt("validator")
 
+
 @agent(
     name="ValidatorAgent",
     description="This agent is responsible for validating the answers to the tasks",

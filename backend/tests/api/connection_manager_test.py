@@ -1,11 +1,13 @@
-
 import pytest
 from fastapi.websockets import WebSocketState
 from src.api.connection_manager import ConnectionManager
 
 error_message = "Test Error"
+
+
 async def async_error(_):
     raise Exception(error_message)
+
 
 @pytest.fixture
 def connection_manager(mocker):
@@ -27,6 +29,7 @@ async def test_connect_new_websocket(connection_manager):
     assert manager.websocket == mock_ws
     mock_ws.accept.assert_awaited_once()
 
+
 @pytest.mark.asyncio
 async def test_connect_websocket_exists(mocker):
     connection_manager = ConnectionManager()
@@ -36,6 +39,7 @@ async def test_connect_websocket_exists(mocker):
         await connection_manager.connect(mocker.AsyncMock())
 
     assert str(error.value) == "Connection already exists"
+
 
 @pytest.mark.asyncio
 async def test_handle_connect_on_message_error(connection_manager):
@@ -58,6 +62,7 @@ async def test_disconnect_websocket_close_connection(connection_manager):
     mock_ws.close.assert_awaited_once()
     assert manager.websocket is None
 
+
 @pytest.mark.asyncio
 async def test_disconnect_websocket_no_websocket(connection_manager):
     manager, mock_ws, _ = connection_manager
@@ -66,6 +71,7 @@ async def test_disconnect_websocket_no_websocket(connection_manager):
 
     mock_ws.close.assert_not_called()
     assert manager.websocket is None
+
 
 @pytest.mark.asyncio
 async def test_disconnect_websocket_already_disconnected(connection_manager):
