@@ -43,4 +43,9 @@ class MockAgent(Agent):
     pass
 
 
-__all__ = ["MockAgent", "mock_agent_description", "mock_agent_name", "mock_tools"]
+__all__ = ["MockAgent",
+           "mock_agent_description",
+           "mock_agent_name",
+           "mock_tools",
+           "mock_tool_a",
+           "mock_tool_b"]
