@@ -36,7 +36,6 @@ async def lifespan(app: FastAPI):
         blob_client = container_client.get_blob_client(config.azure_initial_data_filename)
         download_stream = blob_client.download_blob()
         annual_transactions = download_stream.readall().decode("utf-8")
-
         populate_db(annual_transactions_cypher_script, json.loads(annual_transactions))
     except Exception as e:
         logging.info(f"Failed to populate database with initial data from Azure: {e}")
@@ -64,7 +63,6 @@ unhealthy_backend_response = health_prefix + "backend is unhealthy. Unable to he
 unhealthy_neo4j_response = health_prefix + "backend is healthy. Neo4J is unhealthy. " + further_guidance
 
 chat_fail_response = "Unable to generate a response. Check the service by using the keyphrase 'healthcheck'"
-
 
 @app.get("/health")
 async def health_check():
