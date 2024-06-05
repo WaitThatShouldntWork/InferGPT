@@ -5,9 +5,11 @@ from .intent_agent import IntentAgent
 from .maths_agent import MathsAgent
 from .tool import tool, Parameter
 from .validator_agent import ValidatorAgent
+from .answer_agent import AnswerAgent
 
 validator_agent = ValidatorAgent()
 intent_agent = IntentAgent()
+answer_agent = AnswerAgent()
 
 
 def get_agent_details(agent):
@@ -22,6 +24,7 @@ __all__ = [
     "Agent",
     "agents_details",
     "agents",
+    "answer_agent",
     "create_tasks",
     "intent_agent",
     "Parameter",

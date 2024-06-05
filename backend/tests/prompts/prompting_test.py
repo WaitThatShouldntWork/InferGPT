@@ -58,6 +58,8 @@ Here is the list of Agents you can choose from:
 AGENT LIST:
 
 
+If the list of agents does not contain something suitable, you should say the agent is 'none'. ie. If question is 'general knowledge', 'personal' or a 'greeting'.
+
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
 If the same agent_name and task are repeated more than twice in the history, you must not pick that agent_name.
@@ -100,6 +102,8 @@ Here is the list of Agents you can choose from:
 
 AGENT LIST:
 
+
+If the list of agents does not contain something suitable, you should say the agent is 'none'. ie. If question is 'general knowledge', 'personal' or a 'greeting'.
 
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
@@ -216,6 +220,8 @@ Add if appropriate, but do not hallucinate arguments for these parameters
 
 {"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}
 
+From the task you should be able to extract the parameters. If it is data driven, it should be turned into a cypher query
+
 If none of the tools are appropriate for the task, return the following tool
 
 {
@@ -223,7 +229,9 @@ If none of the tools are appropriate for the task, return the following tool
     \"tool_parameters\":  \"{}\",
     \"reasoning\": \"No tool was appropriate for the task\"
 }"""
-        prompt_string = engine.load_prompt("best-tool", task="Say hello world to the user", scratchpad="scratchpad of history", tools=tools)
+        prompt_string = engine.load_prompt(
+            "best-tool", task="Say hello world to the user", scratchpad="scratchpad of history", tools=tools
+        )
         assert prompt_string == expected_string
     except Exception:
         raise

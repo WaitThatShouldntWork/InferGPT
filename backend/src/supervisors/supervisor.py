@@ -26,11 +26,10 @@ def solve_task(task, scratchpad, attempt=0) -> Tuple[str | None, str]:
         return (None, no_agent_response)
 
     answer = agent.invoke(task)
-    if is_valid_answer(answer, task):
-        return (agent.name, answer)
+    # if is_valid_answer(answer, task):
 
-    update_scratchpad(agent.name, task, answer)
-    return solve_task(task, scratchpad, attempt + 1)
+    return (agent.name, answer)
+    # return solve_task(task, scratchpad, attempt + 1)
 
 
 no_tasks_response = "No tasks found to solve"
@@ -50,6 +49,5 @@ def solve_all_tasks(intent_json):
     logging.info("Final scratchpad:")
     logging.info(json.dumps(get_scratchpad(), indent=4))
 
-    final_answer = get_scratchpad()[-1]
     clear_scratchpad()
-    return final_answer["result"]  # TODO: Add summariser method
+    return get_scratchpad()
