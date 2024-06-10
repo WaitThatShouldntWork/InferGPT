@@ -6,6 +6,7 @@ client = TestClient(app)
 utterance = "Hello there"
 expected_message = "Hello to you too! From InferGPT"
 
+
 @pytest.fixture
 def mock_initial_data(mocker):
     blob_service_client = mocker.patch("src.api.app.BlobServiceClient", return_value=mocker.Mock())
@@ -19,6 +20,7 @@ def mock_initial_data(mocker):
     mocker.patch("src.api.app.json.loads", return_value=mock_data)
 
     return mock_data
+
 
 def test_health_check_response_healthy(mocker):
     mock_test_connection = mocker.patch("src.api.app.test_connection", return_value=True)
