@@ -35,7 +35,10 @@ generate_cypher_query_prompt = engine.load_prompt(
         ),
         "question_params": Parameter(
             type="string",
-            description="The specific parameters required for the question to be answered with the question_intent or none if no params required",
+            description="""
+                The specific parameters required for the question to be answered with the question_intent
+                or none if no params required
+            """,
         ),
         "aggregation": Parameter(
             type="string",

@@ -187,7 +187,7 @@ By using the final scratchpad below:
 
 and the question in the user prompt, this should be a readable sentence or 2 that summarises the findings in the results.
 
-If the question is a general knowledge question, check if you have the correct details for the answer and reply with this. 
+If the question is a general knowledge question, check if you have the correct details for the answer and reply with this.
 If you do not have the answer or you require the internet, do not make it up. You should recommend the user to look this up themselves.
 If it is just conversational chitchat. Please reply kindly and direct them to the sort of answers you are able to respond.
 
