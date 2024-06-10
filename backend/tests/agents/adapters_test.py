@@ -6,7 +6,8 @@ expected_tools_str = """{"description": "A test tool", "name": "Mock Tool A", "p
 
 {"description": "A test tool", "name": "Mock Tool B", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}
 
-""" # noqa: E501
+"""  # noqa: E501
+
 
 def test_create_all_tools_str():
     assert create_all_tools_str([mock_tool_a, mock_tool_b]) == expected_tools_str

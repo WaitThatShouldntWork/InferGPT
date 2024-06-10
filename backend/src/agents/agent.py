@@ -12,10 +12,12 @@ from .types import Action_and_args
 engine = PromptEngine()
 format_prompt = engine.load_prompt("tool-selection-format")
 
+
 class Agent(ABC):
     name: str
     description: str
     tools: List[Tool]
+
     def __get_action(self, utterance: str) -> Action_and_args:
 
         tools_available = engine.load_prompt(
