@@ -58,6 +58,8 @@ Here is the list of Agents you can choose from:
 AGENT LIST:
 
 
+If the list of agents does not contain something suitable, you should say the agent is 'none'. ie. If question is 'general knowledge', 'personal' or a 'greeting'.
+
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
 If the same agent_name and task are repeated more than twice in the history, you must not pick that agent_name.
@@ -101,6 +103,8 @@ Here is the list of Agents you can choose from:
 AGENT LIST:
 
 
+If the list of agents does not contain something suitable, you should say the agent is 'none'. ie. If question is 'general knowledge', 'personal' or a 'greeting'.
+
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
 If the same agent_name and task are repeated more than twice in the history, you must not pick that agent_name.
@@ -111,85 +115,6 @@ Play to your strengths as an LLM and pursue simple strategies with no legal comp
         prompt_string = engine.load_prompt("best-next-step", task=task, history=history)
         assert prompt_string == expected_string
 
-    except Exception:
-        raise
-
-
-def test_load_create_tasks_template():
-    engine = PromptEngine()
-    try:
-        list_of_agents = "TestAgentOne, TestAgentTwo, TestAgentThree"
-        expected_string = """You are an agent who specialises in breaking down questions into smaller tasks that are performed to complete
-the question with allocated Agents to each of the tasks.
-
-You know that an Agent is a digital assistant like yourself that you can hand work on to.
-Here is the list of Agents you can choose from:
-
-AGENT LIST:
-TestAgentOne, TestAgentTwo, TestAgentThree
-
-You are dedicated to performing the job of breaking down a user question into up to 5 tasks that are easy
-to understand and manageable in size.
-
-A user will provide a goal that they want to perform and you will create tasks that when all of them are performed,
-will provide an answer for the user question.
-
-To determine the tasks you will create, you will use reasoning, any context you have and will attempt to criticise
-each task in order to find the best way possible for tasks to answer the overall question.
-
-If you are unable to breakdown the question into tasks, say that unfortunately you are unable to break down
-the question.
-
-You are connected to a neo4j database, as a source of information. You do not need to create a task to connect
-or retrieve user data from the database.
-
-you should provide the tasks in valid JSON format following this template:
-
-{
-    "tasks": [
-        {
-            "summary": <A short (10-20 word) summary of the task>,
-            "explanation": <A short (20-30 word) justification of completing the task>
-        }
-    ]
-}
-
-EG. prompt: "Which bank should I choose to open a savings account based on the best interest rate
-between Lloyds Bank and Tesco Bank?"
-response:
-{
-    "tasks": [
-        {
-            "summary": "Find the interest rate for Lloyds Bank\'s savings account.",
-            "explanation": "To compare the two I need to know latest interest rate for Lloyds Bank\'s main savings account."
-        },
-        {
-            "summary": "Find the interest rate for Tesco Bank\'s savings account.",
-            "explanation": "To compare the two I need to know latest interest rate for Tesco Bank\'s main savings account."
-        },
-        {
-            "summary": "Compare both interest rate values.",
-            "explanation": "I need to compare my findings from task 1 and 2 to determine the account with the better interest rate."
-        }
-    ]
-}
-
-EG. prompt: "How much did I spend last month on my debit card?"
-response:
-{
-    "tasks": [
-        {
-            "summary": "Find all spending transactions last month on all of the user\'s debit card.",
-            "explanation": "To understand the total amount spent I must first search and retrieve every transaction the user made on their debit card in the last 31 days."
-        },
-        {
-            "summary": "Sum all transactions.",
-            "explanation": "To give the user the total amount spent on their debit card I need to summate all amounts from the transactions found in the last step."
-        }
-    ]
-}"""
-        prompt_string = engine.load_prompt("create-tasks", list_of_agents=list_of_agents)
-        assert prompt_string == expected_string
     except Exception:
         raise
 
@@ -216,6 +141,8 @@ Add if appropriate, but do not hallucinate arguments for these parameters
 
 {"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}
 
+From the task you should be able to extract the parameters. If it is data driven, it should be turned into a cypher query
+
 If none of the tools are appropriate for the task, return the following tool
 
 {
@@ -223,7 +150,9 @@ If none of the tools are appropriate for the task, return the following tool
     \"tool_parameters\":  \"{}\",
     \"reasoning\": \"No tool was appropriate for the task\"
 }"""
-        prompt_string = engine.load_prompt("best-tool", task="Say hello world to the user", scratchpad="scratchpad of history", tools=tools)
+        prompt_string = engine.load_prompt(
+            "best-tool", task="Say hello world to the user", scratchpad="scratchpad of history", tools=tools
+        )
         assert prompt_string == expected_string
     except Exception:
         raise
@@ -240,6 +169,30 @@ def test_tool_selection_format_template():
     \"reasoning\": \"A sentence on why you chose that tool\"
 }"""
         prompt_string = engine.load_prompt("tool-selection-format")
+        assert prompt_string == expected_string
+    except Exception:
+        raise
+
+
+def test_create_answer_prompt():
+    engine = PromptEngine()
+    try:
+        final_scratchpad = "example scratchpad"
+        datetime = "example datetime"
+        expected_string = f"""You have been provided the final scratchpad which contains the results for the question in the user prompt.
+Your goal is to turn the results into a natural language format to present to the user.
+
+By using the final scratchpad below:
+{ final_scratchpad }
+
+and the question in the user prompt, this should be a readable sentence or 2 that summarises the findings in the results.
+
+If the question is a general knowledge question, check if you have the correct details for the answer and reply with this.
+If you do not have the answer or you require the internet, do not make it up. You should recommend the user to look this up themselves.
+If it is just conversational chitchat. Please reply kindly and direct them to the sort of answers you are able to respond.
+
+The current date and time is { datetime}"""
+        prompt_string = engine.load_prompt("create-answer", final_scratchpad=final_scratchpad, datetime=datetime)
         assert prompt_string == expected_string
     except Exception:
         raise

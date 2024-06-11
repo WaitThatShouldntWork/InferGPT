@@ -5,8 +5,8 @@ def get_scratchpad() -> list:
     return scratchpad
 
 
-def update_scratchpad(agent_name, task, result):
-    scratchpad.append({"agent_name": agent_name, "task": task["summary"], "result": result})
+def update_scratchpad(agent_name, question, result):
+    scratchpad.append({"agent_name": agent_name, "question": question["query"], "result": result})
 
 
 def clear_scratchpad():

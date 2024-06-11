@@ -16,24 +16,24 @@ Specify an operation type under the operation key; here are a few examples:
 Examples:
 Q: How much did I spend with Amazon this month?
 Response:
-{"query":"How much did I spend with Amazon this month?","user_intent":"sum amount spent","questions":[{"question_intent":"calculate total expenses","operation":"filter + aggregation","question_category": "data driven","parameters":[{"type":"company","value":"Amazon"}],"timeframe":"this month","aggregation":"sum","sort_order":"none"}]}
+{"query":"How much did I spend with Amazon this month?","user_intent":"sum amount spent","questions":[{"query":"How much did I spend with Amazon this month?","question_intent":"calculate total expenses","operation":"filter + aggregation","question_category": "data driven","parameters":[{"type":"company","value":"Amazon"}],"timeframe":"this month","aggregation":"sum","sort_order":"none"}]}
 
 Q: Can you find all documents referencing the topic of Inflation?
 Response:
-{"query":"Can you find all documents referencing the topic of Inflation?","user_intent":"find and sort documents","questions":[{"question_intent":"retrieve documents by topic","operation":"relevancy search","question_category": "data driven","parameters":[{"type":"topic","value":"Inflation"}],"sort_order":"relevancy descending"}]}
+{"query":"Can you find all documents referencing the topic of Inflation?","user_intent":"find and sort documents","questions":[{"query":"Can you find all documents referencing the topic of Inflation?","question_intent":"retrieve documents by topic","operation":"relevancy search","question_category": "data driven","parameters":[{"type":"topic","value":"Inflation"}],"sort_order":"relevancy descending"}]}
 
 Q: Find me all cases that have taken more than 2 days to close.
 Response:
-{"query":"Find me all cases that have taken more than 2 days to close.","user_intent":"find cases with duration","questions":[{"question_intent":"identify long-duration cases","operation":"filter + sort","question_category": "data driven","parameters":[{"type":"case","attribute":"duration","condition":"greater than","value":2,"unit":"days"}],"sort_order":"descending"}]}
+{"query":"Find me all cases that have taken more than 2 days to close.","user_intent":"find cases with duration","questions":[{"query":"Find me all cases that have taken more than 2 days to close.","question_intent":"identify long-duration cases","operation":"filter + sort","question_category": "data driven","parameters":[{"type":"case","attribute":"duration","condition":"greater than","value":2,"unit":"days"}],"sort_order":"descending"}]}
 
 Q: I would like to work out which is the most common case closure topic so we can optimise our process.
 Response:
-{"query":"I would like to work out which is the most common case closure topic so we can optimise our process.","user_intent":"identify and rank case closure topics by frequency","questions":[{"question_intent":"determine most common closure topic","question_category": "data driven","operation":"filter + aggregation + sort","parameters":[{"type":"case","attribute":"closure topic"}],"aggregation":"count","sort_order":"descending"}]}
+{"query":"I would like to work out which is the most common case closure topic so we can optimise our process.","user_intent":"identify and rank case closure topics by frequency","questions":[{"query":"I would like to work out which is the most common case closure topic so we can optimise our process.","question_intent":"determine most common closure topic","question_category": "data driven","operation":"filter + aggregation + sort","parameters":[{"type":"case","attribute":"closure topic"}],"aggregation":"count","sort_order":"descending"}]}
 
 Q: What is the capital of England?
 Response:
-{"query":"What is the capital of England?","user_intent":"find information","questions":[{"question_intent":"find capital city","operation":"literal search","question_category":"general knowledge","parameters":[{"type":"country","value":"England"}]}]}
+{"query":"What is the capital of England?","user_intent":"find information","questions":[{"query":"What is the capital of England?","question_intent":"find capital city","operation":"literal search","question_category":"general knowledge","parameters":[{"type":"country","value":"England"}]}]}
 
 Q: How are you?
 Response:
-{"query":"How are you?","user_intent":"greeting response","questions":[{"user_intent":"greeting response","question_category": "chitchat"}]}
+{"query":"How are you?","user_intent":"greeting response","questions":[{"query":"How are you?","user_intent":"greeting response","question_category": "chitchat"}]}
