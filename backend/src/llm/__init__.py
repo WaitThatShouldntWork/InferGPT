@@ -1,7 +1,6 @@
-from .llm import call_model, get_response_three_prompts, MistralClient
+from .llm import call_model, MistralClient
 
 __all__ = [
     "call_model",
-    "get_response_three_prompts",
     "MistralClient"
 ]
