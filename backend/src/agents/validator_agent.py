@@ -1,6 +1,6 @@
 import logging
 from src.prompts import PromptEngine
-from src.utils import call_model
+from src.llm import call_model
 from src.agents import Agent, agent
 
 engine = PromptEngine()

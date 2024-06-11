@@ -1,5 +1,5 @@
 import logging
-from src.utils import call_model
+from src.llm import call_model
 from src.utils.graph_db_utils import execute_query
 from src.prompts import PromptEngine
 from datetime import datetime

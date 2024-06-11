@@ -4,7 +4,8 @@ import logging
 from typing import List, Type
 
 from .adapters import create_all_tools_str, extract_tool, validate_args
-from src.utils import call_model, get_scratchpad
+from src.llm import call_model
+from src.utils import get_scratchpad
 from src.prompts import PromptEngine
 from .tool import Tool
 from .types import Action_and_args

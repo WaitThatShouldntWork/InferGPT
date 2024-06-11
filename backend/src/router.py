@@ -1,7 +1,7 @@
 import json
 import logging
 from src.utils import to_json
-from src.utils import call_model
+from src.llm import call_model
 from src.prompts import PromptEngine
 from src.agents import Agent, agents, agents_details
 

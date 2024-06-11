@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import Optional
-from src.utils import call_model
+from src.llm import call_model
 from src.prompts import PromptEngine
 from src.agents import Agent, agent
 
