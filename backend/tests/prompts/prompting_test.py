@@ -192,7 +192,7 @@ If you do not have the answer or you require the internet, do not make it up. Yo
 If it is just conversational chitchat. Please reply kindly and direct them to the sort of answers you are able to respond.
 
 The current date and time is { datetime}"""
-        prompt_string = engine.load_prompt("create_answer", final_scratchpad=final_scratchpad, datetime=datetime)
+        prompt_string = engine.load_prompt("create-answer", final_scratchpad=final_scratchpad, datetime=datetime)
         assert prompt_string == expected_string
     except Exception:
         raise

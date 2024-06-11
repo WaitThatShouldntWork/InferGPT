@@ -14,6 +14,6 @@ engine = PromptEngine()
 )
 class AnswerAgent(Agent):
     def invoke(self, question: str, final_scratchpad: Optional[str] = None) -> str:
-        create_answer = engine.load_prompt("create_answer", final_scratchpad=final_scratchpad, datetime=datetime.now())
+        create_answer = engine.load_prompt("create-answer", final_scratchpad=final_scratchpad, datetime=datetime.now())
 
         return call_model(create_answer, user_prompt=question)

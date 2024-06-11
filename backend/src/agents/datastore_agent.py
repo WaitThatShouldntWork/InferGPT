@@ -55,8 +55,14 @@ generate_cypher_query_prompt = engine.load_prompt(
     },
 )
 def generate_query(question_intent, operation, question_params, aggregation, sort_order, timeframe) -> str:
-    details_to_create_cypher_query = (
-        f"{question_intent} {operation} {question_params} {aggregation} {sort_order }{timeframe}"
+    details_to_create_cypher_query = engine.load_prompt(
+        "details-to-create-cypher-query",
+        question_intent=question_intent,
+        operation=operation,
+        question_params=question_params,
+        aggregation=aggregation,
+        sort_order=sort_order,
+        timeframe=timeframe,
     )
     llm_query = call_model(generate_cypher_query_prompt, details_to_create_cypher_query)
     json_query = to_json(llm_query)
