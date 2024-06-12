@@ -15,6 +15,13 @@ services:
       - network
     environment:
       NEO4J_AUTH: ${NEO4J_USERNAME}/${NEO4J_PASSWORD}
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: yes
+      NEO4J_apoc_export_file_enabled: true
+      NEO4J_apoc_import_file_enabled: true
+      NEO4J_apoc_import_file_use__neo4j__config: true
+      NEO4J_dbms_security_procedures_allowlist: jwt.security.*, gds.*, apoc.*
+      NEO4J_dbms_security_procedures_unrestricted: gds.*, apoc.*
     # network ports, we can customise exposed ports so that we
     # don't conflict with other neo4j instances that may be running.
     # if none are provided, we revert to defaults.
@@ -31,7 +38,6 @@ services:
       retries: 5
       start_interval: 5s
       start_period: 60s
-
   # InferGPT Backend
   backend:
     image: infergpt/backend
