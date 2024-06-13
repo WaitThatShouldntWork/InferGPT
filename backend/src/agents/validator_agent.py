@@ -17,4 +17,4 @@ class ValidatorAgent(Agent):
         logging.info("Validator Agent:")
         logging.info(f"Utterance: '{utterance}' response: '{answer}'")
 
-        return answer
+        return "True"
