@@ -71,7 +71,7 @@ For instructions on how to run indivdual components locally or within Docker con
 - [backend README](backend/README.md)
 - [data README](data/README.md)
 
-#### Running with Docker Compose
+### Running with Docker Compose
 
 - **Ensure Docker is installed and running**. The easiest way to do this is by using the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it).
 - In the root directory of the project run `docker compose up`
@@ -79,6 +79,8 @@ For instructions on how to run indivdual components locally or within Docker con
 > the first time you do this it may take longer as the compose file builds the images.
 
 > To re-build the docker images following any changes, run `docker compose build` first or use `docker compose up --build`.
+
+For ease of development, after running `docker compose build` you can run `docker compose up --watch`. Watch mode allows for the docker container to rebuild when you save a file. This means that it is not required to take down the service after every change to see these implemented. This option is recommended.
 
 - View the frontend at [localhost:8650](http://localhost:8650)
 - View the Neo4j Browser at [localhost:7474](http://localhost:7474)
