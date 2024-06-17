@@ -1,4 +1,3 @@
-from src.llm import call_model
 from src.prompts import PromptEngine
 from src.agents import Agent, agent
 
@@ -14,4 +13,4 @@ class IntentAgent(Agent):
     def invoke(self, utterance: str) -> str:
         user_prompt = engine.load_prompt("intent", question=utterance)
 
-        return call_model(intent_format, user_prompt=user_prompt)
+        return self.llm.chat(intent_format, user_prompt=user_prompt)

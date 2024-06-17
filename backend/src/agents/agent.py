@@ -2,9 +2,9 @@ from abc import ABC
 import json
 import logging
 from typing import List, Type
+from src.llm import LLM
 
 from .adapters import create_all_tools_str, extract_tool, validate_args
-from src.llm import call_model
 from src.utils import get_scratchpad
 from src.prompts import PromptEngine
 from .tool import Tool
@@ -18,6 +18,10 @@ class Agent(ABC):
     name: str
     description: str
     tools: List[Tool]
+    llm: LLM
+
+    def __init__(self, llm: LLM):
+        self.llm = llm
 
     def __get_action(self, utterance: str) -> Action_and_args:
 
@@ -31,7 +35,7 @@ class Agent(ABC):
         logging.info("#####  ~  Picking Action from tools:  ~  #####")
         logging.info(create_all_tools_str(self.tools))
 
-        response = json.loads(call_model(format_prompt, tools_available))
+        response = json.loads(self.llm.chat(format_prompt, tools_available))
 
         logging.info("Tool chosen - choice response:")
         logging.info(json.dumps(response))
@@ -47,7 +51,7 @@ class Agent(ABC):
 
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
-        result_of_action = action(**args)
+        result_of_action = action(**args, llm=self.llm)
         logging.info(f'Action gave result: {result_of_action}')
         return result_of_action
 

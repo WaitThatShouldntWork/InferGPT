@@ -1,6 +1,5 @@
 from datetime import datetime
-from typing import Optional
-from src.llm import call_model
+from src.utils import get_scratchpad
 from src.prompts import PromptEngine
 from src.agents import Agent, agent
 
@@ -13,7 +12,8 @@ engine = PromptEngine()
     tools=[],
 )
 class AnswerAgent(Agent):
-    def invoke(self, question: str, final_scratchpad: Optional[str] = None) -> str:
+    def invoke(self, question: str) -> str:
+        final_scratchpad = get_scratchpad()
         create_answer = engine.load_prompt("create-answer", final_scratchpad=final_scratchpad, datetime=datetime.now())
 
-        return call_model(create_answer, user_prompt=question)
+        return self.llm.chat(create_answer, user_prompt=question)
