@@ -16,8 +16,9 @@ config = Config()
         - get the env variables working in ci
         - separate this modul (There is a ticket for this...)
 """
-print("HELLO - inside agents init. intent_agent_llm = ", config.intent_agent_llm)
+print("HELLO - inside agents init. INTENT_AGENT_LLM = ", config.intent_agent_llm)
 print("HELLO - inside agents init. MISTRAL_KEY = ", config.mistral_key)
+print("HELLO - inside agents init. ANSWER_AGENT_LLM = ", config.answer_agent_llm)
 print("HELLO - inside agents init. CONFIG = ", config)
 
 validator_agent = ValidatorAgent(get_llm(config.validator_agent_llm))
