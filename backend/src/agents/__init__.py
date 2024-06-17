@@ -10,8 +10,7 @@ from .answer_agent import AnswerAgent
 
 config = Config()
 
-print("HELLO - inside agents init. NEO4J_USERNAME = ", config.neo4j_user)
-print("HELLO - inside agents init. CONFIG = ", config)
+print("HELLO - inside agents init. intent_agent_llm = ", config.intent_agent_llm)
 
 validator_agent = ValidatorAgent(get_llm(config.validator_agent_llm))
 intent_agent = IntentAgent(get_llm(config.intent_agent_llm))
