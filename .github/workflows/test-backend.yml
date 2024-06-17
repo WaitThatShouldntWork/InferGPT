@@ -35,6 +35,12 @@ jobs:
           NEO4J_URI=bolt://localhost:1234
           NEO4J_USERNAME=neo4j
           NEO4J_PASSWORD=my-password
+          ANSWER_AGENT_LLM="mistral"
+          INTENT_AGENT_llm="mistral"
+          VALIDATOR_AGENT_LLM="mistral"
+          DATASTORE_AGENT_LLM="mistral"
+          MATHS_AGENT_LLM="mistral"
+          ROUTER_LLM="mistral"
           EOF
           cat .env
 
