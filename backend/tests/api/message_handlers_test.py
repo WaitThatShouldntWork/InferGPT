@@ -7,7 +7,7 @@ def test_on_ping_send_pong(mocker):
     on_ping = create_on_ping()
     mock_ws = mocker.Mock()
     mock_disconnect = mocker.AsyncMock()
-    mocked_create_task = mocker.patch('asyncio.create_task')
+    mocked_create_task = mocker.patch("asyncio.create_task")
 
     on_ping(mock_ws, mock_disconnect, None)
 
@@ -24,4 +24,3 @@ async def test_on_ping_no_disconnect(mocker):
     on_ping(mock_ws, mock_disconnect, None)
 
     mock_disconnect.assert_not_awaited()
-

@@ -12,6 +12,7 @@ no_agent_response = "I am sorry, but I was unable to find an agent to solve this
 config = Config()
 router_llm = get_llm(config.router_llm)
 
+
 def solve_all(intent_json) -> None:
     questions = intent_json["questions"]
 

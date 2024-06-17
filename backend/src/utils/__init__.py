@@ -10,5 +10,5 @@ __all__ = [
     "Scratchpad",
     "test_connection",
     "to_json",
-    "update_scratchpad"
+    "update_scratchpad",
 ]

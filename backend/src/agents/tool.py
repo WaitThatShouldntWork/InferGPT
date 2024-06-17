@@ -3,7 +3,7 @@ from typing import Callable
 from .types import Action, Parameter
 
 
-class Tool():
+class Tool:
     def __init__(self, name: str, description: str, parameters: dict[str, Parameter], action: Action):
         self.name = name
         self.description = description

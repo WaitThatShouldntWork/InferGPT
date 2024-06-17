@@ -14,6 +14,7 @@ engine = PromptEngine()
 
 graph_schema = engine.load_prompt("graph-schema")
 
+
 @tool(
     name="generate cypher query",
     description="Generate Cypher query if the category is data driven, based on the operation to be performed",
@@ -57,9 +58,9 @@ def generate_query(question_intent, operation, question_params, aggregation, sor
         sort_order=sort_order,
         timeframe=timeframe,
     )
-    generate_cypher_query_prompt = engine.load_prompt("generate-cypher-query",
-                                                  graph_schema=graph_schema,
-                                                  current_date=datetime.now())
+    generate_cypher_query_prompt = engine.load_prompt(
+        "generate-cypher-query", graph_schema=graph_schema, current_date=datetime.now()
+    )
     logger.info("generate cypher query prompt: " + generate_cypher_query_prompt)
     llm_query = llm.chat(generate_cypher_query_prompt, details_to_create_cypher_query)
     json_query = to_json(llm_query)

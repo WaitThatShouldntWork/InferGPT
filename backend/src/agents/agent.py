@@ -24,7 +24,6 @@ class Agent(ABC):
         self.llm = llm
 
     def __get_action(self, utterance: str) -> Action_and_args:
-
         tools_available = engine.load_prompt(
             "best-tool",
             task=utterance,
@@ -52,7 +51,7 @@ class Agent(ABC):
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
         result_of_action = action(**args, llm=self.llm)
-        logging.info(f'Action gave result: {result_of_action}')
+        logging.info(f"Action gave result: {result_of_action}")
         return result_of_action
 
 

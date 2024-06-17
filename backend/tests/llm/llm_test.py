@@ -2,10 +2,11 @@ from tests.llm import MockLLM
 
 model = MockLLM()
 
+
 def test_chat_exists():
     assert hasattr(model, "chat")
 
-    
+
 def test_chat_returns_string():
     response = model.chat("system prompt", "user prompt")
 

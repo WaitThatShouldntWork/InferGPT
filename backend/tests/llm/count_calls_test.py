@@ -1,9 +1,11 @@
 from src.llm.count_calls import Counter, count_calls
 
+
 def test_counter_initial_count():
     counter = Counter()
 
     assert counter.count == 0
+
 
 def test_counter_increment():
     counter = Counter()
@@ -11,6 +13,7 @@ def test_counter_increment():
     counter.increment()
 
     assert counter.count == 1
+
 
 def test_counter_reset():
     counter = Counter()
@@ -20,6 +23,7 @@ def test_counter_reset():
 
     assert counter.count == 0
 
+
 def test_counter_increment_multiple():
     counter = Counter()
 
@@ -27,6 +31,7 @@ def test_counter_increment_multiple():
     counter.increment()
 
     assert counter.count == 2
+
 
 def test_count_calls(mocker):
     mock_func = mocker.Mock(spec=lambda: None)

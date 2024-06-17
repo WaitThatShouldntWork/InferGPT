@@ -13,6 +13,7 @@ content_response = "Hello there"
 
 mistral = cast(Mistral, get_llm("mistral"))
 
+
 def create_mock_chat_response(content, tool_calls=None):
     mock_usage = UsageInfo(prompt_tokens=1, total_tokens=2, completion_tokens=3)
     mock_message = ChatMessage(role="system", content=content, tool_calls=tool_calls)
