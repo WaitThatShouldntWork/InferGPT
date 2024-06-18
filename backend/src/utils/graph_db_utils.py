@@ -14,16 +14,13 @@ driver = GraphDatabase.driver(URI, auth=AUTH)
 
 
 def test_connection():
-    logger.info("testing database connection...")
     connection_healthy = False
     try:
         driver.verify_connectivity()
-        logger.info("database connection verified")
         connection_healthy = True
 
     except Exception as e:
-        logger.critical("database connection failed")
-        logger.critical(e)
+        logger.exception(f"Database connection failed: {e}")
 
     finally:
         driver.close()
@@ -53,19 +50,19 @@ def populate_db(query, data) -> None:
     try:
         with driver.session() as session:
             session.run("MATCH (n) DETACH DELETE n")
-            logger.info("Cleared database")
+            logger.debug("Cleared database")
 
             session.run(query, data=data)
-            logger.info("Database populated")
+            logger.debug("Database populated")
 
             session.run(remove_credits)
-            logger.info("Removed any credits from database")
+            logger.debug("Removed any credits from database")
 
             session.run(remove_transactions_without_merchant)
-            logger.info("Removed transactions without merchant from database")
+            logger.debug("Removed transactions without merchant from database")
 
             session.run(remove_connecting_nodes)
-            logger.info("Removed connecting nodes to transactions without merchants")
+            logger.debug("Removed connecting nodes to transactions without merchants")
     except Exception as e:
         logger.exception(f"Error: {e}")
         raise

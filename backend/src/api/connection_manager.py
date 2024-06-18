@@ -46,7 +46,7 @@ class ConnectionManager:
         try:
             await self.__on_message()
         except Exception as e:
-            logger.error(f"Error in process: {e}")
+            logger.exception(f"Error in websocket process: {e}")
             await self.disconnect()
 
     async def disconnect(self):

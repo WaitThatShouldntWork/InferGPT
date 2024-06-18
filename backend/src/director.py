@@ -12,16 +12,14 @@ director_prompt = engine.load_prompt("director")
 
 
 def question(question):
-    logger.debug("Received utterance: {question}")
     intent = intent_agent.invoke(question)
     intent_json = json.loads(intent)
     logger.info(f"Intent determined: {intent}")
 
     final_scratchpad = solve_all(intent_json)
     final_answer = answer_agent.invoke(question, final_scratchpad)
-    logger.info(f"final answer: {final_answer}")
+    logger.info(f"Final answer: {final_answer}")
 
     clear_scratchpad()
-    logger.info("scratchpad cleared")
 
     return final_answer

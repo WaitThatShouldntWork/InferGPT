@@ -23,8 +23,7 @@ def solve_all(intent_json):
         (agent_name, answer) = solve_task(question, get_scratchpad())
         update_scratchpad(agent_name, question, answer)
 
-    logger.info("Final scratchpad:")
-    logger.info(json.dumps(get_scratchpad(), indent=4))
+    logger.info(f"USER - Final scratchpad: {json.dumps(get_scratchpad(), indent=4)}")
 
     return get_scratchpad()
 

@@ -1,3 +1,7 @@
+import logging
+
+logger = logging.getLogger(__name__)
+
 scratchpad = []
 
 
@@ -10,4 +14,5 @@ def update_scratchpad(agent_name, question, result):
 
 
 def clear_scratchpad():
+    logger.info("Scratchpad cleared")
     scratchpad.clear()

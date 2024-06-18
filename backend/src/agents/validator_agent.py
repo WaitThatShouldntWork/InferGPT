@@ -16,7 +16,6 @@ validator_prompt = engine.load_prompt("validator")
 class ValidatorAgent(Agent):
     def invoke(self, utterance: str) -> str:
         answer = call_model(validator_prompt, utterance)
-        logger.info("Validator Agent:")
-        logger.info(f"Utterance: '{utterance}' response: '{answer}'")
+        logger.info(f"USER - Validating: '{utterance}' Answer: '{answer}'")
 
         return answer

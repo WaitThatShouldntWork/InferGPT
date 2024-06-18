@@ -38,7 +38,7 @@ async def lifespan(app: FastAPI):
         annual_transactions = download_stream.readall().decode("utf-8")
         populate_db(annual_transactions_cypher_script, json.loads(annual_transactions))
     except Exception as e:
-        logger.info(f"Failed to populate database with initial data from Azure: {e}")
+        logger.exception(f"Failed to populate database with initial data from Azure: {e}")
         populate_db(annual_transactions_cypher_script, {})
     yield
 
@@ -66,23 +66,20 @@ chat_fail_response = "Unable to generate a response. Check the service by using 
 
 @app.get("/health")
 async def health_check():
-    logger.info("health_check method called")
     response = JSONResponse(status_code=200, content=healthy_response)
     try:
         if not test_connection():
-            logger.info("health_check method failed - neo4j connection unsuccessful")
             response = JSONResponse(status_code=500, content=unhealthy_neo4j_response)
     except Exception as e:
-        logger.critical(f"health_check method failed with error: {e}")
+        logger.exception(f"Healthcheck method failed with error: {e}")
         response = JSONResponse(status_code=500, content=unhealthy_neo4j_response)
     finally:
-        logger.info("health_check method complete")
         return response
 
 
 @app.get("/chat")
 async def chat(utterance: str):
-    logger.info(f"chat method called with utterance: {utterance}")
+    logger.info(f"Chat method called with utterance: {utterance}")
     try:
         final_result = question(utterance)
         return JSONResponse(status_code=200, content=final_result)
