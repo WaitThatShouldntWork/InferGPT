@@ -3,7 +3,6 @@ from src.utils import Config
 from .agent import Agent, agent
 from .datastore_agent import DatastoreAgent
 from .intent_agent import IntentAgent
-from .maths_agent import MathsAgent
 from .tool import tool, Parameter
 from .validator_agent import ValidatorAgent
 from .answer_agent import AnswerAgent
