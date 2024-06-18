@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from src.utils import Config, get_scratchpad, update_scratchpad
+from src.utils import get_scratchpad, update_scratchpad
 from src.router import get_agent_for_task
 from src.agents import validator_agent
 

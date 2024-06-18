@@ -48,5 +48,5 @@ def test_agent_invoke_no_appropriate_tool_for_task(mocker):
     with raises(Exception) as error:
         mock_agent_instance.invoke("Mock task to solve")
 
-    expected = "Unable to extract chosen tool and parameters from {'tool_name': 'None', 'tool_parameters': {}, 'reasoning': 'No tool was appropriate for the task'}" # noqa: E501
-    assert str(error.value) == expected # noqa: E501
+    expected = "Unable to extract chosen tool and parameters from {'tool_name': 'None', 'tool_parameters': {}, 'reasoning': 'No tool was appropriate for the task'}"  # noqa: E501
+    assert str(error.value) == expected  # noqa: E501

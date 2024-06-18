@@ -29,7 +29,6 @@ model = get_llm("mockllm")
 agent = MockAgent("mockllm")
 
 
-
 def test_solve_all_no_tasks():
     with pytest.raises(Exception) as error:
         solve_all({"questions": []})
