@@ -30,7 +30,6 @@ jobs:
         run: |
           echo "Create environment file"
           cat <<EOF > .env
-          ROUTER_LLM=mistral
           MODEL=my-model
           MISTRAL_KEY=123456
           NEO4J_URI=bolt://localhost:1234
@@ -41,6 +40,7 @@ jobs:
           VALIDATOR_AGENT_LLM=mistral
           DATASTORE_AGENT_LLM=mistral
           MATHS_AGENT_LLM=mistral
+          ROUTER_LLM=mistral
           EOF
           cat .env
 
