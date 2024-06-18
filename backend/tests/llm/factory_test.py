@@ -7,7 +7,7 @@ def test_get_llm_type_none_throws():
     with pytest.raises(ValueError) as error:
         get_llm(None)
 
-    assert str(error.value) == "LLM type not provided"
+    assert str(error.value) == "LLM name not provided"
 
 
 def test_get_llm_invalid_type_throws():

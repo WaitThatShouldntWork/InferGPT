@@ -1,5 +1,4 @@
-from src.agents.types import Parameter
-from src.agents import Agent, agent, tool
+from src.agents import Agent, agent, tool, Parameter
 
 name_a = "Mock Tool A"
 name_b = "Mock Tool B"

@@ -1,5 +1,5 @@
 from src.llm.count_calls import Counter
-from tests.llm import MockLLM
+from src.llm import MockLLM
 
 model = MockLLM()
 

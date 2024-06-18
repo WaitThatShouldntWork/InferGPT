@@ -2,7 +2,7 @@ from abc import ABC
 import json
 import logging
 from typing import List, Type
-from src.llm import LLM
+from src.llm import LLM, get_llm
 
 from .adapters import create_all_tools_str, extract_tool, validate_args
 from src.utils import get_scratchpad
@@ -20,8 +20,8 @@ class Agent(ABC):
     tools: List[Tool]
     llm: LLM
 
-    def __init__(self, llm: LLM):
-        self.llm = llm
+    def __init__(self, llm_name: str | None):
+        self.llm = get_llm(llm_name)
 
     def __get_action(self, utterance: str) -> Action_and_args:
         tools_available = engine.load_prompt(

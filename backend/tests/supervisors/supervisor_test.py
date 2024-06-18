@@ -1,6 +1,6 @@
 import pytest
+from src.llm import get_llm
 from src.utils import get_scratchpad
-from tests.llm import MockLLM
 from tests.agents import MockAgent
 from src.supervisors import solve_all, solve_task, no_questions_response, unsolvable_response, no_agent_response
 
@@ -25,8 +25,9 @@ intent_json = {
     ],
 }
 
-model = MockLLM()
-agent = MockAgent(model)
+model = get_llm("mockllm")
+agent = MockAgent("mockllm")
+
 
 
 def test_solve_all_no_tasks():

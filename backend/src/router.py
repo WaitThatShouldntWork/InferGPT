@@ -1,10 +1,14 @@
 import json
 import logging
-from src.utils import to_json
+from src.utils import to_json, Config
 from src.prompts import PromptEngine
 from src.agents import Agent, agents, agents_details
+from src.llm import get_llm
 
 prompt_engine = PromptEngine()
+config = Config()
+
+llm = get_llm(config.router_llm)
 
 
 def build_best_next_step_prompt(task, scratchpad):
@@ -40,7 +44,7 @@ def find_agent_from_name(name):
     return (agent for agent in agents if agent.name == name)
 
 
-def get_agent_for_task(task, llm, scratchpad) -> Agent | None:
+def get_agent_for_task(task, scratchpad) -> Agent | None:
     plan = build_plan(task, llm, scratchpad)
     agent = next(find_agent_from_name(plan["agent_name"]), None)
 
