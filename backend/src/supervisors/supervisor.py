@@ -6,6 +6,8 @@ from src.utils import get_scratchpad, update_scratchpad
 from src.router import get_agent_for_task
 from src.agents import validator_agent
 
+logger = logging.getLogger(__name__)
+
 no_tasks_response = "No tasks found to solve"
 unsolvable_response = "I am sorry, but I was unable to find an answer to this task"
 no_agent_response = "I am sorry, but I was unable to find an agent to solve this task"
@@ -21,8 +23,8 @@ def solve_all(intent_json):
         (agent_name, answer) = solve_task(question, get_scratchpad())
         update_scratchpad(agent_name, question, answer)
 
-    logging.info("Final scratchpad:")
-    logging.info(json.dumps(get_scratchpad(), indent=4))
+    logger.info("Final scratchpad:")
+    logger.info(json.dumps(get_scratchpad(), indent=4))
 
     return get_scratchpad()
 

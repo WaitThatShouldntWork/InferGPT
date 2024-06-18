@@ -9,6 +9,7 @@ from src.prompts import PromptEngine
 from .tool import Tool
 from .types import Action_and_args
 
+logger = logging.getLogger(__name__)
 engine = PromptEngine()
 format_prompt = engine.load_prompt("tool-selection-format")
 
@@ -27,13 +28,13 @@ class Agent(ABC):
             tools=create_all_tools_str(self.tools),
         )
 
-        logging.info("#####  ~  Picking Action from tools:  ~  #####")
-        logging.info(create_all_tools_str(self.tools))
+        logger.info("#####  ~  Picking Action from tools:  ~  #####")
+        logger.info(create_all_tools_str(self.tools))
 
         response = json.loads(call_model(format_prompt, tools_available))
 
-        logging.info("Tool chosen - choice response:")
-        logging.info(json.dumps(response))
+        logger.info("Tool chosen - choice response:")
+        logger.info(json.dumps(response))
 
         try:
             chosen_tool = extract_tool(response["tool_name"], self.tools)
@@ -47,7 +48,7 @@ class Agent(ABC):
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
         result_of_action = action(**args)
-        logging.info(f'Action gave result: {result_of_action}')
+        logger.info(f'Action gave result: {result_of_action}')
         return result_of_action
 
 

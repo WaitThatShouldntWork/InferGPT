@@ -3,6 +3,8 @@ from neo4j import GraphDatabase
 from src.utils import Config
 from src.utils.annual_cypher_import import remove_connecting_nodes, remove_transactions_without_merchant, remove_credits
 
+logger = logging.getLogger(__name__)
+
 config = Config()
 
 URI = config.neo4j_uri
@@ -12,16 +14,16 @@ driver = GraphDatabase.driver(URI, auth=AUTH)
 
 
 def test_connection():
-    logging.info("testing database connection...")
+    logger.info("testing database connection...")
     connection_healthy = False
     try:
         driver.verify_connectivity()
-        logging.info("database connection verified")
+        logger.info("database connection verified")
         connection_healthy = True
 
     except Exception as e:
-        logging.critical("database connection failed")
-        logging.critical(e)
+        logger.critical("database connection failed")
+        logger.critical(e)
 
     finally:
         driver.close()
@@ -37,7 +39,7 @@ def execute_query(llm_query):
         return record_dict
 
     except Exception as e:
-        logging.exception(f"Error: {e}")
+        logger.exception(f"Error: {e}")
         raise
 
     finally:
@@ -51,21 +53,21 @@ def populate_db(query, data) -> None:
     try:
         with driver.session() as session:
             session.run("MATCH (n) DETACH DELETE n")
-            logging.info("Cleared database")
+            logger.info("Cleared database")
 
             session.run(query, data=data)
-            logging.info("Database populated")
+            logger.info("Database populated")
 
             session.run(remove_credits)
-            logging.info("Removed any credits from database")
+            logger.info("Removed any credits from database")
 
             session.run(remove_transactions_without_merchant)
-            logging.info("Removed transactions without merchant from database")
+            logger.info("Removed transactions without merchant from database")
 
             session.run(remove_connecting_nodes)
-            logging.info("Removed connecting nodes to transactions without merchants")
+            logger.info("Removed connecting nodes to transactions without merchants")
     except Exception as e:
-        logging.exception(f"Error: {e}")
+        logger.exception(f"Error: {e}")
         raise
     finally:
         if session:

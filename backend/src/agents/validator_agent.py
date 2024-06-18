@@ -3,6 +3,7 @@ from src.prompts import PromptEngine
 from src.utils import call_model
 from src.agents import Agent, agent
 
+logger = logging.getLogger(__name__)
 engine = PromptEngine()
 validator_prompt = engine.load_prompt("validator")
 
@@ -15,7 +16,7 @@ validator_prompt = engine.load_prompt("validator")
 class ValidatorAgent(Agent):
     def invoke(self, utterance: str) -> str:
         answer = call_model(validator_prompt, utterance)
-        logging.info("Validator Agent:")
-        logging.info(f"Utterance: '{utterance}' response: '{answer}'")
+        logger.info("Validator Agent:")
+        logger.info(f"Utterance: '{utterance}' response: '{answer}'")
 
         return answer

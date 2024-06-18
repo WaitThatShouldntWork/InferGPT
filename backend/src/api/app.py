@@ -38,7 +38,7 @@ async def lifespan(app: FastAPI):
         annual_transactions = download_stream.readall().decode("utf-8")
         populate_db(annual_transactions_cypher_script, json.loads(annual_transactions))
     except Exception as e:
-        logging.info(f"Failed to populate database with initial data from Azure: {e}")
+        logger.info(f"Failed to populate database with initial data from Azure: {e}")
         populate_db(annual_transactions_cypher_script, {})
     yield
 
@@ -70,13 +70,13 @@ async def health_check():
     response = JSONResponse(status_code=200, content=healthy_response)
     try:
         if not test_connection():
-            logging.info("health_check method failed - neo4j connection unsuccessful")
+            logger.info("health_check method failed - neo4j connection unsuccessful")
             response = JSONResponse(status_code=500, content=unhealthy_neo4j_response)
     except Exception as e:
         logger.critical(f"health_check method failed with error: {e}")
         response = JSONResponse(status_code=500, content=unhealthy_neo4j_response)
     finally:
-        logging.info("health_check method complete")
+        logger.info("health_check method complete")
         return response
 
 
