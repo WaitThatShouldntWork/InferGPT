@@ -52,7 +52,7 @@ def test_tool_action():
     assert mock_tool.action() == "Hello, World!"
 
 
-expected_tools_object = """{"description": "A test tool", "name": "Mock Tool", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}""" # noqa: E501
+expected_tools_object = """{"description": "A test tool", "name": "Mock Tool", "parameters": {"input": {"type": "string", "description": "A string"}, "optional": {"type": "string", "description": "A string"}}}"""  # noqa: E501
 
 
 def test_to_object():

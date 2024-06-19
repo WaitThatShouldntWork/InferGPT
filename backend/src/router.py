@@ -1,11 +1,14 @@
 import json
 import logging
-from src.utils import to_json
-from src.utils import call_model
+from src.utils import to_json, Config
 from src.prompts import PromptEngine
 from src.agents import Agent, agents, agents_details
+from src.llm import get_llm
 
 prompt_engine = PromptEngine()
+config = Config()
+
+llm = get_llm(config.router_llm)
 
 
 def build_best_next_step_prompt(task, scratchpad):
@@ -20,7 +23,7 @@ def build_best_next_step_prompt(task, scratchpad):
 response_format_prompt = prompt_engine.load_prompt("agent-selection-format")
 
 
-def build_plan(task, scratchpad):
+def build_plan(task, llm, scratchpad):
     best_next_step_prompt = build_best_next_step_prompt(task, scratchpad)
 
     # Call model to choose agent
@@ -28,7 +31,7 @@ def build_plan(task, scratchpad):
 
     logging.info("Scratchpad so far:")
     logging.info(scratchpad)
-    best_next_step = call_model(response_format_prompt, best_next_step_prompt)
+    best_next_step = llm.chat(response_format_prompt, best_next_step_prompt)
 
     plan = to_json(best_next_step, "Failed to interpret LLM next step format from step string")
     logging.info("Next best step response:")
@@ -42,7 +45,7 @@ def find_agent_from_name(name):
 
 
 def get_agent_for_task(task, scratchpad) -> Agent | None:
-    plan = build_plan(task, scratchpad)
+    plan = build_plan(task, llm, scratchpad)
     agent = next(find_agent_from_name(plan["agent_name"]), None)
 
     return agent

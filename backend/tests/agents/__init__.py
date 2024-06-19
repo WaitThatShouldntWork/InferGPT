@@ -1,5 +1,4 @@
-from src.agents.types import Parameter
-from src.agents import Agent, agent, tool
+from src.agents import Agent, agent, tool, Parameter
 
 name_a = "Mock Tool A"
 name_b = "Mock Tool B"
@@ -16,7 +15,7 @@ param_description = "A string"
         "another_optional": Parameter(type="string", description=param_description, required=False),
     },
 )
-def mock_tool_a(input: str):
+def mock_tool_a(input: str, llm):
     return input
 
 
@@ -28,7 +27,7 @@ def mock_tool_a(input: str):
         "optional": Parameter(type="string", description=param_description, required=False),
     },
 )
-def mock_tool_b(input: str):
+def mock_tool_b(input: str, llm):
     return input
 
 
@@ -43,9 +42,4 @@ class MockAgent(Agent):
     pass
 
 
-__all__ = ["MockAgent",
-           "mock_agent_description",
-           "mock_agent_name",
-           "mock_tools",
-           "mock_tool_a",
-           "mock_tool_b"]
+__all__ = ["MockAgent", "mock_agent_description", "mock_agent_name", "mock_tools", "mock_tool_a", "mock_tool_b"]

@@ -17,6 +17,12 @@ class Config(object):
         self.azure_storage_connection_string = None
         self.azure_storage_container_name = None
         self.azure_initial_data_filename = None
+        self.answer_agent_llm = None
+        self.intent_agent_llm = None
+        self.validator_agent_llm = None
+        self.datastore_agent_llm = None
+        self.maths_agent_llm = None
+        self.router_llm = None
         self.load_env()
 
     def load_env(self):
@@ -35,6 +41,12 @@ class Config(object):
             self.azure_storage_connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
             self.azure_storage_container_name = os.getenv("AZURE_STORAGE_CONTAINER_NAME")
             self.azure_initial_data_filename = os.getenv("AZURE_INITIAL_DATA_FILENAME")
+            self.answer_agent_llm = os.getenv("ANSWER_AGENT_LLM")
+            self.intent_agent_llm = os.getenv("INTENT_AGENT_LLM")
+            self.validator_agent_llm = os.getenv("VALIDATOR_AGENT_LLM")
+            self.datastore_agent_llm = os.getenv("DATASTORE_AGENT_LLM")
+            self.maths_agent_llm = os.getenv("MATHS_AGENT_LLM")
+            self.router_llm = os.getenv("ROUTER_LLM")
         except FileNotFoundError:
             raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
         except Exception:

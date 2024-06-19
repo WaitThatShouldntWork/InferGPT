@@ -1,6 +1,6 @@
 # NOT NEEDED CURRENTLY AS THE RETURNED VALUE OF GRAPH SCHEMA IS STORED STATICALLY AS A JINJA TEMPLATE
 
-from src.utils import call_model
+from src.llm import call_model
 from src.utils.graph_db_utils import execute_query
 import logging
 from src.prompts import PromptEngine

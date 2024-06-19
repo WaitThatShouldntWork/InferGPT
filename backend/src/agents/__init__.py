@@ -1,3 +1,4 @@
+from src.utils import Config
 from .agent import Agent, agent
 from .datastore_agent import DatastoreAgent
 from .intent_agent import IntentAgent
@@ -6,16 +7,19 @@ from .tool import tool, Parameter
 from .validator_agent import ValidatorAgent
 from .answer_agent import AnswerAgent
 
-validator_agent = ValidatorAgent()
-intent_agent = IntentAgent()
-answer_agent = AnswerAgent()
+config = Config()
+
+
+validator_agent = ValidatorAgent(config.validator_agent_llm)
+intent_agent = IntentAgent(config.intent_agent_llm)
+answer_agent = AnswerAgent(config.answer_agent_llm)
 
 
 def get_agent_details(agent):
     return {"name": agent.name, "description": agent.description}
 
 
-agents = [DatastoreAgent(), MathsAgent()]
+agents = [DatastoreAgent(config.datastore_agent_llm), MathsAgent(config.maths_agent_llm)]
 agents_details = [get_agent_details(agent) for agent in agents]
 
 __all__ = [

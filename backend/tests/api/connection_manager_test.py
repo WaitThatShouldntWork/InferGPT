@@ -15,7 +15,7 @@ def connection_manager(mocker):
     mock_ws = mocker.AsyncMock()
     mock_ws.accept = mocker.AsyncMock()
     mock_on_message = mocker.AsyncMock
-    mocker.patch.object(manager, '_ConnectionManager__on_message', new_callable=mock_on_message)
+    mocker.patch.object(manager, "_ConnectionManager__on_message", new_callable=mock_on_message)
 
     return manager, mock_ws, mock_on_message
 
