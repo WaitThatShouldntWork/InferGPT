@@ -2,7 +2,7 @@ import json
 import logging
 from src.utils import to_json, Config
 from src.prompts import PromptEngine
-from src.agents import Agent, get_question_agents, get_agent_details
+from src.agents import Agent, get_available_agents, get_agent_details
 from src.llm import get_llm
 
 prompt_engine = PromptEngine()
@@ -39,7 +39,7 @@ def build_plan(task, llm, scratchpad):
 
 
 def find_agent_from_name(name):
-    agents = get_question_agents()
+    agents = get_available_agents()
     return (agent for agent in agents if agent.name == name)
 
 

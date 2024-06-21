@@ -27,12 +27,12 @@ def agent_details(agent) -> dict:
     return {"name": agent.name, "description": agent.description}
 
 
-def get_question_agents() -> List[Agent]:
+def get_available_agents() -> List[Agent]:
     return [DatastoreAgent(config.datastore_agent_llm), MathsAgent(config.maths_agent_llm)]
 
 
 def get_agent_details():
-    agents = get_question_agents()
+    agents = get_available_agents()
     return [agent_details(agent) for agent in agents]
 
 
@@ -43,7 +43,7 @@ __all__ = [
     "get_agent_details",
     "get_answer_agent",
     "get_intent_agent",
-    "get_question_agents",
+    "get_available_agents",
     "get_validator_agent",
     "Parameter",
     "tool",
