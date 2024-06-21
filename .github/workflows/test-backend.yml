@@ -24,26 +24,6 @@ jobs:
           pip install -r requirements.txt
           pip install pytest-md pytest-emoji
 
-        # some tests require an .env file to run.
-        # file should contain all the required properties.  
-      - name: Create environment file
-        run: |
-          echo "Create environment file"
-          cat <<EOF > .env
-          MODEL=my-model
-          MISTRAL_KEY=123456
-          NEO4J_URI=bolt://localhost:1234
-          NEO4J_USERNAME=neo4j
-          NEO4J_PASSWORD=my-password
-          ANSWER_AGENT_LLM=mistral
-          INTENT_AGENT_LLM=mistral
-          VALIDATOR_AGENT_LLM=mistral
-          DATASTORE_AGENT_LLM=mistral
-          MATHS_AGENT_LLM=mistral
-          ROUTER_LLM=mistral
-          EOF
-          cat .env
-
       - name: Run tests
         uses: pavelzw/pytest-action@v2
         with:

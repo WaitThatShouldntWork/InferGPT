@@ -2,7 +2,7 @@ from typing import Tuple
 
 from src.utils import get_scratchpad, update_scratchpad
 from src.router import get_agent_for_task
-from src.agents import validator_agent
+from src.agents import get_validator_agent
 
 no_questions_response = "No questions found to solve"
 unsolvable_response = "I am sorry, but I was unable to find an answer to this task"
@@ -39,5 +39,5 @@ def solve_task(task, scratchpad, attempt=0) -> Tuple[str, str]:
 
 
 def is_valid_answer(answer, task) -> bool:
-    is_valid = (validator_agent.invoke(f"Task: {task}  Answer: {answer}")).lower() == "true"
+    is_valid = (get_validator_agent().invoke(f"Task: {task}  Answer: {answer}")).lower() == "true"
     return is_valid
