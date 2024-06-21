@@ -2,6 +2,7 @@ from typing import List
 from src.utils import Config
 from .agent import Agent, agent
 from .datastore_agent import DatastoreAgent
+from .maths_agent import MathsAgent
 from .intent_agent import IntentAgent
 from .tool import tool, Parameter
 from .validator_agent import ValidatorAgent
