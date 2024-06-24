@@ -15,5 +15,3 @@ class Parameter:
         self.type = type
         self.description = description
         self.required = required
-
-

@@ -1,7 +1,7 @@
 import json
 import logging
-from src.utils.scratchpad import clear_scratchpad
-from src.agents import intent_agent, answer_agent
+from src.utils import clear_scratchpad, update_scratchpad
+from src.agents import get_intent_agent, get_answer_agent
 from src.prompts import PromptEngine
 from src.supervisors import solve_all
 
@@ -11,14 +11,18 @@ engine = PromptEngine()
 director_prompt = engine.load_prompt("director")
 
 
-def question(question):
-    intent = intent_agent.invoke(question)
+def question(question: str) -> str:
+    intent = get_intent_agent().invoke(question)
     intent_json = json.loads(intent)
     logger.info(f"Intent determined: {intent}")
 
-    final_scratchpad = solve_all(intent_json)
-    final_answer = answer_agent.invoke(question, final_scratchpad)
-    logger.info(f"Final answer: {final_answer}")
+    try:
+        solve_all(intent_json)
+    except Exception as error:
+        update_scratchpad(error=str(error))
+
+    final_answer = get_answer_agent().invoke(question)
+    logger.info(f"final answer: {final_answer}")
 
     clear_scratchpad()
 

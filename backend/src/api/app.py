@@ -64,6 +64,7 @@ unhealthy_neo4j_response = health_prefix + "backend is healthy. Neo4J is unhealt
 
 chat_fail_response = "Unable to generate a response. Check the service by using the keyphrase 'healthcheck'"
 
+
 @app.get("/health")
 async def health_check():
     response = JSONResponse(status_code=200, content=healthy_response)

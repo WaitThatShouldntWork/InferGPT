@@ -11,7 +11,7 @@ from .agent import Agent, agent
             type="list[number]",
             description="Python list of comma separated values (e.g. [1, 5, 3])",
         )
-    }
+    },
 )
 def sum_list_of_values(list_of_values) -> str:
     if not isinstance(list_of_values, list):

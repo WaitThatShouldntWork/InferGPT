@@ -18,6 +18,6 @@ def test_scratchpad():
     assert get_scratchpad() == []
     update_scratchpad("ExampleAgent", question, "example result")
     assert get_scratchpad() == [
-        {"agent_name": "ExampleAgent", "question": "example question", "result": "example result"}
+        {"agent_name": "ExampleAgent", "question": "example question", "result": "example result", "error": None}
     ]
     clear_scratchpad()

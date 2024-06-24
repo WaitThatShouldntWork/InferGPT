@@ -1,13 +1,17 @@
+from typing import cast
 from unittest.mock import MagicMock
 from mistralai.models.chat_completion import ChatCompletionResponse
 from mistralai.models.chat_completion import ChatCompletionResponseChoice
 from mistralai.models.chat_completion import ChatMessage
 from mistralai.models.common import UsageInfo
-from src.utils import Config, call_model, MistralClient
+from src.llm import get_llm, MistralClient, Mistral
+from src.utils import Config
 
 system_prompt = "system_prompt"
 user_prompt = "user_prompt"
 content_response = "Hello there"
+
+mistral = cast(Mistral, get_llm("mistral"))
 
 
 def create_mock_chat_response(content, tool_calls=None):
@@ -23,35 +27,35 @@ mock_client = MagicMock(spec=MistralClient)
 mock_config = MagicMock(spec=Config)
 
 
-def test_call_model_content_string_returns_string(mocker):
-    client_instance = mocker.patch("src.utils.llm.client", return_value=mock_client)
-    client_instance.chat.return_value = create_mock_chat_response(content_response)
+def test_chat_content_string_returns_string(mocker):
+    mistral.client = mocker.MagicMock(return_value=mock_client)
+    mistral.client.chat.return_value = create_mock_chat_response(content_response)
 
-    response = call_model(system_prompt, user_prompt)
+    response = mistral.chat(system_prompt, user_prompt)
 
     assert response == content_response
 
 
-def test_call_model_content_list_returns_string(mocker):
+def test_chat_content_list_returns_string(mocker):
     content_list = ["Hello", "there"]
-    client_instance = mocker.patch("src.utils.llm.client", return_value=mock_client)
-    client_instance.chat.return_value = create_mock_chat_response(content_list)
+    mistral.client = mocker.MagicMock(return_value=mock_client)
+    mistral.client.chat.return_value = create_mock_chat_response(content_list)
 
-    response = call_model(system_prompt, user_prompt)
+    response = mistral.chat(system_prompt, user_prompt)
 
     assert response == content_response
 
 
-def test_call_model_calls_client_chat(mocker):
-    config_instance = mocker.patch("src.utils.llm.config", return_value=mock_config)
-    client_instance = mocker.patch("src.utils.llm.client", return_value=mock_client)
+def test_chat_calls_client_chat(mocker):
+    config_instance = mocker.patch("src.llm.mistral.config", return_value=mock_config)
+    mistral.client = mocker.MagicMock(return_value=mock_client)
 
-    call_model(system_prompt, user_prompt)
+    mistral.chat(system_prompt, user_prompt)
 
     expected_messages = [
         ChatMessage(role="system", content=system_prompt),
         ChatMessage(role="user", content=user_prompt),
     ]
-    client_instance.chat.assert_called_once_with(
-        messages=expected_messages, model=config_instance.mistral_model, tool_choice=None, tools=None, temperature=0
+    mistral.client.chat.assert_called_once_with(
+        messages=expected_messages, model=config_instance.mistral_model, temperature=0
     )

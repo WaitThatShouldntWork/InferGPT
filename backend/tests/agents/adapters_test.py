@@ -31,7 +31,7 @@ def test_validate_all_args_success():
     valid_args = {
         "input": "An example string value for input",
         "optional": "An example optional string value for optional",
-        "another_optional": "An example optional string value for another_optional"
+        "another_optional": "An example optional string value for another_optional",
     }
     try:
         validate_args(valid_args, mock_tool_a)
@@ -42,7 +42,7 @@ def test_validate_all_args_success():
 def test_validate_args_some_optional_passed_success():
     valid_args = {
         "input": "An example string value for input",
-        "optional": "An example optional string value for optional"
+        "optional": "An example optional string value for optional",
     }
     try:
         validate_args(valid_args, mock_tool_a)
@@ -51,9 +51,7 @@ def test_validate_args_some_optional_passed_success():
 
 
 def test_validate_args_no_optional_passed_success():
-    valid_args = {
-        "input": "An example string value for input"
-    }
+    valid_args = {"input": "An example string value for input"}
     try:
         validate_args(valid_args, mock_tool_a)
     except Exception:
@@ -61,9 +59,7 @@ def test_validate_args_no_optional_passed_success():
 
 
 def test_validate_args_failure():
-    invalid_args = {
-        "argument": "An example string value for argument"
-    }
+    invalid_args = {"argument": "An example string value for argument"}
     with pytest.raises(Exception, match=r"Unable to fit parameters .* to Tool arguments .*: Wrong params"):
         validate_args(invalid_args, mock_tool_a)
 
@@ -73,7 +69,7 @@ def test_validate_extra_args_failure():
         "input": "An example string value for input",
         "optional": "An example optional string value for optional",
         "another_optional": "An example optional string value for another_optional",
-        "argument": "An example string value for argument"
+        "argument": "An example string value for argument",
     }
     with pytest.raises(Exception, match=r"Unable to fit parameters .* to Tool arguments .*: Extra params"):
         validate_args(invalid_args, mock_tool_a)
