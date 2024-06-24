@@ -34,7 +34,7 @@ class Agent(ABC):
 
         response = json.loads(call_model(format_prompt, tools_available))
 
-        logger.info(F"USER - Tool chosen: {json.dumps(response)}")
+        logger.info(f"USER - Tool chosen: {json.dumps(response)}")
 
         try:
             chosen_tool = extract_tool(response["tool_name"], self.tools)
