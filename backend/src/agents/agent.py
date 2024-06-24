@@ -10,6 +10,7 @@ from src.prompts import PromptEngine
 from .tool import Tool
 from .types import Action_and_args
 
+logger = logging.getLogger(__name__)
 engine = PromptEngine()
 format_prompt = engine.load_prompt("tool-selection-format")
 
@@ -24,20 +25,21 @@ class Agent(ABC):
         self.llm = get_llm(llm_name)
 
     def __get_action(self, utterance: str) -> Action_and_args:
+
+        tool_descriptions = create_all_tools_str(self.tools)
+
         tools_available = engine.load_prompt(
             "best-tool",
             task=utterance,
             scratchpad=get_scratchpad(),
-            tools=create_all_tools_str(self.tools),
+            tools=tool_descriptions,
         )
 
-        logging.info("#####  ~  Picking Action from tools:  ~  #####")
-        logging.info(create_all_tools_str(self.tools))
+        logger.debug(f"List of tools: {tool_descriptions}")
 
         response = json.loads(self.llm.chat(format_prompt, tools_available))
 
-        logging.info("Tool chosen - choice response:")
-        logging.info(json.dumps(response))
+        logger.info(f"USER - Tool chosen: {json.dumps(response)}")
 
         try:
             chosen_tool = extract_tool(response["tool_name"], self.tools)
@@ -51,7 +53,7 @@ class Agent(ABC):
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
         result_of_action = action(**args, llm=self.llm)
-        logging.info(f"Action gave result: {result_of_action}")
+        logger.info(f"USER - Action gave result: {result_of_action}")
         return result_of_action
 
 

@@ -6,6 +6,7 @@ from fastapi.websockets import WebSocketState
 from .types import Message, MessageTypes
 from .message_handlers import handlers
 
+logger = logging.getLogger(__name__)
 
 def parse_message(message: Dict[str, Any]) -> Message:
     data = message.get("data") or None
@@ -45,7 +46,7 @@ class ConnectionManager:
         try:
             await self.__on_message()
         except Exception as e:
-            logging.error(f"Error in process: {e}")
+            logger.exception(f"Error in websocket process: {e}")
             await self.disconnect()
 
     async def disconnect(self):

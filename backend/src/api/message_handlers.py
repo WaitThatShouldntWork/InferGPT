@@ -5,6 +5,8 @@ from fastapi import WebSocket
 from typing import Callable
 from .types import Handlers, MessageTypes
 
+logger = logging.getLogger(__name__)
+
 heartbeat_timeout = 30
 pong = json.dumps({"type": MessageTypes.PONG.value})
 
@@ -15,7 +17,6 @@ def create_on_ping():
     async def heartbeat(disconnect: Callable):
         try:
             await asyncio.sleep(heartbeat_timeout)
-            logging.info("Heartbeat timeout")
             await disconnect()
         except asyncio.CancelledError:
             pass
@@ -34,7 +35,7 @@ def create_on_ping():
 
 
 def on_chat(websocket: WebSocket, disconnect: Callable, data: str | None):
-    logging.info(f"Chat message: {data}")
+    logger.info(f"Chat message: {data}")
 
 
 handlers: Handlers = {MessageTypes.PING: create_on_ping(), MessageTypes.CHAT: on_chat}

@@ -44,8 +44,7 @@ def get_semantic_layer():
     enriched_relationships = json.dumps(enriched_relationships)
     enriched_relationships = json.loads(enriched_relationships)
     finalised_graph_structure['relationships'] = enriched_relationships if enriched_relationships else {}
-    logger.info("Finalised graph structure with enriched relationships: ")
-    logger.info(finalised_graph_structure)
+    logger.debug(f"Finalised graph structure with enriched relationships: {finalised_graph_structure}")
 
     # Fetch and enrich nodes
     nodes_neo4j_result = execute_query(node_query)
@@ -53,8 +52,7 @@ def get_semantic_layer():
     enriched_nodes = call_model(neo4j_nodes_understanding_prompt, str(nodes_neo4j))
     enriched_nodes = ast.literal_eval(enriched_nodes)
     finalised_graph_structure['nodes']['labels'] = enriched_nodes['nodes']
-    logger.info("Finalised graph structure with enriched nodes: ")
-    logger.info(finalised_graph_structure)
+    logger.debug(f"Finalised graph structure with enriched nodes: {finalised_graph_structure}")
 
     # Fetch and enrich relationship properties
     properties_result = execute_query(relationship_property_query)
@@ -62,8 +60,7 @@ def get_semantic_layer():
     enriched_rel_properties = call_model(neo4j_relationship_property_prompt, str(rel_properties_neo4j))
     enriched_rel_properties = ast.literal_eval(enriched_rel_properties)
     finalised_graph_structure['properties']['relationship_properties'] = enriched_rel_properties['relProperties']
-    logger.info("Finalised graph structure with enriched relationship properties: ")
-    logger.info(finalised_graph_structure)
+    logger.debug(f"Finalised graph structure with enriched relationship properties: {finalised_graph_structure}")
 
     # Fetch and enrich node properties
     node_properties_neo4j_result = execute_query(node_property_query)
@@ -71,8 +68,7 @@ def get_semantic_layer():
     enriched_node_properties = call_model(neo4j_node_property_prompt, str(node_properties_neo4j))
     enriched_node_properties = ast.literal_eval(enriched_node_properties)
     finalised_graph_structure['properties']['node_properties'] = enriched_node_properties['nodeProperties']
-    logger.info("Finalised graph structure with enriched node properties: ")
-    logger.info(finalised_graph_structure)
+    logger.debug(f"Finalised graph structure with enriched node properties: {finalised_graph_structure}")
 
     graph_schema = json.dumps(finalised_graph_structure, separators=(',', ':'))
     return graph_schema

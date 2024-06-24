@@ -1,8 +1,10 @@
 from typing import Tuple
-
+import logging
 from src.utils import get_scratchpad, update_scratchpad
 from src.router import get_agent_for_task
 from src.agents import get_validator_agent
+
+logger = logging.getLogger(__name__)
 
 no_questions_response = "No questions found to solve"
 unsolvable_response = "I am sorry, but I was unable to find an answer to this task"

@@ -1,5 +1,7 @@
 from typing import TypedDict
+import logging
 
+logger = logging.getLogger(__name__)
 
 class Answer(TypedDict):
     agent_name: str | None
@@ -23,4 +25,5 @@ def update_scratchpad(agent_name=None, question=None, result=None, error=None):
 
 
 def clear_scratchpad():
+    logger.info("Scratchpad cleared")
     scratchpad.clear()

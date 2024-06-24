@@ -5,6 +5,7 @@ from src.prompts import PromptEngine
 from src.agents import Agent, get_available_agents, get_agent_details
 from src.llm import get_llm
 
+logger = logging.getLogger(__name__)
 prompt_engine = PromptEngine()
 config = Config()
 
@@ -25,15 +26,12 @@ def build_plan(task, llm, scratchpad):
     best_next_step_prompt = build_best_next_step_prompt(task, scratchpad)
 
     # Call model to choose agent
-    logging.info("#####  ~  Calling LLM for next best step  ~  #####")
-
-    logging.info("Scratchpad so far:")
-    logging.info(scratchpad)
+    logger.info("#####  ~  Calling LLM for next best step  ~  #####")
+    logger.info(f"USER - Scratchpad so far: {scratchpad}")
     best_next_step = llm.chat(response_format_prompt, best_next_step_prompt)
 
     plan = to_json(best_next_step, "Failed to interpret LLM next step format from step string")
-    logging.info("Next best step response:")
-    logging.info(json.dumps(plan, indent=4))
+    logger.info(f"USER - Next best step response: {json.dumps(plan, indent=4)}")
 
     return plan
 
