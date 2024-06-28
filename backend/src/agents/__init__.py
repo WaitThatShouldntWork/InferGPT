@@ -10,17 +10,16 @@ from .answer_agent import AnswerAgent
 
 config = Config()
 
-
 def get_validator_agent() -> Agent:
-    return ValidatorAgent(config.validator_agent_llm)
+    return ValidatorAgent(config.validator_agent_llm, config.validator_agent_model)
 
 
 def get_intent_agent() -> Agent:
-    return IntentAgent(config.intent_agent_llm)
+    return IntentAgent(config.intent_agent_llm, config.intent_agent_model)
 
 
 def get_answer_agent() -> Agent:
-    return AnswerAgent(config.answer_agent_llm)
+    return AnswerAgent(config.answer_agent_llm, config.answer_agent_model)
 
 
 def agent_details(agent) -> dict:
@@ -28,7 +27,7 @@ def agent_details(agent) -> dict:
 
 
 def get_available_agents() -> List[Agent]:
-    return [DatastoreAgent(config.datastore_agent_llm), MathsAgent(config.maths_agent_llm)]
+    return [DatastoreAgent(config.datastore_agent_llm, config.datastore_agent_model), MathsAgent(config.maths_agent_llm)]
 
 
 def get_agent_details():
