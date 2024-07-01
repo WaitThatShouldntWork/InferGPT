@@ -3,6 +3,7 @@ from src.utils import get_scratchpad
 from tests.agents import MockAgent
 from src.supervisors import solve_all, solve_task, no_questions_response, unsolvable_response, no_agent_response
 
+mock_model = "mockmodel"
 mock_answer = "answer"
 scratchpad = []
 task = {"query": "Solve this problem"}
@@ -24,7 +25,7 @@ intent_json = {
     ],
 }
 
-agent = MockAgent("mockllm")
+agent = MockAgent("mockllm", mock_model)
 
 
 def test_solve_all_no_tasks():
