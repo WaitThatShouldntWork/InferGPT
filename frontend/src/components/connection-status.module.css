@@ -1,0 +1,24 @@
+.container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 10px;
+}
+
+.green {
+    background-color: green;
+}
+
+.red {
+    background-color: red;
+}

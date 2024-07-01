@@ -1,0 +1,12 @@
+CALL db.schema.relTypeProperties() YIELD relType, propertyName, propertyTypes
+WITH
+    relType AS rel,
+    COLLECT({
+        name: propertyName,
+        data_type: propertyTypes,
+        detail: "A " + propertyName + " is a.. "
+    }) AS props
+RETURN COLLECT({
+    relationship_type: "[" + REPLACE(rel, "`", "") + "]",
+    properties: props
+}) AS relProperties

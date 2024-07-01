@@ -41,33 +41,53 @@ To clone the repository, you need to have Git installed on your system. Use the 
 
 Once you have Git installed, follow these steps:
 
-- Open your terminal.
+- Open your preferred terminal.
 - Navigate to the directory where you want to clone the repository.
 - Run the git clone command for the fork you just created.
 
-### Install Neo4j Desktop or Aura DB
-Instructions can be found [here](https://neo4j.com/docs/?utm_medium=PaidSearch&utm_source=google&utm_campaign=GDB&utm_content=EMEA-X-Conversion-GDB-Text&utm_term=neo4j&gclid=Cj0KCQiA1rSsBhDHARIsANB4EJY8wQONKSyNCofQBGAcOGWwNpNh4Z0yj7oGxok8vs2CipPJMjGPcpkaAuw1EALw_wcB).  
-Install the pre-made recommendations database. Version 4.4 is the latest stable.
+### Initial configuration
 
-### Running the service
-- Create `.env` files based on the `.env.example` files under `/frontend` and `/backend`
+There is a example property file `.env.example` at the root of this project.
 
-#### Using Docker
-- Start and open the Neo4J Desktop app. Start the default database (neo4j).
-- create `.env` files as instructed within the [frontend README](frontend/README.md) and [backend README](backend/README.md)
-- Run the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it)
+Configuration steps:
+
+- Copy the `.env.example` file at the root of this project.
+- Rename the copied file as `.env`.
+- Update the `.env` file with your wanted configuration following the guidance in the file.
+
+### Running the application
+
+There are a few ways to run the application:
+
+1. **Docker Compose** - run the entire application within Docker containers configured by Docker Compose.
+2. **Locally** - run local instances of the front-end, back-end and a neo4j database.
+3. **Individual Docker Containers** - you may choose to run individual components within a Docker container.
+
+For ease of use, we would recommended that you run the application using **Docker Compose**.
+
+For instructions on how to run indivdual components locally or within Docker containers, refer to appropriate READMEs:
+
+- [frontend README](frontend/README.md)
+- [backend README](backend/README.md)
+- [data README](data/README.md)
+
+### Running with Docker Compose
+
+- **Ensure Docker is installed and running**. The easiest way to do this is by using the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it).
 - In the root directory of the project run `docker compose up`
-  - Note the first time you do this it may take longer as the compose file builds the images
+> [!WARNING]  
+> the first time you do this it may take longer as the compose file builds the images.
 
-#### Using pip and python
-- Open your preferred terminal.
-It's recommended (though not technically required) to create a virtual environment for the project by running `python -m venv .venv` to create it and `.venv/Scripts/activate` to activate it in your active terminal.
-- Follow the [frontend README](frontend/README.md) to set up the front end
-- Follow the [backend README](backend/README.md) to set up the back end
-- Once all dependencies have been pulled run `uvicorn app:api` to start the app. Check the backend app is running at [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health).
+> To re-build the docker images following any changes, run `docker compose build` first or use `docker compose up --build`.
+
+For ease of development, after running `docker compose build` you can run `docker compose up --watch`. Watch mode allows for the docker container to rebuild when you save a file. This means that it is not required to take down the service after every change to see these implemented. This option is recommended.
+
+- View the frontend at [localhost:8650](http://localhost:8650)
+- View the Neo4j Browser at [localhost:7474](http://localhost:7474)
+- Type the phrase "healthcheck" into the frontend UI to test if everything is connected successfully
  
 ### Usage
 Coming
 
-### LICENCE 
+### LICENCE
 See [LICENCE.md](LICENCE.md)

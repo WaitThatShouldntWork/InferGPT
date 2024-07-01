@@ -11,6 +11,6 @@ export const App = () => {
     <div className={styles.container}>
       <Chat messages={messages} waiting={waiting} />
       <Input sendMessage={sendMessage} />
-    </div>
+    </div>  
   );
 };

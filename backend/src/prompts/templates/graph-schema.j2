@@ -1,0 +1,156 @@
+{
+  "nodes": {
+    "labels": [
+      {
+        "label": "Account",
+        "detail": "An Account is a unique user profile with specific identifiers and associated transactions.",
+        "cypher_representation": "(:Account)"
+      },
+      {
+        "label": "Transaction",
+        "detail": "A Transaction is a record of a financial exchange between an Account and a Merchant, containing details like date, amount, etc.",
+        "cypher_representation": "(:Transaction)"
+      },
+      {
+        "label": "Merchant",
+        "detail": "A Merchant is an entity that provides goods or services in exchange for payment, linked to Transactions.",
+        "cypher_representation": "(:Merchant)"
+      },
+      {
+        "label": "Classification",
+        "detail": "A Classification is a category assigned to a Transaction, based on the type of purchase or service.",
+        "cypher_representation": "(:Classification)"
+      }
+    ]
+  },
+  "properties": {
+    "node_properties": [
+      {
+        "node_label": "Transaction",
+        "properties": [
+          {
+            "name": "id",
+            "data_type": "String",
+            "detail": "Unique identifier for the transaction"
+          },
+          {
+            "name": "amount",
+            "data_type": "Long",
+            "detail": "The amount of money involved in the transaction"
+          },
+          {
+            "name": "description",
+            "data_type": "String",
+            "detail": "A short explanation or reason for the transaction"
+          },
+          {
+            "name": "date",
+            "data_type": "DateTime",
+            "detail": "The date and time when the transaction occurred"
+          },
+          {
+            "name": "type",
+            "data_type": "String",
+            "detail": "The category or type of the transaction. One of: DEBIT, CREDIT, TRANSFER"
+          }
+        ]
+      },
+      {
+        "node_label": "Merchant",
+        "properties": [
+          {
+            "name": "name",
+            "data_type": "String",
+            "detail": "The name of the merchant / company involved in the transaction"
+          }
+        ]
+      },
+      {
+        "node_label": "Classification",
+        "properties": [
+          {
+            "name": "name",
+            "data_type": "String",
+            "detail": "The category or classification of the transaction"
+          }
+        ]
+      },
+      {
+        "node_label": "Account",
+        "properties": [
+          {
+            "name": "name",
+            "data_type": "String",
+            "detail": "The name or identifier of the account involved in the transaction"
+          }
+        ]
+      }
+    ],
+    "relationship_properties": [
+      {
+        "relationship_type": "[:PAID_BY]",
+        "properties": [
+          {
+            "name": "transaction_id",
+            "data_type": "String",
+            "detail": "Represents the payment of a Transaction by an Account"
+          }
+        ]
+      },
+      {
+        "relationship_type": "[:PAID_TO]",
+        "properties": [
+          {
+            "name": "transaction_id",
+            "data_type": "String",
+            "detail": "Represents the payment for a Transaction received by a Merchant"
+          }
+        ]
+      },
+      {
+        "relationship_type": "[:CLASSIFIED_AS]",
+        "properties": [
+          {
+            "name": "category",
+            "data_type": "String",
+            "detail": "Represents the categorization or classification of a transaction"
+          }
+        ]
+      }
+    ]
+  },
+  "relationships": {
+    "paths": [
+      {
+        "label": "[:PAID_TO]",
+        "detail": "Represents a payment made to a merchant",
+        "cypher_representation": "(:Transaction)-[:PAID_TO]->(:Merchant)"
+      },
+      {
+        "label": "[:PAID_BY]",
+        "detail": "Represents a transaction that is paid by a specific account",
+        "cypher_representation": "(:Transaction)-[:PAID_BY]->(:Account)"
+      },
+      {
+        "label": "[:CLASSIFIED_AS]",
+        "detail": "Represents the classification of a node",
+        "cypher_representation": "(:Transaction)-[:CLASSIFIED_AS]->(:Classification)"
+      },
+      {
+        "label": "[:PAID_TO]",
+        "detail": "Represents a payment made to a node",
+        "cypher_representation": "(:Transaction)-[:PAID_TO]->(:Merchant)"
+      },
+      {
+        "label": "[:PAID_BY]",
+        "detail": "Represents the account that made a transaction *NOTE DIRECTION OF ARROW*",
+        "cypher_representation": "(:Transaction)-[:PAID_BY]->(:Account)"
+      },
+      {
+        "label": "[:CLASSIFIED_AS]",
+        "detail": "Represents the classification of a transaction",
+        "cypher_representation": "(:Transaction)-[:CLASSIFIED_AS]->(:Classification)"
+      }
+    ]
+  }
+}

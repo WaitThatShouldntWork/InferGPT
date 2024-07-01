@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Message, MessageComponent } from './message';
 import styles from './chat.module.css';
 import { Waiting } from './waiting';
+import { ConnectionStatus } from './connection-status';
+import { WebsocketContext } from '../session/websocket-context';
 
 export interface ChatProps {
   messages: Message[];
@@ -11,6 +13,8 @@ export interface ChatProps {
 export const Chat = ({ messages, waiting }: ChatProps) => {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
+  const { isConnected } = useContext(WebsocketContext);
+
   useEffect(() => {
     if (containerRef.current) {
       containerRef.current.scrollTo(0, containerRef.current.scrollHeight);
@@ -19,6 +23,7 @@ export const Chat = ({ messages, waiting }: ChatProps) => {
 
   return (
     <div ref={containerRef} className={styles.container}>
+      <ConnectionStatus isConnected={isConnected} />
       {messages.map((message, index) => (
         <MessageComponent key={index} message={message} />
       ))}
