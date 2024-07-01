@@ -23,5 +23,5 @@ class LLM(ABC, metaclass=LLMMeta):
         return cls.instances
 
     @abstractmethod
-    def chat(self, system_prompt: str, user_prompt: str) -> str:
+    def chat(self, model: str, system_prompt: str, user_prompt: str) -> str:
         pass
