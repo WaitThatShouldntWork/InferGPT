@@ -1,27 +1,28 @@
-from openai import OpenAI
+# src/llm/openai_llm.py
 import logging
+from .openai_client import OpenAIClient
 from src.utils import Config
 from .llm import LLM
+
 logger = logging.getLogger(__name__)
 config = Config()
 
-
 class OpenAI(LLM):
+    def __init__(self):
+        self.client = OpenAIClient(config.openai_key)
 
-    client = OpenAI(api_key=config.openai_key)
     def chat(self, system_prompt: str, user_prompt: str) -> str:
         logger.debug("##### Called open ai chat ... llm. Waiting on response model with prompt {0}."
-                     .format(str([system_prompt,user_prompt])))
+                     .format(str([system_prompt, user_prompt])))
 
         try:
-            response = self.client.chat.completions.create(
+            response = self.client.chat(
                 model=config.openai_model,
                 messages=[
-                    {"role":"system", "content":system_prompt},
-                    {"role":"user", "content":user_prompt},
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
                 ],
                 temperature=0,
-                max_tokens=150,  # Adjust this value based on your requirements
             )
             content = response.choices[0].message.content
 
@@ -32,8 +33,6 @@ class OpenAI(LLM):
                 return " ".join(content)
             else:
                 return "Unexpected content format"
-
-
         except Exception as e:
             logger.error("Error calling OpenAI model: {0}".format(e))
             return "An error occurred while processing the request."
