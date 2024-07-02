@@ -16,3 +16,4 @@ cffi==1.16.0
 cryptography==42.0.7
 isodate==0.6.1
 pycparser==2.22
+openai==1.35.3
