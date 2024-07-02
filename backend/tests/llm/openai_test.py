@@ -42,7 +42,6 @@ def test_chat_content_list_returns_string(mocker):
     assert response == openapi_reponse
 
 def test_chat_handles_exception(mocker):
-    mock_create = mocker.patch("openai.Completion.create", side_effect=Exception("API error"))
     mocker.patch("src.llm.openai.config", return_value=mock_config)
 
     response = openai_model.chat(system_prompt, user_prompt)
