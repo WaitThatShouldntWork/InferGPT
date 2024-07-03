@@ -67,6 +67,7 @@ services:
       VALIDATOR_AGENT_MODEL: ${VALIDATOR_AGENT_MODEL}
       DATASTORE_AGENT_MODEL: ${DATASTORE_AGENT_MODEL}
       ROUTER_MODEL: ${ROUTER_MODEL}
+      MATHS_AGENT_MODEL: ${MATHS_AGENT_MODEL}
     depends_on:
       neo4j-db:
         condition: service_healthy
