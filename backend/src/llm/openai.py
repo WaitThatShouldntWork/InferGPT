@@ -1,22 +1,23 @@
 # src/llm/openai_llm.py
 import logging
-from .openai_client import OpenAIClient
 from src.utils import Config
 from .llm import LLM
+from openai import OpenAI as OpenAIModel
 
 logger = logging.getLogger(__name__)
 config = Config()
 
+
 class OpenAI(LLM):
-    def __init__(self):
-        self.client = OpenAIClient(config.openai_key)
+
+    client = OpenAIModel(api_key=config.openai_key)
 
     def chat(self, system_prompt: str, user_prompt: str) -> str:
         logger.debug("##### Called open ai chat ... llm. Waiting on response model with prompt {0}."
                      .format(str([system_prompt, user_prompt])))
 
         try:
-            response = self.client.chat(
+            response = self.client.chat.completions.create(
                 model=config.openai_model,
                 messages=[
                     {"role": "system", "content": system_prompt},
@@ -25,7 +26,6 @@ class OpenAI(LLM):
                 temperature=0,
             )
             content = response.choices[0].message.content
-
             logger.debug('{0} response : "{1}"'.format(config.openai_model, content))
             if isinstance(content, str):
                 return content

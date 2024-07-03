@@ -16,8 +16,6 @@ class OpenAIClient:
             response = openai.ChatCompletion.create(
                 model=model,
                 messages=messages,
-                temperature=0,
-                max_tokens=150,
             )
             content = response["choices"][0]["message"]["content"]
             logger.debug(f'{model} response: "{content}"')
