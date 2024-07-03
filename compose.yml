@@ -68,6 +68,7 @@ services:
       DATASTORE_AGENT_MODEL: ${DATASTORE_AGENT_MODEL}
       ROUTER_MODEL: ${ROUTER_MODEL}
       MATHS_AGENT_MODEL: ${MATHS_AGENT_MODEL}
+      AGENT_CLASS_MODEL: ${AGENT_CLASS_MODEL}
     depends_on:
       neo4j-db:
         condition: service_healthy

@@ -31,6 +31,7 @@ class Config(object):
         self.datastore_agent_model = None
         self.maths_agent_model = None
         self.router_model = None
+        self.agent_class_model = None
         self.load_env()
 
     def load_env(self):
@@ -63,6 +64,7 @@ class Config(object):
             self.datastore_agent_model = os.getenv("DATASTORE_AGENT_MODEL")
             self.maths_agent_model = os.getenv("MATHS_AGENT_MODEL")
             self.router_model = os.getenv("ROUTER_MODEL")
+            self.agent_class_model =  os.getenv("AGENT_CLASS_MODEL")
         except FileNotFoundError:
             raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
         except Exception:
