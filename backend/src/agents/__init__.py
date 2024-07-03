@@ -28,7 +28,7 @@ def agent_details(agent) -> dict:
 
 def get_available_agents() -> List[Agent]:
     return [DatastoreAgent(config.datastore_agent_llm, config.datastore_agent_model),
-            MathsAgent(config.maths_agent_llm)]
+            MathsAgent(config.maths_agent_llm, config.maths_agent_model)]
 
 
 def get_agent_details():

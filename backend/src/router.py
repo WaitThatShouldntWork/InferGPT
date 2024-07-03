@@ -43,7 +43,7 @@ def find_agent_from_name(name):
 
 def get_agent_for_task(task, scratchpad) -> Agent | None:
     llm = get_llm(config.router_llm)
-    model=config.router_llm
+    model=config.router_model
     plan = build_plan(task, llm, scratchpad, model)
     agent = next(find_agent_from_name(plan["agent_name"]), None)
 
