@@ -50,6 +50,8 @@ services:
       NEO4J_PASSWORD: ${NEO4J_PASSWORD}
       MODEL: ${MODEL}
       MISTRAL_KEY: ${MISTRAL_KEY}
+      OPENAI_MODEL: ${OPENAI_MODEL}
+      OPENAI_KEY: ${OPENAI_KEY}
       FRONTEND_URL: ${FRONTEND_URL}
       AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING}
       AZURE_STORAGE_CONTAINER_NAME: ${AZURE_STORAGE_CONTAINER_NAME}
@@ -80,7 +82,7 @@ services:
           action: rebuild
         - path: backend
           target: /backend
-          action: sync  
+          action: sync
 
   # InferGPT Frontend
   frontend:
