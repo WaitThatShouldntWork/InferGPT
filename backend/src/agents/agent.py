@@ -5,7 +5,7 @@ from typing import List, Type
 from src.llm import LLM, get_llm
 
 from .adapters import create_all_tools_str, extract_tool, validate_args
-from src.utils import get_scratchpad
+from src.utils import get_scratchpad, Config
 from src.prompts import PromptEngine
 from .tool import Tool
 from .types import Action_and_args
@@ -13,16 +13,18 @@ from .types import Action_and_args
 logger = logging.getLogger(__name__)
 engine = PromptEngine()
 format_prompt = engine.load_prompt("tool-selection-format")
-
+config = Config()
 
 class Agent(ABC):
     name: str
     description: str
     tools: List[Tool]
     llm: LLM
+    model: str
 
-    def __init__(self, llm_name: str | None):
+    def __init__(self, llm_name: str | None, model: str):
         self.llm = get_llm(llm_name)
+        self.model = model
 
     def __get_action(self, utterance: str) -> Action_and_args:
 
@@ -37,7 +39,7 @@ class Agent(ABC):
 
         logger.debug(f"List of tools: {tool_descriptions}")
 
-        response = json.loads(self.llm.chat(format_prompt, tools_available))
+        response = json.loads(self.llm.chat(config.agent_class_model, format_prompt, tools_available))
 
         logger.info(f"USER - Tool chosen: {json.dumps(response)}")
 
@@ -52,7 +54,7 @@ class Agent(ABC):
 
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
-        result_of_action = action(**args, llm=self.llm)
+        result_of_action = action(**args, llm=self.llm, model=self.model)
         logger.info(f"USER - Action gave result: {result_of_action}")
         return result_of_action
 

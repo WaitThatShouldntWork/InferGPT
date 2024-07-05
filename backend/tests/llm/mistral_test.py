@@ -7,6 +7,7 @@ from mistralai.models.common import UsageInfo
 from src.llm import get_llm, MistralClient, Mistral
 from src.utils import Config
 
+mock_model = "mockmodel"
 system_prompt = "system_prompt"
 user_prompt = "user_prompt"
 content_response = "Hello there"
@@ -31,7 +32,7 @@ def test_chat_content_string_returns_string(mocker):
     mistral.client = mocker.MagicMock(return_value=mock_client)
     mistral.client.chat.return_value = create_mock_chat_response(content_response)
 
-    response = mistral.chat(system_prompt, user_prompt)
+    response = mistral.chat(mock_model, system_prompt, user_prompt)
 
     assert response == content_response
 
@@ -41,21 +42,20 @@ def test_chat_content_list_returns_string(mocker):
     mistral.client = mocker.MagicMock(return_value=mock_client)
     mistral.client.chat.return_value = create_mock_chat_response(content_list)
 
-    response = mistral.chat(system_prompt, user_prompt)
+    response = mistral.chat(mock_model, system_prompt, user_prompt)
 
     assert response == content_response
 
 
 def test_chat_calls_client_chat(mocker):
-    config_instance = mocker.patch("src.llm.mistral.config", return_value=mock_config)
     mistral.client = mocker.MagicMock(return_value=mock_client)
 
-    mistral.chat(system_prompt, user_prompt)
+    mistral.chat(mock_model, system_prompt, user_prompt)
 
     expected_messages = [
         ChatMessage(role="system", content=system_prompt),
         ChatMessage(role="user", content=user_prompt),
     ]
     mistral.client.chat.assert_called_once_with(
-        messages=expected_messages, model=config_instance.mistral_model, temperature=0
+        messages=expected_messages, model=mock_model, temperature=0
     )

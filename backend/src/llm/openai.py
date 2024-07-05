@@ -13,13 +13,13 @@ class OpenAI(LLM):
     def __init__(self):
         self.client = OpenAIClient(config.openai_key)
 
-    def chat(self, system_prompt: str, user_prompt: str) -> str:
+    def chat(self, model, system_prompt: str, user_prompt: str) -> str:
         logger.debug("##### Called open ai chat ... llm. Waiting on response model with prompt {0}."
                      .format(str([system_prompt, user_prompt])))
         client = OpenAIModel(api_key=config.openai_key)
         try:
             response = client.chat.completions.create(
-                model=config.openai_model,
+                model=model,
                 messages=[
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
