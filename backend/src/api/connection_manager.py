@@ -41,6 +41,8 @@ class ConnectionManager:
             raise Exception("No handler for message type")
         handler(ws, self.disconnect, message.data)
 
+    # This broadcast method is a place holder until the backend has implemented the idea of a user session
+    # at that point this should be replaced by a send message that targets a specific web socket.
     async def broadcast(self, message: Message):
         for ws in self.websockets:
             if ws.application_state == WebSocketState.CONNECTED:
