@@ -1,5 +1,6 @@
+import json
 import logging
-from typing import Any, Dict
+from typing import Any, Dict, List
 from fastapi import WebSocket
 from fastapi.websockets import WebSocketState
 
@@ -14,42 +15,37 @@ def parse_message(message: Dict[str, Any]) -> Message:
 
 
 class ConnectionManager:
-    websocket: WebSocket | None
+    websockets: List[WebSocket]
 
     def __init__(self):
-        self.websocket = None
+        self.websockets = []
 
-    async def __handle_message(self, message: Message):
+    async def connect(self, ws: WebSocket):
+        if ws not in self.websockets:
+            await ws.accept()
+            self.websockets.append(ws)
+        else:
+            raise Exception(f"Given websocket ({ws}) was already being tracked")
+
+    async def disconnect(self, ws: WebSocket):
+        try:
+            self.websockets.remove(ws)
+            if ws.client_state != WebSocketState.DISCONNECTED:
+                await ws.close()
+        except ValueError:
+            pass
+
+    async def handle_message(self, ws: WebSocket, message: Message):
         handler = handlers.get(MessageTypes(message.type))
         if handler is None:
             raise Exception("No handler for message type")
+        handler(ws, self.disconnect, message.data)
 
-        if self.websocket is not None:
-            handler(self.websocket, self.disconnect, message.data)
+    # This broadcast method is a place holder until the backend has implemented the idea of a user session
+    # at that point this should be replaced by a send message that targets a specific web socket.
+    async def broadcast(self, message: Message):
+        for ws in self.websockets:
+            if ws.application_state == WebSocketState.CONNECTED:
+                await ws.send_json(json.dumps({"type": message.type.value, "data": message.data}))
 
-    async def __on_message(self):
-        if self.websocket is None:
-            raise Exception("No connection")
-
-        raw_message = await self.websocket.receive_json()
-        parsed_message = parse_message(raw_message)
-
-        await self.__handle_message(parsed_message)
-        await self.__on_message()
-
-    async def connect(self, websocket: WebSocket):
-        if self.websocket is not None:
-            raise Exception("Connection already exists")
-
-        await websocket.accept()
-        self.websocket = websocket
-        try:
-            await self.__on_message()
-        except Exception as e:
-            logger.exception(f"Error in websocket process: {e}")
-            await self.disconnect()
-
-    async def disconnect(self):
-        if self.websocket is not None and self.websocket.client_state != WebSocketState.DISCONNECTED:
-            await self.websocket.close()
-        self.websocket = None
+connection_manager = ConnectionManager()

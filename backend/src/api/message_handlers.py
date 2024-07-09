@@ -14,10 +14,10 @@ pong = json.dumps({"type": MessageTypes.PONG.value})
 def create_on_ping():
     heartbeat_timer: asyncio.Task | None = None
 
-    async def heartbeat(disconnect: Callable):
+    async def heartbeat(disconnect: Callable, ws: WebSocket):
         try:
             await asyncio.sleep(heartbeat_timeout)
-            await disconnect()
+            await disconnect(ws)
         except asyncio.CancelledError:
             pass
 
@@ -29,7 +29,7 @@ def create_on_ping():
         if heartbeat_timer is not None:
             heartbeat_timer.cancel()
 
-        heartbeat_timer = asyncio.create_task(heartbeat(disconnect))
+        heartbeat_timer = asyncio.create_task(heartbeat(disconnect, websocket))
 
     return on_ping
 
