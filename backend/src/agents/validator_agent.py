@@ -1,6 +1,7 @@
 import logging
 from src.prompts import PromptEngine
 from src.agents import Agent, agent
+from src.utils.user_logger import user_log_info
 
 logger = logging.getLogger(__name__)
 engine = PromptEngine()
@@ -15,6 +16,6 @@ class ValidatorAgent(Agent):
 
     def invoke(self, utterance: str) -> str:
         answer = self.llm.chat(self.model, validator_prompt, utterance)
-        logger.info(f"USER - Validating: '{utterance}' Answer: '{answer}'")
+        user_log_info(f"Validating: '{utterance}' Answer: '{answer}'", __name__)
 
         return answer
