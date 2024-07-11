@@ -18,6 +18,10 @@ Q: How much did I spend with Amazon this month?
 Response:
 {"query":"How much did I spend with Amazon this month?","user_intent":"sum amount spent","questions":[{"query":"How much did I spend with Amazon this month?","question_intent":"calculate total expenses","operation":"filter + aggregation","question_category": "data driven","parameters":[{"type":"company","value":"Amazon"}],"timeframe":"this month","aggregation":"sum","sort_order":"none"}]}
 
+Q: What are the mortgage rates offered by NatWest for first-time buyers?
+Response:
+{"query":"What are the mortgage rates offered by NatWest for first-time buyers.","user_intent":"find information online","questions":[{"query":"What are the mortgage rates offered by NatWest for first-time buyers.","question_intent":"retrieve information from web","operation":"online search and scrapping","question_category": "search online","parameters":[{"type":"topic","value":"mortgage rates","company":"Natwest"}],"sort_order":"descending"}]}
+
 Q: Can you find all documents referencing the topic of Inflation?
 Response:
 {"query":"Can you find all documents referencing the topic of Inflation?","user_intent":"find and sort documents","questions":[{"query":"Can you find all documents referencing the topic of Inflation?","question_intent":"retrieve documents by topic","operation":"relevancy search","question_category": "data driven","parameters":[{"type":"topic","value":"Inflation"}],"sort_order":"relevancy descending"}]}
