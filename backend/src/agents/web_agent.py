@@ -9,6 +9,8 @@ from .agent_types import Parameter
 from .agent import Agent, agent
 from .tool import tool
 from src.utils import Config
+from src.utils.web_utils import web_search as find_urls, scrape_content
+from src.utils import clear_scratchpad, update_scratchpad
 
 
 logger = logging.getLogger(__name__)
@@ -17,8 +19,8 @@ config = Config()
 engine = PromptEngine()
 
 @tool(
-    name="web_search",
-    description="Search the internet based on the query provided",
+    name="web_general_search",
+    description="Search the internet based on the query provided and then get the meaningful answer from the content found",
     parameters={
         "search_query": Parameter(
             type="string",
@@ -26,69 +28,56 @@ engine = PromptEngine()
         ),
     },
 )
-def web_search(search_query, llm, model) -> list:
+def web_general_search(search_query, llm, model) -> list:
+
     urls = []
-    try:
-        for url in search(search_query, num_results=1):
-            urls.append(url)
-    except Exception as e:
-        logger.error(f"Error during web search: {e}")
-    # return urls
+    urls = find_urls(search_query)
     logger.info(f"############# URLs found: {urls}")
-    contents = []
-    for url in urls:
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, 'html.parser')
-            paragraphs = soup.find_all('p')
-            content = ' '.join([para.get_text() for para in paragraphs])
-            contents.append(content[:500])
-            logger.info(f"Scraped content from {url}- {content[:500]}")
-        except Exception as e:
-            logger.error(f"Error scraping {url}: {e}")
-            contents.append(f"Error scraping {url}: {e}")
+    if not urls:
+        return ["No relevant information found on the internet for the given query."]
+    update_scratchpad(result=urls)
+    contents = scrape_content(urls)
+    if not contents:
+        return ["No relevant information found on the internet for the given query."]
+    update_scratchpad(result=contents)
 
-    combined_content = "\n\n".join([f"{i+1}. {content}" for i, content in enumerate(contents)])
-    prompt = (
-        f"User Query: {search_query}\n\n"
-        f"You are an experienced document reader. Based on the user's query, read through the content provided below "
-        f"and answer the query.\n\n"
-        f"Contents:\n{combined_content}"
-    )
-    response = llm.chat(model, prompt, "")
-    logger.info(f"############# Response from LLM: {response}")
-    return response
+    final_response = summarise_content(search_query, contents, llm, model)
 
-@tool(
-    name="scrape_content",
-    description="Scrape content from the given URLs",
-    parameters={
-        "urls": Parameter(
-            type="list",
-            description="The list of URLs to scrape content from",
-        ),
-    },
-)
-def scrape_content(urls) -> list:
-    logger.info(f"Scraping content from URLs: {urls}")
-    contents = []
-    for url in urls:
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, 'html.parser')
-            paragraphs = soup.find_all('p')
-            content = ' '.join([para.get_text() for para in paragraphs])
-            contents.append(content)
-        except Exception as e:
-            logger.error(f"Error scraping {url}: {e}")
-            contents.append(f"Error scraping {url}: {e}")
-    return contents
+    if final_response:
+        update_scratchpad(result=final_response)
+        return [final_response]
+    else:
+        return ["No relevant information found on the internet for the given query."]
+
+# @tool(
+#     name="scrape_content",
+#     description="Scrape content from the given URLs",
+#     parameters={
+#         "urls": Parameter(
+#             type="list",
+#             description="The list of URLs to scrape content from",
+#         ),
+#     },
+# )
+# def scrape_content(urls) -> list:
+#     logger.info(f"Scraping content from URLs: {urls}")
+#     contents = []
+#     for url in urls:
+#         try:
+#             response = requests.get(url)
+#             response.raise_for_status()
+#             soup = BeautifulSoup(response.text, 'html.parser')
+#             paragraphs = soup.find_all('p')
+#             content = ' '.join([para.get_text() for para in paragraphs])
+#             contents.append(content)
+#         except Exception as e:
+#             logger.error(f"Error scraping {url}: {e}")
+#             contents.append(f"Error scraping {url}: {e}")
+#     return contents
 
 @tool(
-    name="summarize_content",
-    description="Summarize the scraped content to answer the user's query",
+    name="summarise_content",
+    description="Summarise the scraped content to answer the user's query",
     parameters={
         "search_query": Parameter(
             type="string",
@@ -100,7 +89,7 @@ def scrape_content(urls) -> list:
         ),
     },
 )
-def summarize_content(search_query, contents, llm, model) -> str:
+def summarise_content(search_query, contents, llm, model) -> str:
     combined_content = "\n\n".join([f"{i+1}. {content}" for i, content in enumerate(contents)])
     prompt = (
         f"User Query: {search_query}\n\n"
@@ -114,7 +103,7 @@ def summarize_content(search_query, contents, llm, model) -> str:
 @agent(
     name="WebAgent",
     description="This agent is responsible for handling web search queries and summarizing information from the web.",
-    tools=[web_search, scrape_content, summarize_content],
+    tools=[web_general_search],
 )
 class WebAgent(Agent):
     pass
