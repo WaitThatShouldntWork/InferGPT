@@ -1,6 +1,7 @@
 import json
 import logging
 from src.utils import to_json, Config
+from src.utils.log_publisher import publish_log_info, LogPrefix
 from src.prompts import PromptEngine
 from src.agents import Agent, get_available_agents, get_agent_details
 from src.llm import get_llm
@@ -27,11 +28,11 @@ def build_plan(task, llm, scratchpad, model):
 
     # Call model to choose agent
     logger.info("#####  ~  Calling LLM for next best step  ~  #####")
-    logger.info(f"USER - Scratchpad so far: {scratchpad}")
+    publish_log_info(LogPrefix.USER, f"Scratchpad so far: {scratchpad}", __name__)
     best_next_step = llm.chat(model, response_format_prompt, best_next_step_prompt)
 
     plan = to_json(best_next_step, "Failed to interpret LLM next step format from step string")
-    logger.info(f"USER - Next best step response: {json.dumps(plan, indent=4)}")
+    publish_log_info(LogPrefix.USER, f"Next best step response: {json.dumps(plan, indent=4)}", __name__)
 
     return plan
 

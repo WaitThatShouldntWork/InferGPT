@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.utils.graph_db_utils import populate_db
 from src.utils import Config, test_connection
 from src.director import question
-from .connection_manager import connection_manager, parse_message
+from src.websockets.connection_manager import connection_manager, parse_message
 from src.utils.annual_cypher_import import annual_transactions_cypher_script
 
 config_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "config.ini"))

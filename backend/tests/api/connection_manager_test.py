@@ -2,9 +2,9 @@ import json
 from unittest.mock import patch
 import pytest
 from fastapi.websockets import WebSocketState
-from src.api.types import Message, MessageTypes
-from src.api.message_handlers import handlers
-from src.api.connection_manager import ConnectionManager
+from src.websockets.types import Message, MessageTypes
+from src.websockets.message_handlers import handlers
+from src.websockets.connection_manager import ConnectionManager
 
 error_message = "Test Error"
 
