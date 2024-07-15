@@ -1,0 +1,31 @@
+import io
+import fitz
+import json
+import requests
+
+# Required to bypass being blocked by websites that restrict access
+# Shouldn't be necessary when implemented in code, same for GET request
+headers = {"""'User-Agent': 'Mozilla/5.0 (X11; Windows; Windows x86_64)
+           AppleWebKit/537.36 (KHTML, like Gecko) 
+           Chrome/103.0.5060.114 Safari/537.36'"""}
+
+url = 'https://www.natwest.com/content/dam/natwest/personal/current-accounts/documents/Independent-survey-resultsf.pdf'
+
+response = requests.get(url=url, headers=headers, timeout=120)
+# Loads the PDF into an In-Memory Object
+on_fly_mem_obj = io.BytesIO(response.content)
+
+pdf_document = fitz.open("pdf", on_fly_mem_obj)
+
+pdf_text = {}
+
+for page_num in range(len(pdf_document)):
+    page = pdf_document[page_num]
+    text = page.get_text()
+    pdf_text[f"Page {page_num + 1}"] = text
+
+pdf_document.close()
+
+pdf_json = json.dumps(pdf_text, indent=4)
+
+print(pdf_json)
