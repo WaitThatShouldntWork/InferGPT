@@ -1,3 +1,4 @@
+# Need to add to requirements.txt file
 import io
 import fitz
 import json
@@ -15,17 +16,22 @@ response = requests.get(url=url, headers=headers, timeout=120)
 # Loads the PDF into an In-Memory Object
 on_fly_mem_obj = io.BytesIO(response.content)
 
-pdf_document = fitz.open("pdf", on_fly_mem_obj)
+with fitz.open("pdf", on_fly_mem_obj) as pdf_document:
+    pdf_text = {}
 
-pdf_text = {}
+    for count, page in enumerate(pdf_document, start=1):
+        all_infos = page.get_text("dict", sort=True)
+        blocks = all_infos["blocks"]
+        filtered_blocks = [block for block in blocks if not block.get("image")]
+        page_text = ""
+        for block in filtered_blocks:
+            try:
+                text = block["lines"][0]['spans'][0]['text']
+                page_text += text + " "
+            except KeyError:
+                ("No image in this block")
+        pdf_text[f"Page {count}"] = page_text.strip()
 
-for page_num in range(len(pdf_document)):
-    page = pdf_document[page_num]
-    text = page.get_text()
-    pdf_text[f"Page {page_num + 1}"] = text
-
-pdf_document.close()
-
-pdf_json = json.dumps(pdf_text, indent=4)
+    pdf_json = json.dumps(pdf_text, indent=4)
 
 print(pdf_json)
