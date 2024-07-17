@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 
 engine = PromptEngine()
 
-
 @tool(
     name="generate chart code",
     description="Generate Matplotlib bar chart code if the user's query involves creating a chart",
