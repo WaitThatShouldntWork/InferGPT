@@ -34,7 +34,7 @@ engine = PromptEngine()
     }
 )
 
-def generate_chart_code(question_intent, categorical_values, question_params, timeframe, llm, model) -> str:
+def generate_chart(question_intent, categorical_values, question_params, timeframe, llm, model) -> str:
     details_to_generate_chart_code = engine.load_prompt(
         "details-to-generate-chart-code",
         question_intent=question_intent,
@@ -43,15 +43,21 @@ def generate_chart_code(question_intent, categorical_values, question_params, ti
         timeframe=timeframe
     )
     generate_chart_code_prompt = engine.load_prompt("generate-chart-code")
-    generate_code = llm.chat(model, generate_chart_code_prompt, details_to_generate_chart_code)
-    print(generate_chart_code)
-    return generate_code
+    generated_code = llm.chat(model, generate_chart_code_prompt, details_to_generate_chart_code)
+    sanitised_script = sanitise_script(generated_code)
+    return sanitised_script
 
+def sanitise_script(script):
+    if script.startswith("```python"):
+        script = script[9:]
+    if script.endswith("```"):
+        script = script[:-3]
+    return script.strip()
 
 @agent(
     name="CharGeneratorAgent",
     description="This agent is responsible for creating charts",
-    tools=[generate_chart_code]
+    tools=[generate_chart]
 )
 class CharGeneratorAgent(Agent):
     pass
