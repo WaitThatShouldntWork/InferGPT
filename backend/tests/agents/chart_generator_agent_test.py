@@ -13,7 +13,7 @@ class TestGenerateChartAgent(unittest.TestCase):
 
     @patch('src.agents.chart_generator_agent.sanitise_script')
     @patch('src.agents.chart_generator_agent.engine.load_prompt')
-    def test_generate_chart_success(self, mock_load_prompt, mock_sanitise_script):
+    async def test_generate_chart_success(self, mock_load_prompt, mock_sanitise_script):
         # Arrange
         self.llm.chat.return_value = "generated code"
         mock_sanitise_script.return_value = """
@@ -27,7 +27,7 @@ plt.plot([1, 2, 3], [4, 5, 6])
         with patch('matplotlib.pyplot.figure') as mock_fig:
             mock_fig_instance = MagicMock()
             mock_fig.return_value = mock_fig_instance
-            result = generate_chart("intent", "values", "params", "timeframe", self.llm, self.model)
+            result = await generate_chart("intent", "values", "params", "timeframe", self.llm, self.model)
 
         # Assert
         self.llm.chat.assert_called_once_with(self.model, self.generate_chart_code_prompt,
@@ -39,7 +39,7 @@ plt.plot([1, 2, 3], [4, 5, 6])
 
     @patch('src.agents.chart_generator_agent.sanitise_script')
     @patch('src.agents.chart_generator_agent.engine.load_prompt')
-    def test_generate_chart_no_fig(self, mock_load_prompt, mock_sanitise_script):
+    async def test_generate_chart_no_fig(self, mock_load_prompt, mock_sanitise_script):
         # Arrange
         self.llm.chat.return_value = "generated code"
         mock_sanitise_script.return_value = """
@@ -50,11 +50,11 @@ plt.plot([1, 2, 3], [4, 5, 6])
 
         # Act / Assert
         with self.assertRaises(ValueError):
-            generate_chart("intent", "values", "params", "timeframe", self.llm, self.model)
+            await generate_chart("intent", "values", "params", "timeframe", self.llm, self.model)
 
     @patch('src.agents.chart_generator_agent.sanitise_script')
     @patch('src.agents.chart_generator_agent.engine.load_prompt')
-    def test_generate_chart_exception(self, mock_load_prompt, mock_sanitise_script):
+    async def test_generate_chart_exception(self, mock_load_prompt, mock_sanitise_script):
         # Arrange
         self.llm.chat.return_value = "generated code"
         mock_sanitise_script.return_value = """
@@ -67,7 +67,7 @@ plt.plot([1, 2, 3], [4, 5, 6])
         with patch('builtins.exec', side_effect=Exception("Test exception")):
             # Act / Assert
             with self.assertRaises(Exception):
-                generate_chart("intent", "values", "params", "timeframe", self.llm, self.model)
+                await generate_chart("intent", "values", "params", "timeframe", self.llm, self.model)
 
 if __name__ == '__main__':
     unittest.main()
