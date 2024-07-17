@@ -23,6 +23,7 @@ class Config(object):
         self.web_agent_llm = None
         self.maths_agent_llm = None
         self.router_llm = None
+        self.chart_generator_llm = None
         self.answer_agent_model = None
         self.intent_agent_model = None
         self.validator_agent_model = None
@@ -30,6 +31,7 @@ class Config(object):
         self.web_agent_model = None
         self.maths_agent_model = None
         self.router_model = None
+        self.chart_generator_model = None
         self.agent_class_model = None
 
         # We don't want to load the environment variables when running tests
@@ -72,6 +74,7 @@ class Config(object):
             self.maths_agent_model = config.get("agents", {}).get("maths", {}).get("model")
             self.router_model = config.get("agents", {}).get("router", {}).get("model")
             self.agent_class_model = config.get("agents", {}).get("agent_class", {}).get("model")
+            self.chart_generator_model = config.get("agents", {}).get("agent_class", {}).get("model")
 
         except FileNotFoundError:
             raise FileNotFoundError("Please provide a env.yml file. See the Getting Started guide on the README.md")

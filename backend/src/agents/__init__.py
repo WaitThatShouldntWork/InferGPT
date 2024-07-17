@@ -7,6 +7,7 @@ from .intent_agent import IntentAgent
 from .tool import tool, Parameter
 from .validator_agent import ValidatorAgent
 from .answer_agent import AnswerAgent
+from .chart_generator_agent import CharGeneratorAgent
 
 config = Config()
 
@@ -29,6 +30,7 @@ def agent_details(agent) -> dict:
 def get_available_agents() -> List[Agent]:
     return [DatastoreAgent(config.datastore_agent_llm, config.datastore_agent_model),
             WebAgent(config.web_agent_llm, config.web_agent_model),
+            CharGeneratorAgent(config.chart_generator_llm, config.chart_generator_model),
             ]
 
 
