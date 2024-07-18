@@ -21,21 +21,6 @@ def question(question: str) -> str:
     logger.info(f"Intent determined: {intent}")
 
     try:
-    # if intent_json.get('questions') and intent_json['questions'][0].get('question_category') == 'general knowledge':
-    #     # Perform web search using the tool manager or handler
-    #     search_results = web_agent.web_search(search_query=intent_json['query'])
-    #     update_scratchpad(result=search_results)
-
-    #     # Scrape the content from the search results
-    #     scrape_results = web_agent.scrape_content(urls=search_results)
-    #     update_scratchpad(result=scrape_results)
-
-    #     # Summarise the scraped content
-    #     summarisation = web_agent.summarise_content(search_query=intent_json['query'], contents=scrape_results,
-    #       llm=config.web_agent_llm, model=config.web_agent_model)
-    #     update_scratchpad(result=summarisation)
-    #     logger.info(f"Summarisation: {summarisation}")
-    # else:
         solve_all(intent_json)
     except Exception as error:
         logger.error(f"Error during task solving: {error}")
