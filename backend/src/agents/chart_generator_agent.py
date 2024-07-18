@@ -8,6 +8,7 @@ logger = logging.getLogger(__name__)
 
 engine = PromptEngine()
 
+
 @tool(
     name="generate chart code",
     description="Generate Matplotlib bar chart code if the user's query involves creating a chart",
@@ -31,21 +32,21 @@ engine = PromptEngine()
             type="string",
             description="string of the timeframe to be considered or none if no timeframe is needed",
         ),
-    }
+    },
 )
-
 def generate_chart(question_intent, categorical_values, question_params, timeframe, llm, model) -> str:
     details_to_generate_chart_code = engine.load_prompt(
         "details-to-generate-chart-code",
         question_intent=question_intent,
         categorical_values=categorical_values,
         question_params=question_params,
-        timeframe=timeframe
+        timeframe=timeframe,
     )
     generate_chart_code_prompt = engine.load_prompt("generate-chart-code")
     generated_code = llm.chat(model, generate_chart_code_prompt, details_to_generate_chart_code)
     sanitised_script = sanitise_script(generated_code)
     return sanitised_script
+
 
 def sanitise_script(script):
     if script.startswith("```python"):
@@ -54,10 +55,7 @@ def sanitise_script(script):
         script = script[:-3]
     return script.strip()
 
-@agent(
-    name="CharGeneratorAgent",
-    description="This agent is responsible for creating charts",
-    tools=[generate_chart]
-)
-class CharGeneratorAgent(Agent):
+
+@agent(name="ChartGeneratorAgent", description="This agent is responsible for creating charts", tools=[generate_chart])
+class ChartGeneratorAgent(Agent):
     pass
