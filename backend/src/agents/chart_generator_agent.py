@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 engine = PromptEngine()
 
+
 async def generate_chart(question_intent, categorical_values, question_params, timeframe, llm, model) -> str:
     details_to_generate_chart_code = engine.load_prompt(
         "details-to-generate-chart-code",
