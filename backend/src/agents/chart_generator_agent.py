@@ -12,13 +12,47 @@ logger = logging.getLogger(__name__)
 
 engine = PromptEngine()
 
+<<<<<<< HEAD
 async def generate_chart(question_intent, data_provided, question_params, llm, model) -> str:
+=======
+
+@tool(
+    name="generate chart code",
+    description="Generate Matplotlib bar chart code if the user's query involves creating a chart",
+    parameters={
+        "question_intent": Parameter(
+            type="string",
+            description="The intent the question will be based on",
+        ),
+        "categorical_values": Parameter(
+            type="string",
+            description="The categorical values the chart needs to represent",
+        ),
+        "question_params": Parameter(
+            type="string",
+            description="""
+                The specific parameters required for the question to be answered with the question_intent
+                or none if no params required
+            """,
+        ),
+        "timeframe": Parameter(
+            type="string",
+            description="string of the timeframe to be considered or none if no timeframe is needed",
+        ),
+    },
+)
+def generate_chart(question_intent, categorical_values, question_params, timeframe, llm, model) -> str:
+>>>>>>> b3deed22 (Correct Chart Generator Agent Name)
     details_to_generate_chart_code = engine.load_prompt(
         "details-to-generate-chart-code",
         question_intent=question_intent,
         data_provided=data_provided,
         question_params=question_params,
+<<<<<<< HEAD
         scratchpad=scratchpad,
+=======
+        timeframe=timeframe,
+>>>>>>> b3deed22 (Correct Chart Generator Agent Name)
     )
 
     generate_chart_code_prompt = engine.load_prompt("generate-chart-code")
@@ -45,14 +79,19 @@ async def generate_chart(question_intent, data_provided, question_params, llm, m
     return image_data
 
 
+<<<<<<< HEAD
 def sanitise_script(script: str) -> str:
     script = script.strip()
+=======
+def sanitise_script(script):
+>>>>>>> b3deed22 (Correct Chart Generator Agent Name)
     if script.startswith("```python"):
         script = script[9:]
     if script.endswith("```"):
         script = script[:-3]
     return script.strip()
 
+<<<<<<< HEAD
 @tool(
     name="generate_code_chart",
     description="Generate Matplotlib bar chart code if the user's query involves creating a chart",
@@ -81,8 +120,8 @@ async def generate_code_chart(question_intent, data_provided, question_params, l
     name="ChartGeneratorAgent",
     description="This agent is responsible for creating charts",
     tools=[generate_code_chart]
+    tools=[generate_chart_code]
 )
-
-class ChartGeneratorAgent(Agent):
+class CharGeneratorAgent(Agent):
     pass
 
