@@ -12,6 +12,8 @@ logger = logging.getLogger(__name__)
 
 engine = PromptEngine()
 
+
+
 <<<<<<< HEAD
 async def generate_chart(question_intent, data_provided, question_params, llm, model) -> str:
 =======
