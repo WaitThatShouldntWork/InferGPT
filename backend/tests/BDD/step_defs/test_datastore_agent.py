@@ -10,8 +10,8 @@ scenarios("../features/datastore_agent.feature")
 
 @given(parsers.parse("a transactional prompt to InferGPT"))
 def prepare_prompt():
-    response = app_healthcheck
-    #assert response.status_code == 200
+    response = app_healthcheck()
+    assert response.status_code == 200
     assert response.json() == healthy_response
 
 @when(parsers.parse("I get the response"))
@@ -23,8 +23,8 @@ def check_response_includes_critical_info(prompt, expected_amount):
     response = send_prompt(prompt)
     result = correctness_evaluator.evaluate_strings( # type: ignore
         input=prompt, # type: ignore
-        prediction=response.json(),
+        prediction= response.json(),
         reference= expected_amount,
     )
     assert result["score"] == 1, "The bot response is not correct. \nReasoning: " + result["reasoning"]
-    print("Hello: ", result)
+    print("Result: ", result)
