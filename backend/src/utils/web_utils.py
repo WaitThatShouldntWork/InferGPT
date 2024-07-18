@@ -3,7 +3,6 @@ from googlesearch import search
 import requests
 from bs4 import BeautifulSoup
 from src.prompts import PromptEngine
-from src.utils import to_json
 from src.utils import Config
 
 
@@ -12,7 +11,8 @@ config = Config()
 
 engine = PromptEngine()
 
-def web_search(search_query) -> list:
+def search_urls(search_query) -> list:
+    logger.info(f"Searching the web for: {search_query}")
     urls = []
     try:
         for url in search(search_query, num_results=5):
@@ -22,18 +22,30 @@ def web_search(search_query) -> list:
     return urls
 
 
-def scrape_content(urls, limit=1000) -> list:
-    logger.info(f"Scraping content from URLs: {urls}")
+def scrape_content(url, limit=100000) -> list:
     contents = []
-    for url in urls:
-        try:
-            response = requests.get(url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, 'html.parser')
-            paragraphs = soup.find_all('p')
-            content = ' '.join([para.get_text() for para in paragraphs])
-            contents.append(content[:limit])
-        except Exception as e:
-            logger.error(f"Error scraping {url}: {e}")
-            contents.append(f"Error scraping {url}: {e}")
-    return contents
+    # for url in urls:
+    try:
+        logger.info(f"Scraping content from URL: {url}")
+        response = requests.get(url)
+        response.raise_for_status()
+        soup = BeautifulSoup(response.text, 'html.parser')
+        paragraphs = soup.find_all('p')
+        content = ' '.join([para.get_text() for para in paragraphs])
+        return content[:limit]
+        contents.append(content[:limit])
+    except Exception as e:
+        logger.error(f"Error scraping {url}: {e}")
+    # return contents
+
+def summarise_content(search_query, contents, llm, model) -> str:
+    # combined_content = "\n\n".join([f"{i+1}. {content}" for i, content in enumerate(contents)])
+    logger.info(f"######### combined_content ######### {contents}")
+    summariser_prompt =  engine.load_prompt(
+        "summariser",
+        question=search_query,
+        content=contents
+    )
+
+    response = llm.chat(model, summariser_prompt, "")
+    return response
