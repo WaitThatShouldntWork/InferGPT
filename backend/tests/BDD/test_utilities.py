@@ -4,7 +4,6 @@ from langchain.evaluation import load_evaluator
 from langchain.evaluation import EvaluatorType
 from langchain_openai.chat_models import ChatOpenAI
 
-
 START_ENDPOINT_URL = "/chat?utterance={utterance}"
 CONVERSATION_ENDPOINT_URL = "/chat?utterance={utterance}"
 HEALTHCHECK_ENDPOINT_URL = "/health"
