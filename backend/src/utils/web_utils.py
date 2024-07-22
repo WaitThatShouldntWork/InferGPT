@@ -23,8 +23,6 @@ def search_urls(search_query) -> list:
 
 
 def scrape_content(url, limit=100000) -> list:
-    contents = []
-    # for url in urls:
     try:
         logger.info(f"Scraping content from URL: {url}")
         response = requests.get(url)
@@ -33,13 +31,9 @@ def scrape_content(url, limit=100000) -> list:
         paragraphs = soup.find_all('p')
         content = ' '.join([para.get_text() for para in paragraphs])
         return content[:limit]
-        contents.append(content[:limit])
     except Exception as e:
         logger.error(f"Error scraping {url}: {e}")
-    # return contents
-
 def summarise_content(search_query, contents, llm, model) -> str:
-    # combined_content = "\n\n".join([f"{i+1}. {content}" for i, content in enumerate(contents)])
     logger.info(f"######### combined_content ######### {contents}")
     summariser_prompt =  engine.load_prompt(
         "summariser",

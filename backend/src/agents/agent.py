@@ -47,11 +47,9 @@ class Agent(ABC):
             chosen_tool = extract_tool(response["tool_name"], self.tools)
             logger.info(f"USER - Chosen tool: {chosen_tool.name}")
             chosen_tool_parameters = response["tool_parameters"]
-            logger.info(f"USER - Chosen tool parameters: {chosen_tool_parameters}")
             validate_args(chosen_tool_parameters, chosen_tool)
         except Exception:
             raise Exception(f"Unable to extract chosen tool and parameters from {response}")
-        logger.info(f"USER - Chosen tool: {chosen_tool.name} with parameters: {chosen_tool_parameters} and action: {chosen_tool.action}")
         return (chosen_tool.action, chosen_tool_parameters)
 
     def invoke(self, utterance: str) -> str:

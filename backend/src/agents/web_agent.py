@@ -19,15 +19,15 @@ def web_general_search_core(search_query, llm, model) -> list:
     logger.info(f"URLs found: {urls}")
     if not urls:
         return ["No relevant information found on the internet for the given query."]
-    update_scratchpad(result=urls)
+    update_scratchpad(result=urls, agent_name="WebAgent")
     for url in urls:
         content = scrape_content(url)
         if not content:
             return [f"No content for the url: {url} found."]
-        update_scratchpad(result=content)
+        update_scratchpad(result=content, agent_name="WebAgent")
         final_response = summarise_content(search_query, content, llm, model)
         if final_response:
-            update_scratchpad(result=final_response)
+            update_scratchpad(result=final_response, agent_name="WebAgent")
             if is_valid_answer(final_response, search_query):
                 return [final_response]
             else:
