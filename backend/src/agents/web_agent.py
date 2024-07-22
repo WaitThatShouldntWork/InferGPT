@@ -37,7 +37,8 @@ def web_general_search_core(search_query, llm, model) -> list:
 
 @tool(
     name="web_general_search",
-    description="Search the internet based on the query provided and then get the meaningful answer from the content found",
+    description="Search the internet based on the query provided and then "
+                "get the meaningful answer from the content found",
     parameters={
         "search_query": Parameter(
             type="string",
