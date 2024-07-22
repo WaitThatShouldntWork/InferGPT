@@ -16,6 +16,7 @@ engine = PromptEngine()
 format_prompt = engine.load_prompt("tool-selection-format")
 config = Config()
 
+
 class Agent(ABC):
     name: str
     description: str
@@ -23,12 +24,13 @@ class Agent(ABC):
     llm: LLM
     model: str
 
-    def __init__(self, llm_name: str | None, model: str):
+    def __init__(self, llm_name: str | None, model: str | None):
         self.llm = get_llm(llm_name)
+        if model is None:
+            raise ValueError("LLM Model Not Provided")
         self.model = model
 
     def __get_action(self, utterance: str) -> Action_and_args:
-
         tool_descriptions = create_all_tools_str(self.tools)
 
         tools_available = engine.load_prompt(
@@ -39,7 +41,7 @@ class Agent(ABC):
         )
 
         logger.debug(f"List of tools: {tool_descriptions}")
-        response = json.loads(self.llm.chat(config.agent_class_model, format_prompt, tools_available))
+        response = json.loads(self.llm.chat(self.model, format_prompt, tools_available))
 
         publish_log_info(LogPrefix.USER, f"Tool chosen: {json.dumps(response)}", __name__)
 
