@@ -22,7 +22,7 @@ class TestWebAgentCore(unittest.TestCase):
 
         result = web_general_search_core('example query', self.llm, self.model)
         self.assertEqual(result, ['Example summary.'])
-        mock_search_urls.assert_called_once_with('example query')
+        mock_search_urls.assert_called_once_with('example query', num_results=15)
         mock_scrape_content.assert_called_once_with('http://example.com')
         mock_summarise_content.assert_called_once_with(
             'example query', 'Example scraped content.', self.llm, self.model
@@ -40,7 +40,7 @@ class TestWebAgentCore(unittest.TestCase):
 
         result = web_general_search_core('example query', self.llm, self.model)
         self.assertEqual(result, ['No relevant information found on the internet for the given query.'])
-        mock_search_urls.assert_called_once_with('example query')
+        mock_search_urls.assert_called_once_with('example query', num_results=15)
         mock_scrape_content.assert_not_called()
         mock_summarise_content.assert_not_called()
         mock_is_valid_answer.assert_not_called()
@@ -59,7 +59,7 @@ class TestWebAgentCore(unittest.TestCase):
 
         result = web_general_search_core('example query', self.llm, self.model)
         self.assertEqual(result, ['No relevant information found on the internet for the given query.'])
-        mock_search_urls.assert_called_once_with('example query')
+        mock_search_urls.assert_called_once_with('example query', num_results=15)
         mock_scrape_content.assert_called_once_with('http://example.com')
         mock_summarise_content.assert_called_once_with(
             'example query', 'Example scraped content.', self.llm, self.model

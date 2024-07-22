@@ -14,8 +14,8 @@ config = Config()
 engine = PromptEngine()
 
 
-def web_general_search_core(search_query, llm, model) -> list:
-    urls = search_urls(search_query)
+def web_general_search_core(search_query, llm, model) -> str:
+    urls = search_urls(search_query, num_results=15)
     logger.info(f"URLs found: {urls}")
     if not urls:
         return ["No relevant information found on the internet for the given query."]
@@ -23,12 +23,13 @@ def web_general_search_core(search_query, llm, model) -> list:
     for url in urls:
         content = scrape_content(url)
         if not content:
-            return [f"No content for the url: {url} found."]
+           continue
         update_scratchpad(result=content, agent_name="WebAgent")
         final_response = summarise_content(search_query, content, llm, model)
         if final_response:
             update_scratchpad(result=final_response, agent_name="WebAgent")
-            if is_valid_answer(final_response, search_query):
+            is_valid = is_valid_answer(final_response, search_query)
+            if (is_valid):
                 return [final_response]
             else:
                 continue
@@ -46,7 +47,7 @@ def web_general_search_core(search_query, llm, model) -> list:
         ),
     },
 )
-def web_general_search(search_query, llm, model) -> list:
+def web_general_search(search_query, llm, model) -> str:
     return web_general_search_core(search_query, llm, model)
 
 
@@ -65,7 +66,4 @@ def is_valid_answer(answer, task) -> bool:
     tools=[web_general_search],
 )
 class WebAgent(Agent):
-    def __init__(self, llm, model):
-        self.llm = llm
-        self.model = model
-        super().__init__(llm_name=llm, model=model)
+    pass

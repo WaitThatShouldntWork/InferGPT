@@ -11,18 +11,18 @@ config = Config()
 
 engine = PromptEngine()
 
-def search_urls(search_query) -> list:
+def search_urls(search_query, num_results=10) -> list:
     logger.info(f"Searching the web for: {search_query}")
     urls = []
     try:
-        for url in search(search_query, num_results=5):
+        for url in search(search_query, num_results=num_results):
             urls.append(url)
     except Exception as e:
         logger.error(f"Error during web search: {e}")
     return urls
 
 
-def scrape_content(url, limit=100000) -> list:
+def scrape_content(url, limit=100000) -> str:
     try:
         logger.info(f"Scraping content from URL: {url}")
         response = requests.get(url)
@@ -33,13 +33,13 @@ def scrape_content(url, limit=100000) -> list:
         return content[:limit]
     except Exception as e:
         logger.error(f"Error scraping {url}: {e}")
+        return ""
+
 def summarise_content(search_query, contents, llm, model) -> str:
-    logger.info(f"######### combined_content ######### {contents}")
     summariser_prompt =  engine.load_prompt(
         "summariser",
         question=search_query,
         content=contents
     )
-
     response = llm.chat(model, summariser_prompt, "")
     return response
