@@ -1,6 +1,6 @@
 from unittest.mock import call
 import pytest
-from src.api.message_handlers import create_on_ping, pong
+from src.websockets.message_handlers import create_on_ping, pong
 
 
 def test_on_ping_send_pong(mocker):

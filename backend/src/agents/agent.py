@@ -3,6 +3,7 @@ import json
 import logging
 from typing import List, Type
 from src.llm import LLM, get_llm
+from src.utils.log_publisher import LogPrefix, publish_log_info
 
 from .adapters import create_all_tools_str, extract_tool, validate_args
 from src.utils import get_scratchpad, Config
@@ -38,10 +39,9 @@ class Agent(ABC):
         )
 
         logger.debug(f"List of tools: {tool_descriptions}")
-
         response = json.loads(self.llm.chat(config.agent_class_model, format_prompt, tools_available))
 
-        logger.info(f"USER - Tool chosen: {json.dumps(response)}")
+        publish_log_info(LogPrefix.USER, f"Tool chosen: {json.dumps(response)}", __name__)
 
         try:
             chosen_tool = extract_tool(response["tool_name"], self.tools)
@@ -56,7 +56,7 @@ class Agent(ABC):
         (action, args) = self.__get_action(utterance)
         logger.info(f"USER - Action: {action} and args: {args} for utterance: {utterance}")
         result_of_action = action(**args, llm=self.llm, model=self.model)
-        logger.info(f"USER - Action gave result: {result_of_action}")
+        publish_log_info(LogPrefix.USER, f"Action gave result: {result_of_action}", __name__)
         return result_of_action
 
 
