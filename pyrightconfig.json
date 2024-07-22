@@ -1,0 +1,14 @@
+{
+    "include": [
+        "backend/src",
+        "backend/tests"
+    ],
+    "exclude": [
+        "**/node_modules",
+        "**/__pycache__",
+        "financialhealthcheckScottLogic"
+    ],
+    "typeCheckingMode": "standard",
+    "reportMissingImports": true,
+    "reportMissingTypeStubs": true,
+}
