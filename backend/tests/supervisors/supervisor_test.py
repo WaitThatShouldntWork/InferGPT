@@ -28,47 +28,52 @@ intent_json = {
 agent = MockAgent("mockllm", mock_model)
 
 
-def test_solve_all_no_tasks():
+@pytest.mark.asyncio
+async def test_solve_all_no_tasks():
     with pytest.raises(Exception) as error:
-        solve_all({"questions": []})
+        await solve_all({"questions": []})
         assert error == no_questions_response
 
 
-def test_solve_all_gets_answer(mocker):
+@pytest.mark.asyncio
+async def test_solve_all_gets_answer(mocker):
     task_1_answer = "the answer is 42"
     agent_name = "the_best_agent"
     expected_result = [{"agent_name": agent_name, "question": query, "result": task_1_answer, "error": None}]
     mocker.patch("src.supervisors.supervisor.solve_task", return_value=(agent_name, task_1_answer))
 
-    solve_all(intent_json)
+    await solve_all(intent_json)
 
     result = get_scratchpad()
     assert result == expected_result
 
 
-def test_solve_task_first_attempt_solves(mocker):
-    agent.invoke = mocker.MagicMock(return_value=mock_answer)
+@pytest.mark.asyncio
+async def test_solve_task_first_attempt_solves(mocker):
+    agent.invoke = mocker.AsyncMock(return_value=mock_answer)
     mocker.patch("src.supervisors.supervisor.get_agent_for_task", return_value=agent)
     mocker.patch("src.supervisors.supervisor.is_valid_answer", return_value=True)
 
-    answer = solve_task(task, scratchpad)
+    answer = await solve_task(task, scratchpad)
 
     assert answer == (agent.name, mock_answer)
 
 
-def test_solve_task_unsolvable(mocker):
+@pytest.mark.asyncio
+async def test_solve_task_unsolvable(mocker):
     agent.invoke = mocker.MagicMock(return_value=mock_answer)
     mocker.patch("src.supervisors.supervisor.get_agent_for_task", return_value=agent)
     mocker.patch("src.supervisors.supervisor.is_valid_answer", return_value=False)
 
     with pytest.raises(Exception) as error:
-        solve_task(task, scratchpad)
+        await solve_task(task, scratchpad)
         assert error == unsolvable_response
 
 
-def test_solve_task_no_agent_found(mocker):
+@pytest.mark.asyncio
+async def test_solve_task_no_agent_found(mocker):
     mocker.patch("src.supervisors.supervisor.get_agent_for_task", return_value=None)
 
     with pytest.raises(Exception) as error:
-        solve_task(task, scratchpad)
+        await solve_task(task, scratchpad)
         assert error == no_agent_response

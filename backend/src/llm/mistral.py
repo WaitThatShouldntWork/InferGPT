@@ -1,4 +1,4 @@
-from mistralai.client import MistralClient
+from mistralai.async_client import MistralAsyncClient
 from mistralai.models.chat_completion import ChatCompletionResponse, ChatMessage
 import logging
 from src.utils import Config
@@ -7,12 +7,13 @@ from .llm import LLM
 logger = logging.getLogger(__name__)
 config = Config()
 
-class Mistral(LLM):
-    client = MistralClient(api_key=config.mistral_key)
 
-    def chat(self, model, system_prompt: str, user_prompt: str) -> str:
+class Mistral(LLM):
+    client = MistralAsyncClient(api_key=config.mistral_key)
+
+    async def chat(self, model, system_prompt: str, user_prompt: str) -> str:
         logger.debug("Called llm. Waiting on response model with prompt {0}.".format(str([system_prompt, user_prompt])))
-        response: ChatCompletionResponse = self.client.chat(
+        response: ChatCompletionResponse = await self.client.chat(
             model=model,
             messages=[
                 ChatMessage(role="system", content=system_prompt),

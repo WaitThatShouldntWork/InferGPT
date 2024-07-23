@@ -30,7 +30,7 @@ class Agent(ABC):
             raise ValueError("LLM Model Not Provided")
         self.model = model
 
-    def __get_action(self, utterance: str) -> Action_and_args:
+    async def __get_action(self, utterance: str) -> Action_and_args:
         tool_descriptions = create_all_tools_str(self.tools)
 
         tools_available = engine.load_prompt(
@@ -41,7 +41,7 @@ class Agent(ABC):
         )
 
         logger.debug(f"List of tools: {tool_descriptions}")
-        response = json.loads(self.llm.chat(self.model, format_prompt, tools_available))
+        response = json.loads(await self.llm.chat(self.model, format_prompt, tools_available))
 
         publish_log_info(LogPrefix.USER, f"Tool chosen: {json.dumps(response)}", __name__)
 
@@ -54,9 +54,9 @@ class Agent(ABC):
 
         return (chosen_tool.action, chosen_tool_parameters)
 
-    def invoke(self, utterance: str) -> str:
-        (action, args) = self.__get_action(utterance)
-        result_of_action = action(**args, llm=self.llm, model=self.model)
+    async def invoke(self, utterance: str) -> str:
+        (action, args) = await self.__get_action(utterance)
+        result_of_action = await action(**args, llm=self.llm, model=self.model)
         publish_log_info(LogPrefix.USER, f"Action gave result: {result_of_action}", __name__)
         return result_of_action
 

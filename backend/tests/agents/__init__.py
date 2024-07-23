@@ -15,7 +15,7 @@ param_description = "A string"
         "another_optional": Parameter(type="string", description=param_description, required=False),
     },
 )
-def mock_tool_a(input: str, llm, model):
+async def mock_tool_a(input: str, llm, model):
     return input
 
 
@@ -27,7 +27,7 @@ def mock_tool_a(input: str, llm, model):
         "optional": Parameter(type="string", description=param_description, required=False),
     },
 )
-def mock_tool_b(input: str, llm, model):
+async def mock_tool_b(input: str, llm, model):
     return input
 
 
