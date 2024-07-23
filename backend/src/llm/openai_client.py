@@ -14,7 +14,7 @@ class OpenAIClient:
 
     def chat(self, model, messages, temperature=0, max_tokens=150):
         try:
-            response = openai.ChatCompletion.create(
+            response = openai.ChatCompletion.create(  # type: ignore
                 model=model,
                 messages=messages,
             )
