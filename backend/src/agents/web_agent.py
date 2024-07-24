@@ -4,7 +4,6 @@ from .agent_types import Parameter
 from .agent import Agent, agent
 from .tool import tool
 from src.utils import Config
-from src.utils import update_scratchpad
 from src.utils.web_utils import search_urls, scrape_content, summarise_content
 from .validator_agent import ValidatorAgent
 import json
@@ -23,16 +22,13 @@ def web_general_search_core(search_query, llm, model) -> str:
             return "No relevant information found on the internet for the given query."
         urls = search_result["urls"]
         logger.info(f"URLs found: {urls}")
-        update_scratchpad(result=urls, agent_name="WebAgent")
         for url in urls:
             content = perform_scrape(url)
             if not content:
                 continue
-            update_scratchpad(result=content, agent_name="WebAgent")
             summary = perform_summarization(search_query, content, llm, model)
             if not summary:
                 continue
-            update_scratchpad(result=summary, agent_name="WebAgent")
             if is_valid_answer(summary, search_query):
                 return summary
         return "No relevant information found on the internet for the given query."
@@ -54,10 +50,8 @@ def web_general_search_core(search_query, llm, model) -> str:
 def web_general_search(search_query, llm, model) -> str:
     return web_general_search_core(search_query, llm, model)
 
-
 def get_validator_agent() -> Agent:
     return ValidatorAgent(config.validator_agent_llm, config.validator_agent_model)
-
 
 def is_valid_answer(answer, task) -> bool:
     is_valid = (get_validator_agent().invoke(f"Task: {task}  Answer: {answer}")).lower() == "true"
@@ -88,7 +82,7 @@ def perform_summarization(search_query: str, content: str, llm: Any, model: str)
         summarise_result = json.loads(summarise_result_json)
         if summarise_result["status"] == "error":
             return ""
-        return summarise_result["summary"]
+        return summarise_result["response"]
     except Exception as e:
         logger.error(f"Error summarizing content: {e}")
         return ""

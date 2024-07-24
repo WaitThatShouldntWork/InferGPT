@@ -63,13 +63,13 @@ def summarise_content(search_query, contents, llm, model) -> str:
         response = llm.chat(model, summariser_prompt, "")
         return json.dumps({
             "status": "success",
-            "summary": response,
+            "response": response,
             "error": None
         })
     except Exception as e:
         logger.error(f"Error during summarisation: {e}")
         return json.dumps({
             "status": "error",
-            "summary": None,
+            "response": None,
             "error": str(e)
         })

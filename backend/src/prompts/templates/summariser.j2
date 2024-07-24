@@ -13,7 +13,16 @@ User's question is:
 Below is the content scraped from the web:
 {{ content }}
 
+Reply only in json with the following format:
+
+{
+    "summary":  "The summary of the content that answers the user's query",
+    "reasoning": "A sentence on why you chose that summary"
+}
+
 e.g.
 Task: What is the capital of England
-Answer: London is the capital of England
-Response: True
+{
+    "summary": "The capital of England is London.",
+    "reasoning": "London is widely known as the capital of England, a fact mentioned in various authoritative sources and geographical references."
+}
