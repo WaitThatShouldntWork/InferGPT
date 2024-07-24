@@ -5,14 +5,15 @@ from src.agents import Agent, agent
 
 engine = PromptEngine()
 
+
 @agent(
     name="AnswerAgent",
     description="This agent is responsible for generating an answer for the user, based on results in the scratchpad",
     tools=[],
 )
 class AnswerAgent(Agent):
-    def invoke(self, question: str) -> str:
+    def invoke(self, utterance: str) -> str:
         final_scratchpad = get_scratchpad()
         create_answer = engine.load_prompt("create-answer", final_scratchpad=final_scratchpad, datetime=datetime.now())
 
-        return self.llm.chat(self.model, create_answer, user_prompt=question)
+        return self.llm.chat(self.model, create_answer, user_prompt=utterance)

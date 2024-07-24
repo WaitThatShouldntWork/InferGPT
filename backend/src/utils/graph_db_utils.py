@@ -29,19 +29,17 @@ def test_connection():
 
 def execute_query(llm_query):
     try:
-        session = driver.session()
-        query = llm_query
-        records = session.run(query)
-        record_dict = [record.data() for record in records]
-        return record_dict
+        with driver.session() as session:
+            query = llm_query
+            records = session.run(query)
+            record_dict = [record.data() for record in records]
+            return record_dict
 
     except Exception as e:
         logger.exception(f"Error: {e}")
         raise
 
     finally:
-        if session:
-            session.close()
         driver.close()
 
 
@@ -67,6 +65,4 @@ def populate_db(query, data) -> None:
         logger.exception(f"Error: {e}")
         raise
     finally:
-        if session:
-            session.close()
         driver.close()

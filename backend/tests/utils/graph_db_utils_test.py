@@ -69,7 +69,7 @@ def test_populate_db_populates_db(mocker, mock_driver, mock_session):
     mock_session.run.assert_any_call(remove_transactions_without_merchant)
     mock_session.run.assert_any_call(remove_connecting_nodes)
 
-    mock_session.close.assert_called_once()
+    mock_driver.session.return_value.__exit__.assert_called_once()
     mock_driver.close.assert_called_once()
 
 
@@ -84,5 +84,5 @@ def test_populate_db_throws_exception(mocker, mock_driver, mock_session):
     with pytest.raises(Exception, match="Test exception"):
         populate_db(query, data)
 
-    mock_session.close.assert_called_once()
+    mock_driver.session.return_value.__exit__.assert_called_once()
     mock_driver.close.assert_called_once()

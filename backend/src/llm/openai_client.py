@@ -6,14 +6,15 @@ import logging
 config = Config()
 logger = logging.getLogger(__name__)
 
+
 class OpenAIClient:
-    def __init__(self, api_key: str):
+    def __init__(self):
         self.api_key = config.openai_key
         openai.api_key = self.api_key
 
     def chat(self, model, messages, temperature=0, max_tokens=150):
         try:
-            response = openai.ChatCompletion.create(
+            response = openai.ChatCompletion.create(  # type: ignore
                 model=model,
                 messages=messages,
             )
