@@ -1,7 +1,7 @@
 import logging
 import pytest
 from unittest.mock import Mock, patch
-from src.utils.log_publisher import LogPrefix, publish_log, publish_log_info_async
+from src.utils.log_publisher import LogPrefix, publish_log, publish_log_info
 from src.websockets.types import Message, MessageTypes
 
 
@@ -20,10 +20,10 @@ async def test_publish_log_logger_and_connection_manager_called():
 
 
 @pytest.mark.asyncio
-async def test_publish_log_info_async_publish_log_called():
+async def test_publish_log_info_publish_log_called():
     with patch("src.utils.log_publisher.publish_log") as publish_log_mock:
         test_message = "Test Message"
         test_name = "Test Name"
-        await publish_log_info_async(LogPrefix.USER, test_message, test_name)
+        await publish_log_info(LogPrefix.USER, test_message, test_name)
 
         publish_log_mock.assert_awaited_once_with(LogPrefix.USER, test_message, logging.INFO, test_name)

@@ -3,7 +3,7 @@ import json
 import logging
 from typing import List, Type
 from src.llm import LLM, get_llm
-from src.utils.log_publisher import LogPrefix, publish_log_info_async
+from src.utils.log_publisher import LogPrefix, publish_log_info
 
 from .adapters import create_all_tools_str, extract_tool, validate_args
 from src.utils import get_scratchpad, Config
@@ -43,7 +43,7 @@ class Agent(ABC):
         logger.debug(f"List of tools: {tool_descriptions}")
         response = json.loads(await self.llm.chat(self.model, format_prompt, tools_available))
 
-        await publish_log_info_async(LogPrefix.USER, f"Tool chosen: {json.dumps(response)}", __name__)
+        await publish_log_info(LogPrefix.USER, f"Tool chosen: {json.dumps(response)}", __name__)
 
         try:
             chosen_tool = extract_tool(response["tool_name"], self.tools)
@@ -57,7 +57,7 @@ class Agent(ABC):
     async def invoke(self, utterance: str) -> str:
         (action, args) = await self.__get_action(utterance)
         result_of_action = await action(**args, llm=self.llm, model=self.model)
-        await publish_log_info_async(LogPrefix.USER, f"Action gave result: {result_of_action}", __name__)
+        await publish_log_info(LogPrefix.USER, f"Action gave result: {result_of_action}", __name__)
         return result_of_action
 
 
