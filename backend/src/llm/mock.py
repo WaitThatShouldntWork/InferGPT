@@ -2,5 +2,5 @@ from .llm import LLM
 
 
 class MockLLM(LLM):
-    def chat(self, model: str, system_prompt: str, user_prompt: str) -> str:
+    def chat(self, model: str, system_prompt: str, user_prompt: str, return_json=False) -> str:
         return "mocked response"

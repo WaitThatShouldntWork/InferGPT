@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 prompt_engine = PromptEngine()
 config = Config()
 
+
 def build_best_next_step_prompt(task, scratchpad):
     agents_details = get_agent_details()
     return prompt_engine.load_prompt(
@@ -29,7 +30,7 @@ def build_plan(task, llm, scratchpad, model):
     # Call model to choose agent
     logger.info("#####  ~  Calling LLM for next best step  ~  #####")
     publish_log_info(LogPrefix.USER, f"Scratchpad so far: {scratchpad}", __name__)
-    best_next_step = llm.chat(model, response_format_prompt, best_next_step_prompt)
+    best_next_step = llm.chat(model, response_format_prompt, best_next_step_prompt, return_json=True)
 
     plan = to_json(best_next_step, "Failed to interpret LLM next step format from step string")
     publish_log_info(LogPrefix.USER, f"Next best step response: {json.dumps(plan, indent=4)}", __name__)
@@ -44,7 +45,7 @@ def find_agent_from_name(name):
 
 def get_agent_for_task(task, scratchpad) -> Agent | None:
     llm = get_llm(config.router_llm)
-    model=config.router_model
+    model = config.router_model
     plan = build_plan(task, llm, scratchpad, model)
     agent = next(find_agent_from_name(plan["agent_name"]), None)
 

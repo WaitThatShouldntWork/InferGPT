@@ -3,7 +3,7 @@ import logging
 from .openai_client import OpenAIClient
 from src.utils import Config
 from .llm import LLM
-from openai import OpenAI as OpenAIModel
+from openai import NOT_GIVEN, OpenAI as OpenAIModel
 
 logger = logging.getLogger(__name__)
 config = Config()
@@ -13,7 +13,7 @@ class OpenAI(LLM):
     def __init__(self):
         self.client = OpenAIClient()
 
-    def chat(self, model, system_prompt: str, user_prompt: str) -> str:
+    def chat(self, model, system_prompt: str, user_prompt: str, return_json=False) -> str:
         logger.debug(
             "##### Called open ai chat ... llm. Waiting on response model with prompt {0}.".format(
                 str([system_prompt, user_prompt])
@@ -28,6 +28,7 @@ class OpenAI(LLM):
                     {"role": "user", "content": user_prompt},
                 ],
                 temperature=0,
+                response_format={"type": "json_object"} if return_json else NOT_GIVEN,
             )
             logger.info("OpenAI response: {0}".format(response))
             content = response.choices[0].message.content
