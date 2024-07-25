@@ -13,6 +13,8 @@ director_prompt = engine.load_prompt("director")
 
 def question(question: str) -> str:
     intent = get_intent_agent().invoke(question)
+   
+
     intent_json = json.loads(intent)
     logger.info(f"Intent determined: {intent}")
 
