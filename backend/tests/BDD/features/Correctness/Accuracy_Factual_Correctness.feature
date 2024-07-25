@@ -1,5 +1,5 @@
 Scenario Outline: My Scenario
-    Given  a transactional prompt to InferGPT
+    Given  a user asks InferGPT about his financial information
     When   I get the response
     Then   the response to this '<prompt>' should match the '<expected_amount>'
 Examples:

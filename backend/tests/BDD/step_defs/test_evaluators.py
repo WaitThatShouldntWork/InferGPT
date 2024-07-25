@@ -6,9 +6,9 @@ from tests.BDD.test_utilities import (
     healthy_response
 )
 
-scenarios("../features/Accuracy_Factual_Correctness.feature")
+scenarios("../features/Correctness/Accuracy_Factual_Correctness.feature")
 
-@given(parsers.parse("a transactional prompt to InferGPT"))
+@given(parsers.parse("a user asks InferGPT about his financial information"))
 def prepare_prompt():
     response = app_healthcheck()
     assert response.status_code == 200
@@ -21,8 +21,8 @@ def get_response():
 @then(parsers.parse("the response to this '{prompt}' should match the {expected_amount}"))
 def check_response_includes_expected_amount(prompt, expected_amount):
     response = send_prompt(prompt)
-    result = correctness_evaluator.evaluate_strings( # type: ignore
-        input=prompt, # type: ignore
+    result = correctness_evaluator.evaluate_strings(
+        input=prompt,
         prediction= response.json(),
         reference= expected_amount,
     )
@@ -32,8 +32,8 @@ def check_response_includes_expected_amount(prompt, expected_amount):
 @then(parsers.parse("the response to this '{prompt}'"))
 def check_response_includes_critical_info(prompt, expected_amount):
     response = send_prompt(prompt)
-    result = correctness_evaluator.evaluate_strings( # type: ignore
-        input=prompt, # type: ignore
+    result = correctness_evaluator.evaluate_strings(
+        input=prompt,
         prediction= response.json(),
         reference= expected_amount,
     )
