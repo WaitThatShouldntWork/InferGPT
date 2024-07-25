@@ -9,7 +9,7 @@ from .adapters import create_all_tools_str, extract_tool, validate_args
 from src.utils import get_scratchpad, Config
 from src.prompts import PromptEngine
 from .tool import Tool
-from .types import Action_and_args
+from .agent_types import Action_and_args
 
 logger = logging.getLogger(__name__)
 engine = PromptEngine()
@@ -47,15 +47,16 @@ class Agent(ABC):
 
         try:
             chosen_tool = extract_tool(response["tool_name"], self.tools)
+            logger.info(f"USER - Chosen tool: {chosen_tool.name}")
             chosen_tool_parameters = response["tool_parameters"]
             validate_args(chosen_tool_parameters, chosen_tool)
         except Exception:
             raise Exception(f"Unable to extract chosen tool and parameters from {response}")
-
         return (chosen_tool.action, chosen_tool_parameters)
 
     def invoke(self, utterance: str) -> str:
         (action, args) = self.__get_action(utterance)
+        logger.info(f"USER - Action: {action} and args: {args} for utterance: {utterance}")
         result_of_action = action(**args, llm=self.llm, model=self.model)
         publish_log_info(LogPrefix.USER, f"Action gave result: {result_of_action}", __name__)
         return result_of_action
