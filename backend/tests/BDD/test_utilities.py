@@ -1,7 +1,7 @@
 from src.api import app
 from fastapi.testclient import TestClient
 from langchain.evaluation import load_evaluator
-from langchain.evaluation import EvaluatorType
+from langchain.evaluation import EvaluatorType, StringEvaluator, load_evaluator
 from langchain_openai.chat_models import ChatOpenAI
 from langchain.agents import AgentExecutor
 
@@ -32,12 +32,13 @@ def send_prompt(prompt: str):
 ##Evaluation LLM
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, max_retries=2)
 
-correctness_evaluator = load_evaluator(EvaluatorType.LABELED_CRITERIA, criteria="correctness", llm=llm)
+correctness_evaluator: StringEvaluator = load_evaluator( # type: ignore
+    EvaluatorType.LABELED_CRITERIA, criteria="correctness", llm=llm)
 
 confidence_criterion = {
     "confidence": "Does the bot seem confident that it replied to the question and gave the correct answer?"
 }
 
-confidence_evaluator: load_evaluator(  # type: ignore
+confidence_evaluator: StringEvaluator = load_evaluator(  # type: ignore
     EvaluatorType.CRITERIA, criteria=confidence_criterion, llm=llm
 )
