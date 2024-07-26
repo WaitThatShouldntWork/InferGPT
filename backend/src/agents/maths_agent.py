@@ -1,5 +1,5 @@
 from .tool import tool
-from .types import Parameter
+from .agent_types import Parameter
 from .agent import Agent, agent
 
 

@@ -1,5 +1,4 @@
 import pytest
-from src.utils import get_scratchpad
 from tests.agents import MockAgent
 from src.supervisors import solve_all, solve_task, no_questions_response, unsolvable_response, no_agent_response
 
@@ -41,10 +40,11 @@ async def test_solve_all_gets_answer(mocker):
     agent_name = "the_best_agent"
     expected_result = [{"agent_name": agent_name, "question": query, "result": task_1_answer, "error": None}]
     mocker.patch("src.supervisors.supervisor.solve_task", return_value=(agent_name, task_1_answer))
+    mock_get_scratchpad = mocker.patch("src.utils.get_scratchpad", return_value=expected_result)
 
     await solve_all(intent_json)
 
-    result = get_scratchpad()
+    result = mock_get_scratchpad()
     assert result == expected_result
 
 
