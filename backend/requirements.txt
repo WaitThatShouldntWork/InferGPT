@@ -18,5 +18,5 @@ isodate==0.6.1
 pycparser==2.22
 openai==1.35.3
 beautifulsoup4==4.12.3
-requests==2.32.3
+aiohttp==3.9.5
 googlesearch-python==1.2.4
