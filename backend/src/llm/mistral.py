@@ -11,7 +11,7 @@ config = Config()
 class Mistral(LLM):
     client = MistralAsyncClient(api_key=config.mistral_key)
 
-    async def chat(self, model, system_prompt: str, user_prompt: str) -> str:
+    async def chat(self, model, system_prompt: str, user_prompt: str, return_json=False) -> str:
         logger.debug("Called llm. Waiting on response model with prompt {0}.".format(str([system_prompt, user_prompt])))
         response: ChatCompletionResponse = await self.client.chat(
             model=model,
@@ -20,6 +20,7 @@ class Mistral(LLM):
                 ChatMessage(role="user", content=user_prompt),
             ],
             temperature=0,
+            response_format={"type": "json_object"} if return_json else None,
         )
         logger.debug('{0} response : "{1}"'.format(model, response.choices[0].message.content))
 

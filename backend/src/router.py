@@ -31,7 +31,7 @@ async def build_plan(task, llm: LLM, scratchpad, model):
     # Call model to choose agent
     logger.info("#####  ~  Calling LLM for next best step  ~  #####")
     await publish_log_info(LogPrefix.USER, f"Scratchpad so far: {scratchpad}", __name__)
-    best_next_step = await llm.chat(model, response_format_prompt, best_next_step_prompt)
+    best_next_step = await llm.chat(model, response_format_prompt, best_next_step_prompt, return_json=True)
 
     plan = to_json(best_next_step, "Failed to interpret LLM next step format from step string")
     await publish_log_info(LogPrefix.USER, f"Next best step response: {json.dumps(plan, indent=4)}", __name__)

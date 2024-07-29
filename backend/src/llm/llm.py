@@ -24,5 +24,5 @@ class LLM(ABC, metaclass=LLMMeta):
         return cls.instances
 
     @abstractmethod
-    def chat(self, model: str, system_prompt: str, user_prompt: str) -> Coroutine[Any, Any, str]:
+    def chat(self, model: str, system_prompt: str, user_prompt: str, return_json=False) -> Coroutine[Any, Any, str]:
         pass

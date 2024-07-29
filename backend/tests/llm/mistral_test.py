@@ -61,4 +61,6 @@ async def test_chat_calls_client_chat(mocker):
         ChatMessage(role="system", content=system_prompt),
         ChatMessage(role="user", content=user_prompt),
     ]
-    mistral.client.chat.assert_called_once_with(messages=expected_messages, model=mock_model, temperature=0)
+    mistral.client.chat.assert_called_once_with(
+        messages=expected_messages, model=mock_model, temperature=0, response_format=None
+    )
