@@ -41,7 +41,7 @@ class Agent(ABC):
         )
 
         logger.debug(f"List of tools: {tool_descriptions}")
-        response = json.loads(self.llm.chat(self.model, format_prompt, tools_available))
+        response = json.loads(self.llm.chat(self.model, format_prompt, tools_available, return_json=True))
 
         publish_log_info(LogPrefix.USER, f"Tool chosen: {json.dumps(response)}", __name__)
 
