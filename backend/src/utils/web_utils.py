@@ -1,5 +1,5 @@
 import logging
-from googlesearch import search  # type: ignore
+from googlesearch import search
 
 import aiohttp
 from bs4 import BeautifulSoup
