@@ -14,4 +14,4 @@ class IntentAgent(Agent):
     async def invoke(self, utterance: str) -> str:
         user_prompt = engine.load_prompt("intent", question=utterance)
 
-        return await self.llm.chat(self.model, intent_format, user_prompt=user_prompt)
+        return await self.llm.chat(self.model, intent_format, user_prompt=user_prompt, return_json=True)
