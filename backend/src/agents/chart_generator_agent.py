@@ -80,8 +80,8 @@ def sanitise_script(script: str) -> str:
     }
 )
 
-def generate_code_chart(question_intent, categorical_values, question_params, timeframe, llm, model):
-    return generate_chart(question_intent, categorical_values, question_params, timeframe, llm, model)
+async def generate_code_chart(question_intent, categorical_values, question_params, timeframe, llm, model):
+    return await generate_chart(question_intent, categorical_values, question_params, timeframe, llm, model)
 
 @agent(
     name="CharGeneratorAgent",
@@ -89,5 +89,5 @@ def generate_code_chart(question_intent, categorical_values, question_params, ti
     tools=[generate_code_chart]
 )
 
-class ChartGeneratorAgent(Agent):
+class CharGeneratorAgent(Agent):
     pass
