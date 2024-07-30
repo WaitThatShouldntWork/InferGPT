@@ -88,5 +88,5 @@ async def generate_code_chart(question_intent, categorical_values, question_para
     tools=[generate_code_chart]
 )
 
-class CharGeneratorAgent(Agent):
+class ChartGeneratorAgent(Agent):
     pass
