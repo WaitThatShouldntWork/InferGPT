@@ -8,7 +8,6 @@ from .tool import tool, Parameter
 from .validator_agent import ValidatorAgent
 from .answer_agent import AnswerAgent
 from .chart_generator_agent import ChartGeneratorAgent
-from .chart_generator_agent import ChartGeneratorAgent
 
 config = Config()
 
