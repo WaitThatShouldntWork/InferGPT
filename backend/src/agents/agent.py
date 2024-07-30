@@ -30,7 +30,7 @@ class Agent(ABC):
             raise ValueError("LLM Model Not Provided")
         self.model = model
 
-    def __get_action(self, utterance: str) -> Action_and_args:
+    async def __get_action(self, utterance: str) -> Action_and_args:
         tool_descriptions = create_all_tools_str(self.tools)
 
         tools_available = engine.load_prompt(
@@ -41,9 +41,9 @@ class Agent(ABC):
         )
 
         logger.debug(f"List of tools: {tool_descriptions}")
-        response = json.loads(self.llm.chat(self.model, format_prompt, tools_available, return_json=True))
+        response = json.loads(await self.llm.chat(self.model, format_prompt, tools_available, return_json=True))
 
-        publish_log_info(LogPrefix.USER, f"Tool chosen: {json.dumps(response)}", __name__)
+        await publish_log_info(LogPrefix.USER, f"Tool chosen: {json.dumps(response)}", __name__)
 
         try:
             chosen_tool = extract_tool(response["tool_name"], self.tools)
@@ -54,11 +54,11 @@ class Agent(ABC):
             raise Exception(f"Unable to extract chosen tool and parameters from {response}")
         return (chosen_tool.action, chosen_tool_parameters)
 
-    def invoke(self, utterance: str) -> str:
-        (action, args) = self.__get_action(utterance)
+    async def invoke(self, utterance: str) -> str:
+        (action, args) = await self.__get_action(utterance)
         logger.info(f"USER - Action: {action} and args: {args} for utterance: {utterance}")
-        result_of_action = action(**args, llm=self.llm, model=self.model)
-        publish_log_info(LogPrefix.USER, f"Action gave result: {result_of_action}", __name__)
+        result_of_action = await action(**args, llm=self.llm, model=self.model)
+        await publish_log_info(LogPrefix.USER, f"Action gave result: {result_of_action}", __name__)
         return result_of_action
 
 

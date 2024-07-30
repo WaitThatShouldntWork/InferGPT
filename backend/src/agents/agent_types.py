@@ -1,7 +1,7 @@
-from typing import Callable, Tuple, TypeVar
+from typing import Any, Callable, Coroutine, Tuple, TypeVar
 
 
-Action = Callable[..., str]
+Action = Callable[..., Coroutine[Any, Any, str]]
 T = TypeVar("T")
 Action_and_args = Tuple[Action, T]
 

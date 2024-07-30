@@ -1,4 +1,5 @@
 from abc import ABC, ABCMeta, abstractmethod
+from typing import Any, Coroutine
 from .count_calls import count_calls
 
 
@@ -23,5 +24,5 @@ class LLM(ABC, metaclass=LLMMeta):
         return cls.instances
 
     @abstractmethod
-    def chat(self, model: str, system_prompt: str, user_prompt: str, return_json=False) -> str:
+    def chat(self, model: str, system_prompt: str, user_prompt: str, return_json=False) -> Coroutine[Any, Any, str]:
         pass

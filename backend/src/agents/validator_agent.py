@@ -7,15 +7,15 @@ logger = logging.getLogger(__name__)
 engine = PromptEngine()
 validator_prompt = engine.load_prompt("validator")
 
+
 @agent(
     name="ValidatorAgent",
     description="This agent is responsible for validating the answers to the tasks",
     tools=[],
 )
 class ValidatorAgent(Agent):
-
-    def invoke(self, utterance: str) -> str:
-        answer = self.llm.chat(self.model, validator_prompt, utterance)
-        publish_log_info(LogPrefix.USER, f"Validating: '{utterance}' Answer: '{answer}'", __name__)
+    async def invoke(self, utterance: str) -> str:
+        answer = await self.llm.chat(self.model, validator_prompt, utterance)
+        await publish_log_info(LogPrefix.USER, f"Validating: '{utterance}' Answer: '{answer}'", __name__)
 
         return answer
