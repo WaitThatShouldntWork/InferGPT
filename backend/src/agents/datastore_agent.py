@@ -77,7 +77,7 @@ async def generate_query(
 
 @agent(
     name="DatastoreAgent",
-    description="This agent is responsible for handling database queries.",
+    description="This agent is responsible for handling database queries relating to the user's personal data.",
     tools=[generate_query],
 )
 class DatastoreAgent(Agent):
