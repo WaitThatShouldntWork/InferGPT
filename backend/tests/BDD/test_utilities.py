@@ -1,9 +1,7 @@
 from src.api import app
 from fastapi.testclient import TestClient
-from langchain.evaluation import load_evaluator
 from langchain.evaluation import EvaluatorType, StringEvaluator, load_evaluator
 from langchain_openai.chat_models import ChatOpenAI
-from langchain.agents import AgentExecutor
 
 START_ENDPOINT_URL = "/chat?utterance={utterance}"
 CONVERSATION_ENDPOINT_URL = "/chat?utterance={utterance}"

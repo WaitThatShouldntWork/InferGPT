@@ -21,3 +21,6 @@ openai==1.35.3
 beautifulsoup4==4.12.3
 aiohttp==3.9.5
 googlesearch-python==1.2.4
+pytest-bdd
+langchain
+langchain-openai
