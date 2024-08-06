@@ -1,18 +1,20 @@
-from pytest_bdd import scenario, given, when, then, parsers, scenarios
+from pytest_bdd import given, when, then, parsers, scenarios
 from tests.BDD.test_utilities import (
     send_prompt, 
     app_healthcheck, 
-    correctness_evaluator, 
-    healthy_response
+    correctness_evaluator,
+    healthy_response,
 )
+class Evaluators():
 
-scenarios("../features/Correctness/Accuracy_Factual_Correctness.feature")
+    scenarios("../features/Correctness/Accuracy_Factual_Correctness.feature")
 
-@given(parsers.parse("a user asks InferGPT about his financial information"))
+@given(parsers.parse("a prompt to InferGPT"))
 def prepare_prompt():
-    response = app_healthcheck()
-    assert response.status_code == 200
-    assert response.json() == healthy_response
+    healthcheck_response = app_healthcheck()
+    assert healthcheck_response.status_code == 200
+    assert healthcheck_response.json() == healthy_response
+    
 
 @when(parsers.parse("I get the response"))
 def get_response():
@@ -22,20 +24,18 @@ def get_response():
 def check_response_includes_expected_amount(prompt, expected_amount):
     response = send_prompt(prompt)
     result = correctness_evaluator.evaluate_strings(
-        input=prompt,
-        prediction= response.json(),
-        reference= expected_amount,
+        #input=,
+        prediction=response.json(),
+        reference=expected_amount,
     )
     assert result["score"] == 1, "The bot response is not correct. \nReasoning: " + result["reasoning"]
-    print("Result: ", result)
 
-@then(parsers.parse("the response to this '{prompt}'"))
+@then(parsers.parse("the response to this '{prompt}' should match the '{expected_response}'"))
 def check_response_includes_critical_info(prompt, expected_amount):
     response = send_prompt(prompt)
     result = correctness_evaluator.evaluate_strings(
         input=prompt,
-        prediction= response.json(),
-        reference= expected_amount,
+        prediction=response.json(),
+        reference=expected_amount,
     )
     assert result["score"] == 1, "The bot response is not correct. \nReasoning: " + result["reasoning"]
-    print("Result: ", result)
