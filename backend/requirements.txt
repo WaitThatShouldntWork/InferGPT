@@ -24,3 +24,6 @@ googlesearch-python==1.2.4
 pytest-bdd
 langchain
 langchain-openai
+pytest-bdd
+langchain
+langchain-openai
