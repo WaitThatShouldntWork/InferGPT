@@ -3,6 +3,7 @@ import { createContext } from 'react';
 export enum MessageType {
   PING = 'ping',
   CHAT = 'chat',
+  IMAGE = 'image'
 }
 
 export interface Message {
@@ -12,7 +13,7 @@ export interface Message {
 
 export interface Connection {
   isConnected: boolean;
-  lastMessage: string | null;
+  lastMessage: Message | null;
   send: (message: Message) => void;
 }
 

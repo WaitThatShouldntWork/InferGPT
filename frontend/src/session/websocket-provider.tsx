@@ -11,8 +11,8 @@ const ping = JSON.stringify({ type: MessageType.PING });
 
 export const WebsocketProvider = ({ children }: WebsocketProviderProps) => {
   const [isConnected, setIsConnected] = useState(false);
-  const [lastMessage, setLastMessage] = useState(null);
-
+  const [lastMessage, setLastMessage] = useState<Message | null>(null);
+  
   const ws = useRef<WebSocket | null>(null);
 
   const heartbeat = useCallback(() => {
@@ -34,8 +34,10 @@ export const WebsocketProvider = ({ children }: WebsocketProviderProps) => {
       setIsConnected(false);
     };
     socket.onmessage = (event) => {
-      setLastMessage(event.data);
+      const data = JSON.parse(event.data);
+      setLastMessage(data)
     };
+
     socket.onerror = (error) => {
       setIsConnected(false);
       console.error('WebSocket error:', error);
@@ -60,7 +62,7 @@ export const WebsocketProvider = ({ children }: WebsocketProviderProps) => {
       lastMessage,
       send: sendMessage || (() => {}),
     }),
-    [isConnected, lastMessage]
+    [isConnected, lastMessage, sendMessage]
   );
 
   return (
