@@ -48,4 +48,9 @@ class ConnectionManager:
             if ws.application_state == WebSocketState.CONNECTED:
                 await ws.send_json(json.dumps({"type": message.type.value, "data": message.data}))
 
+    async def send_chart(self, data: Dict[str, Any]):
+        for ws in self.websockets:
+            if ws.application_state == WebSocketState.CONNECTED:
+                await ws.send_json(data)
+
 connection_manager = ConnectionManager()
