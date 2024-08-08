@@ -8,15 +8,8 @@ CONVERSATION_ENDPOINT_URL = "/chat?utterance={utterance}"
 HEALTHCHECK_ENDPOINT_URL = "/health"
 health_prefix = "InferGPT healthcheck: "
 healthy_response = health_prefix + "backend is healthy. Neo4J is healthy."
-HEALTHCHECK_ENDPOINT_URL = "/health"
-health_prefix = "InferGPT healthcheck: "
-healthy_response = health_prefix + "backend is healthy. Neo4J is healthy."
 
 client = TestClient(app)
-
-def app_healthcheck():
-    healthcheck_response = client.get(HEALTHCHECK_ENDPOINT_URL)
-    return healthcheck_response
 
 def app_healthcheck():
     healthcheck_response = client.get(HEALTHCHECK_ENDPOINT_URL)
@@ -40,3 +33,12 @@ confidence_criterion = {
 confidence_evaluator: StringEvaluator = load_evaluator(  # type: ignore
     EvaluatorType.CRITERIA, criteria=confidence_criterion, llm=llm
 )
+
+def check_response_confidence(prompt: str, bot_response: str) -> dict[str, str]:
+    """
+    Uses an LLM to check the confidence of the bot's response.\n
+    Returns a dictionary with the binary score (pass = 1, fail = 0) and reasoning (text format)."""
+    return confidence_evaluator.evaluate_strings(
+        input=prompt,
+        prediction=bot_response,
+    )
