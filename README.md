@@ -6,17 +6,20 @@ InferGPT's mission is to be an AI that knows you better than your best friend. A
 💡 Have deep and personal conversations without having to answer lots of questions - it will already infer your needs, make personalised recommendations and remember all your conversations.  
 🎯 Help you set and keep track of goals.  
 🏗️ Carry out tasks: this is an agent after all - it will go away and action stuff for you!  
-🔮 Predict what you need before you need it!  
+🔮 Predict what you need before you need it!
 
 We aim to be able to answer complex questions that require a deep understanding of someone to effectively answer, such as:
-1) How can i be better with my finances?
-2) I'm trying to lose weight but its not working, why? 
-3) I'm learning to code, can you create a tailored learning plan?  
+
+1. How can i be better with my finances?
+2. I'm trying to lose weight but its not working, why?
+3. I'm learning to code, can you create a tailored learning plan?
 
 ## Roadmap & Docs
+
 Want more context about how it works, our roadmap and documentation? Check out the [wiki](https://github.com/WaitThatShouldntWork/InferGPT/wiki)
 
 For further reading on InferGPT's components, see any of the following
+
 - [Full system testing](test/README.md)
 - [Data persistence](data/README.md)
 - [Backend](backend/README.md)
@@ -26,6 +29,7 @@ For further reading on InferGPT's components, see any of the following
 - [Financial Bot](financialhealthcheckScottLogic/README.md)
 
 ## Contribute
+
 See [the contribution guide](CONTRIBUTING.md) for further guidance. Note this guide is in progress!
 
 ## Getting Started
@@ -47,13 +51,13 @@ Once you have Git installed, follow these steps:
 
 ### Initial configuration
 
-There is a example property file `.env.example` at the root of this project.
+There is a example property file `env.yml.example` at the root of this project.
 
 Configuration steps:
 
-- Copy the `.env.example` file at the root of this project.
-- Rename the copied file as `.env`.
-- Update the `.env` file with your wanted configuration following the guidance in the file.
+- Copy the `env.yml.example` file at the root of this project.
+- Rename the copied file as `env.yml`.
+- Update the `env.yml` file with your wanted configuration following the guidance in the file.
 
 ### Running the application
 
@@ -75,8 +79,8 @@ For instructions on how to run indivdual components locally or within Docker con
 
 - **Ensure Docker is installed and running**. The easiest way to do this is by using the Docker Desktop app (install it from [docker.com](docker.com) if you don't have it).
 - In the root directory of the project run `docker compose up`
-> [!WARNING]  
-> the first time you do this it may take longer as the compose file builds the images.
+  > [!WARNING]  
+  > the first time you do this it may take longer as the compose file builds the images.
 
 > To re-build the docker images following any changes, run `docker compose build` first or use `docker compose up --build`.
 
@@ -85,9 +89,11 @@ For ease of development, after running `docker compose build` you can run `docke
 - View the frontend at [localhost:8650](http://localhost:8650)
 - View the Neo4j Browser at [localhost:7474](http://localhost:7474)
 - Type the phrase "healthcheck" into the frontend UI to test if everything is connected successfully
- 
+
 ### Usage
+
 Coming
 
 ### LICENCE
+
 See [LICENCE.md](LICENCE.md)
