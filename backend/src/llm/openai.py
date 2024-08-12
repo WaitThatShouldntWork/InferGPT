@@ -32,7 +32,6 @@ class OpenAI(LLM):
             )
             logger.info("OpenAI response: {0}".format(response))
             content = response.choices[0].message.content
-            logger.debug('{0} response : "{1}"'.format(config.openai_model, content))
             if isinstance(content, str):
                 return content
             elif isinstance(content, list):
