@@ -47,7 +47,7 @@ def generate_chart(question_intent, categorical_values, question_params, timefra
             image_data = base64.b64encode(image_file.read()).decode("utf-8")
 
         await connection_manager.send_chart({"type": "image", "data": image_data})
-        logger.info(f"image send via connection manager as {image_data}")
+
 
     except Exception as e:
         logger.error(f"Error during chart generation or saving: {e}")
