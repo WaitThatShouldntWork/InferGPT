@@ -20,7 +20,7 @@ export const Chat = ({ messages, waiting }: ChatProps) => {
       const imageData = `data:image/png;base64,${lastMessage.data}`;
       setChart(imageData);
     }
-  }, [lastMessage])
+  }, [lastMessage]);
 
   useEffect(() => {
     if (containerRef.current) {

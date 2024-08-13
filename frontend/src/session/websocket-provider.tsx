@@ -35,7 +35,7 @@ export const WebsocketProvider = ({ children }: WebsocketProviderProps) => {
     };
     socket.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      setLastMessage(data)
+      setLastMessage(data);
     };
 
     socket.onerror = (error) => {
