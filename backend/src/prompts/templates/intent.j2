@@ -6,7 +6,7 @@ The question is:
 {{ question }} 
 
  
-The task is to comprehend the intention the question. The question can be composed of different intents and when it is the case, examine all intents one by one to determine which one to tackle first as you may need the data gathered from a secondary intent to perform the first intent.  
+The task is to comprehend the intention of the question. The question can be composed of different intents and when it is the case, examine all intents one by one to determine which one to tackle first as you may need the data gathered from a secondary intent to perform the first intent.  
 You are NOT ALLOWED to make up sample data or example values. Only use concrete data for which you can name the source. 
 Based on this understanding, the following query must be formulated to extract the necessary data, which can then be used to address the question. 
 
@@ -53,12 +53,3 @@ Response:
 Q: Find the schedule of the local train station. 
 Response: 
 {"query":"Find the schedule of the local train station.","user_intent":"find train schedule","questions":[{"query":"Find the schedule of the local train station.","question_intent":"retrieve train schedule from web","operation":"online search","question_category":"search online","parameters":[{"type":"train station","value":"local"}],"sort_order":"none"}]} 
-
-Q: Create a chart to represent how much I spent at Amazon compared to Tesco over time. 
-Response: 
-{"query":" Create a chart to represent how much I spent at Amazon compared to Tesco over time.","user_intent":"display chart showing spending at Tesco and Amazon","questions": 
-    [ 
-        {"query":"How much did I spend at Tesco and how much did I spend at Amazon","question_intent":"calculate total amount spent at Amazon and Tesco","operation":" filter + aggregation + sort","question_category": "data driven","parameters":[{"type":"company","value":"Amazon and Tesco"}],"sort_order":"none"}, 
-        {"query":"Create a chart to represent the data","question_intent":"create a chart","operation":"generate chart","question_category": "chart creation","parameters":[{"type":"chart","value":"data returned from the previous query"}]} 
-    ] 
-} 
