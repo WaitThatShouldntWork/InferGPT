@@ -3,12 +3,11 @@ from src.prompts import PromptEngine
 from .agent import Agent, agent
 from .tool import tool
 from .agent_types import Parameter
-from src.utils.log_publisher import LogPrefix, publish_log_info
-import os
 from io import BytesIO
 import base64
 from src.websockets.connection_manager import connection_manager
 from src.utils import scratchpad
+from PIL import Image
 
 logger = logging.getLogger(__name__)
 
@@ -32,20 +31,13 @@ async def generate_chart(question_intent, data_provided, question_params, llm, m
         local_vars = {}
         exec(sanitised_script, {}, local_vars)
         fig = local_vars.get('fig')
+        buf = BytesIO()
         if fig is None:
             raise ValueError("The generated code did not produce a figure named 'fig'.")
-        # buf = BytesIO()
-        # saved_fig = fig.savefig(buf, format='png')
-        output_dir = '/app/output'
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
-        logger.info("Saving the figure as 'output.png'")
-        output_path = os.path.join(output_dir, "output.png")
-        fig.savefig(output_path)
-        logger.info(f"Figure saved successfully as {output_path}")
-
-        with open(output_path, "rb") as image_file:
-            image_data = base64.b64encode(image_file.read()).decode("utf-8")
+        fig.savefig(buf, format='png')
+        buf.seek(0)
+        with Image.open(buf):
+            image_data = base64.b64encode(buf.getvalue()).decode("utf-8")
 
         await connection_manager.send_chart({"type": "image", "data": image_data})
 
@@ -57,6 +49,7 @@ async def generate_chart(question_intent, data_provided, question_params, llm, m
 
 
 def sanitise_script(script: str) -> str:
+    script = script.strip()
     if script.startswith("```python"):
         script = script[9:]
     if script.endswith("```"):
