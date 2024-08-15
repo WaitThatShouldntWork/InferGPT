@@ -3,12 +3,11 @@ from src.prompts import PromptEngine
 from .agent import Agent, agent
 from .tool import tool
 from .agent_types import Parameter
-from src.utils.log_publisher import LogPrefix, publish_log_info
-import os
 from io import BytesIO
 import base64
 from src.websockets.connection_manager import connection_manager
 from src.utils import scratchpad
+from PIL import Image
 
 logger = logging.getLogger(__name__)
 
@@ -58,6 +57,7 @@ def generate_chart(question_intent, categorical_values, question_params, timefra
     return image_data
 
 def sanitise_script(script: str) -> str:
+    script = script.strip()
     if script.startswith("```python"):
         script = script[9:]
     if script.endswith("```"):
