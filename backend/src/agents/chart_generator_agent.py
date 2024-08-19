@@ -5,7 +5,6 @@ from .tool import tool
 from .agent_types import Parameter
 from io import BytesIO
 import base64
-from src.websockets.connection_manager import connection_manager
 from src.utils import scratchpad
 from PIL import Image
 
@@ -39,13 +38,12 @@ async def generate_chart(question_intent, data_provided, question_params, llm, m
         with Image.open(buf):
             image_data = base64.b64encode(buf.getvalue()).decode("utf-8")
 
-        await connection_manager.send_chart({"type": "image", "data": image_data})
-
-
+        buf.close()
     except Exception as e:
         logger.error(f"Error during chart generation or saving: {e}")
         raise
     return image_data
+
 
 
 def sanitise_script(script: str) -> str:
@@ -66,7 +64,7 @@ def sanitise_script(script: str) -> str:
         ),
         "data_provided": Parameter(
             type="string",
-            description="This is the data collected to answer the user_intent. The data is stored in the {scratchpad}",
+            description="This is the data collected to answer the user_intent. The data is stored in the scratchpad",
         ),
         "question_params": Parameter(
             type="string",
@@ -81,10 +79,11 @@ async def generate_code_chart(question_intent, data_provided, question_params, l
     return await generate_chart(question_intent, data_provided, question_params, llm, model)
 
 @agent(
-    name="CharGeneratorAgent",
+    name="ChartGeneratorAgent",
     description="This agent is responsible for creating charts",
     tools=[generate_code_chart]
 )
 
 class ChartGeneratorAgent(Agent):
     pass
+
