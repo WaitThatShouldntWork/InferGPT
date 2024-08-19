@@ -45,7 +45,6 @@ async def generate_chart(question_intent, data_provided, question_params, llm, m
     return image_data
 
 
-
 def sanitise_script(script: str) -> str:
     script = script.strip()
     if script.startswith("```python"):
