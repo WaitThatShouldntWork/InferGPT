@@ -33,9 +33,18 @@ async def question(question: str) -> str:
             clear_scratchpad()
             return ""
 
+
     final_answer = await get_answer_agent().invoke(question)
     logger.info(f"final answer: {final_answer}")
 
     clear_scratchpad()
 
     return final_answer
+
+def get_result_by_agent(agent_name: str) -> str | None:
+    scratchpad = get_scratchpad()
+
+    for entry in scratchpad:
+        if entry["agent_name"] == agent_name:
+            return entry["result"]
+    return None
