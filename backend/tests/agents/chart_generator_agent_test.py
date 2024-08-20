@@ -4,6 +4,7 @@ from unittest.mock import patch, AsyncMock, MagicMock
 import pytest
 from src.agents.chart_generator_agent import generate_chart
 
+
 class TestGenerateChartAgent(unittest.TestCase):
     def setUp(self):
         self.llm = AsyncMock()

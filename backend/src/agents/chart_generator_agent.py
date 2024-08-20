@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 engine = PromptEngine()
 
-def generate_chart(question_intent, categorical_values, question_params, timeframe, llm, model) -> str:
+async def generate_chart(question_intent, data_provided, question_params, llm, model) -> str:
     details_to_generate_chart_code = engine.load_prompt(
         "details-to-generate-chart-code",
         question_intent=question_intent,
@@ -20,39 +20,29 @@ def generate_chart(question_intent, categorical_values, question_params, timefra
         question_params=question_params,
         scratchpad=scratchpad,
     )
+
     generate_chart_code_prompt = engine.load_prompt("generate-chart-code")
-    generated_code = llm.chat(model, generate_chart_code_prompt, details_to_generate_chart_code)
+    generated_code = await llm.chat(model, generate_chart_code_prompt, details_to_generate_chart_code)
     sanitised_script = sanitise_script(generated_code)
     logger.info(f"Sanitised script: {sanitised_script}")
 
     try:
-
         local_vars = {}
         exec(sanitised_script, {}, local_vars)
         fig = local_vars.get('fig')
-
+        buf = BytesIO()
         if fig is None:
             raise ValueError("The generated code did not produce a figure named 'fig'.")
-        # buf = BytesIO()
-        # saved_fig = fig.savefig(buf, format='png')
-        output_dir = '/app/output'
-
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
-        logger.info("Saving the figure as 'output.png'")
-        output_path = os.path.join(output_dir, "output.png")
-        fig.savefig(output_path)
-        logger.info(f"Figure saved successfully as {output_path}")
-
-        with open(output_path, "rb") as image_file:
-            image_data = base64.b64encode(image_file.read()).decode("utf-8")
+        fig.savefig(buf, format='png')
+        buf.seek(0)
+        with Image.open(buf):
+            image_data = base64.b64encode(buf.getvalue()).decode("utf-8")
 
         buf.close()
     except Exception as e:
         logger.error(f"Error during chart generation or saving: {e}")
         raise
     return image_data
-
 
 
 def sanitise_script(script: str) -> str:
@@ -95,4 +85,3 @@ async def generate_code_chart(question_intent, data_provided, question_params, l
 
 class ChartGeneratorAgent(Agent):
     pass
-
