@@ -6,6 +6,10 @@ from .tool import tool
 from src.utils import Config
 from src.utils.web_utils import search_urls, scrape_content, summarise_content
 from .validator_agent import ValidatorAgent
+# import aiohttp
+import requests
+import io
+from PyPDF2 import PdfReader
 import json
 from typing import Dict, Any
 
@@ -36,6 +40,47 @@ async def web_general_search_core(search_query, llm, model) -> str:
         logger.error(f"Error in web_general_search_core: {e}")
         return "An error occurred while processing the search query."
 
+def download_pdf(url):
+    response = requests.get(url)
+    response.raise_for_status()
+    return io.BytesIO(response.content)
+
+def extract_text_from_pdf(pdf_io):
+    pdf_reader = PdfReader(pdf_io)
+    all_content = ""
+    for page_num in range(len(pdf_reader.pages)):
+        all_content += pdf_reader.pages[page_num].extract_text() + "\n"
+    return all_content
+
+
+async def web_pdf_download_core(pdf_url, llm, model) -> str:
+    try:
+        response = requests.get(url=pdf_url, timeout=120)
+        on_fly_mem_obj = io.BytesIO(response.content)
+        pdf_file = PdfReader(on_fly_mem_obj)
+        print(f"Number of pages: {len(pdf_file.pages)}")
+        all_content = ""
+        for page_num in range(len(pdf_file.pages)):
+            page_text = pdf_file.pages[page_num].extract_text()
+            summary = await perform_summarization("What is the key information in this document?", page_text, llm, model)
+            if not summary:
+                continue
+            parsed_json = json.loads(summary)
+            summary = parsed_json.get('summary', '')
+            all_content += summary
+            # Optionally, add a separator between pages (e.g., a newline or form feed character)
+            all_content += "\n"
+        # print(all_content)
+        logger.info('PDF content extracted successfully')
+        response = {
+            "content": all_content,
+            "ignore_validation": "true"
+        }
+        logger.info('Returning the response')
+        return json.dumps(response, indent=4)
+    except Exception as e:
+        logger.error(f"Error in web_general_search_core: {e}")
+        return "An error occurred while processing the search query."
 
 @tool(
     name="web_general_search",
@@ -52,6 +97,20 @@ async def web_general_search_core(search_query, llm, model) -> str:
 async def web_general_search(search_query, llm, model) -> str:
     return await web_general_search_core(search_query, llm, model)
 
+@tool(
+    name="web_pdf_download",
+    description=(
+        "Download the data from the provided pdf url"
+    ),
+    parameters={
+        "pdf_url": Parameter(
+            type="string",
+            description="The pdf url to find information on the internet",
+        ),
+    },
+)
+async def web_pdf_download(pdf_url, llm, model) -> str:
+    return await web_pdf_download_core(pdf_url, llm, model)
 
 def get_validator_agent() -> Agent:
     return ValidatorAgent(config.validator_agent_llm, config.validator_agent_model)
@@ -98,7 +157,7 @@ async def perform_summarization(search_query: str, content: str, llm: Any, model
 @agent(
     name="WebAgent",
     description="This agent is responsible for handling web search queries and summarizing information from the web.",
-    tools=[web_general_search],
+    tools=[web_general_search, web_pdf_download],
 )
 class WebAgent(Agent):
     pass
