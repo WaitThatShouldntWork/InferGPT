@@ -5,16 +5,13 @@ FROM python:3.12
 WORKDIR /backend
 
 # Copy just the requirements into the working directory so it gets cached by itself
-COPY backend/requirements.txt ./requirements.txt
+COPY ./requirements.txt ./requirements.txt
 
 # Install the dependencies from the requirements file
 RUN pip install --no-cache-dir --upgrade -r /backend/requirements.txt
 
 # Copy the source code into the working directory
-COPY backend/src/. ./src
-
-# Copy the env.yaml file from the root directory to the backend directory
-COPY env.yml ./env.yml
+COPY ./src/. ./src
 
 EXPOSE 8250
 
