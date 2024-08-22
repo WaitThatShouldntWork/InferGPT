@@ -7,16 +7,18 @@ from .intent_agent import IntentAgent
 from .tool import tool, Parameter
 from .validator_agent import ValidatorAgent
 from .answer_agent import AnswerAgent
+import logging
 from .chart_generator_agent import ChartGeneratorAgent
 
 config = Config()
-
+logger = logging.getLogger(__name__)
 
 def get_validator_agent() -> Agent:
     return ValidatorAgent(config.validator_agent_llm, config.validator_agent_model)
 
 
 def get_intent_agent() -> Agent:
+    logger.info(f"THe intent agent is {config.intent_agent_model}")
     return IntentAgent(config.intent_agent_llm, config.intent_agent_model)
 
 
