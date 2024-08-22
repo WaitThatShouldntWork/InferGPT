@@ -24,7 +24,6 @@ async def generate_chart(question_intent, data_provided, question_params, llm, m
     generate_chart_code_prompt = engine.load_prompt("generate-chart-code")
     generated_code = await llm.chat(model, generate_chart_code_prompt, details_to_generate_chart_code)
     sanitised_script = sanitise_script(generated_code)
-    logger.info(f"Sanitised script: {sanitised_script}")
 
     try:
         local_vars = {}
