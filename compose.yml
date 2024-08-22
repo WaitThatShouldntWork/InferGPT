@@ -1,0 +1,120 @@
+# Docker compose file that allows each of the services we require to start
+# only when their dependent service(s) have started. This is achieved through
+# the use of a docker healthcheck for each service.
+
+# First, construct private network for our services to communicate with each other
+networks:
+  network:
+    driver: bridge
+
+services:
+  # neo4j service
+  neo4j-db:
+    image: neo4j:latest
+    networks:
+      - network
+    environment:
+      NEO4J_AUTH: ${NEO4J_USERNAME}/${NEO4J_PASSWORD}
+      NEO4J_PLUGINS: '["apoc"]'
+      NEO4J_ACCEPT_LICENSE_AGREEMENT: yes
+      NEO4J_apoc_export_file_enabled: true
+      NEO4J_apoc_import_file_enabled: true
+      NEO4J_apoc_import_file_use__neo4j__config: true
+      NEO4J_dbms_security_procedures_allowlist: jwt.security.*, gds.*, apoc.*
+      NEO4J_dbms_security_procedures_unrestricted: gds.*, apoc.*
+    # network ports, we can customise exposed ports so that we
+    # don't conflict with other neo4j instances that may be running.
+    # if none are provided, we revert to defaults.
+    ports:
+      - ${NEO4J_HTTP_PORT:-7474}:7474 # HTTP for Neo4j Browser
+      - ${NEO4J_BOLT_PORT:-7687}:7687 # Bolt port
+    expose:
+      - ${NEO4J_HTTP_PORT:-7474}
+      - ${NEO4J_BOLT_PORT:-7687}
+    healthcheck:
+      test: wget http://neo4j-db:7474 || exit 1
+      interval: 60s
+      timeout: 10s
+      retries: 5
+      start_interval: 5s
+      start_period: 60s
+  # InferGPT Backend
+  backend:
+    image: infergpt/backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      NEO4J_URI: bolt://neo4j-db:7687
+      NEO4J_USERNAME: ${NEO4J_USERNAME}
+      NEO4J_PASSWORD: ${NEO4J_PASSWORD}
+      MISTRAL_KEY: ${MISTRAL_KEY}
+      OPENAI_KEY: ${OPENAI_KEY}
+      FRONTEND_URL: ${FRONTEND_URL}
+      AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING}
+      AZURE_STORAGE_CONTAINER_NAME: ${AZURE_STORAGE_CONTAINER_NAME}
+      AZURE_INITIAL_DATA_FILENAME: ${AZURE_INITIAL_DATA_FILENAME}
+      ANSWER_AGENT_LLM: ${ANSWER_AGENT_LLM}
+      INTENT_AGENT_LLM: ${INTENT_AGENT_LLM}
+      VALIDATOR_AGENT_LLM: ${VALIDATOR_AGENT_LLM}
+      DATASTORE_AGENT_LLM: ${DATASTORE_AGENT_LLM}
+      WEB_AGENT_LLM: ${WEB_AGENT_LLM}
+      MATHS_AGENT_LLM: ${MATHS_AGENT_LLM}
+      ROUTER_LLM: ${ROUTER_LLM}
+      ANSWER_AGENT_MODEL: ${ANSWER_AGENT_MODEL}
+      INTENT_AGENT_MODEL: ${INTENT_AGENT_MODEL}
+      VALIDATOR_AGENT_MODEL: ${VALIDATOR_AGENT_MODEL}
+      DATASTORE_AGENT_MODEL: ${DATASTORE_AGENT_MODEL}
+      WEB_AGENT_MODEL: ${WEB_AGENT_MODEL}
+      ROUTER_MODEL: ${ROUTER_MODEL}
+      MATHS_AGENT_MODEL: ${MATHS_AGENT_MODEL}
+      AGENT_CLASS_MODEL: ${AGENT_CLASS_MODEL}
+    depends_on:
+      neo4j-db:
+        condition: service_healthy
+    networks:
+      - network
+    ports:
+      - 8250:8250
+    healthcheck:
+      test: wget http://backend:8250/health || exit 1
+      interval: 60s
+      timeout: 10s
+      retries: 5
+      start_interval: 5s
+      start_period: 60s
+    develop:
+      watch:
+        - path: backend
+          action: rebuild
+        - path: backend
+          target: /backend
+          action: sync
+
+  # InferGPT Frontend
+  frontend:
+    image: infergpt/frontend
+    build:
+      context: frontend
+      dockerfile: ./Dockerfile
+    environment:
+      BACKEND_URL: ${BACKEND_URL}
+      WS_URL: ${WS_URL}
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - network
+    ports:
+      - 8650:8650
+    expose:
+      - 8650
+    develop:
+      watch:
+        - path: frontend/package.json
+          action: rebuild
+        - path: frontend/package-lock.json
+          action: rebuild
+        - path: frontend
+          target: /app
+          action: sync
