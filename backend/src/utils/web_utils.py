@@ -84,3 +84,24 @@ async def summarise_content(search_query, contents, llm, model) -> str:
                 "error": str(e),
             }
         )
+
+async def summarise_pdf_content(contents, llm, model) -> str:
+    try:
+        summariser_prompt = engine.load_prompt("pdf-summariser", content=contents)
+        response = await llm.chat(model, summariser_prompt, "", return_json=True)
+        return json.dumps(
+            {
+                "status": "success",
+                "response": response,
+                "error": None,
+            }
+        )
+    except Exception as e:
+        logger.error(f"Error during summarisation: {e}")
+        return json.dumps(
+            {
+                "status": "error",
+                "response": None,
+                "error": str(e),
+            }
+        )

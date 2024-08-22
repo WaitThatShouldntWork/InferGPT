@@ -4,7 +4,7 @@ from .agent_types import Parameter
 from .agent import Agent, agent
 from .tool import tool
 from src.utils import Config
-from src.utils.web_utils import search_urls, scrape_content, summarise_content
+from src.utils.web_utils import search_urls, scrape_content, summarise_content, summarise_pdf_content
 from .validator_agent import ValidatorAgent
 # import aiohttp
 import requests
@@ -62,7 +62,7 @@ async def web_pdf_download_core(pdf_url, llm, model) -> str:
         all_content = ""
         for page_num in range(len(pdf_file.pages)):
             page_text = pdf_file.pages[page_num].extract_text()
-            summary = await perform_summarization("What is the key information in this document?", page_text, llm, model)
+            summary = await perform_pdf_summarization(page_text, llm, model)
             if not summary:
                 continue
             parsed_json = json.loads(summary)
@@ -153,6 +153,16 @@ async def perform_summarization(search_query: str, content: str, llm: Any, model
         logger.error(f"Error summarizing content: {e}")
         return ""
 
+async def perform_pdf_summarization(content: str, llm: Any, model: str) -> str:
+    try:
+        summarise_result_json = await summarise_pdf_content(content, llm, model)
+        summarise_result = json.loads(summarise_result_json)
+        if summarise_result["status"] == "error":
+            return ""
+        return summarise_result["response"]
+    except Exception as e:
+        logger.error(f"Error summarizing content: {e}")
+        return ""
 
 @agent(
     name="WebAgent",
