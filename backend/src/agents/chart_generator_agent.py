@@ -2,6 +2,7 @@ import logging
 from src.prompts import PromptEngine
 from .agent import Agent, agent
 from .tool import tool
+from src.llm.llm import LLM
 from .agent_types import Parameter
 from io import BytesIO
 import base64
@@ -12,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 engine = PromptEngine()
 
-async def generate_chart(question_intent, data_provided, question_params, llm, model) -> str:
+async def generate_chart(question_intent, data_provided, question_params, llm: LLM, model) -> str:
     details_to_generate_chart_code = engine.load_prompt(
         "details-to-generate-chart-code",
         question_intent=question_intent,
@@ -36,7 +37,6 @@ async def generate_chart(question_intent, data_provided, question_params, llm, m
         buf.seek(0)
         with Image.open(buf):
             image_data = base64.b64encode(buf.getvalue()).decode("utf-8")
-
         buf.close()
     except Exception as e:
         logger.error(f"Error during chart generation or saving: {e}")
@@ -73,7 +73,7 @@ def sanitise_script(script: str) -> str:
     }
 )
 
-async def generate_code_chart(question_intent, data_provided, question_params, llm, model) -> str:
+async def generate_code_chart(question_intent, data_provided, question_params, llm: LLM, model) -> str:
     return await generate_chart(question_intent, data_provided, question_params, llm, model)
 
 @agent(

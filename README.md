@@ -51,13 +51,13 @@ Once you have Git installed, follow these steps:
 
 ### Initial configuration
 
-There is a example property file `env.yml.example` at the root of this project.
+There is a example property file `.env.example` at the root of this project.
 
 Configuration steps:
 
-- Copy the `env.yml.example` file at the root of this project.
-- Rename the copied file as `env.yml`.
-- Update the `env.yml` file with your wanted configuration following the guidance in the file.
+- Copy the `.env.example` file at the root of this project.
+- Rename the copied file as `.env`.
+- Update the `.env` file with your wanted configuration following the guidance in the file.
 
 ### Running the application
 
