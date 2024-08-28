@@ -10,6 +10,7 @@ class MessageTypes(Enum):
     PONG = "pong"
     CHAT = "chat"
     LOG  = "log"
+    IMAGE = "image"
 
 
 @dataclass
