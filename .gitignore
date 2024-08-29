@@ -174,3 +174,15 @@ poetry.toml
 # IDE stuff
 .vscode
 /.idea/material_theme_project_new.xml
+agbenchmark_config/__init__.py
+agbenchmark_config/challenges_already_beaten.json
+agbenchmark_config/config.json
+agbenchmark_config/updates.json
+agbenchmark_config/reports/regression_tests.json
+agbenchmark_config/reports/success_rate.json
+agbenchmark_config/reports/20240829T112253_full_run/report.json
+agbenchmark_config/reports/20240829T112304_full_run/report.json
+agbenchmark_config/reports/20240829T112423_full_run/radar_chart.png
+agbenchmark_config/reports/20240829T112423_full_run/report.json
+agbenchmark_config/reports/20240829T123608_full_run/radar_chart.png
+agbenchmark_config/reports/20240829T123608_full_run/report.json
