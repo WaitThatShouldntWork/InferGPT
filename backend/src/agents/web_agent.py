@@ -6,7 +6,6 @@ from .tool import tool
 from src.utils import Config
 from src.utils.web_utils import search_urls, scrape_content, summarise_content, summarise_pdf_content
 from .validator_agent import ValidatorAgent
-# import aiohttp
 import requests
 import io
 from PyPDF2 import PdfReader
@@ -68,18 +67,15 @@ async def web_pdf_download_core(pdf_url, llm, model) -> str:
             parsed_json = json.loads(summary)
             summary = parsed_json.get('summary', '')
             all_content += summary
-            # Optionally, add a separator between pages (e.g., a newline or form feed character)
             all_content += "\n"
-        # print(all_content)
         logger.info('PDF content extracted successfully')
         response = {
             "content": all_content,
             "ignore_validation": "true"
         }
-        logger.info('Returning the response')
         return json.dumps(response, indent=4)
     except Exception as e:
-        logger.error(f"Error in web_general_search_core: {e}")
+        logger.error(f"Error in web_pdf_download_core: {e}")
         return "An error occurred while processing the search query."
 
 @tool(

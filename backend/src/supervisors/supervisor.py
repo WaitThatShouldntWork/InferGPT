@@ -34,21 +34,10 @@ async def solve_task(task, scratchpad, attempt=0) -> Tuple[str, str]:
     if agent is None:
         raise Exception(no_agent_response)
     logger.info(f"Agent selected: {agent.name}")
-    logger.info(f"Task: {task}")
     answer = await agent.invoke(task)
-    logger.info(f"Answer from the task: {answer}")
     parsed_json = json.loads(answer)
     ignore_validation = parsed_json.get('ignore_validation', '')
     logger.info(f"Ignore Validation: {ignore_validation}")
-    # Parse the output
-    # parsed_output = parse_output(answer)
-
-    # # Accessing the parsed content and check_validation
-    # extracted_content = parsed_output['content'] # type: ignore
-    # validation_status = parsed_output['check_validation'] # type: ignore
-    # logger.info(f"Validation status: {validation_status}")
-    # if(ignore_validation == 'true'):
-    #     return (agent.name, answer)
     if(ignore_validation == 'true') or await is_valid_answer(answer, task):
         return (agent.name, answer)
     return await solve_task(task, scratchpad, attempt + 1)
