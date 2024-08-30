@@ -39,18 +39,6 @@ async def web_general_search_core(search_query, llm, model) -> str:
         logger.error(f"Error in web_general_search_core: {e}")
         return "An error occurred while processing the search query."
 
-def download_pdf(url):
-    response = requests.get(url)
-    response.raise_for_status()
-    return io.BytesIO(response.content)
-
-def extract_text_from_pdf(pdf_io):
-    pdf_reader = PdfReader(pdf_io)
-    all_content = ""
-    for page_num in range(len(pdf_reader.pages)):
-        all_content += pdf_reader.pages[page_num].extract_text() + "\n"
-    return all_content
-
 
 async def web_pdf_download_core(pdf_url, llm, model) -> str:
     try:
