@@ -33,7 +33,6 @@ async def solve_task(task, scratchpad, attempt=0) -> Tuple[str, str]:
     agent = await get_agent_for_task(task, scratchpad)
     if agent is None:
         raise Exception(no_agent_response)
-    logger.info(f"Agent selected: {agent.name}")
     answer = await agent.invoke(task)
     parsed_json = json.loads(answer)
     ignore_validation = parsed_json.get('ignore_validation', '')
