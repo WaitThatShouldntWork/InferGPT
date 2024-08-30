@@ -1,5 +1,6 @@
 import pytest
 from tests.agents import MockAgent
+import json
 from src.supervisors import solve_all, solve_task, no_questions_response, unsolvable_response, no_agent_response
 
 mock_model = "mockmodel"
@@ -48,14 +49,21 @@ async def test_solve_all_gets_answer(mocker):
     assert result == expected_result
 
 
+
 @pytest.mark.asyncio
 async def test_solve_task_first_attempt_solves(mocker):
+    # Mock the agent to return a JSON-formatted answer
+    mock_answer = json.dumps({
+        "result": "the answer is 42",
+        "ignore_validation": "false"
+    })
     agent.invoke = mocker.AsyncMock(return_value=mock_answer)
     mocker.patch("src.supervisors.supervisor.get_agent_for_task", return_value=agent)
     mocker.patch("src.supervisors.supervisor.is_valid_answer", return_value=True)
 
     answer = await solve_task(task, scratchpad)
 
+    # The test now expects the tuple (agent_name, parsed JSON string as answer)
     assert answer == (agent.name, mock_answer)
 
 
