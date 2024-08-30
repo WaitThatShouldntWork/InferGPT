@@ -1,6 +1,5 @@
 import logging
 from googlesearch import search
-
 import aiohttp
 from bs4 import BeautifulSoup
 from src.prompts import PromptEngine
