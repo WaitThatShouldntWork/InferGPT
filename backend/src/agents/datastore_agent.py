@@ -53,12 +53,14 @@ cache = {}
 async def generate_query(
     question_intent, operation, question_params, aggregation, sort_order, timeframe, llm: LLM, model
 ) -> str:
+
     async def get_semantic_layer_cache(graph_schema):
+        global cache
         if not cache:
             graph_schema = await get_semantic_layer(llm, model)
-            cache['nodes'] = graph_schema['nodes']
-            cache['properties'] = graph_schema['properties']
-            cache['relationships'] = graph_schema['relationships']
+            cache = graph_schema
+            return cache
+        else:
             return cache
 
     details_to_create_cypher_query = engine.load_prompt(
