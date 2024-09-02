@@ -1,3 +1,4 @@
+import json
 import logging
 from src.llm.llm import LLM
 from src.utils.graph_db_utils import execute_query
@@ -14,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 engine = PromptEngine()
 
+cache = {}
 
 @tool(
     name="generate cypher query",
@@ -51,6 +53,14 @@ engine = PromptEngine()
 async def generate_query(
     question_intent, operation, question_params, aggregation, sort_order, timeframe, llm: LLM, model
 ) -> str:
+    async def get_semantic_layer_cache(graph_schema):
+        if not cache:
+            graph_schema = await get_semantic_layer(llm, model)
+            cache['nodes'] = graph_schema['nodes']
+            cache['properties'] = graph_schema['properties']
+            cache['relationships'] = graph_schema['relationships']
+            return cache
+
     details_to_create_cypher_query = engine.load_prompt(
         "details-to-create-cypher-query",
         question_intent=question_intent,
@@ -61,11 +71,13 @@ async def generate_query(
         timeframe=timeframe,
     )
     try:
-        result = await get_semantic_layer(llm, model)
+        graph_schema = await get_semantic_layer_cache(cache)
+        graph_schema = json.dumps(graph_schema, separators=(",", ":"))
 
         generate_cypher_query_prompt = engine.load_prompt(
-            "generate-cypher-query", graph_schema=result, current_date=datetime.now()
+            "generate-cypher-query", graph_schema=graph_schema, current_date=datetime.now()
         )
+        logger.info(f"generate cypher query prompt: {generate_cypher_query_prompt}")
 
         llm_query = await llm.chat(model, generate_cypher_query_prompt, details_to_create_cypher_query, return_json=True)
         json_query = to_json(llm_query)
