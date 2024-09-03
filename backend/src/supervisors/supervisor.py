@@ -3,6 +3,7 @@ import logging
 from src.utils import get_scratchpad, update_scratchpad
 from src.router import get_agent_for_task
 from src.agents import get_validator_agent
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -32,11 +33,12 @@ async def solve_task(task, scratchpad, attempt=0) -> Tuple[str, str]:
     agent = await get_agent_for_task(task, scratchpad)
     if agent is None:
         raise Exception(no_agent_response)
-
     answer = await agent.invoke(task)
-    if await is_valid_answer(answer, task):
-        return (agent.name, answer)
-
+    parsed_json = json.loads(answer)
+    ignore_validation = parsed_json.get('ignore_validation', '')
+    answer_content = parsed_json.get('content', '')
+    if(ignore_validation == 'true') or await is_valid_answer(answer_content, task):
+        return (agent.name, answer_content)
     return await solve_task(task, scratchpad, attempt + 1)
 
 

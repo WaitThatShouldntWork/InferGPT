@@ -4,8 +4,11 @@ from .agent_types import Parameter
 from .agent import Agent, agent
 from .tool import tool
 from src.utils import Config
-from src.utils.web_utils import search_urls, scrape_content, summarise_content
+from src.utils.web_utils import search_urls, scrape_content, summarise_content, summarise_pdf_content
 from .validator_agent import ValidatorAgent
+import aiohttp
+import io
+from pypdf import PdfReader
 import json
 from typing import Dict, Any
 
@@ -37,6 +40,32 @@ async def web_general_search_core(search_query, llm, model) -> str:
         return "An error occurred while processing the search query."
 
 
+async def web_pdf_download_core(pdf_url, llm, model) -> str:
+    try:
+        async with aiohttp.request("GET", url=pdf_url) as response:
+            content = await response.read()
+            on_fly_mem_obj = io.BytesIO(content)
+            pdf_file = PdfReader(on_fly_mem_obj)
+            all_content = ""
+            for page_num in range(len(pdf_file.pages)):
+                page_text = pdf_file.pages[page_num].extract_text()
+                summary = await perform_pdf_summarization(page_text, llm, model)
+                if not summary:
+                    continue
+                parsed_json = json.loads(summary)
+                summary = parsed_json.get('summary', '')
+                all_content += summary
+                all_content += "\n"
+            logger.info('PDF content extracted successfully')
+            response = {
+                "content": all_content,
+                "ignore_validation": "true"
+            }
+        return json.dumps(response, indent=4)
+    except Exception as e:
+        logger.error(f"Error in web_pdf_download_core: {e}")
+        return "An error occurred while processing the search query."
+
 @tool(
     name="web_general_search",
     description=(
@@ -52,6 +81,20 @@ async def web_general_search_core(search_query, llm, model) -> str:
 async def web_general_search(search_query, llm, model) -> str:
     return await web_general_search_core(search_query, llm, model)
 
+@tool(
+    name="web_pdf_download",
+    description=(
+        "Download the data from the provided pdf url"
+    ),
+    parameters={
+        "pdf_url": Parameter(
+            type="string",
+            description="The pdf url to find information on the internet",
+        ),
+    },
+)
+async def web_pdf_download(pdf_url, llm, model) -> str:
+    return await web_pdf_download_core(pdf_url, llm, model)
 
 def get_validator_agent() -> Agent:
     return ValidatorAgent(config.validator_agent_llm, config.validator_agent_model)
@@ -94,11 +137,21 @@ async def perform_summarization(search_query: str, content: str, llm: Any, model
         logger.error(f"Error summarizing content: {e}")
         return ""
 
+async def perform_pdf_summarization(content: str, llm: Any, model: str) -> str:
+    try:
+        summarise_result_json = await summarise_pdf_content(content, llm, model)
+        summarise_result = json.loads(summarise_result_json)
+        if summarise_result["status"] == "error":
+            return ""
+        return summarise_result["response"]
+    except Exception as e:
+        logger.error(f"Error summarizing content: {e}")
+        return ""
 
 @agent(
     name="WebAgent",
     description="This agent is responsible for handling web search queries and summarizing information from the web.",
-    tools=[web_general_search],
+    tools=[web_general_search, web_pdf_download],
 )
 class WebAgent(Agent):
     pass
