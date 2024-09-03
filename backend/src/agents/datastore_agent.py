@@ -8,6 +8,7 @@ from .agent_types import Parameter
 from src.utils.log_publisher import LogPrefix, publish_log_info
 from .agent import Agent, agent
 from .tool import tool
+import json
 
 
 logger = logging.getLogger(__name__)
@@ -72,7 +73,11 @@ async def generate_query(
         return "No database query"
     db_response = execute_query(json_query["query"])
     await publish_log_info(LogPrefix.USER, f"Database response: {db_response}", __name__)
-    return str(db_response)
+    response = {
+        "content": db_response,
+        "ignore_validation": "false"
+    }
+    return json.dumps(response, indent=4)
 
 
 @agent(

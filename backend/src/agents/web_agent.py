@@ -6,9 +6,9 @@ from .tool import tool
 from src.utils import Config
 from src.utils.web_utils import search_urls, scrape_content, summarise_content, summarise_pdf_content
 from .validator_agent import ValidatorAgent
-import requests
+import aiohttp
 import io
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
 import json
 from typing import Dict, Any
 
@@ -42,25 +42,25 @@ async def web_general_search_core(search_query, llm, model) -> str:
 
 async def web_pdf_download_core(pdf_url, llm, model) -> str:
     try:
-        response = requests.get(url=pdf_url, timeout=120)
-        on_fly_mem_obj = io.BytesIO(response.content)
-        pdf_file = PdfReader(on_fly_mem_obj)
-        print(f"Number of pages: {len(pdf_file.pages)}")
-        all_content = ""
-        for page_num in range(len(pdf_file.pages)):
-            page_text = pdf_file.pages[page_num].extract_text()
-            summary = await perform_pdf_summarization(page_text, llm, model)
-            if not summary:
-                continue
-            parsed_json = json.loads(summary)
-            summary = parsed_json.get('summary', '')
-            all_content += summary
-            all_content += "\n"
-        logger.info('PDF content extracted successfully')
-        response = {
-            "content": all_content,
-            "ignore_validation": "true"
-        }
+        async with aiohttp.request("GET", url=pdf_url) as response:
+            content = await response.read()
+            on_fly_mem_obj = io.BytesIO(content)
+            pdf_file = PdfReader(on_fly_mem_obj)
+            all_content = ""
+            for page_num in range(len(pdf_file.pages)):
+                page_text = pdf_file.pages[page_num].extract_text()
+                summary = await perform_pdf_summarization(page_text, llm, model)
+                if not summary:
+                    continue
+                parsed_json = json.loads(summary)
+                summary = parsed_json.get('summary', '')
+                all_content += summary
+                all_content += "\n"
+            logger.info('PDF content extracted successfully')
+            response = {
+                "content": all_content,
+                "ignore_validation": "true"
+            }
         return json.dumps(response, indent=4)
     except Exception as e:
         logger.error(f"Error in web_pdf_download_core: {e}")
