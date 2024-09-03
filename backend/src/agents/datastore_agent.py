@@ -9,7 +9,7 @@ from .agent_types import Parameter
 from src.utils.log_publisher import LogPrefix, publish_log_info
 from .agent import Agent, agent
 from .tool import tool
-from src.agents.semantic_layer_builder import get_semantic_layer
+from src.utils.semantic_layer_builder import get_semantic_layer
 
 logger = logging.getLogger(__name__)
 
@@ -79,7 +79,6 @@ async def generate_query(
         generate_cypher_query_prompt = engine.load_prompt(
             "generate-cypher-query", graph_schema=graph_schema, current_date=datetime.now()
         )
-        logger.info(f"generate cypher query prompt: {generate_cypher_query_prompt}")
 
         llm_query = await llm.chat(model, generate_cypher_query_prompt, details_to_create_cypher_query, return_json=True)
         json_query = to_json(llm_query)

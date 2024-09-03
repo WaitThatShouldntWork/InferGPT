@@ -4,7 +4,7 @@ WITH
     COLLECT({
         name: propertyName,
         data_type: propertyTypes,
-        detail: "A " + propertyName + " is a.. "
+        detail: ""
     }) AS props
 RETURN COLLECT({
     relationship_type: "[" + REPLACE(rel, "`", "") + "]",
