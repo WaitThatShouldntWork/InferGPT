@@ -8,6 +8,7 @@ from io import BytesIO
 import base64
 from src.utils import scratchpad
 from PIL import Image
+import json
 
 logger = logging.getLogger(__name__)
 
@@ -41,7 +42,11 @@ async def generate_chart(question_intent, data_provided, question_params, llm: L
     except Exception as e:
         logger.error(f"Error during chart generation or saving: {e}")
         raise
-    return image_data
+    response = {
+        "content": image_data,
+        "ignore_validation": "false"
+    }
+    return json.dumps(response, indent=4)
 
 
 def sanitise_script(script: str) -> str:
