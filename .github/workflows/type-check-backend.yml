@@ -1,0 +1,28 @@
+name: Type Check Backend
+on:
+  pull_request:
+
+jobs:
+  checking:
+    name: Type Checking Backend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          cd ./backend
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Type Check Backend
+        uses: jakebailey/pyright-action@v2 
+        with:
+          pylance-version: latest-release
+          project: ./pyrightconfig.json

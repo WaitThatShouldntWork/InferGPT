@@ -11,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from src.utils.graph_db_utils import populate_db
 from src.utils import Config, test_connection
 from src.director import question
-from .connection_manager import ConnectionManager
+from src.websockets.connection_manager import connection_manager, parse_message
 from src.utils.annual_cypher_import import annual_transactions_cypher_script
 
 config_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "config.ini"))
@@ -82,16 +82,20 @@ async def health_check():
 async def chat(utterance: str):
     logger.info(f"Chat method called with utterance: {utterance}")
     try:
-        final_result = question(utterance)
+        final_result = await question(utterance)
         return JSONResponse(status_code=200, content=final_result)
     except Exception as e:
         logger.exception(e)
         return JSONResponse(status_code=500, content=chat_fail_response)
 
 
-connection_manager = ConnectionManager()
-
-
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket) -> NoReturn:
     await connection_manager.connect(websocket)
+    try:
+        while True:
+            message = await websocket.receive_json()
+            parsed_message = parse_message(message)
+            await connection_manager.handle_message(websocket, parsed_message)
+    except Exception:
+        await connection_manager.disconnect(websocket)

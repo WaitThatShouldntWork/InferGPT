@@ -1,6 +1,6 @@
 import json
 from typing import Callable
-from .types import Action, Parameter
+from .agent_types import Action, Parameter
 
 
 class Tool:

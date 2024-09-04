@@ -171,9 +171,6 @@ poetry.toml
 # ruff
 .ruff_cache/
 
-# LSP config files
-pyrightconfig.json
-
 # IDE stuff
 .vscode
 /.idea/material_theme_project_new.xml

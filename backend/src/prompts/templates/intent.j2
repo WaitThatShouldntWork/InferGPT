@@ -1,39 +1,55 @@
-You are an expert in determining the intent behind a user's question.
+You are an expert in determining the intent behind a user's question. 
 
-The question is: 
-{{ question }}
+ 
+The question is:  
 
-The task is to comprehend the intention the question. Based on this understanding, the following query must be formulated to extract the necessary data from a database, which can then be used to address the question.
+{{ question }} 
 
-Specify an operation type under the operation key; here are a few examples:
-* "literal search" - This should be used when the user is looking to find precise information, such as known facts
-* "relevancy search" - This should be used when the user is looking to find something that is not a literal and is fuzzy 
-* "filter + aggregation" - This should be used when they want something like a count, where there will be only 1 number returned
-* "filter + aggregation + sort" - This should be used when multiple numbers will be returned
-* "filter + sort" - This should be used when no aggregation is required e.g. count
+ 
+The task is to comprehend the intention of the question. The question can be composed of different intents and when it is the case, examine all intents one by one to determine which one to tackle first as you may need the data gathered from a secondary intent to perform the first intent.  
+You are NOT ALLOWED to make up sample data or example values. Only use concrete data for which you can name the source. 
+Based on this understanding, the following query must be formulated to extract the necessary data, which can then be used to address the question. 
+
+ 
+Specify an operation type under the operation key; here are a few examples: 
+
+* "literal search" - This should be used when the user is looking to find precise information, such as known facts 
+* "relevancy search" - This should be used when the user is looking to find something that is not a literal and is fuzzy  
+* "filter + aggregation" - This should be used when they want something like a count, where there will be only 1 number returned 
+* "filter + aggregation + sort" - This should be used when multiple numbers will be returned 
+* "filter + sort" - This should be used when no aggregation is required e.g. count 
 
 
-Examples:
-Q: How much did I spend with Amazon this month?
-Response:
-{"query":"How much did I spend with Amazon this month?","user_intent":"sum amount spent","questions":[{"query":"How much did I spend with Amazon this month?","question_intent":"calculate total expenses","operation":"filter + aggregation","question_category": "data driven","parameters":[{"type":"company","value":"Amazon"}],"timeframe":"this month","aggregation":"sum","sort_order":"none"}]}
+Examples: 
 
-Q: Can you find all documents referencing the topic of Inflation?
-Response:
-{"query":"Can you find all documents referencing the topic of Inflation?","user_intent":"find and sort documents","questions":[{"query":"Can you find all documents referencing the topic of Inflation?","question_intent":"retrieve documents by topic","operation":"relevancy search","question_category": "data driven","parameters":[{"type":"topic","value":"Inflation"}],"sort_order":"relevancy descending"}]}
+Q: How much did I spend with Amazon this month? 
+Response: 
+{"query":"How much did I spend with Amazon this month?","user_intent":"sum amount spent","questions":[{"query":"How much did I spend with Amazon this month?","question_intent":"calculate total expenses","operation":"filter + aggregation","question_category": "data driven","parameters":[{"type":"company","value":"Amazon"}],"timeframe":"this month","aggregation":"sum","sort_order":"none"}]} 
 
-Q: Find me all cases that have taken more than 2 days to close.
-Response:
-{"query":"Find me all cases that have taken more than 2 days to close.","user_intent":"find cases with duration","questions":[{"query":"Find me all cases that have taken more than 2 days to close.","question_intent":"identify long-duration cases","operation":"filter + sort","question_category": "data driven","parameters":[{"type":"case","attribute":"duration","condition":"greater than","value":2,"unit":"days"}],"sort_order":"descending"}]}
+Q: What are the mortgage rates offered by NatWest for first-time buyers? 
+Response: 
+{"query":"What are the mortgage rates offered by NatWest for first-time buyers.","user_intent":"find information online","questions":[{"query":"What are the mortgage rates offered by NatWest for first-time buyers.","question_intent":"retrieve information from web","operation":"online search and scraping","question_category": "search online","parameters":[{"type":"topic","value":"mortgage rates","company":"Natwest"}],"sort_order":"descending"}]} 
 
-Q: I would like to work out which is the most common case closure topic so we can optimise our process.
-Response:
-{"query":"I would like to work out which is the most common case closure topic so we can optimise our process.","user_intent":"identify and rank case closure topics by frequency","questions":[{"query":"I would like to work out which is the most common case closure topic so we can optimise our process.","question_intent":"determine most common closure topic","question_category": "data driven","operation":"filter + aggregation + sort","parameters":[{"type":"case","attribute":"closure topic"}],"aggregation":"count","sort_order":"descending"}]}
+Q: Can you find all documents referencing the topic of Inflation? 
+Response: 
+{"query":"Can you find all documents referencing the topic of Inflation?","user_intent":"find and sort documents","questions":[{"query":"Can you find all documents referencing the topic of Inflation?","question_intent":"retrieve documents by topic","operation":"relevancy search","question_category": "data driven","parameters":[{"type":"topic","value":"Inflation"}],"sort_order":"relevancy descending"}]} 
 
-Q: What is the capital of England?
-Response:
-{"query":"What is the capital of England?","user_intent":"find information","questions":[{"query":"What is the capital of England?","question_intent":"find capital city","operation":"literal search","question_category":"general knowledge","parameters":[{"type":"country","value":"England"}]}]}
+Q: Find me all cases that have taken more than 2 days to close. 
+Response: 
+{"query":"Find me all cases that have taken more than 2 days to close.","user_intent":"find cases with duration","questions":[{"query":"Find me all cases that have taken more than 2 days to close.","question_intent":"identify long-duration cases","operation":"filter + sort","question_category": "data driven","parameters":[{"type":"case","attribute":"duration","condition":"greater than","value":2,"unit":"days"}],"sort_order":"descending"}]} 
 
-Q: How are you?
-Response:
-{"query":"How are you?","user_intent":"greeting response","questions":[{"query":"How are you?","user_intent":"greeting response","question_category": "chitchat"}]}
+Q: I would like to work out which is the most common case closure topic so we can optimise our process. 
+Response: 
+{"query":"I would like to work out which is the most common case closure topic so we can optimise our process.","user_intent":"identify and rank case closure topics by frequency","questions":[{"query":"I would like to work out which is the most common case closure topic so we can optimise our process.","question_intent":"determine most common closure topic","question_category": "data driven","operation":"filter + aggregation + sort","parameters":[{"type":"case","attribute":"closure topic"}],"aggregation":"count","sort_order":"descending"}]} 
+
+Q: What is the capital of England? 
+Response: 
+{"query":"What is the capital of England?","user_intent":"find information","questions":[{"query":"What is the capital of England?","question_intent":"find capital city","operation":"literal search","question_category":"general knowledge","parameters":[{"type":"country","value":"England"}]}]} 
+
+Q: How are you? 
+Response: 
+{"query":"How are you?","user_intent":"greeting response","questions":[{"query":"How are you?","user_intent":"greeting response","question_category": "chitchat"}]} 
+
+Q: Find the schedule of the local train station. 
+Response: 
+{"query":"Find the schedule of the local train station.","user_intent":"find train schedule","questions":[{"query":"Find the schedule of the local train station.","question_intent":"retrieve train schedule from web","operation":"online search","question_category":"search online","parameters":[{"type":"train station","value":"local"}],"sort_order":"none"}]} 

@@ -1,4 +1,4 @@
-from mistralai.client import MistralClient
+from mistralai.async_client import MistralAsyncClient
 from mistralai.models.chat_completion import ChatCompletionResponse, ChatMessage
 import logging
 from src.utils import Config
@@ -9,20 +9,20 @@ config = Config()
 
 
 class Mistral(LLM):
-    client = MistralClient(api_key=config.mistral_key)
+    client = MistralAsyncClient(api_key=config.mistral_key)
 
-    def chat(self, system_prompt: str, user_prompt: str) -> str:
+    async def chat(self, model, system_prompt: str, user_prompt: str, return_json=False) -> str:
         logger.debug("Called llm. Waiting on response model with prompt {0}.".format(str([system_prompt, user_prompt])))
-
-        response: ChatCompletionResponse = self.client.chat(
-            model=config.mistral_model,
+        response: ChatCompletionResponse = await self.client.chat(
+            model=model,
             messages=[
                 ChatMessage(role="system", content=system_prompt),
                 ChatMessage(role="user", content=user_prompt),
             ],
             temperature=0,
+            response_format={"type": "json_object"} if return_json else None,
         )
-        logger.debug('{0} response : "{1}"'.format(config.mistral_model, response.choices[0].message.content))
+        logger.debug('{0} response : "{1}"'.format(model, response.choices[0].message.content))
 
         content = response.choices[0].message.content
 

@@ -1,5 +1,5 @@
 from .tool import tool
-from .types import Parameter
+from .agent_types import Parameter
 from .agent import Agent, agent
 
 
@@ -13,7 +13,7 @@ from .agent import Agent, agent
         )
     },
 )
-def sum_list_of_values(list_of_values) -> str:
+async def sum_list_of_values(list_of_values) -> str:
     if not isinstance(list_of_values, list):
         raise Exception("Method not passed a valid Python list")
     return f"The sum of all the values passed {list_of_values} is {str(sum(list_of_values))}"
@@ -41,7 +41,7 @@ def sum_list_of_values(list_of_values) -> str:
         ),
     },
 )
-def compare_two_values(value_one, thing_one, value_two, thing_two) -> str:
+async def compare_two_values(value_one, thing_one, value_two, thing_two) -> str:
     if value_one > value_two:
         return f"You have spent more on {thing_one} ({value_one}) than {thing_two} ({value_two}) in the last month"
     else:

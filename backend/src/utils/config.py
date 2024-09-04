@@ -11,6 +11,7 @@ class Config(object):
         self.mistral_url = None
         self.mistral_key = None
         self.mistral_model = None
+        self.openai_key = None
         self.neo4j_uri = default_neo4j_uri
         self.neo4j_user = None
         self.neo4j_password = None
@@ -22,7 +23,16 @@ class Config(object):
         self.validator_agent_llm = None
         self.datastore_agent_llm = None
         self.maths_agent_llm = None
+        self.web_agent_llm = None
+        self.chart_generator_llm = None
         self.router_llm = None
+        self.validator_agent_model = None
+        self.intent_agent_model = None
+        self.answer_agent_model = None
+        self.datastore_agent_model = None
+        self.chart_generator_model = None
+        self.web_agent_model = None
+        self.router_model = None
         self.load_env()
 
     def load_env(self):
@@ -35,6 +45,7 @@ class Config(object):
             self.mistral_url = os.getenv("MISTRAL_URL")
             self.mistral_key = os.getenv("MISTRAL_KEY")
             self.mistral_model = os.getenv("MODEL")
+            self.openai_key  = os.getenv("OPENAI_KEY")
             self.neo4j_uri = os.getenv("NEO4J_URI", default_neo4j_uri)
             self.neo4j_user = os.getenv("NEO4J_USERNAME")
             self.neo4j_password = os.getenv("NEO4J_PASSWORD")
@@ -45,8 +56,18 @@ class Config(object):
             self.intent_agent_llm = os.getenv("INTENT_AGENT_LLM")
             self.validator_agent_llm = os.getenv("VALIDATOR_AGENT_LLM")
             self.datastore_agent_llm = os.getenv("DATASTORE_AGENT_LLM")
+            self.chart_generator_llm = os.getenv("CHART_GENERATOR_LLM")
+            self.web_agent_llm = os.getenv("WEB_AGENT_LLM")
             self.maths_agent_llm = os.getenv("MATHS_AGENT_LLM")
             self.router_llm = os.getenv("ROUTER_LLM")
+            self.answer_agent_model = os.getenv("ANSWER_AGENT_MODEL")
+            self.intent_agent_model = os.getenv("INTENT_AGENT_MODEL")
+            self.validator_agent_model = os.getenv("VALIDATOR_AGENT_MODEL")
+            self.datastore_agent_model = os.getenv("DATASTORE_AGENT_MODEL")
+            self.web_agent_model = os.getenv("WEB_AGENT_MODEL")
+            self.chart_generator_model = os.getenv("CHART_GENERATOR_MODEL")
+            self.maths_agent_model = os.getenv("MATHS_AGENT_MODEL")
+            self.router_model = os.getenv("ROUTER_MODEL")
         except FileNotFoundError:
             raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
         except Exception:
