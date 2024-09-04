@@ -17,40 +17,7 @@ engine = PromptEngine()
 
 cache = {}
 
-@tool(
-    name="generate cypher query",
-    description="Generate Cypher query if the category is data driven, based on the operation to be performed",
-    parameters={
-        "question_intent": Parameter(
-            type="string",
-            description="The intent the question will be based on",
-        ),
-        "operation": Parameter(
-            type="string",
-            description="The operation the cypher query will have to perform",
-        ),
-        "question_params": Parameter(
-            type="string",
-            description="""
-                The specific parameters required for the question to be answered with the question_intent
-                or none if no params required
-            """,
-        ),
-        "aggregation": Parameter(
-            type="string",
-            description="Any aggregation that is required to answer the question or none if no aggregation is needed",
-        ),
-        "sort_order": Parameter(
-            type="string",
-            description="The order a list should be sorted in or none if no sort_order is needed",
-        ),
-        "timeframe": Parameter(
-            type="string",
-            description="string of the timeframe to be considered or none if no timeframe is needed",
-        ),
-    },
-)
-async def generate_query(
+async def generate_cypher_query_core(
     question_intent, operation, question_params, aggregation, sort_order, timeframe, llm: LLM, model
 ) -> str:
 
@@ -92,11 +59,49 @@ async def generate_query(
         raise
     return str(db_response)
 
+@tool(
+    name="generate cypher query",
+    description="Generate Cypher query if the category is data driven, based on the operation to be performed",
+    parameters={
+        "question_intent": Parameter(
+            type="string",
+            description="The intent the question will be based on",
+        ),
+        "operation": Parameter(
+            type="string",
+            description="The operation the cypher query will have to perform",
+        ),
+        "question_params": Parameter(
+            type="string",
+            description="""
+                The specific parameters required for the question to be answered with the question_intent
+                or none if no params required
+            """,
+        ),
+        "aggregation": Parameter(
+            type="string",
+            description="Any aggregation that is required to answer the question or none if no aggregation is needed",
+        ),
+        "sort_order": Parameter(
+            type="string",
+            description="The order a list should be sorted in or none if no sort_order is needed",
+        ),
+        "timeframe": Parameter(
+            type="string",
+            description="string of the timeframe to be considered or none if no timeframe is needed",
+        ),
+    },
+)
+
+async def generate_cypher(question_intent, operation, question_params, aggregation, sort_order,
+                          timeframe, llm: LLM, model) -> str:
+    return await generate_cypher_query_core(question_intent, operation, question_params, aggregation, sort_order,
+                                            timeframe, llm, model)
 
 @agent(
     name="DatastoreAgent",
     description="This agent is responsible for handling database queries relating to the user's personal data.",
-    tools=[generate_query],
+    tools=[generate_cypher],
 )
 class DatastoreAgent(Agent):
     pass

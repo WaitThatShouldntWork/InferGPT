@@ -81,9 +81,7 @@ async def get_semantic_layer(llm, model):
 
     for relationship in relationships:
         enriched_relationship = await llm.chat(model, neo4j_relationships_understanding_prompt, str(relationship))
-
         enriched_relationship = sanitise_script(enriched_relationship)
-
         enriched_relationships_list.append(json.loads(enriched_relationship))
 
         finalised_graph_structure['relationships'] = enriched_relationships_list
@@ -92,9 +90,7 @@ async def get_semantic_layer(llm, model):
     # Fetch and enrich nodes
     neo4j_data = finalised_graph_structure['nodes']
     enriched_nodes = await llm.chat(model, neo4j_nodes_understanding_prompt, str(neo4j_data))
-
     enriched_nodes = sanitise_script(enriched_nodes)
-
     enriched_nodes = json.loads(enriched_nodes)
     json.dumps(enriched_nodes)
     finalised_graph_structure['nodes'] = enriched_nodes
@@ -115,9 +111,7 @@ async def get_semantic_layer(llm, model):
     json.dumps(rel_properties_neo4j)
 
     enriched_rel_properties = await llm.chat(model, neo4j_relationship_property_prompt, str(rel_properties_neo4j))
-
     enriched_rel_properties = sanitise_script(enriched_rel_properties)
-
     enriched_rel_properties = json.loads(enriched_rel_properties)
 
     # Merge properties
