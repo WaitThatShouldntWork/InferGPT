@@ -58,7 +58,11 @@ async def generate_cypher_query_core(
     except Exception as e:
         logger.error(f"Error during data retrieval: {e}")
         raise
-    return str(db_response)
+    response = {
+        "content": db_response,
+        "ignore_validation": "false"
+    }
+    return json.dumps(response, indent=4)
 
 @tool(
     name="generate cypher query",
