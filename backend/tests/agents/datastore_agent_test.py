@@ -34,7 +34,7 @@ async def test_generate_query_success(mock_load_prompt, mock_publish_log_info,
     result = await generate_cypher_query_core(question_intent, operation, question_params, aggregation, sort_order,
                                               timeframe, llm, model)
 
-    assert result == "Mocked response from the database"
+    assert result == '{\n    "content": "Mocked response from the database",\n    "ignore_validation": "false"\n}'
     mock_load_prompt.assert_called()
     llm.chat.assert_called_once_with(
         model,

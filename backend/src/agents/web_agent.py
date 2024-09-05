@@ -35,7 +35,7 @@ async def web_general_search_core(search_query, llm, model) -> str:
             if await is_valid_answer(summary, search_query):
                 response = {
                     "content": summary,
-                    "ignore_validation": "true"
+                    "ignore_validation": "false"
                 }
                 return json.dumps(response, indent=4)
         return "No relevant information found on the internet for the given query."
