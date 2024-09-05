@@ -20,7 +20,7 @@ engine = PromptEngine()
 
 async def web_general_search_core(search_query, llm, model) -> str:
     try:
-        search_result = perform_search(search_query, num_results=15)
+        search_result = await perform_search(search_query, num_results=15)
         if search_result["status"] == "error":
             return "No relevant information found on the internet for the given query."
         urls = search_result["urls"]
@@ -32,7 +32,8 @@ async def web_general_search_core(search_query, llm, model) -> str:
             summary = await perform_summarization(search_query, content, llm, model)
             if not summary:
                 continue
-            if await is_valid_answer(summary, search_query):
+            is_valid = await is_valid_answer(summary, search_query)
+            if is_valid:
                 response = {
                     "content": summary,
                     "ignore_validation": "false"
@@ -109,9 +110,9 @@ async def is_valid_answer(answer, task) -> bool:
     return is_valid
 
 
-def perform_search(search_query: str, num_results: int) -> Dict[str, Any]:
+async def perform_search(search_query: str, num_results: int) -> Dict[str, Any]:
     try:
-        search_result_json = search_urls(search_query, num_results=num_results)
+        search_result_json = await search_urls(search_query, num_results=num_results)
         return json.loads(search_result_json)
     except Exception as e:
         logger.error(f"Error during web search: {e}")
