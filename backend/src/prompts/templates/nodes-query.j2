@@ -1,6 +1,0 @@
-call db.labels() yield label
-return collect({
-    label: label,
-    cypher_representation : "(:" + label + ")",
-    detail: "A " + label  + " is a..."
-}) AS nodes

@@ -1,12 +1,1 @@
-CALL apoc.meta.stats() YIELD relTypes
-WITH relTypes, keys(relTypes) AS relTypeKeys
-UNWIND relTypeKeys AS relTypeKey
-WITH relTypeKey, relTypes[relTypeKey] AS count
-WHERE relTypeKey CONTAINS ")->(:"
-   OR relTypeKey CONTAINS "(:"
-WITH collect({
-    label: split(split(relTypeKey, "-")[1], ">")[0],
-    cypher_representation: relTypeKey,
-    detail: ""
-}) AS paths
-RETURN paths
+call db.schema.visualization
