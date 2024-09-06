@@ -80,8 +80,8 @@ async def get_semantic_layer(llm, model):
     enriched_relationships_list = []
 
     for relationship in relationships:
-        enriched_relationship = await llm.chat(model, neo4j_relationships_understanding_prompt, str(relationship))
-        enriched_relationship = sanitise_script(enriched_relationship)
+        enriched_relationship = await llm.chat(model, neo4j_relationships_understanding_prompt, str(relationship),
+                                               return_json=True)
         enriched_relationships_list.append(json.loads(enriched_relationship))
 
         finalised_graph_structure['relationships'] = enriched_relationships_list
@@ -89,8 +89,7 @@ async def get_semantic_layer(llm, model):
 
     # Fetch and enrich nodes
     neo4j_data = finalised_graph_structure['nodes']
-    enriched_nodes = await llm.chat(model, neo4j_nodes_understanding_prompt, str(neo4j_data))
-    enriched_nodes = sanitise_script(enriched_nodes)
+    enriched_nodes = await llm.chat(model, neo4j_nodes_understanding_prompt, str(neo4j_data), return_json=True)
     enriched_nodes = json.loads(enriched_nodes)
     json.dumps(enriched_nodes)
     finalised_graph_structure['nodes'] = enriched_nodes
@@ -110,20 +109,20 @@ async def get_semantic_layer(llm, model):
     rel_properties_neo4j = {'relProperties': cleaned_rel_properties}
     json.dumps(rel_properties_neo4j)
 
-    enriched_rel_properties = await llm.chat(model, neo4j_relationship_property_prompt, str(rel_properties_neo4j))
-    enriched_rel_properties = sanitise_script(enriched_rel_properties)
+    enriched_rel_properties = await llm.chat(model, neo4j_relationship_property_prompt, str(rel_properties_neo4j),
+                                             return_json=True)
     enriched_rel_properties = json.loads(enriched_rel_properties)
 
     # Merge properties
     for new_rel in enriched_rel_properties["relProperties"]:
-        relationship_type = new_rel["relationship_type"]
-        properties_to_add = new_rel["properties"]
+        relationship_type = new_rel["relType"]
+        properties_to_add = new_rel["property"]
 
         for rel in finalised_graph_structure["relationships"]:
             if rel["cypher_representation"] == relationship_type:
                 if "properties" not in rel:
-                    rel["properties"] = []
-                rel["properties"] = properties_to_add
+                    rel["property"] = []
+                rel["property"] = properties_to_add
 
     logger.debug(f"finalised graph structure with enriched properties: {finalised_graph_structure}")
 
@@ -136,8 +135,8 @@ async def get_semantic_layer(llm, model):
             if all(prop['data_type'] is not None and prop['name'] is not None for prop in node['properties'])
         ]
     }
-    enriched_node_properties = await llm.chat(model, neo4j_node_property_prompt, str(filtered_payload))
-    enriched_node_properties = sanitise_script(enriched_node_properties)
+    enriched_node_properties = await llm.chat(model, neo4j_node_property_prompt, str(filtered_payload),
+                                              return_json=True)
     enriched_node_properties = json.loads(enriched_node_properties)
 
     for new_node in enriched_node_properties["nodeProperties"]:
@@ -152,11 +151,3 @@ async def get_semantic_layer(llm, model):
     logger.debug(f"finalised graph structure with enriched nodes: {finalised_graph_structure}")
 
     return finalised_graph_structure
-
-def sanitise_script(script: str) -> str:
-    script = script.strip()
-    if script.startswith("```json"):
-        script = script[7:]
-    if script.endswith("```"):
-        script = script[:-3]
-    return script.strip()
