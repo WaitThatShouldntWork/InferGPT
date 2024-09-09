@@ -33,7 +33,11 @@ async def web_general_search_core(search_query, llm, model) -> str:
             if not summary:
                 continue
             if await is_valid_answer(summary, search_query):
-                return summary
+                response = {
+                    "content": summary,
+                    "ignore_validation": "false"
+                }
+                return json.dumps(response, indent=4)
         return "No relevant information found on the internet for the given query."
     except Exception as e:
         logger.error(f"Error in web_general_search_core: {e}")
