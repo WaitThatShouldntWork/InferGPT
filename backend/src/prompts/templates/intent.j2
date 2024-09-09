@@ -6,10 +6,21 @@ The question is:
 {{ question }} 
 
  
-The task is to comprehend the intention of the question. The question can be composed of different intents and when it is the case, examine all intents one by one to determine which one to tackle first as you may need the data gathered from a secondary intent to perform the first intent.  
-You are NOT ALLOWED to make up sample data or example values. Only use concrete data for which you can name the source. 
+Your task is to accurately comprehend the intentions behind the question. The question can be composed of different intents and when it is the case, examine all intents one by one to determine which one to tackle first as you may need the data gathered from a secondary intent to perform the first intent.  
+If the question contains multiple intents, break them down into individual tasks, and specify the order in which these tasks should be tackled. The order should ensure that each intent is addressed in a logical sequence, particularly if one intent depends on the data obtained from another.
+You are NOT ALLOWED to make up sample data or example values. Only use concrete data for which you can name the source.
 Based on this understanding, the following query must be formulated to extract the necessary data, which can then be used to address the question. 
 
+Guidelines:
+1. Determine each distinct intent in the question.
+2. Sequence the intents: Identify which intent should be tackled first and which should follow.
+3. For each intent, specify:
+    - The exact operation required (e.g., "literal search", "filter + aggregation", "data visualization").
+    - The category of the question (e.g., "data-driven", "data presentation", "general knowledge").
+    - Any specific parameters or conditions that apply.
+    - The correct aggregation and sorting methods if applicable.
+4. Avoid conflating intents: If a user's query asks for data retrieval and its visualization, treat these as separate operations.
+5. Do not make assumptions or create hypothetical data. Use only concrete data where applicable.
  
 Specify an operation type under the operation key; here are a few examples: 
 
@@ -53,3 +64,11 @@ Response:
 Q: Find the schedule of the local train station. 
 Response: 
 {"query":"Find the schedule of the local train station.","user_intent":"find train schedule","questions":[{"query":"Find the schedule of the local train station.","question_intent":"retrieve train schedule from web","operation":"online search","question_category":"search online","parameters":[{"type":"train station","value":"local"}],"sort_order":"none"}]} 
+
+Q: What are the different subscriptions with Netflix? Show me the results in a chart.
+Response:
+{"query": "What are the different subscriptions with Netflix? Show me the results in a chart.", "user_intent": "find and display subscription information", "questions": [{"query": "What are the different subscriptions with Netflix?", "question_intent": "retrieve subscription information", "operation": "literal search", "question_category": "data driven", "parameters": [{"type": "company", "value": "Netflix"}], "aggregation": "none", "sort_order": "none", "timeframe": "none"}, {"query": "Show me the results in a chart", "question_intent": "display information in a chart", "operation": "data visualization", "question_category": "data presentation", "parameters": [], "aggregation": "none", "sort_order": "none", "timeframe": "none"}]}
+
+Q: Show me a chart of different subscription prices with Netflix?
+Response:
+{"query": "Show me a chart of different subscription prices with Netflix?", "user_intent": "retrieve and visualize subscription data", "questions": [{"query": "What are the different subscription prices with Netflix?", "question_intent": "retrieve subscription pricing information", "operation": "literal search", "question_category": "data driven", "parameters": [{"type": "company", "value": "Netflix"}], "aggregation": "none", "sort_order": "none", "timeframe": "none"}, {"query": "Show me the results in a chart", "question_intent": "display subscription pricing information in a chart", "operation": "data visualization", "question_category": "data presentation", "parameters": [], "aggregation": "none", "sort_order": "none", "timeframe": "none"}]}
