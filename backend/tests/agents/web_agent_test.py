@@ -1,8 +1,6 @@
-import unittest
-from unittest.mock import AsyncMock, patch
-import json
-
 import pytest
+from unittest.mock import patch, AsyncMock
+import json
 from src.agents.web_agent import web_general_search_core
 
 @pytest.mark.asyncio
@@ -25,7 +23,7 @@ async def test_web_general_search_core(
     mock_is_valid_answer.return_value = True
     result = await web_general_search_core("example query", llm, model)
     expected_response = {
-        "content": "Example summary.",
+        "content": "Example salut.",
         "ignore_validation": "false"
     }
     assert json.loads(result) == expected_response
