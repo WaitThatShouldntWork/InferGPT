@@ -21,15 +21,6 @@ async def generate_cypher_query_core(
     question_intent, operation, question_params, aggregation, sort_order, timeframe, llm: LLM, model
 ) -> str:
 
-    async def get_semantic_layer_cache(graph_schema):
-        global cache
-        if not cache:
-            graph_schema = await get_semantic_layer(llm, model)
-            cache = graph_schema
-            return cache
-        else:
-            return cache
-
     details_to_create_cypher_query = engine.load_prompt(
         "details-to-create-cypher-query",
         question_intent=question_intent,
@@ -40,7 +31,7 @@ async def generate_cypher_query_core(
         timeframe=timeframe,
     )
     try:
-        graph_schema = await get_semantic_layer_cache(cache)
+        graph_schema = await get_semantic_layer_cache(llm, model, cache)
         graph_schema = json.dumps(graph_schema, separators=(",", ":"))
 
         generate_cypher_query_prompt = engine.load_prompt(
@@ -102,6 +93,16 @@ async def generate_cypher(question_intent, operation, question_params, aggregati
                           timeframe, llm: LLM, model) -> str:
     return await generate_cypher_query_core(question_intent, operation, question_params, aggregation, sort_order,
                                             timeframe, llm, model)
+
+
+async def get_semantic_layer_cache(llm, model, graph_schema):
+    global cache
+    if not cache:
+        graph_schema = await get_semantic_layer(llm, model)
+        cache = graph_schema
+        return cache
+    else:
+        return cache
 
 @agent(
     name="DatastoreAgent",
