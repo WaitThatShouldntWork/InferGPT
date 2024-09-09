@@ -23,7 +23,7 @@ async def test_web_general_search_core(
     mock_is_valid_answer.return_value = True
     result = await web_general_search_core("example query", llm, model)
     expected_response = {
-        "content": "Example salut.",
+        "content": "Example summary.",
         "ignore_validation": "false"
     }
     assert json.loads(result) == expected_response
