@@ -33,7 +33,12 @@ async def test_web_general_search_core(
 @patch("src.agents.web_agent.perform_scrape", new_callable=AsyncMock)
 @patch("src.agents.web_agent.perform_summarization", new_callable=AsyncMock)
 @patch("src.agents.web_agent.is_valid_answer", new_callable=AsyncMock)
-async def test_web_general_search_core_no_results(mock_is_valid_answer, mock_perform_summarization, mock_perform_scrape, mock_perform_search):
+async def test_web_general_search_core_no_results(
+    mock_is_valid_answer,
+    mock_perform_summarization,
+    mock_perform_scrape,
+    mock_perform_search,
+):
     llm = AsyncMock()
     model = "mock_model"
     mock_perform_search.return_value = {"status": "error", "urls": []}
@@ -46,7 +51,12 @@ async def test_web_general_search_core_no_results(mock_is_valid_answer, mock_per
 @patch("src.agents.web_agent.perform_scrape", new_callable=AsyncMock)
 @patch("src.agents.web_agent.perform_summarization", new_callable=AsyncMock)
 @patch("src.agents.web_agent.is_valid_answer", new_callable=AsyncMock)
-async def test_web_general_search_core_invalid_summary(mock_is_valid_answer, mock_perform_summarization, mock_perform_scrape, mock_perform_search):
+async def test_web_general_search_core_invalid_summary(
+    mock_is_valid_answer,
+    mock_perform_summarization,
+    mock_perform_scrape,
+    mock_perform_search
+):
     llm = AsyncMock()
     model = "mock_model"
     mock_perform_search.return_value = {"status": "success", "urls": ["http://example.com"]}
