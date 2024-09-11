@@ -9,10 +9,13 @@ import base64
 from src.utils import scratchpad
 from PIL import Image
 import json
+from src.websockets.user_confirmer import UserConfirmer
+from src.websockets.confirmations_manager import confirmations_manager
 
 logger = logging.getLogger(__name__)
 
 engine = PromptEngine()
+
 
 async def generate_chart(question_intent, data_provided, question_params, llm: LLM, model) -> str:
     details_to_generate_chart_code = engine.load_prompt(
@@ -28,13 +31,17 @@ async def generate_chart(question_intent, data_provided, question_params, llm: L
     sanitised_script = sanitise_script(generated_code)
 
     try:
+        confirmer = UserConfirmer(confirmations_manager)
+        is_confirmed = await confirmer.confirm("Would you like to generate a graph?")
+        if not is_confirmed:
+            raise Exception("The user did not confirm to creating a graph.")
         local_vars = {}
         exec(sanitised_script, {}, local_vars)
-        fig = local_vars.get('fig')
+        fig = local_vars.get("fig")
         buf = BytesIO()
         if fig is None:
             raise ValueError("The generated code did not produce a figure named 'fig'.")
-        fig.savefig(buf, format='png')
+        fig.savefig(buf, format="png")
         buf.seek(0)
         with Image.open(buf):
             image_data = base64.b64encode(buf.getvalue()).decode("utf-8")
@@ -44,7 +51,7 @@ async def generate_chart(question_intent, data_provided, question_params, llm: L
         raise
     response = {
         "content": image_data,
-        "ignore_validation": "false"
+        "ignore_validation": "false",
     }
     return json.dumps(response, indent=4)
 
@@ -56,6 +63,7 @@ def sanitise_script(script: str) -> str:
     if script.endswith("```"):
         script = script[:-3]
     return script.strip()
+
 
 @tool(
     name="generate_code_chart",
@@ -74,18 +82,18 @@ def sanitise_script(script: str) -> str:
             description="""
                 The specific parameters required for the question to be answered with the question_intent,
                 extracted from data_provided
-            """),
-    }
+            """,
+        ),
+    },
 )
-
 async def generate_code_chart(question_intent, data_provided, question_params, llm: LLM, model) -> str:
     return await generate_chart(question_intent, data_provided, question_params, llm, model)
+
 
 @agent(
     name="ChartGeneratorAgent",
     description="This agent is responsible for creating charts",
-    tools=[generate_code_chart]
+    tools=[generate_code_chart],
 )
-
 class ChartGeneratorAgent(Agent):
     pass
