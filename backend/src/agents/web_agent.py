@@ -29,10 +29,12 @@ async def web_general_search_core(search_query, llm, model) -> str:
             content = await perform_scrape(url)
             if not content:
                 continue
-            summary = await perform_summarization(search_query, content, llm, model)
-            if not summary:
+            summarisation = await perform_summarization(search_query, content, llm, model)
+            if not summarisation:
                 continue
-            is_valid = await is_valid_answer(summary, search_query)
+            is_valid = await is_valid_answer(summarisation, search_query)
+            parsed_json = json.loads(summarisation)
+            summary = parsed_json.get('summary', '')
             if is_valid:
                 response = {
                     "content": summary,
@@ -137,6 +139,7 @@ async def perform_summarization(search_query: str, content: str, llm: Any, model
         summarise_result = json.loads(summarise_result_json)
         if summarise_result["status"] == "error":
             return ""
+        logger.info(f"Content summarized successfully: {summarise_result['response']}")
         return summarise_result["response"]
     except Exception as e:
         logger.error(f"Error summarizing content: {e}")
