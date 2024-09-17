@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 default_frontend_url = "http://localhost:8650"
 default_neo4j_uri = "bolt://localhost:7687"
+default_files_directory = "files"
 
 
 class Config(object):
@@ -33,7 +34,7 @@ class Config(object):
         self.chart_generator_model = None
         self.web_agent_model = None
         self.router_model = None
-        self.files_directory = None
+        self.files_directory = default_files_directory
         self.load_env()
 
     def load_env(self):
