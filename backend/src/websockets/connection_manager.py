@@ -1,4 +1,3 @@
-import json
 import logging
 from typing import Any, Dict, List
 from fastapi import WebSocket
@@ -8,6 +7,7 @@ from .types import Message, MessageTypes
 from .message_handlers import handlers
 
 logger = logging.getLogger(__name__)
+
 
 def parse_message(message: Dict[str, Any]) -> Message:
     data = message.get("data") or None
@@ -46,11 +46,12 @@ class ConnectionManager:
     async def broadcast(self, message: Message):
         for ws in self.websockets:
             if ws.application_state == WebSocketState.CONNECTED:
-                await ws.send_json(json.dumps({"type": message.type.value, "data": message.data}))
+                await ws.send_json({"type": message.type.value, "data": message.data})
 
     async def send_chart(self, data: Dict[str, Any]):
         for ws in self.websockets:
             if ws.application_state == WebSocketState.CONNECTED:
                 await ws.send_json(data)
+
 
 connection_manager = ConnectionManager()
