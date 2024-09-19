@@ -13,7 +13,7 @@ config = Config()
 engine = PromptEngine()
 
 
-def search_urls(search_query, num_results=10) -> str:
+async def search_urls(search_query, num_results=10) -> str:
     logger.info(f"Searching the web for: {search_query}")
     urls = []
     try:

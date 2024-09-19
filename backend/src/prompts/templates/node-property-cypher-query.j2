@@ -7,7 +7,7 @@ WITH
         detail : ""
     }) as props
 RETURN  COLLECT({
-    node_label: node,
+    label: node,
     cypher_representation : "(:" + node + ")",
     properties: props
 }) AS nodeProperties
