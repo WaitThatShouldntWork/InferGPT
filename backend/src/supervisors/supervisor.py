@@ -38,12 +38,11 @@ async def solve_task(task, scratchpad, attempt=0) -> Tuple[str, str, str]:
         raise Exception(no_agent_response)
     answer = await agent.invoke(task)
     parsed_json = json.loads(answer)
+    status = parsed_json.get('status', 'success')
     ignore_validation = parsed_json.get('ignore_validation', '')
     answer_content = parsed_json.get('content', '')
-    if ignore_validation == 'error':
-        return (agent.name, answer_content, "error")
     if(ignore_validation == 'true') or await is_valid_answer(answer_content, task):
-        return (agent.name, answer_content, "success")
+        return (agent.name, answer_content, status)
     return await solve_task(task, scratchpad, attempt + 1)
 
 

@@ -26,6 +26,7 @@ class Config(object):
         self.maths_agent_llm = None
         self.web_agent_llm = None
         self.chart_generator_llm = None
+        self.file_agent_llm = None
         self.router_llm = None
         self.validator_agent_model = None
         self.intent_agent_model = None
@@ -35,6 +36,7 @@ class Config(object):
         self.web_agent_model = None
         self.router_model = None
         self.files_directory = default_files_directory
+        self.file_agent_model = None
         self.load_env()
 
     def load_env(self):
@@ -60,6 +62,7 @@ class Config(object):
             self.validator_agent_llm = os.getenv("VALIDATOR_AGENT_LLM")
             self.datastore_agent_llm = os.getenv("DATASTORE_AGENT_LLM")
             self.chart_generator_llm = os.getenv("CHART_GENERATOR_LLM")
+            self.file_agent_llm = os.getenv("FILE_AGENT_LLM")
             self.web_agent_llm = os.getenv("WEB_AGENT_LLM")
             self.maths_agent_llm = os.getenv("MATHS_AGENT_LLM")
             self.router_llm = os.getenv("ROUTER_LLM")
@@ -71,6 +74,7 @@ class Config(object):
             self.chart_generator_model = os.getenv("CHART_GENERATOR_MODEL")
             self.maths_agent_model = os.getenv("MATHS_AGENT_MODEL")
             self.router_model = os.getenv("ROUTER_MODEL")
+            self.file_agent_model = os.getenv("FILE_AGENT_MODEL")
         except FileNotFoundError:
             raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
         except Exception:
