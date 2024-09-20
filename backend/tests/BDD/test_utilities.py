@@ -2,7 +2,7 @@ from src.api import app
 from fastapi.testclient import TestClient
 from langchain.evaluation import EvaluatorType, StringEvaluator, load_evaluator
 from langchain_openai.chat_models import ChatOpenAI
-from langchain_mistralai import ChatMistralAI
+#from langchain_mistralai import ChatMistralAI
 
 START_ENDPOINT_URL = "/chat?utterance={utterance}"
 CONVERSATION_ENDPOINT_URL = "/chat?utterance={utterance}"
@@ -22,8 +22,8 @@ def send_prompt(prompt: str):
 
 #Evaluators
 ##Evaluation LLM
-#llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, max_retries=2)
-llm = ChatMistralAI(name="mistral-small-latest", model_name= "mistral-small-latest", temperature=0, max_retries=2,) 
+llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, max_retries=2)
+#llm = ChatMistralAI(name="mistral-small-latest", model_name= "mistral-small-latest", temperature=0, max_retries=2,) 
 
 correctness_evaluator: StringEvaluator = load_evaluator( # type: ignore
     EvaluatorType.LABELED_CRITERIA, criteria="correctness", llm=llm)
