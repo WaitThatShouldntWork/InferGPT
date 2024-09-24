@@ -30,5 +30,5 @@ class Mistral(LLM):
             logger.error("Call to Mistral API failed: message content is None or Unset")
             return "An error occurred while processing the request."
 
-        logger.debug('{0} response : "{1}"'.format(model, response.choices[0].message.content))
+        logger.debug('{0} response : "{1}"'.format(model, content))
         return content
