@@ -21,23 +21,14 @@ class Mistral(LLM):
             temperature=0,
             response_format={"type": "json_object"} if return_json else None,
         )
-        if response is None:
-            logger.error("Call to mistral api failed: response was None")
+        if not response or not response.choices:
+            logger.error("Call to Mistral API failed: No valid response or choices received")
             return "An error occurred while processing the request."
 
-        if response.choices is None:
-            logger.error("Call to mistral api failed: response.choices was None")
-            return "An error occurred while processing the request."
-
-        if len(response.choices) < 1:
-            logger.error("Call to mistral api failed: response.choices was empty")
+        content = response.choices[0].message.content
+        if not content:
+            logger.error("Call to Mistral API failed: message content is None or Unset")
             return "An error occurred while processing the request."
 
         logger.debug('{0} response : "{1}"'.format(model, response.choices[0].message.content))
-
-        content = response.choices[0].message.content
-        if isinstance(content, str):
-            return content
-        else:
-            logger.error("Call to mistral api failed: message.content was None or Unset")
-            return "An error occurred while processing the request."
+        return content

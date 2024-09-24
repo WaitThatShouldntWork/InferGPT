@@ -61,15 +61,19 @@ async def test_chat_response_none_logs_error(mocker, caplog):
     response = await mistral.chat(mock_model, system_prompt, user_prompt)
 
     assert response == "An error occurred while processing the request."
-    assert ("src.llm.mistral", logging.ERROR, "Call to mistral api failed: response was None") in caplog.record_tuples
+    assert (
+        "src.llm.mistral",
+        logging.ERROR,
+        "Call to Mistral API failed: No valid response or choices received",
+    ) in caplog.record_tuples
 
 
 @pytest.mark.asyncio
 async def test_chat_response_choices_none_logs_error(mocker, caplog):
     mistral.client = mocker.AsyncMock(return_value=mock_client)
-    response = create_mock_chat_response(content_response)
-    response.choices = None
-    mistral.client.chat.complete_async.return_value = response
+    chat_response = create_mock_chat_response(content_response)
+    chat_response.choices = None
+    mistral.client.chat.complete_async.return_value = chat_response
 
     response = await mistral.chat(mock_model, system_prompt, user_prompt)
 
@@ -77,7 +81,7 @@ async def test_chat_response_choices_none_logs_error(mocker, caplog):
     assert (
         "src.llm.mistral",
         logging.ERROR,
-        "Call to mistral api failed: response.choices was None",
+        "Call to Mistral API failed: No valid response or choices received",
     ) in caplog.record_tuples
 
 
@@ -94,7 +98,7 @@ async def test_chat_response_choices_empty_logs_error(mocker, caplog):
     assert (
         "src.llm.mistral",
         logging.ERROR,
-        "Call to mistral api failed: response.choices was empty",
+        "Call to Mistral API failed: No valid response or choices received",
     ) in caplog.record_tuples
 
 
@@ -112,7 +116,7 @@ async def test_chat_response_choices_message_content_none_logs_error(mocker, cap
     assert (
         "src.llm.mistral",
         logging.ERROR,
-        "Call to mistral api failed: message.content was None or Unset",
+        "Call to Mistral API failed: message content is None or Unset",
     ) in caplog.record_tuples
 
 
@@ -130,5 +134,5 @@ async def test_chat_response_choices_message_content_unset_logs_error(mocker, ca
     assert (
         "src.llm.mistral",
         logging.ERROR,
-        "Call to mistral api failed: message.content was None or Unset",
+        "Call to Mistral API failed: message content is None or Unset",
     ) in caplog.record_tuples
