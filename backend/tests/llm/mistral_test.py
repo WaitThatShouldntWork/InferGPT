@@ -84,9 +84,9 @@ async def test_chat_response_choices_none_logs_error(mocker, caplog):
 @pytest.mark.asyncio
 async def test_chat_response_choices_empty_logs_error(mocker, caplog):
     mistral.client = mocker.AsyncMock(return_value=mock_client)
-    response = create_mock_chat_response(content_response)
-    response.choices = []
-    mistral.client.chat.complete_async.return_value = response
+    chat_response = create_mock_chat_response(content_response)
+    chat_response.choices = []
+    mistral.client.chat.complete_async.return_value = chat_response
 
     response = await mistral.chat(mock_model, system_prompt, user_prompt)
 
@@ -101,10 +101,10 @@ async def test_chat_response_choices_empty_logs_error(mocker, caplog):
 @pytest.mark.asyncio
 async def test_chat_response_choices_message_content_none_logs_error(mocker, caplog):
     mistral.client = mocker.AsyncMock(return_value=mock_client)
-    response = create_mock_chat_response(content_response)
-    assert response.choices is not None
-    response.choices[0].message.content = None
-    mistral.client.chat.complete_async.return_value = response
+    chat_response = create_mock_chat_response(content_response)
+    assert chat_response.choices is not None
+    chat_response.choices[0].message.content = None
+    mistral.client.chat.complete_async.return_value = chat_response
 
     response = await mistral.chat(mock_model, system_prompt, user_prompt)
 
@@ -119,10 +119,10 @@ async def test_chat_response_choices_message_content_none_logs_error(mocker, cap
 @pytest.mark.asyncio
 async def test_chat_response_choices_message_content_unset_logs_error(mocker, caplog):
     mistral.client = mocker.AsyncMock(return_value=mock_client)
-    response = create_mock_chat_response(content_response)
-    assert response.choices is not None
-    response.choices[0].message.content = UNSET
-    mistral.client.chat.complete_async.return_value = response
+    chat_response = create_mock_chat_response(content_response)
+    assert chat_response.choices is not None
+    chat_response.choices[0].message.content = UNSET
+    mistral.client.chat.complete_async.return_value = chat_response
 
     response = await mistral.chat(mock_model, system_prompt, user_prompt)
 
