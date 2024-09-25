@@ -40,10 +40,14 @@ services:
       start_period: 60s
   # InferGPT Backend
   backend:
+    env_file:
+      - .env
     image: infergpt/backend
     build:
       context: backend
       dockerfile: ./Dockerfile
+    volumes:
+      - ./${FILES_DIRECTORY}:/app/${FILES_DIRECTORY}
     environment:
       NEO4J_URI: bolt://neo4j-db:7687
       NEO4J_USERNAME: ${NEO4J_USERNAME}
@@ -51,6 +55,7 @@ services:
       MISTRAL_KEY: ${MISTRAL_KEY}
       OPENAI_KEY: ${OPENAI_KEY}
       FRONTEND_URL: ${FRONTEND_URL}
+      FILES_DIRECTORY: ${FILES_DIRECTORY}
       AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING}
       AZURE_STORAGE_CONTAINER_NAME: ${AZURE_STORAGE_CONTAINER_NAME}
       AZURE_INITIAL_DATA_FILENAME: ${AZURE_INITIAL_DATA_FILENAME}
@@ -62,6 +67,7 @@ services:
       MATHS_AGENT_LLM: ${MATHS_AGENT_LLM}
       ROUTER_LLM: ${ROUTER_LLM}
       CHART_GENERATOR_LLM: ${CHART_GENERATOR_LLM}
+      FILE_AGENT_LLM: ${FILE_AGENT_LLM}
       ANSWER_AGENT_MODEL: ${ANSWER_AGENT_MODEL}
       INTENT_AGENT_MODEL: ${INTENT_AGENT_MODEL}
       VALIDATOR_AGENT_MODEL: ${VALIDATOR_AGENT_MODEL}
@@ -71,6 +77,7 @@ services:
       MATHS_AGENT_MODEL: ${MATHS_AGENT_MODEL}
       AGENT_CLASS_MODEL: ${AGENT_CLASS_MODEL}
       CHART_GENERATOR_MODEL: ${CHART_GENERATOR_MODEL}
+      FILE_AGENT_MODEL: ${FILE_AGENT_MODEL}
     depends_on:
       neo4j-db:
         condition: service_healthy

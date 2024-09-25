@@ -64,7 +64,7 @@ async def test_solve_task_first_attempt_solves(mocker):
     mock_answer_json = json.loads(mock_answer)
 
     # Ensure that the result is returned directly without validation
-    assert answer == (agent.name, mock_answer_json.get('content', ''))
+    assert answer == (agent.name, mock_answer_json.get('content', ''), "success")
 
 
 @pytest.mark.asyncio
@@ -83,7 +83,7 @@ async def test_solve_task_ignore_validation(mocker):
     mock_answer_json = json.loads(mock_answer)
 
     # Ensure that the result is returned directly without validation
-    assert answer == (agent.name, mock_answer_json.get('content', ''))
+    assert answer == (agent.name, mock_answer_json.get('content', ''), "success")
     mock_is_valid_answer.assert_not_called()  # Validation should not be called
 
 @pytest.mark.asyncio

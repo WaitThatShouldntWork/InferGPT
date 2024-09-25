@@ -6,23 +6,15 @@ You will be passed a user query and the content scraped from the web. You need t
 
 Ensure the summary is clear, well-structured, and directly addresses the user's query.
 
-
 User's question is:
 {{ question }}
 
 Below is the content scraped from the web:
-{{ content }}
+{{ content | replace("\n\n", "\n") }}  # Adding this will introduce breaks between paragraphs
 
 Reply only in json with the following format:
 
 {
     "summary":  "The summary of the content that answers the user's query",
     "reasoning": "A sentence on why you chose that summary"
-}
-
-e.g.
-Task: What is the capital of England
-{
-    "summary": "The capital of England is London.",
-    "reasoning": "London is widely known as the capital of England, a fact mentioned in various authoritative sources and geographical references."
 }

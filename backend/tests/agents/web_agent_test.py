@@ -19,7 +19,7 @@ async def test_web_general_search_core(
 
     mock_perform_search.return_value = {"status": "success", "urls": ["http://example.com"]}
     mock_perform_scrape.return_value = "Example scraped content."
-    mock_perform_summarization.return_value = "Example summary."
+    mock_perform_summarization.return_value = json.dumps({"summary": "Example summary."})
     mock_is_valid_answer.return_value = True
     result = await web_general_search_core("example query", llm, model)
     expected_response = {
@@ -61,7 +61,7 @@ async def test_web_general_search_core_invalid_summary(
     model = "mock_model"
     mock_perform_search.return_value = {"status": "success", "urls": ["http://example.com"]}
     mock_perform_scrape.return_value = "Example scraped content."
-    mock_perform_summarization.return_value = "Example invalid summary."
+    mock_perform_summarization.return_value = json.dumps({"summary": "Example invalid summary."})
     mock_is_valid_answer.return_value = False
     result = await web_general_search_core("example query", llm, model)
     assert result == "No relevant information found on the internet for the given query."
