@@ -21,7 +21,8 @@ Guidelines:
     - The correct aggregation and sorting methods if applicable.
 4. Avoid conflating intents: If a user's query asks for data retrieval and its visualization, treat these as separate operations.
 5. If an intent includes a repetition of the same task but with different variables, treat each iteration of the repetition separately.
-5. Do not make assumptions or create hypothetical data. Use only concrete data where applicable.
+6. If an intent contains a succession of similar tasks, with the same task repeated several times, take a step back and examine the number of tasks at hand, then what each task involves and finally ensure that each task is treated separately, in a unique manner within the context of the whole intent. 
+7. Do not make assumptions or create hypothetical data. Use only concrete data where applicable.
  
 Specify an operation type under the operation key; here are a few examples: 
 
@@ -77,3 +78,34 @@ Response:
 Q: Read the file called file_to_read.txt and write its content to a file called output.txt.
 Response:
 {"query": "Read the file called {{ file_name }} and write its content to a file called {{ output_file_name }}.", "user_intent": "read and write file content", "questions": [{"query": "Read the file called {{ file_name }} using fileagent.", "question_intent": "read file content", "operation": "literal search", "question_category": "data driven", "parameters": [{"type": "file", "value": "{{ file_name }}"}], "aggregation": "none", "sort_order": "none", "timeframe": "none"}, {"query": "Write the content to a file called {{ output_file_name }} using fileagent.", "question_intent": "write file content", "operation": "literal search", "question_category": "data driven", "parameters": [{"type": "file", "value": "{{ output_file_name }}"}], "aggregation": "none", "sort_order": "none", "timeframe": "none"}]}
+
+Q: Create 2 files that should both say "La chair est triste hélas! et j'ai lu tous les livres". 
+Response:  
+{"query": "Create two separate files called {{ file1 }} and {{ file2 }} and write in each the content "La chair est triste hélas! et j'ai lu tous les livres", "user_intent": "write file content", "questions": [
+    {
+      "query": "Write 'La chair est triste hélas! et j'ai lu tous les livres' to file1.txt",
+      "question_intent": "write file content",
+      "operation": "literal search",
+      "question_category": "data driven",
+      "parameters": [
+        {"type": "file", "value": "file1.txt"},
+        {"type": "content", "value": "La chair est triste hélas! et j'ai lu tous les livres"}
+      ],
+      "aggregation": "none",
+      "sort_order": "none",
+      "timeframe": "none"
+    },
+    {
+      "query": "Write 'La chair est triste hélas! et j'ai lu tous les livres' to file2.txt",
+      "question_intent": "write file content",
+      "operation": "literal search",
+      "question_category": "data driven",
+      "parameters": [
+        {"type": "file", "value": "file2.txt"},
+        {"type": "content", "value": "La chair est triste hélas! et j'ai lu tous les livres"}
+      ],
+      "aggregation": "none",
+      "sort_order": "none",
+      "timeframe": "none"
+    }
+}
