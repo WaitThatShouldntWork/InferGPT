@@ -103,6 +103,34 @@ async def web_general_search(search_query, llm, model) -> str:
 async def web_pdf_download(pdf_url, llm, model) -> str:
     return await web_pdf_download_core(pdf_url, llm, model)
 
+async def web_scrape_price_core(url: str) -> str:
+    try:
+        logger.info(f"Scraping the price of the book from URL: {url}")
+        # Scrape the content from the provided URL
+        content = await scrape_content(url)
+        if not content:
+            return "No content found at the provided URL."
+        logger.info(f"Content scraped successfully: {content}")
+       
+    except Exception as e:
+        logger.error(f"Error in web_scrape_price_core: {e}")
+        return json.dumps({"status": "error", "error": str(e)})
+
+
+@tool(
+    name="web_scrape_price",
+    description="Scrapes the price of a book from a given URL and writes it to a .txt file.",
+    parameters={
+        "url": Parameter(
+            type="string",
+            description="The URL of the book page to scrape the price from.",
+        ),
+    },
+)
+async def web_scrape_price(url: str, llm, model) -> str:
+    logger.info(f"Scraping the price of the book from URL: {url}")
+    return await web_scrape_price_core(url)
+
 def get_validator_agent() -> Agent:
     return ValidatorAgent(config.validator_agent_llm, config.validator_agent_model)
 
@@ -159,7 +187,7 @@ async def perform_pdf_summarization(content: str, llm: Any, model: str) -> str:
 @agent(
     name="WebAgent",
     description="This agent is responsible for handling web search queries and summarizing information from the web.",
-    tools=[web_general_search, web_pdf_download],
+    tools=[web_general_search, web_pdf_download, web_scrape_price],
 )
 class WebAgent(Agent):
     pass

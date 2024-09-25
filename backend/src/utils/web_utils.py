@@ -104,3 +104,29 @@ async def summarise_pdf_content(contents, llm, model) -> str:
                 "error": str(e),
             }
         )
+
+async def perform_math_operation_util(math_query, llm, model) -> str:
+    try:
+        # Load the prompt template for math operations
+        math_prompt = engine.load_prompt("math-solver", query=math_query)
+
+        # Send the math query to the LLM to perform the math operation
+        response = await llm.chat(model, math_prompt, "", return_json=True)
+        # Parse the response and return the result
+        return json.dumps(
+            {
+                "status": "success",
+                "response": response,  # math result
+                "error": None,
+            }
+        )
+    except Exception as e:
+        # Handle any errors during the LLM math operation
+        logger.error(f"Error during math operation: {e}")
+        return json.dumps(
+            {
+                "status": "error",
+                "response": None,
+                "error": str(e),
+            }
+        )
