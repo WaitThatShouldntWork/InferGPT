@@ -15,12 +15,13 @@ Guidelines:
 1. Determine each distinct intent in the question.
 2. Sequence the intents: Identify which intent should be tackled first and which should follow.
 3. For each intent, specify:
-    - The exact operation required (e.g., "literal search", "filter + aggregation", "data visualization").
+    - The exact operation required (e.g., "literal search", "filter + aggregation", "data transformation", "mathematical operation" for maths-related tasks like rounding).
     - The category of the question (e.g., "data-driven", "data presentation", "general knowledge").
     - Any specific parameters or conditions that apply.
     - The correct aggregation and sorting methods if applicable.
-4. Avoid conflating intents: If a user's query asks for data retrieval and its visualization, treat these as separate operations.
-5. Do not make assumptions or create hypothetical data. Use only concrete data where applicable.
+4. For mathematical operations (like rounding, addition, or finding maximum values), use **MathsAgent** for the task.
+5. Avoid conflating intents: If a user's query asks for data retrieval and its visualization, treat these as separate operations.
+6. Do not make assumptions or create hypothetical data. Use only concrete data where applicable.
  
 Specify an operation type under the operation key; here are a few examples: 
 
