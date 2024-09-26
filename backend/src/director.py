@@ -12,7 +12,6 @@ config = Config()
 engine = PromptEngine()
 director_prompt = engine.load_prompt("director")
 
-
 async def question(question: str) -> str:
     intent = await get_intent_agent().invoke(question)
     intent_json = json.loads(intent)
