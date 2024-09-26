@@ -4,7 +4,7 @@ from .agent_types import Parameter
 from .agent import Agent, agent
 from .tool import tool
 from src.utils import Config
-from src.utils.web_utils import search_urls, scrape_content, summarise_content, summarise_pdf_content
+from src.utils.web_utils import search_urls, scrape_content, summarise_content, summarise_pdf_content, find_info
 from .validator_agent import ValidatorAgent
 import aiohttp
 import io
@@ -103,33 +103,75 @@ async def web_general_search(search_query, llm, model) -> str:
 async def web_pdf_download(pdf_url, llm, model) -> str:
     return await web_pdf_download_core(pdf_url, llm, model)
 
-async def web_scrape_price_core(url: str) -> str:
+async def web_scrape_core(url: str) -> str:
     try:
         logger.info(f"Scraping the price of the book from URL: {url}")
         # Scrape the content from the provided URL
-        content = await scrape_content(url)
+        content = await perform_scrape(url)
         if not content:
             return "No content found at the provided URL."
         logger.info(f"Content scraped successfully: {content}")
-       
+        content = content.replace("\n", " ").replace("\r", " ")
+        response = {
+                "content": content,
+                "ignore_validation": "true"
+            }
+        return json.dumps(response, indent=4)
     except Exception as e:
         logger.error(f"Error in web_scrape_price_core: {e}")
         return json.dumps({"status": "error", "error": str(e)})
 
 
 @tool(
-    name="web_scrape_price",
-    description="Scrapes the price of a book from a given URL and writes it to a .txt file.",
+    name="web_scrape",
+    description="Scrapes the content from the given URL.",
     parameters={
         "url": Parameter(
             type="string",
-            description="The URL of the book page to scrape the price from.",
+            description="The URL of the page to scrape the content from.",
         ),
     },
 )
-async def web_scrape_price(url: str, llm, model) -> str:
-    logger.info(f"Scraping the price of the book from URL: {url}")
-    return await web_scrape_price_core(url)
+async def web_scrape(url: str, llm, model) -> str:
+    logger.info(f"Scraping the content from URL: {url}")
+    return await web_scrape_core(url)
+
+
+async def find_information_from_content_core(content: str, question, llm, model) -> str:
+    try:
+        find_info_json = await find_info(content, question, llm, model)
+        info_result = json.loads(find_info_json)
+        if info_result["status"] == "error":
+            return ""
+        final_info = info_result["response"]
+        if not final_info:
+            return "No information found from the content."
+        logger.info(f"Content scraped successfully: {content}")
+        response = {
+                "content": final_info,
+                "ignore_validation": "true"
+            }
+        return json.dumps(response, indent=4)
+    except Exception as e:
+        logger.error(f"Error finding information: {e}")
+        return ""
+
+@tool(
+    name="find_information_content",
+    description="Finds the information from the content.",
+    parameters={
+        "content": Parameter(
+            type="string",
+            description="The content to find the information from.",
+        ),
+        "question": Parameter(
+            type="string",
+            description="The question to find the information from the content.",
+        ),
+        },
+)
+async def find_information_from_content(content: str, question: str, llm, model) -> str:
+    return await find_information_from_content_core(content, question, llm, model)
 
 def get_validator_agent() -> Agent:
     return ValidatorAgent(config.validator_agent_llm, config.validator_agent_model)
@@ -186,8 +228,15 @@ async def perform_pdf_summarization(content: str, llm: Any, model: str) -> str:
 
 @agent(
     name="WebAgent",
-    description="This agent is responsible for handling web search queries and summarizing information from the web.",
-    tools=[web_general_search, web_pdf_download, web_scrape_price],
+    description="""This agent specializes in handling tasks related to web content extraction, search, and
+    summarization.
+    It can perform the following functions:
+    Web scraping: Extracts data from given URLs, enabling tasks like retrieving specific information from web pages.
+    Finding Information from Content: Extracts specific information from the content provided.
+    Internet search: Conducts general online searches based on queries, retrieving and summarizing relevant content from
+    multiple sources.
+    PDF content extraction: Downloads and summarizes the content of PDF documents from provided URLs.""",
+    tools=[web_general_search, web_pdf_download, web_scrape, find_information_from_content],
 )
 class WebAgent(Agent):
     pass

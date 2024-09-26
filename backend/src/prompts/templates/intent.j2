@@ -15,13 +15,14 @@ Guidelines:
 1. Determine each distinct intent in the question.
 2. Sequence the intents: Identify which intent should be tackled first and which should follow.
 3. For each intent, specify:
-    - The exact operation required (e.g., "literal search", "filter + aggregation", "data transformation", "mathematical operation" for maths-related tasks like rounding).
-    - The category of the question (e.g., "data-driven", "data presentation", "general knowledge").
+    - The exact operation required (e.g., "literal search", "filter + aggregation", "data transformation", "scrape content", "find specific information", "mathematical operation" for maths-related tasks like rounding).
+    - The category of the question (e.g., "data-driven", "data presentation", "general knowledge", "content extraction", "file handling").
     - Any specific parameters or conditions that apply.
     - The correct aggregation and sorting methods if applicable.
 4. For mathematical operations (like rounding, addition, or finding maximum values), use **MathsAgent** for the task.
 5. Avoid conflating intents: If a user's query asks for data retrieval and its visualization, treat these as separate operations.
 6. Do not make assumptions or create hypothetical data. Use only concrete data where applicable.
+7. Treat each operation as a separate task when there are multiple intents.
  
 Specify an operation type under the operation key; here are a few examples: 
 
@@ -77,3 +78,11 @@ Response:
 Q: Read the file called file_to_read.txt and write its content to a file called output.txt.
 Response:
 {"query": "Read the file called {{ file_name }} and write its content to a file called {{ output_file_name }}.", "user_intent": "read and write file content", "questions": [{"query": "Read the file called {{ file_name }} using fileagent.", "question_intent": "read file content", "operation": "literal search", "question_category": "data driven", "parameters": [{"type": "file", "value": "{{ file_name }}"}], "aggregation": "none", "sort_order": "none", "timeframe": "none"}, {"query": "Write the content to a file called {{ output_file_name }} using fileagent.", "question_intent": "write file content", "operation": "literal search", "question_category": "data driven", "parameters": [{"type": "file", "value": "{{ output_file_name }}"}], "aggregation": "none", "sort_order": "none", "timeframe": "none"}]}
+
+Q: What's the price of the book in this URL http://books.toscrape.com/catalogue/meditations_33/index.html?
+Response:
+{"query": "What's the price of the book in this URL http://books.toscrape.com/catalogue/meditations_33/index.html?", "user_intent": "find the price of a book from a URL", "questions": [{"query": "Scrape the content of the page at the URL: http://books.toscrape.com/catalogue/meditations_33/index.html", "question_intent": "scrape content", "operation": "online search and scraping", "question_category": "content extraction", "parameters": [{"type": "URL", "value": "http://books.toscrape.com/catalogue/meditations_33/index.html"}]}, {"query": "Extract the price of the book from the scraped content.", "question_intent": "find specific information", "operation": "literal search", "question_category": "data-driven", "parameters": [{"type": "attribute", "value": "price"}]}]}
+
+Q: Write the price of the book in this URL: http://books.toscrape.com/catalogue/meditations_33/index.html into a .txt file.
+Response:
+{"query": "Write the price of the book in this URL: http://books.toscrape.com/catalogue/meditations_33/index.html into a .txt file.", "user_intent": "scrape price and save to file", "questions": [{"query": "Scrape the content of the page at the URL: http://books.toscrape.com/catalogue/meditations_33/index.html", "question_intent": "scrape content", "operation": "online search and scraping", "question_category": "content extraction", "parameters": [{"type": "URL", "value": "http://books.toscrape.com/catalogue/meditations_33/index.html"}]}, {"query": "Extract the price of the book from the scraped content.", "question_intent": "find specific information", "operation": "literal search", "question_category": "data-driven", "parameters": [{"type": "attribute", "value": "price"}]}, {"query": "Write the price into a file called price.txt.", "question_intent": "save to file", "operation": "write file content", "question_category": "file handling", "parameters": [{"type": "file", "value": "price.txt"}]}]}

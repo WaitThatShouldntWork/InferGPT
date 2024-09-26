@@ -130,3 +130,30 @@ async def perform_math_operation_util(math_query, llm, model) -> str:
                 "error": str(e),
             }
         )
+
+
+async def find_info(content, question, llm, model) -> str:
+    try:
+        # Load the prompt template for math operations
+        math_prompt = engine.load_prompt("find-info", question=question, content=content)
+
+        # Send the math query to the LLM to perform the math operation
+        response = await llm.chat(model, math_prompt, "", return_json=True)
+        # Parse the response and return the result
+        return json.dumps(
+            {
+                "status": "success",
+                "response": response,
+                "error": None,
+            }
+        )
+    except Exception as e:
+        # Handle any errors during the LLM math operation
+        logger.error(f"Error during math operation: {e}")
+        return json.dumps(
+            {
+                "status": "error",
+                "response": None,
+                "error": str(e),
+            }
+        )

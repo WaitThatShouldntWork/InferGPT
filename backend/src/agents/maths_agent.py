@@ -66,8 +66,8 @@ async def perform_math_operation_core(math_query, llm, model) -> str:
             response = result_json.get("response", {})
             response_json = json.loads(response)
             result = response_json.get("result", "")
-            steps = response_json.get("steps", "")
-            reasoning = response_json.get("reasoning", "")
+            # steps = response_json.get("steps", "")
+            # reasoning = response_json.get("reasoning", "")
 
             if result:
                 logger.info(f"Math operation successful: {result}")
@@ -80,24 +80,31 @@ async def perform_math_operation_core(math_query, llm, model) -> str:
                     }
                     return json.dumps(response, indent=4)
             else:
-                return "No valid result found for the math query."
+                response = {
+                        "content": "No valid result found for the math query.",
+                        "ignore_validation": "true"
+                }
+                return json.dumps(response, indent=4)
         else:
-            return json.dumps(
-                {
-                    "status": "error",
-                    "response": None,
-                    "error": result_json.get("error", "Unknown error"),
-                }, indent=4
-            )
+            response = {
+                        "content": None,
+                        "status": "error"
+                    }
+            return json.dumps(response, indent=4)
     except Exception as e:
         logger.error(f"Error in perform_math_operation_core: {e}")
-        return json.dumps(
-            {
-                "status": "error",
-                "response": None,
-                "error": str(e),
-            }, indent=4
-        )
+        response = {
+                    "content": None,
+                    "status": "error"
+                }
+        return json.dumps(response, indent=4)
+
+    # Ensure a return statement in all code paths
+    response = {
+                "content": None,
+                "status": "error"
+            }
+    return json.dumps(response, indent=4)
 
 def get_validator_agent() -> Agent:
     return ValidatorAgent(config.validator_agent_llm, config.validator_agent_model)
