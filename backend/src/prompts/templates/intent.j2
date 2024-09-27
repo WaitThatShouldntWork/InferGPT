@@ -7,7 +7,8 @@ The question is:
 
 
 Your task is to accurately comprehend the intentions behind the question. The question can be composed of different intents and when it is the case, examine all intents one by one to determine which one to tackle first as you may need the data gathered from a secondary intent to perform the first intent.  
-The first thing you need to do is check {{ memory }} for any context you may need. Carefully examine entities mentioned by the user which are stored in memory, and think whether these are relevant for the current utterance.
+The first thing you need to do is check {{ memory }} for any context you may need. Carefully examine entities mentioned which are stored in memory, and think whether these are relevant for the current utterance.
+If {{ memory }} contains a goal, never deviate from that goal. The goal can not be replaced by a subsequent goal, under any circumstances, there is only one goal.
 If the question contains multiple intents, break them down into individual tasks, and specify the order in which these tasks should be tackled. The order should ensure that each intent is addressed in a logical sequence, particularly if one intent depends on the data obtained from another.
 You are NOT ALLOWED to make up sample data or example values. Only use concrete data for which you can name the source.
 Based on this understanding, the following query must be formulated to extract the necessary data, which can then be used to address the question. 
@@ -82,31 +83,4 @@ Response:
 
 Q: Create 2 files that should both say "La chair est triste hélas! et j'ai lu tous les livres". 
 Response:  
-{"query": "Create two separate files called {{ file1 }} and {{ file2 }} and write in each the content "La chair est triste hélas! et j'ai lu tous les livres", "user_intent": "write file content", "questions": [
-    {
-      "query": "Write 'La chair est triste hélas! et j'ai lu tous les livres' to file1.txt",
-      "question_intent": "write file content",
-      "operation": "literal search",
-      "question_category": "data driven",
-      "parameters": [
-        {"type": "file", "value": "file1.txt"},
-        {"type": "content", "value": "La chair est triste hélas! et j'ai lu tous les livres"}
-      ],
-      "aggregation": "none",
-      "sort_order": "none",
-      "timeframe": "none"
-    },
-    {
-      "query": "Write 'La chair est triste hélas! et j'ai lu tous les livres' to file2.txt",
-      "question_intent": "write file content",
-      "operation": "literal search",
-      "question_category": "data driven",
-      "parameters": [
-        {"type": "file", "value": "file2.txt"},
-        {"type": "content", "value": "La chair est triste hélas! et j'ai lu tous les livres"}
-      ],
-      "aggregation": "none",
-      "sort_order": "none",
-      "timeframe": "none"
-    }
-}
+{"query": "Create two separate files called {{ file1 }} and {{ file2 }} and write in each the content 'La chair est triste hélas! et j'ai lu tous les livres'", "user_intent": "write file content", "questions": [{"query": "Write 'La chair est triste hélas! et j'ai lu tous les livres' to file1.txt", "question_intent": "write file content", "operation": "literal search", "question_category": "data driven", "parameters": [{"type": "file", "value": "file1.txt"}, {"type": "content", "value": "La chair est triste hélas! et j'ai lu tous les livres"}], "aggregation": "none", "sort_order": "none", "timeframe": "none"}, {"query": "Write 'La chair est triste hélas! et j'ai lu tous les livres' to file2.txt", "question_intent": "write file content", "operation": "literal search", "question_category": "data driven", "parameters": [{"type": "file", "value": "file2.txt"}, {"type": "content", "value": "La chair est triste hélas! et j'ai lu tous les livres"}], "aggregation": "none", "sort_order": "none", "timeframe": "none"}]}

@@ -66,6 +66,7 @@ class Config(object):
             self.web_agent_llm = os.getenv("WEB_AGENT_LLM")
             self.maths_agent_llm = os.getenv("MATHS_AGENT_LLM")
             self.router_llm = os.getenv("ROUTER_LLM")
+            self.goal_agent_llm = os.getenv("GOAL_AGENT_LLM")
             self.answer_agent_model = os.getenv("ANSWER_AGENT_MODEL")
             self.intent_agent_model = os.getenv("INTENT_AGENT_MODEL")
             self.validator_agent_model = os.getenv("VALIDATOR_AGENT_MODEL")
@@ -75,6 +76,7 @@ class Config(object):
             self.maths_agent_model = os.getenv("MATHS_AGENT_MODEL")
             self.router_model = os.getenv("ROUTER_MODEL")
             self.file_agent_model = os.getenv("FILE_AGENT_MODEL")
+            self.goal_agent_model = os.getenv("GOAL_AGENT_MODEL")
         except FileNotFoundError:
             raise FileNotFoundError("Please provide a .env file. See the Getting Started guide on the README.md")
         except Exception:

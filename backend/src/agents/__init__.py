@@ -8,6 +8,7 @@ from .tool import tool, Parameter
 from .validator_agent import ValidatorAgent
 from .answer_agent import AnswerAgent
 from .chart_generator_agent import ChartGeneratorAgent
+from .goal_agent import GoalAgent
 from .file_agent import FileAgent
 
 config = Config()
@@ -34,6 +35,7 @@ def get_available_agents() -> List[Agent]:
             WebAgent(config.web_agent_llm, config.web_agent_model),
             ChartGeneratorAgent(config.chart_generator_llm, config.chart_generator_model),
             FileAgent(config.file_agent_llm, config.file_agent_model),
+            GoalAgent(config.goal_agent_llm, config.goal_agent_model),
             ]
 
 
