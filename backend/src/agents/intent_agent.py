@@ -1,9 +1,11 @@
 from src.prompts import PromptEngine
 from src.agents import Agent, agent
+from src.utils.config import Config
+
+config = Config()
 
 engine = PromptEngine()
 intent_format = engine.load_prompt("intent-format")
-memory = []
 
 @agent(
     name="IntentAgent",
@@ -12,7 +14,6 @@ memory = []
 )
 class IntentAgent(Agent):
     async def invoke(self, utterance: str) -> str:
-        memory.append(utterance)
-        user_prompt = engine.load_prompt("intent", question=utterance, memory=memory)
+        user_prompt = engine.load_prompt("intent", question=utterance, conversation_history="conversation_history.txt")
         response = await self.llm.chat(self.model, intent_format, user_prompt=user_prompt, return_json=True)
         return response

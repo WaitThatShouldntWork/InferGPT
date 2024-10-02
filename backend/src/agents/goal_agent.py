@@ -7,17 +7,16 @@ import logging
 import json
 
 engine = PromptEngine()
+
 logger = logging.getLogger(__name__)
 
 async def create_goal_core(goal_query, llm: LLM, model) -> str:
     goal_prompt = engine.load_prompt("goal-agent", utterance=goal_query)
     llm_response = await llm.chat(model, goal_query, goal_prompt, return_json=True)
     logger.info(f"goal from llm {llm_response}")
-    response = {
-        "content": llm_response,
-        "ignore_validation": "false"
-    }
+    response = {"content": llm_response, "ignore_validation": "false"}
     return json.dumps(response, indent=4)
+
 
 @tool(
     name="create a goal",
@@ -29,9 +28,9 @@ async def create_goal_core(goal_query, llm: LLM, model) -> str:
         )
     },
 )
-
 async def create_goal(goal_query, llm: LLM, model) -> str:
     return await create_goal_core(goal_query, llm, model)
+
 
 @agent(
     name="GoalAgent",

@@ -57,7 +57,8 @@ async def generate_cypher_query_core(
 
 @tool(
     name="generate cypher query",
-    description="Generate Cypher query if the category is data driven, based on the operation to be performed",
+    description="""Generate Cypher query if the category entails user transactions and transaction history,
+        based on the operation to be performed""",
     parameters={
         "question_intent": Parameter(
             type="string",

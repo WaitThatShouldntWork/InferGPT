@@ -28,6 +28,7 @@ class Config(object):
         self.chart_generator_llm = None
         self.file_agent_llm = None
         self.router_llm = None
+        self.goal_agent_llm = None
         self.validator_agent_model = None
         self.intent_agent_model = None
         self.answer_agent_model = None
@@ -37,6 +38,7 @@ class Config(object):
         self.router_model = None
         self.files_directory = default_files_directory
         self.file_agent_model = None
+        self.goal_agent_model = None
         self.load_env()
 
     def load_env(self):
