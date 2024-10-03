@@ -4,7 +4,14 @@ from .agent_types import Parameter
 from .agent import Agent, agent
 from .tool import tool
 from src.utils import Config
-from src.utils.web_utils import search_urls, scrape_content, summarise_content, summarise_pdf_content, find_info
+from src.utils.web_utils import (
+    search_urls,
+    scrape_content,
+    summarise_content,
+    summarise_pdf_content,
+    find_info,
+    create_search_term
+)
 from .validator_agent import ValidatorAgent
 import aiohttp
 import io
@@ -20,27 +27,42 @@ engine = PromptEngine()
 
 async def web_general_search_core(search_query, llm, model) -> str:
     try:
-        search_result = await perform_search(search_query, num_results=15)
-        if search_result["status"] == "error":
+        # Step 1: Generate the search term from the user's query
+        search_term_json = await create_search_term(search_query, llm, model)
+        search_term_result = json.loads(search_term_json)
+
+        # Check if there was an error in generating the search term
+        if search_term_result.get("status") == "error":
+            return "No search term found for the given query."
+        search_term = json.loads(search_term_result["response"]).get("search_term", "")
+
+        # Step 2: Perform the search using the generated search term
+        search_result = await perform_search(search_term, num_results=15)
+        if search_result.get("status") == "error":
             return "No relevant information found on the internet for the given query."
-        urls = search_result["urls"]
+        urls = search_result.get("urls", [])
         logger.info(f"URLs found: {urls}")
+
+        # Step 3: Scrape content from the URLs found
         for url in urls:
             content = await perform_scrape(url)
             if not content:
-                continue
-            summarisation = await perform_summarization(search_query, content, llm, model)
-            if not summarisation:
-                continue
-            is_valid = await is_valid_answer(summarisation, search_query)
-            parsed_json = json.loads(summarisation)
-            summary = parsed_json.get('summary', '')
-            if is_valid:
-                response = {
-                    "content": summary,
-                    "ignore_validation": "false"
-                }
-                return json.dumps(response, indent=4)
+                continue  # Skip to the next URL if no content is found
+            logger.info(f"Content scraped successfully: {content}")
+            # Step 4: Summarize the scraped content based on the search term
+            summary = await perform_summarization(search_term, content, llm, model)
+            if not summary:
+                continue  # Skip if no summary was generated
+
+            # Step 5: Validate the summarization
+            is_valid = await is_valid_answer(summary, search_term)
+            if not is_valid:
+                continue # Skip if the summarization is not valid
+            response = {
+                "content": summary,
+                "ignore_validation": "false"
+            }
+            return json.dumps(response, indent=4)
         return "No relevant information found on the internet for the given query."
     except Exception as e:
         logger.error(f"Error in web_general_search_core: {e}")
@@ -210,7 +232,7 @@ async def perform_summarization(search_query: str, content: str, llm: Any, model
         if summarise_result["status"] == "error":
             return ""
         logger.info(f"Content summarized successfully: {summarise_result['response']}")
-        return summarise_result["response"]
+        return json.loads(summarise_result["response"])["summary"]
     except Exception as e:
         logger.error(f"Error summarizing content: {e}")
         return ""

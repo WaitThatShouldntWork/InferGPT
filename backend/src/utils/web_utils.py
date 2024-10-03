@@ -43,7 +43,7 @@ async def scrape_content(url, limit=100000) -> str:
         async with aiohttp.request("GET", url) as response:
             response.raise_for_status()
             soup = BeautifulSoup(await response.text(), "html.parser")
-            paragraphs = soup.find_all("p")
+            paragraphs = soup.find_all("p" and "table")
             content = " ".join([para.get_text() for para in paragraphs])
             return json.dumps(
                 {
@@ -62,6 +62,26 @@ async def scrape_content(url, limit=100000) -> str:
             }
         )
 
+async def create_search_term(search_query, llm, model) -> str:
+    try:
+        summariser_prompt = engine.load_prompt("create-search-term", question=search_query)
+        response = await llm.chat(model, summariser_prompt, "", return_json=True)
+        return json.dumps(
+            {
+                "status": "success",
+                "response": response,
+                "error": None,
+            }
+        )
+    except Exception as e:
+        logger.error(f"Error during create search term: {e}")
+        return json.dumps(
+            {
+                "status": "error",
+                "response": None,
+                "error": str(e),
+            }
+        )
 
 async def summarise_content(search_query, contents, llm, model) -> str:
     try:
@@ -96,7 +116,7 @@ async def summarise_pdf_content(contents, llm, model) -> str:
             }
         )
     except Exception as e:
-        logger.error(f"Error during summarisation: {e}")
+        logger.error(f"Error during summarisation of PDF: {e}")
         return json.dumps(
             {
                 "status": "error",
@@ -107,12 +127,9 @@ async def summarise_pdf_content(contents, llm, model) -> str:
 
 async def perform_math_operation_util(math_query, llm, model) -> str:
     try:
-        # Load the prompt template for math operations
         math_prompt = engine.load_prompt("math-solver", query=math_query)
-
-        # Send the math query to the LLM to perform the math operation
         response = await llm.chat(model, math_prompt, "", return_json=True)
-        # Parse the response and return the result
+        logger.info(f"Math operation response: {response}")
         return json.dumps(
             {
                 "status": "success",
@@ -121,7 +138,6 @@ async def perform_math_operation_util(math_query, llm, model) -> str:
             }
         )
     except Exception as e:
-        # Handle any errors during the LLM math operation
         logger.error(f"Error during math operation: {e}")
         return json.dumps(
             {
@@ -134,12 +150,8 @@ async def perform_math_operation_util(math_query, llm, model) -> str:
 
 async def find_info(content, question, llm, model) -> str:
     try:
-        # Load the prompt template for math operations
-        math_prompt = engine.load_prompt("find-info", question=question, content=content)
-
-        # Send the math query to the LLM to perform the math operation
-        response = await llm.chat(model, math_prompt, "", return_json=True)
-        # Parse the response and return the result
+        find_info_prompt = engine.load_prompt("find-info", question=question, content=content)
+        response = await llm.chat(model, find_info_prompt, "", return_json=True)
         return json.dumps(
             {
                 "status": "success",
@@ -148,8 +160,7 @@ async def find_info(content, question, llm, model) -> str:
             }
         )
     except Exception as e:
-        # Handle any errors during the LLM math operation
-        logger.error(f"Error during math operation: {e}")
+        logger.error(f"Error during finding info operation: {e}")
         return json.dumps(
             {
                 "status": "error",
