@@ -22,7 +22,7 @@ def send_prompt(prompt: str):
 
 #Evaluators
 ##Evaluation LLM
-llm = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0, max_retries=2)
+llm = ChatOpenAI(model="gpt-4", temperature=0, max_retries=2)
 #llm = ChatMistralAI(name="mistral-small-latest", model_name= "mistral-small-latest", temperature=0, max_retries=2,) 
 
 correctness_evaluator: StringEvaluator = load_evaluator( # type: ignore
