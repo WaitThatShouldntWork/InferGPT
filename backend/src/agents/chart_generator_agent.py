@@ -9,8 +9,8 @@ import base64
 from src.utils import scratchpad
 from PIL import Image
 import json
-from src.websockets.user_confirmer import UserConfirmer
-from src.websockets.confirmations_manager import confirmations_manager
+# from src.websockets.user_confirmer import UserConfirmer
+# from src.websockets.confirmations_manager import confirmations_manager
 
 logger = logging.getLogger(__name__)
 
@@ -31,8 +31,9 @@ async def generate_chart(question_intent, data_provided, question_params, llm: L
     sanitised_script = sanitise_script(generated_code)
 
     try:
-        confirmer = UserConfirmer(confirmations_manager)
-        is_confirmed = await confirmer.confirm("Would you like to generate a graph?")
+        # confirmer = UserConfirmer(confirmations_manager)
+        is_confirmed = True
+        # await confirmer.confirm("Would you like to generate a graph?")
         if not is_confirmed:
             raise Exception("The user did not confirm to creating a graph.")
         local_vars = {}

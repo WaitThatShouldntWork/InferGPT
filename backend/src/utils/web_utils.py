@@ -43,8 +43,8 @@ async def scrape_content(url, limit=100000) -> str:
         async with aiohttp.request("GET", url) as response:
             response.raise_for_status()
             soup = BeautifulSoup(await response.text(), "html.parser")
-            paragraphs = soup.find_all("p" and "table")
-            content = " ".join([para.get_text() for para in paragraphs])
+            paragraphs_and_tables = soup.find_all(["p", "table", "h1", "h2", "h3", "h4", "h5", "h6"])
+            content = "\n".join([tag.get_text() for tag in paragraphs_and_tables])
             return json.dumps(
                 {
                     "status": "success",
@@ -65,6 +65,27 @@ async def scrape_content(url, limit=100000) -> str:
 async def create_search_term(search_query, llm, model) -> str:
     try:
         summariser_prompt = engine.load_prompt("create-search-term", question=search_query)
+        response = await llm.chat(model, summariser_prompt, "", return_json=True)
+        return json.dumps(
+            {
+                "status": "success",
+                "response": response,
+                "error": None,
+            }
+        )
+    except Exception as e:
+        logger.error(f"Error during create search term: {e}")
+        return json.dumps(
+            {
+                "status": "error",
+                "response": None,
+                "error": str(e),
+            }
+        )
+
+async def answer_user_ques(search_query, llm, model) -> str:
+    try:
+        summariser_prompt = engine.load_prompt("answer-user-ques", question=search_query)
         response = await llm.chat(model, summariser_prompt, "", return_json=True)
         return json.dumps(
             {

@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch, mock_open
 import json
 import os
-from src.agents.file_agent import read_file_core, write_file_core, create_response
+from src.agents.file_agent import read_file_core, write_or_update_file_core, create_response
 
 # Mocking config for the test
 @pytest.fixture(autouse=True)
@@ -34,7 +34,7 @@ async def test_read_file_core_file_not_found(mock_file):
 async def test_write_file_core_success(mock_file):
     file_path = "example_write.txt"
     content = "This is test content to write."
-    result = await write_file_core(file_path, content)
+    result = await write_or_update_file_core(file_path, content, 'no')
     expected_response = create_response(f"Content written to file {file_path}.")
     assert json.loads(result) == json.loads(expected_response)
     expected_full_path = os.path.normpath("/app/files/example_write.txt")
@@ -46,7 +46,7 @@ async def test_write_file_core_success(mock_file):
 async def test_write_file_core_error(mock_file):
     file_path = "error_file.txt"
     content = "Content with error."
-    result = await write_file_core(file_path, content)
+    result = await write_or_update_file_core(file_path, content, 'no')
     expected_response = create_response(f"Error writing to file: {file_path}", "error")
     assert json.loads(result) == json.loads(expected_response)
     expected_full_path = os.path.normpath("/app/files/error_file.txt")
