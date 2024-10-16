@@ -1,6 +1,5 @@
 from src.prompts import PromptEngine
 from src.agents import Agent, agent
-from src.utils import get_scratchpad
 import logging
 import os
 import json
@@ -39,18 +38,14 @@ class IntentAgent(Agent):
         except Exception as e:
             logger.error(f"Error reading file {full_path}: {e}")
             return ""
-        
+
     async def invoke(self, utterance: str) -> str:
         chat_history = await self.read_file_core("conversation-history.txt")
-        logger.info(f"USER - chat history: {chat_history}")
-        
+
         user_prompt = engine.load_prompt("intent", question=utterance, chat_history=chat_history)
-        logger.info(f"USER - user prompt: {user_prompt}")
 
         return await self.llm.chat(self.model, intent_format, user_prompt=user_prompt, return_json=True)
 
-
-    
 
     # Utility function for error responses
 def create_response(content: str, status: str = STATUS_SUCCESS) -> str:
