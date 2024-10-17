@@ -71,8 +71,8 @@ async def is_valid_answer(answer, task) -> bool:
     name="perform_math_operation",
     description=(
         "Use this tool to perform complex mathematical operations or calculations. "
-        "It handles arithmetic operations and algebra, and also supports conversions to specific units like millions, rounding when necessary. "
-        "Returns both the result and an explanation of the steps involved."
+        "It handles arithmetic operations and algebra, and also supports conversions to specific units like millions,"
+        "rounding when necessary. Returns both the result and an explanation of the steps involved."
     ),
     parameters={
         "math_query": Parameter(
