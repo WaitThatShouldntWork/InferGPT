@@ -27,6 +27,7 @@ Use the following guidelines:
 3. Sequence the intents logically if there are multiple, ensuring any dependent intents are handled last.
 4. For each intent, clarify the operation, aggregation, sorting, and any timeframe or other parameters.
 5. Avoid conflating intents: If a user's query asks for data retrieval and its visualization, treat these as separate operations.
+6. Use the chat history to figure out the correct context if the user's question is a bit vague.
 
 Examples of common operations:
 - Literal search for factual information.

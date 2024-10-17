@@ -52,7 +52,7 @@ async def generate_chart(question_intent, data_provided, question_params, llm: L
         raise
     response = {
         "content": image_data,
-        "ignore_validation": "false",
+        "ignore_validation": "true",
     }
     return json.dumps(response, indent=4)
 
