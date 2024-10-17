@@ -71,7 +71,8 @@ async def is_valid_answer(answer, task) -> bool:
     name="perform_math_operation",
     description=(
         "Use this tool to perform complex mathematical operations or calculations. "
-        "It can handle queries related to arithmetic operations, algebra, or calculations involving large numbers."
+        "It handles arithmetic operations and algebra, and also supports conversions to specific units like millions, rounding when necessary. "
+        "Returns both the result and an explanation of the steps involved."
     ),
     parameters={
         "math_query": Parameter(
@@ -87,8 +88,9 @@ async def perform_math_operation(math_query, llm, model) -> str:
 @agent(
     name="MathsAgent",
     description=(
-        "This agent is responsible for handling mathematical queries and can perform "
-        "necessary rounding and formatting operations."
+        "This agent processes mathematical queries, performs calculations, and applies necessary formatting such as"
+         "rounding or converting results into specific units (e.g., millions). "
+        "It provides clear explanations of the steps involved to ensure accuracy."
     ),
     tools=[perform_math_operation],
 )
