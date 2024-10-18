@@ -138,15 +138,15 @@ scratchpad of history
 
 Pick 1 tool (no more than 1) from the list below to complete this task.
 Fit the correct parameters from the task to the tool arguments.
-Ensure that numerical values are formatted correctly, including the use of currency symbols (e.g., "$") and units of measurement (e.g., "million") if applicable.
+Ensure that numerical values are formatted correctly, including the use of currency symbols (e.g., "£") and units of measurement (e.g., "million") if applicable.
 Parameters with required as False do not need to be fit.
 Add if appropriate, but do not hallucinate arguments for these parameters
 
 {"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}
 
 Important:
-If the task involves financial data, ensure that all monetary values are expressed with appropriate currency (e.g., "$") and rounded to the nearest million if specified.
-If the task involves scaling (e.g., thousands, millions), ensure that the extracted parameters reflect the appropriate scale (e.g., "$15 million", "$5000").
+If the task involves financial data, ensure that all monetary values are expressed with appropriate currency (e.g., "£") and rounded to the nearest million if specified.
+If the task involves scaling (e.g., thousands, millions), ensure that the extracted parameters reflect the appropriate scale (e.g., "£15 million", "£5000").
 
 From the task you should be able to extract the parameters. If it is data driven, it should be turned into a cypher query
 
@@ -168,7 +168,7 @@ If none of the tools are appropriate for the task, return the following tool
 def test_tool_selection_format_template():
     engine = PromptEngine()
     try:
-        expected_string = """Reply only in json with the following format, in the tool_paramters please include the curreny and measuring scale used in the content provided.:
+        expected_string = """Reply only in json with the following format, in the tool_parameters please include the currency and measuring scale used in the content provided.:
 
 
 {

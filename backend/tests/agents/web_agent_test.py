@@ -50,8 +50,12 @@ async def test_web_general_search_core_no_results(
     model = "mock_model"
     mock_perform_search.return_value = {"status": "error", "urls": []}
     result = await web_general_search_core("example query", llm, model)
-    # Updated expectation to reflect the actual return value (empty string) in case of no results
-    assert result == ""
+
+    expected_response = {
+        "content": "Error in finding the answer.",
+        "ignore_validation": "false"
+    }
+    assert json.loads(result) == expected_response
 
 @pytest.mark.asyncio
 @patch("src.agents.web_agent.perform_search", new_callable=AsyncMock)
@@ -71,5 +75,9 @@ async def test_web_general_search_core_invalid_summary(
     mock_perform_summarization.return_value = json.dumps({"summary": "Example invalid summary."})
     mock_is_valid_answer.return_value = False
     result = await web_general_search_core("example query", llm, model)
-    # Updated expectation to reflect the actual return value (empty string) in case of an invalid summary
-    assert result == ""
+    expected_response = {
+        "content": "Error in finding the answer.",
+        "ignore_validation": "false"
+    }
+    assert json.loads(result) == expected_response
+
