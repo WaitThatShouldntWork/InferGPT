@@ -9,8 +9,9 @@ class MessageTypes(Enum):
     PING = "ping"
     PONG = "pong"
     CHAT = "chat"
-    LOG  = "log"
+    LOG = "log"
     IMAGE = "image"
+    CONFIRMATION = "confirmation"
 
 
 @dataclass

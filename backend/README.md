@@ -37,7 +37,7 @@ Follow the instructions below to run the backend locally. Change directory to `/
 ```bash
 pip install -r requirements.txt
 ```
-
+> (VsCode) You may run into some issues with compiling python packages from requirements.txt. To resolve this ensure you have downloaded and installed the "Desktop development with C++" workload from your Visual Studio installer.
 3. Run the app
 
 ```bash

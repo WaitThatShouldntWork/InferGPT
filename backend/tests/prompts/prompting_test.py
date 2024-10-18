@@ -58,11 +58,12 @@ Here is the list of Agents you can choose from:
 AGENT LIST:
 
 
-If the list of agents does not contain something suitable, you should say the agent is 'none'. ie. If question is 'general knowledge', 'personal' or a 'greeting'.
+If the list of agents does not contain something suitable, you should say the agent is 'WebAgent'. ie. If question is 'general knowledge', 'personal' or a 'greeting'.
 
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
 If the same agent_name and task are repeated more than twice in the history, you must not pick that agent_name.
+If mathematical processing (e.g., rounding or calculations) is needed, choose the MathsAgent. If file operations are needed, choose the FileAgent.
 
 Your decisions must always be made independently without seeking user assistance.
 Play to your strengths as an LLM and pursue simple strategies with no legal complications.
@@ -103,11 +104,12 @@ Here is the list of Agents you can choose from:
 AGENT LIST:
 
 
-If the list of agents does not contain something suitable, you should say the agent is 'none'. ie. If question is 'general knowledge', 'personal' or a 'greeting'.
+If the list of agents does not contain something suitable, you should say the agent is 'WebAgent'. ie. If question is 'general knowledge', 'personal' or a 'greeting'.
 
 ## Determine the next best step
 Your task is to pick one of the mentioned agents above to complete the task.
 If the same agent_name and task are repeated more than twice in the history, you must not pick that agent_name.
+If mathematical processing (e.g., rounding or calculations) is needed, choose the MathsAgent. If file operations are needed, choose the FileAgent.
 
 Your decisions must always be made independently without seeking user assistance.
 Play to your strengths as an LLM and pursue simple strategies with no legal complications.
@@ -136,10 +138,15 @@ scratchpad of history
 
 Pick 1 tool (no more than 1) from the list below to complete this task.
 Fit the correct parameters from the task to the tool arguments.
+Ensure that numerical values are formatted correctly, including the use of currency symbols (e.g., "£") and units of measurement (e.g., "million") if applicable.
 Parameters with required as False do not need to be fit.
 Add if appropriate, but do not hallucinate arguments for these parameters
 
 {"description": "mock desc", "name": "say hello world", "parameters": {"name": {"type": "string", "description": "name of user"}}}
+
+Important:
+If the task involves financial data, ensure that all monetary values are expressed with appropriate currency (e.g., "£") and rounded to the nearest million if specified.
+If the task involves scaling (e.g., thousands, millions), ensure that the extracted parameters reflect the appropriate scale (e.g., "£15 million", "£5000").
 
 From the task you should be able to extract the parameters. If it is data driven, it should be turned into a cypher query
 
@@ -161,7 +168,8 @@ If none of the tools are appropriate for the task, return the following tool
 def test_tool_selection_format_template():
     engine = PromptEngine()
     try:
-        expected_string = """Reply only in json with the following format:
+        expected_string = """Reply only in json with the following format, in the tool_parameters please include the currency and measuring scale used in the content provided.:
+
 
 {
     \"tool_name\":  \"the exact string name of the tool chosen\",

@@ -3,7 +3,8 @@ import { createContext } from 'react';
 export enum MessageType {
   PING = 'ping',
   CHAT = 'chat',
-  IMAGE = 'image'
+  IMAGE = 'image',
+  CONFIRMATION = 'confirmation',
 }
 
 export interface Message {

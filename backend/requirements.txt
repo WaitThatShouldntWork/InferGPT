@@ -1,6 +1,6 @@
 fastapi==0.110.0
 uvicorn==0.29.0
-mistralai==0.1.8
+mistralai==1.1.0
 pycodestyle==2.11.1
 python-dotenv==1.0.1
 neo4j==5.18.0

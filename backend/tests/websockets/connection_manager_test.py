@@ -1,4 +1,3 @@
-import json
 from unittest.mock import patch
 import pytest
 from fastapi.websockets import WebSocketState
@@ -101,6 +100,7 @@ async def test_disconnect_websocket_already_disconnected(connection_manager):
     mock_ws.close.assert_not_called()
     assert len(manager.websockets) == 0
 
+
 @pytest.mark.asyncio
 async def test_handle_message_handler_exists_for_message_type_handler_called(connection_manager, mocker):
     manager, mock_ws, _ = connection_manager
@@ -111,7 +111,6 @@ async def test_handle_message_handler_exists_for_message_type_handler_called(con
         await manager.handle_message(mock_ws, message)
 
         handler.assert_called()
-
 
 
 @pytest.mark.asyncio
@@ -126,7 +125,6 @@ async def test_handle_message_handler_does_not_exist_for_message_type_handler_ca
         assert str(error.value) == "No handler for message type"
 
 
-
 @pytest.mark.asyncio
 async def test_broadcast_given_message_broadcasted(connection_manager):
     manager, mock_ws, _ = connection_manager
@@ -136,7 +134,7 @@ async def test_broadcast_given_message_broadcasted(connection_manager):
 
     await manager.broadcast(message)
 
-    mock_ws.send_json.assert_awaited_once_with(json.dumps({"type": message.type.value, "data": message.data}))
+    mock_ws.send_json.assert_awaited_once_with({"type": message.type.value, "data": message.data})
 
 
 @pytest.mark.asyncio
