@@ -56,7 +56,6 @@ class Agent(ABC):
 
     async def invoke(self, utterance: str) -> str:
         (action, args) = await self.__get_action(utterance)
-        logger.info(f"USER - Action: {action} and args: {args} for utterance: {utterance}")
         result_of_action = await action(**args, llm=self.llm, model=self.model)
         await publish_log_info(LogPrefix.USER, f"Action gave result: {result_of_action}", __name__)
         return result_of_action

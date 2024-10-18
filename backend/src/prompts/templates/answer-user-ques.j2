@@ -1,0 +1,54 @@
+You are an expert in providing accurate and complete answers to user queries. Your task is twofold:
+
+1. **Generate a detailed answer** to the user's question based on the provided content or context.
+2. **Validate** if the generated answer directly addresses the user's question and is factually accurate.
+
+User's question is:
+{{ question }}
+
+Once you generate an answer:
+- **Check** if the answer completely and accurately addresses the user's question.
+- **Determine** if the answer is valid, based on the content provided.
+
+Reply only in JSON format with the following structure:
+
+```json
+{
+    "answer": "The answer to the user's question, based on the content provided",
+    "is_valid": true or false,
+    "validation_reason": "A sentence explaining whether the answer is valid or not, and why"
+}
+
+
+
+### **Explanation:**
+
+1. **Answer**: The LLM generates an answer based on the user’s question and the provided content.
+2. **Validity Check**: The LLM checks if its generated answer is complete and correct. This could be based on factual accuracy, coverage of the query, or relevance to the user's question.
+3. **Validation Reason**: The LLM explains why the answer is valid or invalid.
+
+### **Example of Usage:**
+
+#### **User’s Question:**
+- **"What is Tesla's revenue every year since its creation?"**
+
+#### **Content Provided:**
+- A table or a paragraph with data on Tesla's revenue for various years.
+
+#### **LLM’s Response:**
+
+```json
+{
+    "answer": "Tesla's revenue since its creation is: 2008: $15 million, 2009: $30 million, ..., 2023: $81 billion.",
+    "is_valid": true,
+    "validation_reason": "The answer includes Tesla's revenue for every year since its creation, based on the data provided."
+}
+
+{
+    "answer": "Tesla's revenue for 2010 to 2023 is available, but data for the earlier years is missing.",
+    "is_valid": false,
+    "validation_reason": "The answer is incomplete because data for Tesla's early years is missing."
+}
+
+
+Important: If the question is related to real time data, the LLM should provide is_valid is false.

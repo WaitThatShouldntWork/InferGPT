@@ -39,13 +39,19 @@ async def read_file_core(file_path: str) -> str:
         return create_response(f"Error reading file: {file_path}", STATUS_ERROR)
 
 
-async def write_file_core(file_path: str, content: str) -> str:
+async def write_or_update_file_core(file_path: str, content: str, update) -> str:
     full_path = os.path.normpath(os.path.join(FILES_DIRECTORY, file_path))
     try:
-        with open(full_path, 'w') as file:
-            file.write(content)
-        logger.info(f"Content written to file {full_path} successfully.")
-        return create_response(f"Content written to file {file_path}.")
+        if update == "yes":
+            with open(full_path, 'a') as file:
+                file.write('\n' +content)
+            logger.info(f"Content appended to file {full_path} successfully.")
+            return create_response(f"Content appended to file {file_path}.")
+        else:
+            with open(full_path, 'w') as file:
+                file.write(content)
+            logger.info(f"Content written to file {full_path} successfully.")
+            return create_response(f"Content written to file {file_path}.")
     except Exception as e:
         logger.error(f"Error writing to file {full_path}: {e}")
         return create_response(f"Error writing to file: {file_path}", STATUS_ERROR)
@@ -67,7 +73,7 @@ async def read_file(file_path: str, llm, model) -> str:
 
 @tool(
     name="write_file",
-    description="Write content to a text file.",
+    description="Write or update content to a text file.",
     parameters={
         "file_path": Parameter(
             type="string",
@@ -77,16 +83,20 @@ async def read_file(file_path: str, llm, model) -> str:
             type="string",
             description="The content to write to the file."
         ),
+        "update": Parameter(
+            type="string",
+            description="if yes then just append the file"
+        ),
     },
 )
-async def write_file(file_path: str, content: str, llm, model) -> str:
-    return await write_file_core(file_path, content)
+async def write_or_update_file(file_path: str, content: str, update, llm, model) -> str:
+    return await write_or_update_file_core(file_path, content, update)
 
 
 @agent(
     name="FileAgent",
     description="This agent is responsible for reading from and writing to files.",
-    tools=[read_file, write_file],
+    tools=[read_file, write_or_update_file],
 )
 class FileAgent(Agent):
     pass

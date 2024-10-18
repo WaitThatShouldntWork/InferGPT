@@ -36,6 +36,7 @@ async def solve_task(task, scratchpad, attempt=0) -> Tuple[str, str, str]:
     logger.info(f"Agent selected: {agent}")
     if agent is None:
         raise Exception(no_agent_response)
+    logger.info(f"Task is {task}")
     answer = await agent.invoke(task)
     parsed_json = json.loads(answer)
     status = parsed_json.get('status', 'success')

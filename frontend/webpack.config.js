@@ -7,14 +7,17 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const localEnv = dotenv.config({ path: path.resolve(__dirname, '../.env') }).parsed;
-const env = { ...process.env, ...localEnv }; 
+const env = { ...process.env, ...localEnv };
 
 const config = {
   mode: 'development',
   entry: './src/index.tsx',
   output: {
-    path: __dirname + '/dist/',
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
+    filename: '[name].bundle.js'
   },
+
   module: {
     rules: [
       {
