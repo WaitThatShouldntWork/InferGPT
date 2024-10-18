@@ -32,7 +32,11 @@ async def web_general_search_core(search_query, llm, model) -> str:
         answer_to_user = await answer_user_ques(search_query, llm, model)
         answer_result = json.loads(answer_to_user)
         if answer_result["status"] == "error":
-            return ""
+            response = {
+                    "content": "Error in finding the answer.",
+                    "ignore_validation": "false"
+                }
+            return json.dumps(response, indent=4)
         logger.info(f'Answer found successfully {answer_result}')
         valid_answer = json.loads(answer_result["response"]).get("is_valid", "")
         if valid_answer:
@@ -149,7 +153,6 @@ async def web_pdf_download(pdf_url, llm, model) -> str:
 
 async def web_scrape_core(url: str) -> str:
     try:
-        logger.info(f"Scraping the price of the book from URL: {url}")
         # Scrape the content from the provided URL
         content = await perform_scrape(url)
         if not content:
@@ -162,7 +165,6 @@ async def web_scrape_core(url: str) -> str:
             }
         return json.dumps(response, indent=4)
     except Exception as e:
-        logger.error(f"Error in web_scrape_price_core: {e}")
         return json.dumps({"status": "error", "error": str(e)})
 
 
